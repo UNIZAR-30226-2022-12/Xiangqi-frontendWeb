@@ -51,7 +51,7 @@
 									<Button class="p-button-lupa" icon="pi pi-search-plus"  @click="incrementScale()" :disabled="scale === scales[scales.length - 1]" />
 								</div>
 							</div>
-							<Button @click="confirm()" class="m-auto w-full h-3rem text-left" style="border-radius: 1rem" icon="pi pi-lock" label="Cerrar sesión"></Button>
+							<Button @click="confirm()" class="m-auto w-full text-left" style="height: 3.22rem; border-radius: 1rem" icon="pi pi-lock" label="Cerrar sesión"></Button>
 						</div>
 					</div>
 				</Transition>
@@ -193,10 +193,10 @@ export default {
 	/* Este estilo se activa cuando el tamaño de la ventana es >= 992 */
 	@media (min-width: 992px) {
 		.dropDownCog {
-			top: 4.5rem; 
+			top: 5.1rem; 
 			right: 1.8rem;
 			border-radius: 1rem;
-			box-shadow: 0px 2px 10px rgb(0 0 0 / 2%), 0px 0px 10px rgb(0 0 0 / 5%), 0px 2px 10px rgb(0 0 0 / 8%);
+			box-shadow: 0px 4px 5px rgb(0 0 0 / 2%), 0px 3px 2px rgb(0 0 0 / 5%), 0px 5px 4px rgb(0 0 0 / 8%);
 			background-color: var(--surface-overlay);
 		}
 	}
