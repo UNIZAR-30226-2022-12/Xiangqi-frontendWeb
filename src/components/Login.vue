@@ -1,6 +1,6 @@
 <!--BOTÓN Y DIALOGO PARA CREAR UNA CUENTA-->
 <template>
-  <Button v-on:click="hazAlgo()" class="p-button-raised font-semibold h-3rem" style="border-radius: 1rem" label=" Iniciar sesión o crear cuenta " icon="" iconPos="right" />
+  <Button v-on:click="displayLoginWdw()" class="p-button-raised font-semibold h-3rem" style="border-radius: 1rem" label=" Iniciar sesión o crear cuenta " icon="" iconPos="right" />
   <Dialog v-model:visible="display" :draggable="false" :modal="true" :class="{ 'altura': isActive, 'alturaMax': isActiveMax }"> <!--v-model:visible asociado con variable contentStyle="padding: 0px;"-->
     <template #header :class="colorHeader">
       <div class="grid" style="margin-right: -28px;">
@@ -41,10 +41,13 @@
                 <div class="field">
                   <label for="passwordLog" :class="{'p-error':(v$.passwordLog.$invalid && submittedLog) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}">Contraseña</label>
                   <div class="p-inputgroup">
-                    <Password id="passwordLog" v-model="v$.passwordLog.$model" :feedback="false" :class="{'p-invalid':(v$.passwordLog.$invalid && submittedLog) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}"></Password>
+                    <Password id="passwordLog" v-model="v$.passwordLog.$model" :feedback="false" :class="{'p-invalid':(v$.passwordLog.$invalid && submittedLog) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}" ></Password>
                     <span class="p-inputgroup-addon">
                       <i class="pi pi-key"></i>
                     </span>
+                    <span id="pwd-error" v-for="(error, index) of v$.passwordLog.$errors" :key="index">
+                        <small class="p-error">{{error.$message}}</small>
+                      </span>
                   </div>
                   <small v-if="(v$.passwordLog.$invalid && submittedLog && v$.passwordLog.$model == '') || v$.passwordLog.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
                 </div>
@@ -205,12 +208,16 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { email, required, minLength, maxLength, helpers } from "@vuelidate/validators";
-
+import io from "socket.io-client"
 //Debe contener al menos mayusculas, minusculas y numeros [0-9]{2} le fuerza a q sean 2 numeros
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
 export default {
   setup: () => ({ v$: useVuelidate() }),
+  created(){
+      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
+      this.socket.on('connect', () =>{})
+  },
   methods: {
     loginImage() {
 			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
@@ -237,18 +244,44 @@ export default {
     },
     handleSubmitLog() {
       this.submittedLog = true;
+      console.log(this.v$.emailLog);
       this.v$.emailLog.$touch();
+      console.log(this.v$.emailLog);
       this.v$.passwordLog.$touch();
-
       //La form de iniciar sesion no es valida
       if (this.v$.emailLog.$invalid || this.v$.passwordLog.$invalid) {
         return;
       }
+
       //La form de iniciar sesion es valida
-      //Cargar el contenido de la pagina si el login es correcto
-      this.display = false;
-      this.$loggedStatus.logged = true;
-      this.$router.push('/profile');
+      //Obtener el contenido de los campos
+      var email = document.getElementById("emailLog");
+      console.log(email.value)
+      var pwd = document.getElementById("passwordLog");
+      console.log(pwd.value)
+
+
+      
+      var ok;
+      //Vamos a pedirle al backend si el login es correcto o no (El servidor tiene definido un evento 'login' el cual se le envia pwd y email y devuelve un resultado)
+      //result es true si ha sido correcto por lo que se pasa a profile
+      this.socket.emit('login', {pwd: pwd, email: email}, (result) => {
+        ok = result;
+        console.log(ok)
+        if (ok){
+          this.display = false;
+          this.$loggedStatus.logged = true;
+          this.$router.push('/profile');
+          //Cargar el contenido de la pagina si el login es correcto(Mejor si lo cargamos al crear el componente de profile)
+
+        } else{
+          return;
+        }
+      })
+      
+      
+
+        
     },
     resetForm() {
       this.nickname = '';
@@ -267,7 +300,7 @@ export default {
       this.emailLog = '';
       this.passwordLog = '';
     },
-    hazAlgo() {
+    displayLoginWdw() {
       this.display = true;
       this.isActive = true;
       this.isActiveMax = false;
@@ -314,6 +347,7 @@ export default {
       submitted: false,
       submittedLog: false,
       showMessage: false,
+      socket: '',
 
       display: false,
       countries: [
@@ -336,7 +370,7 @@ export default {
   validations() {
     return {
       emailLog: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
-      passwordLog: { required },
+      passwordLog: { required, max: helpers.withMessage('La contraseña no debe superar los 4 caracteres', maxLength(4)) },
       nickname: { required, max: maxLength(15) },
       name: { required },
       email: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
