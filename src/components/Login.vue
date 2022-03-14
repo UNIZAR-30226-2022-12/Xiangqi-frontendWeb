@@ -45,11 +45,11 @@
                     <span class="p-inputgroup-addon">
                       <i class="pi pi-key"></i>
                     </span>
-                    <span id="pwd-error" v-for="(error, index) of v$.passwordLog.$errors" :key="index">
-                        <small class="p-error">{{error.$message}}</small>
-                      </span>
                   </div>
                   <small v-if="(v$.passwordLog.$invalid && submittedLog && v$.passwordLog.$model == '') || v$.passwordLog.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
+                  <span id="pwd-error" v-for="(error, index) of v$.passwordLog.$errors" :key="index">
+                    <small class="p-error">{{error.$message}}</small>
+                  </span>
                 </div>
                 <div class="field flex justify-content-center">
                   <a href="">¿Has olvidado tu contraseña?</a>
@@ -252,15 +252,16 @@ export default {
       if (this.v$.emailLog.$invalid || this.v$.passwordLog.$invalid) {
         return;
       }
-
+      //Nachos tests para no hacer peticiones al back
+      //this.$router.push('/profile');
+      //this.$loggedStatus.logged = true;
+  
       //La form de iniciar sesion es valida
       //Obtener el contenido de los campos
       var email = document.getElementById("emailLog");
       console.log(email.value)
       var pwd = document.getElementById("passwordLog");
       console.log(pwd.value)
-
-
       
       var ok;
       //Vamos a pedirle al backend si el login es correcto o no (El servidor tiene definido un evento 'login' el cual se le envia pwd y email y devuelve un resultado)
@@ -273,15 +274,10 @@ export default {
           this.$loggedStatus.logged = true;
           this.$router.push('/profile');
           //Cargar el contenido de la pagina si el login es correcto(Mejor si lo cargamos al crear el componente de profile)
-
         } else{
           return;
         }
-      })
-      
-      
-
-        
+      })       
     },
     resetForm() {
       this.nickname = '';
