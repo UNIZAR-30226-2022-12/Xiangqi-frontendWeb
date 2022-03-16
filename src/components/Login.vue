@@ -118,7 +118,7 @@
                     <div class="p-inputgroup">
                       <Dropdown id="country" v-model="country" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':v$.country.$invalid && submitted}">
                         <template #value="slotProps">
-                          <div class="country-item country-item-value" v-if="slotProps.value">
+                          <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
                             <img src="images/flag_placeholder.png" :class="'flag flag-' + slotProps.value.code.toLowerCase()" />
                             {{slotProps.value.name}}
                           </div>
@@ -143,7 +143,7 @@
                   <div class="field"> 
                     <label for="imagen">Foto de perfil</label> <!--:class="{'p-error':(v$.imagen.$invalid && submitted)}"-->
                     <div class="p-inputgroup">
-                      <FileUpload id="imagen" style="width: 440px !important" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                      <FileUpload id="imagen" style="width: 440px !important" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                     </div>
                       <!--<small v-if="(v$.imagen.$invalid && submitted) || v$.imagen.$pending.$response" class="p-error">{{'Por favor, suba una foto de perfil'}}</small>-->
                   </div>
@@ -219,6 +219,11 @@ export default {
       this.socket.on('connect', () =>{})
   },
   methods: {
+    uploadFile() {
+      console.log("UPLOAD")
+      this.Images = this.$refs.file.files[0];
+      console.log(this.Images)
+    },
     loginImage() {
 			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
 		},
@@ -240,6 +245,25 @@ export default {
         return;
       }
       //La form de crear cuenta es valida
+
+      //obtenemos todos los valores introducidos
+      var email = document.getElementById("email").value;
+      console.log(email)
+      var pwd = document.getElementById("password").value;
+      console.log(pwd)
+      var nickname = document.getElementById("nickname").value;
+      console.log(nickname)
+      var date = document.getElementById("date").value;
+      console.log(date)
+      var country = document.getElementById("country-item").textContent;
+      console.log("---------------------")
+      console.log(country)
+      console.log("---------------------")
+      var name = document.getElementById("name").value;
+      console.log(name)
+      this.socket.emit('register', {pwd: pwd, email: email, nickname: nickname, date: date, country: country, name: name, image: this.Images}, (result) => {
+        console.log(result)
+      }) 
       this.display = false;
     },
     handleSubmitLog() {
@@ -258,10 +282,10 @@ export default {
   
       //La form de iniciar sesion es valida
       //Obtener el contenido de los campos
-      var email = document.getElementById("emailLog");
-      console.log(email.value)
-      var pwd = document.getElementById("passwordLog");
-      console.log(pwd.value)
+      var email = document.getElementById("emailLog").value;
+      console.log(email)
+      var pwd = document.getElementById("passwordLog").value;
+      console.log(pwd)
       
       var ok;
       //Vamos a pedirle al backend si el login es correcto o no (El servidor tiene definido un evento 'login' el cual se le envia pwd y email y devuelve un resultado)
@@ -344,6 +368,8 @@ export default {
       submittedLog: false,
       showMessage: false,
       socket: '',
+      base64: '',
+      Images: '',
 
       display: false,
       countries: [
