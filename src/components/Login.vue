@@ -263,6 +263,11 @@ export default {
       console.log(name)
       this.socket.emit('register', {pwd: pwd, email: email, nickname: nickname, date: date, country: country, name: name, image: this.Images}, (result) => {
         console.log(result)
+        if(result){//Login correcto hay que enviar un mail de confirmacion
+
+        } else {
+          //Login incorrecto NACHO, ponme feedback de que el correo ya esta registrado
+        }
       }) 
       this.display = false;
     },
@@ -277,8 +282,8 @@ export default {
         return;
       }
       //Nachos tests para no hacer peticiones al back
-      this.$router.push('/profile');
-      this.$loggedStatus.logged = true;
+      //this.$router.push('/profile');
+      //this.$loggedStatus.logged = true;
   
       //La form de iniciar sesion es valida
       //Obtener el contenido de los campos
@@ -293,12 +298,25 @@ export default {
       this.socket.emit('login', {pwd: pwd, email: email}, (result) => {
         ok = result;
         console.log(ok)
-        if (ok){
+        if (ok['ok']){
           this.display = false;
           this.$loggedStatus.logged = true;
           this.$router.push('/profile');
           //Cargar el contenido de la pagina si el login es correcto(Mejor si lo cargamos al crear el componente de profile)
-        } else{
+        } else{ // El login ha sido incorrecto(Vemos si existia el correo introducido)
+          if(!ok['exist']){//El correo no existia
+          //---------------------------------------------------------------------------------------------------
+          //---------------------------------------------------------------------------------------------------
+          //---------------------------------------------------------------------------------------------------
+
+            //NACHO haz lo tuyo para que informe de que el correo no existia pls
+
+
+
+          //---------------------------------------------------------------------------------------------------
+          //---------------------------------------------------------------------------------------------------
+          //---------------------------------------------------------------------------------------------------
+          }
           return;
         }
       })       
@@ -392,7 +410,7 @@ export default {
   validations() {
     return {
       emailLog: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
-      passwordLog: { required, max: helpers.withMessage('La contraseña no debe superar los 4 caracteres', maxLength(4)) },
+      passwordLog: { required },
       nickname: { required, max: maxLength(15) },
       name: { required },
       email: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
