@@ -2212,14 +2212,17 @@
   border-radius: 0;
 }
 .p-datatable .p-paginator-bottom {
-  border-width: 0 0 1px 0;
-  border-radius: 0;
+  border-width: 0px 1px 1px 1px;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 .p-datatable .p-datatable-header {
   background: #1f2d40;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
   color: rgba(255, 255, 255, 0.6);
   border: 1px solid #304562;
-  border-width: 0 0 1px 0;
+  border-width: 1px 1px 1px 1px;
   padding: 1rem 1rem;
   font-weight: 600;
 }
@@ -2235,7 +2238,7 @@
   text-align: left;
   padding: 1rem 1rem;
   border: 1px solid #304562;
-  border-width: 0 0 1px 0;
+  border-width: 0 1px 1px 1px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.87);
   background: #1f2d40;
@@ -2296,7 +2299,7 @@
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
   border: 1px solid #304562;
-  border-width: 0 0 1px 0;
+  border-width: 0 1px 1px 1px;
   padding: 1rem 1rem;
 }
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,

@@ -277,8 +277,8 @@ export default {
         return;
       }
       //Nachos tests para no hacer peticiones al back
-      //this.$router.push('/profile');
-      //this.$loggedStatus.logged = true;
+      this.$router.push('/profile');
+      this.$loggedStatus.logged = true;
   
       //La form de iniciar sesion es valida
       //Obtener el contenido de los campos

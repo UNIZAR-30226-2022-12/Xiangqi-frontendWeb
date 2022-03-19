@@ -1,47 +1,122 @@
 <template>
-	<div class="grid">
-		<div class="col-12">
-			<div class="card">
-				<h5>Perfil</h5>
-				<p>Página por hacer.</p>
+	<h2> Mi perfil </h2>
+	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
+			<div class="grid m-auto">
+				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
+					<img id=profliePic src="../assets/images/profilePlaceholder.svg" class="foto-perfil" style="" alt="foto de perfil">
+				</div>
+				<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
+					<h2 class="mb-1">{{name}}</h2>
+					<p class="mb-1">#{{username}}</p>
+					<img class="flag h-auto" :class="[bandera]" src="../assets/demo/flags/flag_placeholder.png">
+				</div>
+				<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
+					<Button class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
+				</div>
+			</div>
+		<div class="surface-section section mt-4 p-6 text-center">
+			<div class="grid">
+				<div class="col-6 md:col-3 mb-4 px-5">
+					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
+						<i class="pi pi-star text-4xl text-primary"></i>
+					</span>
+					<div class="text-900 mb-3 font-medium">Cumpleaños</div>
+					<span class="text-700 text-sm line-height-3">{{birthday}}</span>
+				</div>
+				<div class="col-6 md:col-3 mb-4 px-5">
+					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
+						<i class="pi pi-users text-4xl text-primary"></i>
+					</span>
+					<div class="text-900 mb-3 font-medium">Amigos</div>
+					<span class="text-700 text-sm line-height-3">{{numFriends}} amigos</span>
+				</div>
+				<div class="col-6 md:col-3 mb-4 px-5">
+					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
+						<i class="pi pi-calendar text-4xl text-primary"></i>
+					</span>
+					<div class="text-900 mb-3 font-medium">Usuario desde</div>
+					<span class="text-700 text-sm line-height-3">{{userSince}}</span>
+				</div>
+				<div class="col-6 md:col-3 mb-4 px-5">
+					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
+						<i class="pi pi-sort-amount-up text-4xl text-primary"></i>
+					</span>
+					<div class="text-900 mb-3 font-medium">Rango</div>
+					<span class="text-700 text-sm line-height-3">{{range}}</span>
+				</div>
 			</div>
 		</div>
 	</div>
-
-	<button @click="show = !show">Testea la animacion</button>
-	<Transition name="bounce">
-		<h1 v-if="show">OH MAI GOD!!</h1>
-	</Transition>
-
+	<h2>Mis partidas</h2>
+	<div class="surface-section section p-6">
+			<myGames/>
+	</div>
+	<h2>Estadísticas</h2>
+	<div class="surface-section section p-6 text-center">
+	</div>
 </template>
 
 <script>
+import myGames from '../components/MyGames.vue';
+
 export default {
 	data() {
 		return {
-			show: true
+			name: 'Nacho Ortega Lalmolda',
+			username: 'pikanachi',
+			bandera: 'flag-es', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
+			birthday: '12/04/1991',
+			numFriends: '12',
+			userSince: '19/03/2022',
+			range: 'gold',
 		}
-	}
+	},
+	components: {
+		myGames,
+	},
+
+	//document.getElementById("profliePic").src="../assets/images/1.png";
+
 }
 </script>
 
 <style>
-/* animacion */
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
+.section {
+	border-radius: 1rem;
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--surface-200);
 }
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
+
+.foto-perfil {
+	vertical-align: middle;
+	width: 8rem;
+	height: 8rem;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1.5px;
+	border-color: var(--surface-400);
+	object-fit: cover;
 }
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
+
+.flag {
+	vertical-align: middle;
+	width: 2rem;
+	height: 2rem;
+	object-fit: cover;
+}
+
+/* Este estilo se activa cuando el tamaño de la ventana es >= 992px */
+@media (min-width: 992px) {
+	.profile-name {
+		max-width: 30rem;
+	}
+}
+
+/* Este estilo se activa cuando el tamaño de la ventana es <= 991px */
+@media (max-width: 991px) {
+	.profile-name {
+		/*background-color: green !important;*/
+	}
 }
 </style>
