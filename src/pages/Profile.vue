@@ -60,19 +60,29 @@
 import myGames from '../components/MyGames.vue';
 
 export default {
+	inject: ['$accounts'],
 	data() {
 		return {
-			name: 'Nacho Ortega Lalmolda',
+			name: '',
 			username: 'pikanachi',
 			bandera: 'flag-es', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
 			birthday: '12/04/1991',
 			numFriends: '12',
 			userSince: '19/03/2022',
 			range: 'gold',
+			profileData: ''
 		}
 	},
 	components: {
 		myGames,
+	},
+	created() {
+		console.log(localStorage.getItem('email'));
+		this.$accounts.profile(localStorage.getItem('email')).then(response => {
+			this.name = response.perfil.name;
+
+			console.log(response);
+		});
 	},
 
 	//document.getElementById("profliePic").src="../assets/images/1.png";

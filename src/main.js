@@ -91,12 +91,18 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 
+//Importar el account service
+import AccountService from '@/service/AccountService';
+
 router.beforeEach(function(to, from, next) {
     window.scrollTo(0, 0);
     next();
 });
 
 const app = createApp(AppWrapper);
+
+//Servicio para login y para crear cuentas
+app.provide('$accounts', AccountService);
 
 //Cambiar tema por defecto aquí y en index.html
 app.config.globalProperties.$appState = reactive({ theme: 'saga-blue', darkTheme: false });

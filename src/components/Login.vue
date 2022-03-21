@@ -1,7 +1,16 @@
 <!--BOTÓN Y DIALOGO PARA CREAR UNA CUENTA-->
 <template>
+  <Dialog v-model:visible="accountCreated" class="dialog-account-created dialog-login" :draggable="false" :modal="true">
+      <template #header :class="colorHeader">
+        <h3>Cuenta creada correctamente.</h3>
+      </template>
+      <div class="text-center">
+        <p class="">Por favor, revise su correo electrónico para verificar su cuenta</p>
+        <Button type="submit" label="Aceptar" v-on:click="successfullyCreated()" class="mt-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+      </div>
+  </Dialog>
   <Button v-on:click="displayLoginWdw()" class="p-button-raised font-semibold h-3rem" style="border-radius: 1rem" label=" Iniciar sesión o crear cuenta " icon="" iconPos="right" />
-  <Dialog v-model:visible="display" :draggable="false" :modal="true" :class="{ 'altura': isActive, 'alturaMax': isActiveMax }"> <!--v-model:visible asociado con variable contentStyle="padding: 0px;"-->
+  <Dialog v-model:visible="display" :draggable="false" :modal="true" class="dialog-login" :class="{ 'altura': isActive, 'alturaMax': isActiveMax }">
     <template #header :class="colorHeader">
       <div class="grid" style="margin-right: -28px;">
         <img alt="Logo" class="m-auto logo-size mt-3 mb-1" :src="loginImage()" />
@@ -141,11 +150,10 @@
                   </div>
                   <!--PICTURE-->
                   <div class="field"> 
-                    <label for="imagen">Foto de perfil</label> <!--:class="{'p-error':(v$.imagen.$invalid && submitted)}"-->
+                    <label for="imagen">Foto de perfil</label>
                     <div class="p-inputgroup">
-                      <FileUpload id="imagen" style="width: 440px !important" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                      <FileUpload id="image" style="width: 440px !important" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                     </div>
-                      <!--<small v-if="(v$.imagen.$invalid && submitted) || v$.imagen.$pending.$response" class="p-error">{{'Por favor, suba una foto de perfil'}}</small>-->
                   </div>
                   <!--PASSWORD-->
                   <div class="field"> 
@@ -208,15 +216,17 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { email, required, minLength, maxLength, helpers } from "@vuelidate/validators";
-import io from "socket.io-client"
+//import io from "socket.io-client"
 //Debe contener al menos mayusculas, minusculas y numeros [0-9]{2} le fuerza a q sean 2 numeros
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
 export default {
   setup: () => ({ v$: useVuelidate() }),
+  //Inyectar el modulo de cuentas definido en main.js
+  inject: ['$accounts'],
   created(){
-      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
-      this.socket.on('connect', () =>{})
+      //this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
+      //this.socket.on('connect', () =>{})
   },
   methods: {
     uploadFile() {
@@ -227,6 +237,9 @@ export default {
     loginImage() {
 			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
 		},
+    successfullyCreated() {
+      this.accountCreated = false;
+    },
     //vuelidate
     handleSubmit() {
       this.submitted = true;
@@ -238,38 +251,22 @@ export default {
       this.v$.country.$touch();
       this.v$.accept.$touch();
       this.v$.name.$touch();
-      //this.v$.imagen.$touch();
 
-      //La form de crear cuenta no es valida
+      // La form de crear cuenta no es valida
       if (this.v$.email.$invalid || this.v$.password.$invalid || this.v$.confPassword.$invalid || this.v$.nickname.$invalid || this.v$.date.$invalid || this.v$.country.$invalid || this.v$.accept.$invalid || this.v$.name.$invalid) { //|| this.v$.imagen.$invalid) {
         return;
       }
-      //La form de crear cuenta es valida
-
-      //obtenemos todos los valores introducidos
-      var email = document.getElementById("email").value;
-      console.log(email)
-      var pwd = document.getElementById("password").value;
-      console.log(pwd)
-      var nickname = document.getElementById("nickname").value;
-      console.log(nickname)
-      var date = document.getElementById("date").value;
-      console.log(date)
-      var country = document.getElementById("country-item").textContent;
-      console.log("---------------------")
-      console.log(country)
-      console.log("---------------------")
-      var name = document.getElementById("name").value;
-      console.log(name)
-      this.socket.emit('register', {pwd: pwd, email: email, nickname: nickname, date: date, country: country, name: name, image: this.Images}, (result) => {
-        console.log(result)
-        if(result){//Login correcto hay que enviar un mail de confirmacion
-
+      // La form de crear cuenta es valida
+      // Usar el metodo createAccount del servicio (/src/services/account.js) con los parametros definidos en v-model
+      this.$accounts.createAccount(this.v$.nickname.$model, this.v$.name.$model, this.v$.email.$model, this.v$.date.$model, this.v$.country.$model, this.image, this.v$.password.$model).then(success => {
+        console.log(success);
+        if (success['res'] == 'ok') { // o bien success.res == 'ok' <- cambiarlo a booleano mejor no?
+          this.display = false;
+          this.accountCreated = true;
         } else {
-          //Login incorrecto NACHO, ponme feedback de que el correo ya esta registrado
+          //El email ya estaba registrado
         }
-      }) 
-      this.display = false;
+      });
     },
     handleSubmitLog() {
       this.submittedLog = true;
@@ -277,49 +274,27 @@ export default {
       this.v$.emailLog.$touch();
       console.log(this.v$.emailLog);
       this.v$.passwordLog.$touch();
-      //La form de iniciar sesion no es valida
+      // La form de iniciar sesion no es valida
       if (this.v$.emailLog.$invalid || this.v$.passwordLog.$invalid) {
         return;
       }
       //Nachos tests para no hacer peticiones al back
       //this.$router.push('/profile');
       //this.$loggedStatus.logged = true;
-  
-      //La form de iniciar sesion es valida
-      //Obtener el contenido de los campos
-      var email = document.getElementById("emailLog").value;
-      console.log(email)
-      var pwd = document.getElementById("passwordLog").value;
-      console.log(pwd)
-      
-      var ok;
-      //Vamos a pedirle al backend si el login es correcto o no (El servidor tiene definido un evento 'login' el cual se le envia pwd y email y devuelve un resultado)
-      //result es true si ha sido correcto por lo que se pasa a profile
-      this.socket.emit('login', {pwd: pwd, email: email}, (result) => {
-        ok = result;
-        console.log(ok)
-        if (ok['ok']){
+
+      // La form de iniciar sesion es valida
+      this.$accounts.login(this.v$.emailLog.$model, this.v$.passwordLog.$model).then(success => {
+        console.log(success);
+        if (success) {
           this.display = false;
-          this.$loggedStatus.logged = true;
           this.$router.push('/profile');
-          //Cargar el contenido de la pagina si el login es correcto(Mejor si lo cargamos al crear el componente de profile)
-        } else{ // El login ha sido incorrecto(Vemos si existia el correo introducido)
-          if(!ok['exist']){//El correo no existia
-          //---------------------------------------------------------------------------------------------------
-          //---------------------------------------------------------------------------------------------------
-          //---------------------------------------------------------------------------------------------------
-
-            //NACHO haz lo tuyo para que informe de que el correo no existia pls
-
-
-
-          //---------------------------------------------------------------------------------------------------
-          //---------------------------------------------------------------------------------------------------
-          //---------------------------------------------------------------------------------------------------
-          }
-          return;
+          this.$loggedStatus.logged = true;
+        } else {
+          // Juan: pregunta, hacemos que informe de que el email no existe o que la contraseña es incorrecta
+          // o un mensaje de error generico?? porque eso nos lo deberia decir el back
+          return
         }
-      })       
+      }); 
     },
     resetForm() {
       this.nickname = '';
@@ -347,7 +322,6 @@ export default {
       this.resetFormLog();
     },
     resize(tabName) {
-      //console.log("resize");
       if (tabName == "SignUp") {
         this.isActive = false;
         this.isActiveMax = true;
@@ -370,6 +344,7 @@ export default {
   data() {
     return {
       //vuelidate
+      accountCreated: false,
       texto: '',
       emailLog: '',
       passwordLog: '',
@@ -378,17 +353,14 @@ export default {
       password: '',
       confPassword: '',
       nickname: '',
-      //imagen: '',
       date: null,
       country: null,
       accept: null,
       submitted: false,
       submittedLog: false,
       showMessage: false,
-      socket: '',
       base64: '',
       Images: '',
-
       display: false,
       countries: [
           {name: 'Australia', code: 'AU'},
@@ -419,7 +391,6 @@ export default {
       confPassword: { required },
       country: { required },
       accept: { required },
-      //imagen: { required },
     }
   },
 }
@@ -438,32 +409,33 @@ body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  /*background-color: var(--surface-a);*/
   font-family: var(--font-family);
   font-weight: 400;
   color: var(--text-color);
 }
 
-
 /* DIALOG */
-.altura {
+.dialog-login {
   background-color: var(--surface-a); /* Get el current background del tema */
   border-radius: 15px;
-  width: 540px;
-  height: 620px;
   animation-duration: 0.6s;
   animation-name: lineIns derted;
   transition: height 0.6s, width 0.6s;
 }
 
+.dialog-account-created {
+  width: 450px;
+  height: 210px;
+}
+
+.altura {
+  width: 540px;
+  height: 620px;
+}
+
 .alturaMax {
-  background-color: var(--surface-a);
-  border-radius: 15px;
   width: 540px;
   height: 840px;
-  animation-duration: 0.6s;
-  animation-name: lineInserted;
-  transition: height 0.6s, width 0.6s;
 }
 
 @media screen and (max-width: 600px) {
