@@ -13,9 +13,9 @@ class AccountService {
 
     // CREAR UNA CUENTA
     // Pasarle al back por post los parámetros que el front te da
-    createAccount(nickname, name, email, date, country, image, password){
+    createAccount(nickname, name, email, date, country, password){
         return http
-            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'image': image, 'password': password})
+            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password})
             //la respuesta que da el backend
             .then(response => {
                 //le pido al back, ¿hay cambios? ¿hay cambios?
