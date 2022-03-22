@@ -34,7 +34,7 @@ class AccountService {
             .post('/do-login', {'email': email, 'pwd': password})
             .then(response => {
                 console.log(response.data)
-                if (response.data){
+                if (response.data.ok) {
                     localStorage.setItem('email', email);
                     this.authenticated = true;
                     return true;

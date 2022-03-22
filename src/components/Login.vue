@@ -32,33 +32,33 @@
               <form @submit.prevent="handleSubmitLog(!v$.$invalid)" class="p-fluid">
                 <!--EMAIL-->
                 <div class="field">
-                  <label for="emailLog" :class="{'p-error':v$.emailLog.$invalid && submittedLog}">Email</label>
+                  <label for="emailLog" :class="{'p-error':v$.emailLog.$invalid}">Email</label>
                   <div class="p-inputgroup">
-                    <InputText id="emailLog" placeholder="cuenta@correo.com" v-model="v$.emailLog.$model" :class="{'p-invalid':v$.emailLog.$invalid && submittedLog}" aria-describedby="email-error"/>
+                    <InputText id="emailLog" placeholder="cuenta@correo.com" v-model="v$.emailLog.$model" :class="{'p-invalid':v$.emailLog.$invalid}" aria-describedby="email-error"/>
                     <span class="p-inputgroup-addon">
                       <i class="pi pi-envelope"></i>
                     </span>
                   </div>
-                  <span v-if="v$.emailLog.$error && submittedLog">
+                  <span v-if="v$.emailLog.$error">
                       <span id="email-error" v-for="(error, index) of v$.emailLog.$errors" :key="index">
                         <small class="p-error">{{error.$message}}</small>
                       </span>
                   </span>
-                  <small v-else-if="(v$.emailLog.$invalid && submittedLog) || v$.emailLog.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
+                  <small v-else-if="(v$.emailLog.$invalid) || v$.emailLog.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
                 </div>
                 <!--PASSWORD-->
                 <div class="field">
-                  <label for="passwordLog" :class="{'p-error':(v$.passwordLog.$invalid && submittedLog) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}">Contraseña</label>
+                  <label for="passwordLog" :class="{'p-error':(v$.passwordLog.$invalid) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}">Contraseña</label>
                   <div class="p-inputgroup">
-                    <Password id="passwordLog" v-model="v$.passwordLog.$model" :feedback="false" :class="{'p-invalid':(v$.passwordLog.$invalid && submittedLog) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}" ></Password>
+                    <Password id="passwordLog" v-model="v$.passwordLog.$model" :feedback="false" :class="{'p-invalid':(v$.passwordLog.$invalid) || (v$.passwordLog.$invalid && v$.passwordLog.$model != '')}" ></Password>
                     <span class="p-inputgroup-addon">
                       <i class="pi pi-key"></i>
                     </span>
                   </div>
-                  <small v-if="(v$.passwordLog.$invalid && submittedLog && v$.passwordLog.$model == '') || v$.passwordLog.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
-                  <span id="pwd-error" v-for="(error, index) of v$.passwordLog.$errors" :key="index">
+                  <small v-if="(v$.passwordLog.$invalid && v$.passwordLog.$model == '') || v$.passwordLog.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
+                  <!--<span id="pwd-error" v-for="(error, index) of v$.passwordLog.$errors" :key="index">
                     <small class="p-error">{{error.$message}}</small>
-                  </span>
+                  </span>-->
                 </div>
                 <div class="field flex justify-content-center">
                   <a href="">¿Has olvidado tu contraseña?</a>
@@ -78,54 +78,54 @@
               <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
                   <!--NICKNAME-->
                   <div class="field">
-                    <label for="nickname" :class="{'p-error':(v$.nickname.$invalid && submitted) || (v$.nickname.$invalid && v$.nickname.$model != '')}">Nombre de usuario</label>
+                    <label for="nickname" :class="{'p-error':(v$.nickname.$invalid) || (v$.nickname.$invalid && v$.nickname.$model != '')}">Nombre de usuario</label>
                     <div class="p-inputgroup">
-                      <InputText id="nickname" placeholder="Nombre de usuario" v-model="v$.nickname.$model" :class="{'p-invalid':(v$.nickname.$invalid && submitted) || (v$.nickname.$invalid && v$.nickname.$model != '')}" />
+                      <InputText id="nickname" placeholder="Nombre de usuario" v-model="v$.nickname.$model" :class="{'p-invalid':(v$.nickname.$invalid) || (v$.nickname.$invalid && v$.nickname.$model != '')}" />
                       <span class="p-inputgroup-addon">
                         <i class="pi pi-id-card"></i>
                       </span>
                     </div>
-                    <small v-if="(v$.nickname.$invalid && submitted && v$.nickname.$model == '') || v$.nickname.$pending.$response" class="p-error">{{'Por favor, indique un nombre de usuario'}}</small>
+                    <small v-if="(v$.nickname.$invalid && v$.nickname.$model == '') || v$.nickname.$pending.$response" class="p-error">{{'Por favor, indique un nombre de usuario'}}</small>
                     <small v-else-if="(v$.nickname.$invalid && v$.nickname.$model != '')" class="p-error">{{'El nombre de usuario no puede tener más de 15 caracteres'}}</small>
                   </div>
                   <!--NAME-->
                   <div class="field">
-                    <label for="name" :class="{'p-error':v$.name.$invalid && submitted}">Nombre completo</label>
+                    <label for="name" :class="{'p-error':v$.name.$invalid}">Nombre completo</label>
                       <div class="p-inputgroup">
-                      <InputText id="name" placeholder="Nombre Apellido" v-model="v$.name.$model" :class="{'p-invalid':v$.name.$invalid && submitted}" />
+                      <InputText id="name" placeholder="Nombre Apellido" v-model="v$.name.$model" :class="{'p-invalid':v$.name.$invalid}" />
                       <span class="p-inputgroup-addon">
                         <i class="pi pi-user"></i>
                       </span>
                     </div>
-                    <small v-if="(v$.name.$invalid && submitted) || v$.name.$pending.$response" class="p-error">{{'Por favor, indique su nombre'}}</small>
+                    <small v-if="(v$.name.$invalid) || v$.name.$pending.$response" class="p-error">{{'Por favor, indique su nombre'}}</small>
                   </div>
                   <!--EMAIL-->
                   <div class="field">
-                    <label for="email" :class="{'p-error':v$.email.$invalid && submitted}">Email</label>
+                    <label for="email" :class="{'p-error':v$.email.$invalid}">Email</label>
                     <div class="p-inputgroup">
-                      <InputText id="email" placeholder="cuenta@correo.com" v-model="v$.email.$model" :class="{'p-invalid':v$.email.$invalid && submitted}" aria-describedby="email-error"/>
+                      <InputText id="email" placeholder="cuenta@correo.com" v-model="v$.email.$model" :class="{'p-invalid':v$.email.$invalid}" aria-describedby="email-error"/>
                       <span class="p-inputgroup-addon">
                         <i class="pi pi-envelope"></i>
                       </span>
                     </div>
-                    <span v-if="v$.email.$error && submitted">
+                    <span v-if="v$.email.$error">
                         <span id="email-error" v-for="(error, index) of v$.email.$errors" :key="index">
                           <small class="p-error">{{error.$message}}</small>
                         </span>
                     </span>
-                    <small v-else-if="(v$.email.$invalid && submitted) || v$.email.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
+                    <small v-else-if="(v$.email.$invalid) || v$.email.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
                   </div>
                   <!--BIRTHDAY-->
                   <div class="field">
-                    <label for="date" :class="{'p-error':v$.date.$invalid && submitted}">Fecha de nacimiento</label>
-                    <Calendar id="date" placeholder="01/01/2000" v-model="date" :showIcon="true" :class="{'p-invalid':v$.date.$invalid && submitted}"/>
-                    <small v-if="(v$.date.$invalid && submitted) || v$.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
+                    <label for="date" :class="{'p-error':v$.date.$invalid}">Fecha de nacimiento</label>
+                    <Calendar id="date" placeholder="01/01/2000" v-model="date" :showIcon="true" :class="{'p-invalid':v$.date.$invalid}"/>
+                    <small v-if="(v$.date.$invalid) || v$.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
                   </div>
                   <!--COUNTRY-->
                   <div class="field">
-                    <label for="country" :class="{'p-error':v$.country.$invalid && submitted}">Seleccione su país de residencia</label>
+                    <label for="country" :class="{'p-error':v$.country.$invalid}">Seleccione su país de residencia</label>
                     <div class="p-inputgroup">
-                      <Dropdown id="country" v-model="country" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':v$.country.$invalid && submitted}">
+                      <Dropdown id="country" v-model="country" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':v$.country.$invalid}">
                         <template #value="slotProps">
                           <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
                             <img src="images/flag_placeholder.png" :class="'flag flag-' + slotProps.value.code.toLowerCase()" />
@@ -146,7 +146,7 @@
                         <i class="pi pi-globe"></i>
                       </span>
                     </div>
-                    <small v-if="(v$.country.$invalid && submitted) || v$.country.$pending.$response" class="p-error">{{'Por favor, indique su país de residencia'}}</small>
+                    <small v-if="(v$.country.$invalid) || v$.country.$pending.$response" class="p-error">{{'Por favor, indique su país de residencia'}}</small>
                   </div>
                   <!--PICTURE-->
                   <div class="field"> 
@@ -157,16 +157,16 @@
                   </div>
                   <!--PASSWORD-->
                   <div class="field"> 
-                    <label for="password" :class="{'p-error':(v$.password.$invalid && submitted) || (v$.password.$invalid && v$.password.$model != '')}">Contraseña</label>
+                    <label for="password" :class="{'p-error':(v$.password.$invalid) || (v$.password.$invalid && v$.password.$model != '')}">Contraseña</label>
                     <div class="p-inputgroup">
-                      <Password id="password" v-model="v$.password.$model" :class="{'p-invalid':(v$.password.$invalid && submitted) || (v$.password.$invalid && v$.password.$model != '')}" toggleMask>
+                      <Password id="password" v-model="v$.password.$model" :class="{'p-invalid':(v$.password.$invalid) || (v$.password.$invalid && v$.password.$model != '')}" toggleMask>
                         <template #header>
                           <h6>Elija una contraseña</h6>
                         </template>
                         <template #footer="sp">
                           {{sp.level}}
                           <Divider />
-                            <small v-if="(v$.password.$invalid && submitted && v$.password.$model == '') || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value is required', 'Por favor, especifique una contraseña')}}</small>
+                            <small v-if="(v$.password.$invalid && v$.password.$model == '') || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value is required', 'Por favor, especifique una contraseña')}}</small>
                             <small v-else-if="(v$.password.$invalid && v$.password.$model != '' && v$.password.$model.length < 8)" class="p-error"> {{'La contraseña debe tener al menos 8 caracteres'}} </small>
                             <small v-else-if="(v$.password.$invalid && v$.password.$model != '')" class="p-error"> {{v$.password.alpha.$message}} </small>
                             <p class="mt-2">Obligatorio</p>
@@ -182,26 +182,26 @@
                         <i class="pi pi-key"></i>
                       </span>
                     </div>
-                    <small v-if="(v$.password.$invalid && submitted && v$.password.$model == '') || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value is required', 'Por favor, especifique una contraseña')}}</small>
+                    <small v-if="(v$.password.$invalid && v$.password.$model == '') || v$.password.$pending.$response" class="p-error">{{v$.password.required.$message.replace('Value is required', 'Por favor, especifique una contraseña')}}</small>
                     <small v-else-if="(v$.password.$invalid && v$.password.$model != '' && v$.password.$model.length < 8)" class="p-error"> {{'La contraseña debe tener al menos 8 caracteres'}} </small>
                     <small v-else-if="(v$.password.$invalid && v$.password.$model != '')" class="p-error"> {{v$.password.alpha.$message}} </small>
                   </div>
                   <!--PASSWORD-->
                   <div class="field">
-                    <label for="confPassword" :class="{'p-error':((v$.confPassword.$invalid) || (v$.password.$model != v$.confPassword.$model)) && submitted}">Confirmar contraseña</label>
+                    <label for="confPassword" :class="{'p-error':(v$.confPassword.$invalid) || (v$.password.$model != v$.confPassword.$model)}">Confirmar contraseña</label>
                     <div class="p-inputgroup">
-                      <Password id="confPassword" v-model="v$.confPassword.$model" :feedback="false" :class="{'p-invalid':((v$.confPassword.$invalid) || (v$.password.$model != v$.confPassword.$model)) && submitted}" toggleMask></Password>
+                      <Password id="confPassword" v-model="v$.confPassword.$model" :feedback="false" :class="{'p-invalid':(v$.confPassword.$invalid) || (v$.password.$model != v$.confPassword.$model)}" toggleMask></Password>
                       <span class="p-inputgroup-addon">
                         <i class="pi pi-key"></i>
                       </span>
                     </div>
-                    <small v-if="(v$.confPassword.$invalid && submitted) || v$.confPassword.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
-                    <small v-else-if="(v$.password.$model != v$.confPassword.$model && submitted)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
+                    <small v-if="(v$.confPassword.$invalid) || v$.confPassword.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
+                    <small v-else-if="(v$.password.$model != v$.confPassword.$model)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
                   </div>
                   <!--CONDICIONES-->
                   <div class="field-checkbox">
-                    <Checkbox id="accept" name="accept" value="Accept" v-model="v$.accept.$model" :class="{'p-invalid':v$.accept.$invalid && submitted}" />
-                    <label for="accept" :class="{'p-error': v$.accept.$invalid && submitted}">Acepto los términos y condiciones</label>
+                    <Checkbox id="accept" name="accept" value="Accept" v-model="v$.accept.$model" :class="{'p-invalid':v$.accept.$invalid}" />
+                    <label for="accept" :class="{'p-error': v$.accept.$invalid}">Acepto los términos y condiciones</label>
                   </div>
                   <Button type="submit" label="Crear cuenta" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
               </form>
@@ -221,9 +221,14 @@ import { email, required, minLength, maxLength, helpers } from "@vuelidate/valid
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
 export default {
-  setup: () => ({ v$: useVuelidate() }),
   //Inyectar el modulo de cuentas definido en main.js
   inject: ['$accounts'],
+
+  setup () {
+    return {
+      v$: useVuelidate()
+    }
+  },
   created(){
       //this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
       //this.socket.on('connect', () =>{})
@@ -242,7 +247,7 @@ export default {
     },
     //vuelidate
     handleSubmit() {
-      this.submitted = true;
+      /*
       this.v$.email.$touch();
       this.v$.password.$touch();
       this.v$.confPassword.$touch();
@@ -251,7 +256,7 @@ export default {
       this.v$.country.$touch();
       this.v$.accept.$touch();
       this.v$.name.$touch();
-
+      */
       // La form de crear cuenta no es valida
       if (this.v$.email.$invalid || this.v$.password.$invalid || this.v$.confPassword.$invalid || this.v$.nickname.$invalid || this.v$.date.$invalid || this.v$.country.$invalid || this.v$.accept.$invalid || this.v$.name.$invalid) { //|| this.v$.imagen.$invalid) {
         return;
@@ -269,34 +274,27 @@ export default {
       });
     },
     handleSubmitLog() {
-      this.submittedLog = true;
-      console.log(this.v$.emailLog);
-      this.v$.emailLog.$touch();
-      console.log(this.v$.emailLog);
-      this.v$.passwordLog.$touch();
       // La form de iniciar sesion no es valida
       if (this.v$.emailLog.$invalid || this.v$.passwordLog.$invalid) {
         return;
-      }
-      //Nachos tests para no hacer peticiones al back
-      //this.$router.push('/profile');
-      //this.$loggedStatus.logged = true;
-
+      } 
       // La form de iniciar sesion es valida
       this.$accounts.login(this.v$.emailLog.$model, this.v$.passwordLog.$model).then(success => {
-        console.log(success);
         if (success) {
           this.display = false;
           this.$router.push('/profile');
           this.$loggedStatus.logged = true;
         } else {
-          // Juan: pregunta, hacemos que informe de que el email no existe o que la contraseña es incorrecta
-          // o un mensaje de error generico?? porque eso nos lo deberia decir el back
+          console.log("no reconocido");
+          //this.v$.emailLog.$invalid = true;
+          //this.v$.emailLog.$error = true;
           return
         }
       }); 
     },
     resetForm() {
+      //Resetear las validaciones
+      this.$nextTick(() => { this.v$.$reset() });
       this.nickname = '';
       this.name = '';
       this.email = '';
@@ -306,10 +304,10 @@ export default {
       this.date = null;
       this.country = null;
       this.accept = null;
-      this.submitted = false;
-      this.submittedLog = false;
     },
     resetFormLog() {
+      //Resetear las validaciones
+      this.$nextTick(() => { this.v$.$reset() });
       this.emailLog = '';
       this.passwordLog = '';
     },
@@ -356,10 +354,7 @@ export default {
       date: null,
       country: null,
       accept: null,
-      submitted: false,
-      submittedLog: false,
       showMessage: false,
-      base64: '',
       Images: '',
       display: false,
       countries: [
@@ -381,6 +376,10 @@ export default {
   //vuelidate
   validations() {
     return {
+      //para que autotrackee el estado $dirty
+      "$autoDirty": true,
+      //que no autovalide hasta que le meta algo osea hasta que $dirty
+      "$lazy": true,
       emailLog: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
       passwordLog: { required },
       nickname: { required, max: maxLength(15) },
