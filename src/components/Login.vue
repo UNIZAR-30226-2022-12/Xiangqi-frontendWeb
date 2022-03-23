@@ -1,22 +1,21 @@
-<!--BOTÓN Y DIALOGO PARA CREAR UNA CUENTA-->
 <template>
+
   <!--ACCOUNT CREATED DIALOG-->
-  <Dialog v-model:visible="dialog.accountCreated" class="dialog-account-created dialog-login" :draggable="false" :modal="true">
+  <Dialog v-model:visible="dialog.accountCreated" class="dialog-account-created dialog-login resize-dialog" :draggable="false" :modal="true">
       <template #header :class="colorHeader">
         <h3>Cuenta creada correctamente</h3>
       </template>
       <div class="text-center">
         <p class="">Por favor, revise su correo electrónico para verificar su cuenta</p>
-        <Button type="submit" label="Aceptar" v-on:click="successfullyCreated()" class="mt-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+        <Button type="submit" label="Aceptar" v-on:click="dialog.accountCreated = false" class="mt-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
       </div>
   </Dialog>
 
   <!--FORGOT PASSWORD DIALOG-->
-  <Dialog v-model:visible="dialog.displayPsw" class="dialog-login" :class="{'dialog-forgot-password': !forgotPsw.failed, 'dialog-forgot-password-error': forgotPsw.failed}" :draggable="false" :modal="true"> <!--contentStyle="background-color: transparent !important"-->
+  <Dialog v-model:visible="dialog.displayPsw" class="dialog-login resize-dialog" :class="{'dialog-forgot-password': !forgotPsw.failed, 'dialog-forgot-password-error': forgotPsw.failed}" :draggable="false" :modal="true"> <!--contentStyle="background-color: transparent !important"-->
       <template #header :class="colorHeader">
         <h3>Recuperar contraseña</h3>
       </template>
-      <!--VUELIDATE-->
       <div class="flex justify-content-center">
         <div v-if="!forgotPsw.sent" class="card" style="width: 350px">
           <p class="mt-5">Introduce tu correo electrónico y te mandaremos las instrucciones necesarias para recuperar tu contraseña</p>
@@ -44,24 +43,37 @@
         <div v-else class="text-center" style="width: 350px">
           <h4 class="mt-6">¡Correo enviado correctamente!</h4>
           <p>Por favor, revisa tu correo electrónico y sigue las instrucciones para recuperar tu contraseña</p>
-          <Button type="submit" label="Aceptar" v-on:click="closeForgotPsw()" class="mt-4 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+          <Button type="submit" label="Aceptar" v-on:click="dialog.displayPsw = false" class="mt-4 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
         </div>
       </div>
   </Dialog>
 
   <!--TERMS AND CONDS DIALOG-->
-  <Dialog v-model:visible="dialog.terms" class="dialog-terms dialog-login" :draggable="false" :modal="true">
+  <Dialog v-model:visible="dialog.terms" class="dialog-terms dialog-login resize-dialog" :draggable="false" :modal="true">
       <template #header :class="colorHeader">
         <h3>Términos y condiciones</h3>
       </template>
       <div class="text-justify">
-        <p class="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce gravida dui sapien. Cras eu condimentum nisl, sed scelerisque erat. Donec quis sapien lacus. Maecenas pulvinar sapien quam, sit amet cursus turpis tristique eu. Ut quis ipsum at ante congue semper. In at rhoncus tortor, sit amet luctus ipsum. Etiam volutpat sem vel arcu venenatis vulputate. Praesent magna odio, aliquam eget metus id, vulputate ullamcorper arcu. Nam ut euismod eros, vel luctus libero. Donec in ex lacus. Donec ligula arcu, ornare eu metus non, venenatis lobortis libero. Suspendisse hendrerit efficitur augue porttitor consequat. Sed lorem tortor, accumsan ut arcu a, vestibulum sollicitudin neque. Aliquam mattis eleifend egestas.
-          Mauris nunc leo, gravida et leo at, gravida tempus lacus. Morbi non mattis orci. Duis convallis pretium urna, sed imperdiet augue posuere eget. Vivamus interdum felis eget porttitor maximus. Suspendisse velit diam, consectetur at odio et, auctor rutrum ipsum. Vivamus a est ac lacus dapibus vulputate. Duis rhoncus ultrices mauris, eget vulputate dui placerat vitae. Phasellus sagittis vel arcu et maximus. Etiam eu luctus mauris. Cras placerat facilisis velit, a lobortis ipsum vulputate ut. Morbi tempor consequat iaculis. Maecenas eget sodales leo, quis sodales dolor. Aenean vehicula pellentesque elit eu posuere.
-          Aenean ac nulla viverra, commodo ipsum sed, bibendum leo. Maecenas lacinia dui tincidunt neque commodo vulputate. Proin odio augue, mollis vitae ipsum ac, vulputate euismod orci. Nulla quis ex nec erat blandit viverra eu luctus ipsum. Maecenas quis augue massa. Cras a rutrum felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent scelerisque turpis diam, vel condimentum velit porta in. Proin sit amet ante feugiat, facilisis lorem rutrum, tincidunt justo. Maecenas in laoreet massa, ac consequat metus.
-          Nulla quis nulla at purus luctus vestibulum vitae sit amet dolor. Praesent iaculis, diam ut dapibus malesuada, mauris lectus maximus tortor, id porttitor quam odio sed turpis. Duis diam leo, consectetur non libero vel, faucibus accumsan sem. Sed euismod dictum lorem lobortis ullamcorper. Maecenas vitae purus nisl. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis accumsan velit posuere posuere consectetur. Suspendisse consectetur, ipsum eu ultrices lobortis, elit risus semper dui, pellentesque dignissim augue diam quis mauris. In nec faucibus eros, sed commodo odio. Curabitur dolor nibh, rhoncus vitae ornare a, convallis volutpat arcu. Nam cursus gravida enim, nec auctor velit feugiat vitae. Fusce ultricies facilisis efficitur. Sed efficitur lectus est, in ultrices ipsum pharetra vitae. Maecenas at ex mollis, tincidunt justo ac, mattis augue.
-          In ullamcorper velit eget leo porta accumsan. Duis placerat imperdiet rhoncus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum quis pellentesque orci. Integer consectetur, elit imperdiet ultrices posuere, ligula nulla volutpat arcu, sit amet aliquet mauris metus tempor nisi. Fusce eleifend, nibh id ornare lobortis, nisi leo convallis ex, vel volutpat nulla metus et libero. Mauris ac vestibulum lacus, sed ullamcorper elit. Sed facilisis, massa sit amet pulvinar consequat, odio leo laoreet nibh, imperdiet pharetra felis purus ac mauris. Cras commodo gravida nulla in fringilla. Pellentesque tincidunt risus a diam ultricies posuere.
-        </p>
+        <h2 class="text-primary">¿Quién puede hacer uso de los servicios?</h2>
+        <p>Puede hacer uso de los Servicios solo si accede a firmar un contrato vinculante con Xiangqi Online y no es usted una persona vetada para hacer uso de los servicios de conformidad con la legislación de su jurisdicción aplicable. En cualquier caso, usted deberá tener al menos 13 años, para hacer uso de los Servicios. Si acepta estos Términos y usa los Servicios en nombre de una empresa, organización, gobierno u otra entidad jurídica, afirma y garantiza que está autorizado a hacerlo y cuenta con los poderes necesarios para obligarla al cumplimiento de estos Términos, en cuyo caso el uso de las palabras "usted", "su" y "sus" en estos Términos hará referencia a dicha entidad jurídica.</p>
+        <p>Usted es responsable de su uso de los Servicios y de cualquier Contenido que proporcione, incluyendo el cumplimiento con las leyes, reglas y normas aplicables. Solo debe proporcionarnos contenido que desee compartir con otros.</p>
+        <h2 class="text-primary">Contenido de los servicios</h2>
+        <p>Cualquier confianza que deposite en cualquier Contenido o material publicado por medio de los Servicios u obtenido mediante los mismos, o cualquier uso que haga de ellos, lo hace por su propia cuenta y riesgo. No ratificamos, apoyamos, reafirmamos ni garantizamos la compleción, veracidad, precisión o fiabilidad de ningún Contenido o comunicación publicada por medio de los Servicios, ni ratificamos ninguna opinión expresada por medio de los Servicios. Comprende que al hacer uso de los Servicios, puede exponerse a Contenido que puede resultar ofensivo, dañino, inexacto o inapropiado de cualquier otra forma, o en algunos casos, a publicaciones que puedan haber sido interpretadas erróneamente o que puedan ser engañosas de cualquier otra forma. Todo el Contenido es responsabilidad única de la persona que lo produce. No monitorizamos ni controlamos el Contenido publicado por medio de los Servicios, y no podemos hacernos responsables de dicho Contenido.</p>
+        <p>Nos reservamos el derecho a retirar Contenido que incumpla el Acuerdo de usuario, como por ejemplo, violaciones de derechos de autor o de marcas comerciales o cualesquiera otros usos indebidos de propiedad intelectual, suplantación de identidad, conducta ilícita o acoso. </p>
+        <h2 class="text-primary">Sus derechos y cesión de derechos sobre el contenido</h2>
+        <p>Usted conserva sus derechos sobre cualquier Contenido que envíe, publique o muestre a través de nuestros Servicios. Lo que es suyo, es suyo: usted es el dueño de su Contenido (y del audio incorporado, las fotos y vídeos que se consideren parte del Contenido).</p>
+        <p>Al enviar, publicar o mostrar Contenido a través de los Servicios, nos otorga una licencia mundial, no exclusiva, libre del pago de derechos (con derecho a sublicencia) para usar, copiar, reproducir, procesar, adaptar. modificar, publicar, transmitir, mostrar y distribuir dicho Contenido en todos y cada uno de los medios de comunicación o métodos de distribución posibles, conocidos ahora o desarrollados con posterioridad (a efectos aclaratorios, estos derechos incluyen, por ejemplo, los de organización, transformación y traducción). Esta licencia nos autoriza a poner su Contenido a disposición del resto del mundo y a permitir que otros hagan lo mismo. Usted acepta que esta licencia incluye el derecho de Xiangqi Online a proporcionar, promover y mejorar los Servicios y a poner el contenido enviado a o a través de los Servicios a disposición de otras empresas, organizaciones o personas para la sindicación, emisión, distribución, Retweet, promoción o publicación de dicho contenido en otros medios y servicios, sujeto a nuestros términos y condiciones para el uso de dicho Contenido. Dichos usos adicionales por parte de Xiangqi Online u otras empresas, organizaciones o personas se realizarán sin abonarle a usted una compensación con respecto al Contenido que haya enviado, publicado, transmitido o puesto a disposición pública de cualquier otra forma a través de los Servicios, ya que usted acepta que el uso de los Servicios por su parte constituye una compensación suficiente por el Contenido y la cesión de derechos aquí contemplados.</p>
+        <p>Xiangqi Online cuenta con un conjunto de reglas en evolución para regir cómo los socios del entorno pueden interactuar con su Contenido publicado en los Servicios. Estas reglas existen para permitir un entorno abierto que tenga en cuenta sus derechos. Usted comprende que podemos modificar o adaptar su Contenido según se distribuya, sindique, publique o emita por nuestra parte o por parte de nuestros socios y/o que podemos realizar cambios en su contenido para adaptarlo a distintos medios.</p>
+        <p>Usted declara y garantiza que tiene, o ha obtenido, todos los derechos, licencias, consentimientos, permisos, facultades y/o autorizaciones necesarias para otorgar los derechos aquí conferidos para cualquier Contenido que usted envíe, publique o muestre en los Servicios o a través de estos. Usted acepta que dicho Contenido no contendrá materiales sujetos a derechos de autor u otros derechos de propiedad, salvo que usted cuente con el permiso necesario o esté legalmente facultado para publicar tales materiales y para conceder a Xiangqi Online la licencia anteriormente descrita.</p>
+        <h2 class="text-primary">Su cuenta</h2>
+        <p>Puede necesitar crear una cuenta para usar alguno de nuestros Servicios. Usted es responsable de la seguridad de su cuenta, por lo que debe usar una contraseña fuerte y limitar su uso a esta cuenta. No podemos ser considerados responsables, ni lo seremos, de ninguna pérdida o daño derivado de su incumplimiento de las anteriores condiciones.</p>
+        <p>Usted puede controlar la mayoría de las comunicaciones de los Servicios. Puede que debamos proporcionarle ciertas comunicaciones, como anuncios del servicio y mensajes administrativos. Dichas comunicaciones se consideran parte de los Servicios y no podrá optar por no recibirlos ni usted ni en su cuenta. Si añadió su número de teléfono a su cuenta, y después, lo cambió o desactivó dicho número de teléfono, debe actualizar la información de su cuenta para evitar que nos comuniquemos con cualquiera que asuma su antiguo número.</p>
+        <h2 class="text-primary">Exclusiones y limitaciones de responsabilidad</h2>
+        <h3>Los Servicios se ofrecen "TAL CUAL"</h3>
+        <p>Si usted reside fuera de la Unión Europea, de los Estados de la Asociación Europea de Libre Comercio (EFTA), o del Reino Unido, incluyendo si reside en los Estados Unidos, usted acepta que su acceso y uso de los Servicios o de cualquier Contenido será por su propia cuenta y riesgo. Usted entiende y acepta que los Servicios se le proporcionan "TAL CUAL" y "SEGÚN DISPONIBILIDAD". Las "Entidades de Xiangqi Online" significa Xiangqi Online, sus empresas matriz, filiales, sociedades relacionadas, responsables, directivos, empleados, agentes, representantes, socios y licenciatarios. Sin limitación del carácter general de lo anteriormente indicado, en la medida máxima de lo permitido por la legislación aplicable, LAS ENTIDADES DE Xiangqi Online EXCLUYEN TODAS LAS GARANTÍAS Y CONDICIONES, YA SEAN EXPRESAS O IMPLÍCITAS, DE COMERCIABILIDAD, ADECUACIÓN A UN FIN CONCRETO Y NO INFRACCIÓN. Las Entidades de Xiangqi Online no otorgan ninguna garantía ni realizan ninguna manifestación y excluyen todas las responsabilidades en lo que respecta a: (i) la integridad, exactitud, disponibilidad, puntualidad, seguridad o fiabilidad de los Servicios o de cualquier Contenido; (ii) cualquier daño que pueda sufrir su sistema informático, pérdida de datos u otros daños que resulten de su acceso o uso de los Servicios o de cualquier Contenido; (iii) la eliminación de cualesquiera Contenidos u otras comunicaciones mantenidas por los Servicios o la imposibilidad de almacenar o transmitir tales Contenidos o comunicaciones; y (iv) si los Servicios cumplirán sus requisitos o estarán disponibles de forma ininterrumpida, segura o sin errores. Las sugerencias o informaciones, ya sean de carácter verbal o escrito, que se obtengan de las Entidades de Xiangqi Online o a través de los Servicios, no crearán ninguna garantía o manifestación que no haya sido expresamente contemplada en este documento.</p>
+        <h2 class="text-primary">Limitación de la responsabilidad</h2>
+        <p>Si usted reside fuera de la Unión Europea, de los Estados de la Asociación Europea de Libre Comercio (EFTA) o del Reino Unido, incluyendo si reside en los Estados Unidos, USTED ACEPTA QUE EN LA MEDIDA MÁXIMA DE LO PERMITIDO POR LA LEGISLACIÓN APLICABLE, LAS ENTIDADES DE Xiangqi Online NO SERÁN RESPONSABLES DE NINGÚN TIPO DE DAÑOS INDIRECTOS, DERIVADOS, ESPECIALES, EMERGENTES O PUNITIVOS, PÉRDIDAS DE BENEFICIOS O INGRESOS, CON INDEPENDENCIA DE QUE SE INCURRA EN DICHAS PÉRDIDAS DIRECTA O INDIRECTAMENTE, O PÉRDIDAS DE DATOS, USO, FONDO DE COMERCIO U OTRAS PÉRDIDAS INTANGIBLES, QUE SE DERIVEN DE: (i) SU ACCESO O USO O INCAPACIDAD DE ACCESO O USO DE LOS SERVICIOS; (ii) CUALQUIER COMPORTAMIENTO O CONTENIDO DE TERCEROS EN LOS SERVICIOS INCLUYENDO, SIN LIMITACIÓN ALGUNA, CUALQUIER CONDUCTA DIFAMATORIA, OFENSIVA O ILEGAL DE OTROS USUARIOS O TERCEROS; (iii) CUALQUIER CONTENIDO OBTENIDO DE LOS SERVICIOS; O (iv) EL ACCESO, USO O ALTERACIÓN NO AUTORIZADOS DE SUS TRANSMISIONES O CONTENIDOS. LA RESPONSABILIDAD TOTAL DE LAS ENTIDADES DE Xiangqi Online NO SUPERARÁ EN NINGÚN CASO LA CANTIDAD DE CIEN DÓLARES ESTADOUNIDENSES (100,00 DÓLARES ESTADOUNIDENSES) O LA CANTIDAD QUE USTED HAYA ABONADO A Xiangqi Online, EN SU CASO, EN LOS SEIS ÚLTIMOS MESES POR LOS SERVICIOS QUE HAYAN DADO LUGAR A LA RECLAMACIÓN, SI ESTA ÚLTIMA CANTIDAD ES MAYOR. LAS LIMITACIONES CONTEMPLADAS EN ESTA SUBSECCIÓN SE APLICARÁN A CUALQUIER PRINCIPIO DE RESPONSABILIDAD, CON INDEPENDENCIA DE QUE SE FUNDAMENTE EN CUALQUIER GARANTÍA, CONTRATO, LEY, RESPONSABILIDAD EXTRACONTRACTUAL (INCLUYENDO NEGLIGENCIA) O CUALQUIER OTRA FIGURA LEGAL, Y DE QUE LAS ENTIDADES DE Xiangqi Online HAYAN SIDO INFORMADAS O NO DE LA POSIBILIDAD DE INCURRIR EN DICHOS DAÑOS, E INCLUSO EN EL SUPUESTO DE QUE LAS ACCIONES LEGALES AQUÍ CONTEMPLADAS NO SURTAN LOS EFECTOS PRETENDIDOS.</p>
+        <p>Si usted reside en la Unión Europea, en los Estados de la Asociación Europea de Libre Comercio (EFTA) o en el Reino Unido, usted acepta que al hacer uso de los Servicios usted acepta que la responsabilidad de Xiangqi Online, así como de sus empresas matriz, filiales, sociedades relacionadas, responsables, directivos, empleados, agentes, representantes, socios y licenciatarios, estará limitada a la máxima medida permitida en su país de residencia.</p>
       </div>
     <template #footer>
     </template>
@@ -121,7 +133,7 @@
                   </span>-->
                 </div>
                 <div class="field flex justify-content-center">
-                  <Button v-on:click="forgotPswFunc()" label="¿Has olvidado tu contraseña?" class="p-button-link" />
+                  <Button v-on:click="dialog.display = false, dialog.displayPsw = true" label="¿Has olvidado tu contraseña?" class="p-button-link" />
                 </div>
                 <Button type="submit" label="Iniciar sesión" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
               </form>
@@ -261,8 +273,8 @@
                   </div>
                   <!--CONDICIONES-->
                   <div class="field-checkbox">
-                    <Checkbox id="accept" name="accept" value="Accept" v-model="createAc.accept" :class="{'p-invalid':v$.createAc.accept.$invalid && createAc.submitted}" />
-                    <Button v-on:click="displayTermsDialog()" label="Aceptar los términos y condiciones" class="text-left p-button-link" />
+                    <Checkbox :disabled="createAc.checkBox == false" id="accept" name="accept" value="Accept" v-model="createAc.accept" :class="{'p-invalid':v$.createAc.accept.$invalid && createAc.submitted}" />
+                    <Button v-on:click="dialog.terms = true, createAc.checkBox = true" label="Aceptar los términos y condiciones" class="text-left p-button-link" />
                   </div>
                   <Button type="submit" label="Crear cuenta" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
               </form>
@@ -300,26 +312,10 @@ export default {
     uploadFile() {
       this.Images = this.$refs.file.files[0];
     },
+
     loginImage() {
 			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
 		},
-    successfullyCreated() {
-      this.dialog.accountCreated = false;
-    },
-    forgotPswFunc() {
-      this.dialog.display = false;
-      this.dialog.displayPsw = true;
-    },
-    closeForgotPsw() {
-      this.dialog.displayPsw = false;
-    },
-
-    /*
-     * Mostar el dialog de terms and conditions
-     */
-    displayTermsDialog() {
-      this.dialog.terms = true;
-    },
 
     //vuelidate
     /*
@@ -383,6 +379,10 @@ export default {
         //Muestra el mensaje en rojo de que no se ha encontrado el mail y cambia el tamanyo del dialog
         this.forgotPsw.failed = true;
     },
+
+    /* 
+     * Resetea la form de crear cuenta y sus validaciones
+     */
     resetForm() {
       //Resetear las validaciones
       this.$nextTick(() => { this.v$.$reset() });
@@ -397,7 +397,12 @@ export default {
       this.createAc.accept = null;
       this.createAc.failed = false;
       this.createAc.submitted = false;
+      this.createAc.checkBox = false;
     },
+
+    /* 
+     * Resetea la form de password olvidado y sus validaciones
+     */
     resetFormForgot() {
       //Resetear las validaciones
       this.$nextTick(() => { this.vForgot$.$reset() });
@@ -406,6 +411,10 @@ export default {
       this.forgotPsw.sent = false;
       this.forgotPsw.submitted = false;
     },
+
+    /* 
+     * Resetea la form de login y sus validaciones
+     */
     resetFormLog() {
       //Resetear las validaciones
       this.$nextTick(() => { this.vLogin$.$reset() });
@@ -414,6 +423,10 @@ export default {
       this.login.failed = false;
       this.login.submitted = false;
     },
+
+    /* 
+     * Pone las variables de la form de login al pulsar "iniciar sesion o crear cuenta"
+     */
     displayLoginWdw() {
       this.resetForm();
       this.resetFormLog();
@@ -426,6 +439,10 @@ export default {
       this.createAc.failed = false;
       this.createAc.submitted = false;
     },
+
+    /*
+     * Activa las clases para la animacion de la ventana de login
+     */
     resize(tabName) {
       if (tabName == "SignUp") {
         this.dialog.isActive = false;
@@ -437,6 +454,10 @@ export default {
         this.dialog.texto = "Iniciar sesión";
       }
     },
+
+    /*
+     * Cambia la pestanya seleccionada entre login y crear cuenta
+     */
     selectedTab(tabName) {
       var i;
       var x = document.getElementsByClassName("tabTypeJS");
@@ -446,9 +467,9 @@ export default {
       document.getElementById(tabName).style.display = "block";  
     },
   },
+
   data() {
     return {
-      //vuelidate
       dialog: {
         accountCreated: false,
         display: false,
@@ -482,6 +503,7 @@ export default {
         country: null,
         accept: null,
         failed: false,
+        checkBox: false,
       },
       Images: '',
       countries: [
@@ -503,7 +525,7 @@ export default {
     return {
       //para que autotrackee el estado $dirty
       "$autoDirty": true,
-      //que no autovalide hasta que le meta algo osea hasta que $dirty
+      //que no autovalide hasta que le meta algo osea hasta que $dirty, lo quito porque da problemas (deja enviar forms vacias)
       //"$lazy": true,
       login: {
         email: { 
@@ -540,7 +562,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
 }
 
 body {
@@ -553,7 +574,7 @@ body {
   color: var(--text-color);
 }
 
-/* DIALOG */
+/* Dialog styles */
 .dialog-login {
   background-color: var(--surface-a); /* Get el current background del tema */
   border-radius: 15px;
@@ -605,6 +626,10 @@ body {
     width: 380px !important;
   }
 
+  .resize-dialog {
+    width: 380px !important;
+  }
+
   .resize {
     width: 350px !important;
   }
@@ -633,7 +658,7 @@ body {
   margin-bottom: auto;
 }
 
-/* Tamño del logo en Dialog */
+/* Tamnyo del logo en Dialog */
 .logo-size {
   width: 100px;
   height: 100px;
