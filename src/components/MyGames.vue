@@ -20,13 +20,19 @@
         <template #loading>
             Cargando partidas. Por favor, espere.
         </template>
-        <Column field="image" header="Adversario" sortable>
+        <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
             <template #body="{data}">
-                <img :src="data.image" class="foto-perfil">
+                <div class="card">
+                    <div class="card-container blue-container overflow-hidden">
+                        <div class="flex">
+                            <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
+                            <span class="ml-2 flex align-items-center">{{data.nickname}}</span>
+                        </div>
+                    </div>
+                </div>
             </template>
         </Column>
-        <Column field="nickname" header="Adversario" sortable></Column>
-        <Column field="flag" header="País" sortable>
+        <Column field="flag" header="País" sortable style="min-width: 14rem">
             <template #body="{data}">
                 <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
                 <span class="ml-2 image-text">{{data.country}}</span>
@@ -69,7 +75,7 @@ export default {
         //this.customerService = new CustomerService();
         this.columns= [
                 {image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
-                {image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-uk', country: 'United Kingdom', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-fr', country: 'France', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
                 {image: 'images/profilePlaceholder.svg', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/02/2020', lastMovDate:'01/01/2021', myTurn: true},
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2022', lastMovDate:'01/01/2021', myTurn: true},
