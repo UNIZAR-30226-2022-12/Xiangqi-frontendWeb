@@ -1,111 +1,51 @@
 
 <template>
-    <div>
-        <DataTable :value="customers" :paginator="true" class="p-datatable-customers" :rows="10"
-            dataKey="id" :rowHover="true" v-model:selection="selectedCustomers" v-model:filters="filters" filterDisplay="menu" :loading="loading"
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            :globalFilterFields="['name','country.name','representative.name','status']" responsiveLayout="scroll">
-            <template #header>
-                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 class="m-0">Partidas</h5>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search" />
-                        <InputText v-model="filters['global'].value" placeholder="Keyword Search" />
-                    </span>
-                 </div>
+    <DataTable :value="columns" :paginator="true" :rows="10"
+    :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    :globalFilterFields="['nickname']" responsiveLayout="scroll">
+        <template #header>
+            <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                <h5 class="m-0">Partidas</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search" />
+                    <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
+                </span>
+            </div>
+        </template>
+        <template #empty>
+            No se han encontrado partidas
+        </template>
+        <template #loading>
+            Cargando partidas. Por favor, espere.
+        </template>
+        <Column field="image" header="Adversario" sortable>
+            <template #body="{data}">
+                <img :src="data.image" class="foto-perfil">
             </template>
-            <template #empty>
-                No customers found.
+        </Column>
+        <Column field="nickname" header="Adversario" sortable></Column>
+        <Column field="flag" header="País" sortable>
+            <template #body="{data}">
+                <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                <span class="ml-2 image-text">{{data.country}}</span>
             </template>
-            <template #loading>
-                Loading customers data. Please wait.
+        </Column>
+        <Column field="startDate" header="Inicio de juego" sortable></Column>
+        <Column field="lastMovDate" header="Último movimiento" sortable></Column>
+        <Column field="myTurn" header="Toca mover" sortable>
+            <template #body="{data}">
+                <i v-if="data.myTurn" class="pi pi-check-circle text-green-600"></i>
+                <i v-else class="pi pi-times-circle text-pink-600"></i>
             </template>
-            <!-- Adversario-->
-            <Column field="rival.nickname" header="Adversario" sortable style="min-width: 14rem">
-                <template #body="{data}">
-                    {{data.rival.nickname}}
-                </template>
-                <template #filter="{filterModel}">
-                    <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Buscar por nickname"/>
-                </template>
-            </Column>
-            <Column field="rival.country" header="País" sortable filterMatchMode="contains" style="min-width: 14rem">
-                <template #body="{data}">
-                    <img src="../assets/demo/flags/flag_placeholder.png" class="flag" :class="[data.rival.flag]" width="30" />
-                    <span class="image-text">{{data.rival.country}}</span>
-                </template>
-                <template #filter="{filterModel}">
-                    <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by country"/>
-                </template>
-            </Column>
-            <Column header="Agent" sortable filterField="representative" sortField="representative.name" :showFilterMatchModes="false" :filterMenuStyle="{'width':'14rem'}" style="min-width: 14rem">
-                 <template #body="{data}">
-                    <img :alt="data.representative.name" src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="32" style="vertical-align: middle" />
-                    <span class="image-text">{{data.representative.name}}</span>
-                </template>
-                <template #filter="{filterModel}">
-                    <div class="mb-3 font-bold">Agent Picker</div>
-                    <MultiSelect v-model="filterModel.value" :options="representatives" optionLabel="name" placeholder="Any" class="p-column-filter">
-                        <template #option="slotProps">
-                            <div class="p-multiselect-representative-option">
-                                <img :alt="slotProps.option.name" src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="32" style="vertical-align: middle" />
-                                <span class="image-text">{{slotProps.option.name}}</span>
-                            </div>
-                        </template>
-                    </MultiSelect>
-                </template>
-            </Column>
-            <Column field="date" header="Date" sortable dataType="date" style="min-width: 8rem">
-                <template #body="{data}">
-                    {{formatDate(data.date)}}
-                </template>
-                <template #filter="{filterModel}">
-                    <Calendar v-model="filterModel.value" dateFormat="mm/dd/yy" placeholder="mm/dd/yyyy" />
-                </template>
-            </Column>
-            <Column field="balance" header="Balance" sortable dataType="numeric" style="min-width: 8rem">
-                <template #body="{data}">
-                    {{formatCurrency(data.balance)}}
-                </template>
-                <template #filter="{filterModel}">
-                    <InputNumber v-model="filterModel.value" mode="currency" currency="USD" locale="en-US" />
-                </template>
-            </Column>
-            <Column field="status" header="Status" sortable :filterMenuStyle="{'width':'14rem'}" style="min-width: 10rem">
-                <template #body="{data}">
-                    <span :class="'customer-badge status-' + data.status">{{data.status}}</span>
-                </template>
-                <template #filter="{filterModel}">
-                    <Dropdown v-model="filterModel.value" :options="statuses" placeholder="Any" class="p-column-filter" :showClear="true">
-                        <template #value="slotProps">
-                            <span :class="'customer-badge status-' + slotProps.value">{{slotProps.value}}</span>
-                        </template>
-                        <template #option="slotProps">
-                            <span :class="'customer-badge status-' + slotProps.option">{{slotProps.option}}</span>
-                        </template>
-                    </Dropdown>
-                </template>
-            </Column>
-            <Column field="activity" header="Activity" sortable :showFilterMatchModes="false" style="min-width: 10rem">
-                <template #body="{data}">
-                    <ProgressBar :value="data.activity" :showValue="false" />
-                </template>
-                <template #filter="{filterModel}">
-                    <Slider v-model="filterModel.value" range class="m-3"></Slider>
-                    <div class="flex align-items-center justify-content-center px-2">
-                        <span>{{filterModel.value ? filterModel.value[0] : 0}}</span>
-                        <span>{{filterModel.value ? filterModel.value[1] : 100}}</span>
-                    </div>
-                </template>
-            </Column>
-            <Column headerStyle="width: 4rem; text-align: center" bodyStyle="text-align: center; overflow: visible">
-                <template #body>
-                    <Button type="button" icon="pi pi-cog"></Button>
-                </template>
-            </Column>
-        </DataTable>
-	</div>
+        </Column>
+        <Column header="Continuar">
+            <template #body>
+                <Button class="p-button-raised" style="border-radius: 1rem" label="Continuar"></Button>
+            </template>
+        </Column>
+    </DataTable>    
 </template>
 
 <script>
@@ -115,36 +55,47 @@ import {FilterMatchMode,FilterOperator} from 'primevue/api';
 export default {
     data() {
         return {
-            customers: null,
-            selectedCustomers: null,
+            data: null,
+            columns: null,
             filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
-                'oponentNick': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
-                'country.name': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
-                'representative': {value: null, matchMode: FilterMatchMode.IN},
-                'date': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.DATE_IS}]},
-                'balance': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.EQUALS}]},
-                'status': {operator: FilterOperator.OR, constraints: [{value: null, matchMode: FilterMatchMode.EQUALS}]},
-                'activity': {value: null, matchMode: FilterMatchMode.BETWEEN},
-                'verified': {value: null, matchMode: FilterMatchMode.EQUALS}
+                'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
-            loading: false, //PONER A TRUE CUANDO ESTÉ HECHO
-            rival: [
-                {image: '../assets/images/profilePlaceholder.svg', nickname: 'Pepe', country: 'Spain', code: 'ES', flag: 'flag-es', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-            ],
+            loading: true,
         }
     },
-    /*
+    
     created() {
-        this.customerService = new CustomerService();
+        //this.customerService = new CustomerService();
+        this.columns= [
+                {image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
+                {image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-uk', country: 'United Kingdom', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/02/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2022', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'10/20/2022', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+        ];
     },
     mounted() {
-        this.customerService.getCustomersLarge().then(data => {
+        this.loading = false;
+        /*this.customerService.getCustomersLarge().then(data => {
             this.customers = data;
             this.customers.forEach(customer => customer.date = new Date(customer.date));
             this.loading = false;
-        });
-    },*/
+        });*/
+        //this.loading = false;
+    },
     methods: {
         formatDate(value) {
             return value.toLocaleDateString('en-US', {
@@ -161,6 +112,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.foto-perfil {
+    display: block; 
+	vertical-align: middle;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 1.5px;
+	border-color: var(--surface-400);
+	object-fit: cover;
+}
 
 ::v-deep(.p-paginator) {
     .p-paginator-current {

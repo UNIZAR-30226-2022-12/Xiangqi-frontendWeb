@@ -201,7 +201,7 @@
                       <Dropdown id="country" v-model="createAc.country" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':v$.createAc.country.$invalid && createAc.submitted}">
                         <template #value="slotProps">
                           <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
-                            <img src="../assets/demo/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.value.code.toLowerCase()" />
+                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.value.code.toLowerCase()" />
                             {{slotProps.value.name}}
                           </div>
                           <span v-else>
@@ -210,7 +210,7 @@
                         </template>
                         <template #option="slotProps">
                           <div class="country-item">
-                            <img src="../assets/demo/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
+                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
                               {{slotProps.option.name}}
                           </div>
                         </template>

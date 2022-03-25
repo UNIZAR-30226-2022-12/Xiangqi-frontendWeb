@@ -3,12 +3,12 @@
 	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
 			<div class="grid m-auto">
 				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
-					<img id=profliePic src="../assets/images/profilePlaceholder.svg" class="foto-perfil" style="" alt="foto de perfil">
+					<img id=profliePic src="images/profilePlaceholder.svg" class="foto-perfil" style="" alt="foto de perfil">
 				</div>
 				<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
 					<h2 class="mb-1">{{name}}</h2>
 					<p class="mb-1">#{{username}}</p>
-					<img class="flag h-auto" :class="[bandera]" src="../assets/demo/flags/flag_placeholder.png">
+					<img class="flag h-auto" :class="[flag]" src="images/flags/flag_placeholder.png">
 				</div>
 				<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
 					<Button class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
@@ -65,7 +65,7 @@ export default {
 		return {
 			name: '',
 			username: 'pikanachi',
-			bandera: 'flag-es', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
+			flag: 'flag-es', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
 			birthday: '12/04/1991',
 			numFriends: '12',
 			userSince: '19/03/2022',
