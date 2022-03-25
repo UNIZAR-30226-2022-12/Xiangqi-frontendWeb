@@ -8,7 +8,7 @@
             :globalFilterFields="['name','country.name','representative.name','status']" responsiveLayout="scroll">
             <template #header>
                 <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 class="m-0">Customers</h5>
+                    <h5 class="m-0">Partidas</h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search" />
                         <InputText v-model="filters['global'].value" placeholder="Keyword Search" />
@@ -21,19 +21,19 @@
             <template #loading>
                 Loading customers data. Please wait.
             </template>
-            <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-            <Column field="name" header="Name" sortable style="min-width: 14rem">
+            <!-- Adversario-->
+            <Column field="rival.nickname" header="Adversario" sortable style="min-width: 14rem">
                 <template #body="{data}">
-                    {{data.name}}
+                    {{data.rival.nickname}}
                 </template>
                 <template #filter="{filterModel}">
-                    <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by name"/>
+                    <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Buscar por nickname"/>
                 </template>
             </Column>
-            <Column field="country.name" header="Country" sortable filterMatchMode="contains" style="min-width: 14rem">
+            <Column field="rival.country" header="País" sortable filterMatchMode="contains" style="min-width: 14rem">
                 <template #body="{data}">
-                    <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" :class="'flag flag-' + data.country.code" width="30" />
-                    <span class="image-text">{{data.country.name}}</span>
+                    <img src="../assets/demo/flags/flag_placeholder.png" class="flag" :class="[data.rival.flag]" width="30" />
+                    <span class="image-text">{{data.rival.country}}</span>
                 </template>
                 <template #filter="{filterModel}">
                     <InputText type="text" v-model="filterModel.value" class="p-column-filter" placeholder="Search by country"/>
@@ -119,7 +119,7 @@ export default {
             selectedCustomers: null,
             filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
-                'name': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
+                'oponentNick': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
                 'country.name': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
                 'representative': {value: null, matchMode: FilterMatchMode.IN},
                 'date': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.DATE_IS}]},
@@ -129,21 +129,9 @@ export default {
                 'verified': {value: null, matchMode: FilterMatchMode.EQUALS}
             },
             loading: false, //PONER A TRUE CUANDO ESTÉ HECHO
-            representatives: [
-                {name: "Amy Elsner", image: 'amyelsner.png'},
-                {name: "Anna Fali", image: 'annafali.png'},
-                {name: "Asiya Javayant", image: 'asiyajavayant.png'},
-                {name: "Bernardo Dominic", image: 'bernardodominic.png'},
-                {name: "Elwin Sharvill", image: 'elwinsharvill.png'},
-                {name: "Ioni Bowcher", image: 'ionibowcher.png'},
-                {name: "Ivan Magalhaes",image: 'ivanmagalhaes.png'},
-                {name: "Onyama Limba", image: 'onyamalimba.png'},
-                {name: "Stephen Shaw", image: 'stephenshaw.png'},
-                {name: "XuXue Feng", image: 'xuxuefeng.png'}
+            rival: [
+                {image: '../assets/images/profilePlaceholder.svg', nickname: 'Pepe', country: 'Spain', code: 'ES', flag: 'flag-es', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
             ],
-            statuses: [
-                'unqualified', 'qualified', 'new', 'negotiation', 'renewal', 'proposal'
-            ]
         }
     },
     /*
