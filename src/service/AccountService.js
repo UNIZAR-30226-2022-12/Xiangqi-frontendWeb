@@ -13,9 +13,10 @@ class AccountService {
 
     // CREAR UNA CUENTA
     // Pasarle al back por post los parámetros que el front te da
-    createAccount(nickname, name, email, date, country, password){
+    createAccount(nickname, name, email, date, country, password, image){
+        console.log(image)
         return http
-            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password})
+            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password, 'image': String(image)})
             //la respuesta que da el backend
             .then(response => {
                 //le pido al back, ¿hay cambios? ¿hay cambios?
@@ -36,6 +37,7 @@ class AccountService {
                 console.log(response.data)
                 if (response.data.ok) {
                     localStorage.setItem('email', email);
+                    localStorage.setItem('profile', email);
                     this.authenticated = true;
                     return true;
                 }
@@ -57,6 +59,7 @@ class AccountService {
             .post('/do-profile', {'email': email})
             .then(response => {
                 console.log(response.data)
+                localStorage.setItem('profilePic', "data:image/png;base64," + String(response.data.perfil.foto) );
                 return response.data;
             }, () => {
                 return false;

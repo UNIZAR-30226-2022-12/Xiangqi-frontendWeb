@@ -3,7 +3,7 @@
 	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
 			<div class="grid m-auto">
 				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
-					<img id=profliePic src="images/profilePlaceholder.svg" class="foto-perfil" style="" alt="foto de perfil">
+					<img id=profliePic src="images/profilePlaceholder.svg" class="foto-perfil" style="" alt="Preview">
 				</div>
 				<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
 					<h2 class="mb-1">{{name}}</h2>
@@ -64,12 +64,12 @@ export default {
 	data() {
 		return {
 			name: '',
-			username: 'pikanachi',
-			flag: 'flag-es', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
-			birthday: '12/04/1991',
-			numFriends: '12',
-			userSince: '19/03/2022',
-			range: 'gold',
+			username: '',
+			flag: '', //flag-cn seria china, puesta por defecto, pillarla del back ver tipos que puede ser en assts/demo/flags.txt
+			birthday: '',
+			numFriends: '',
+			userSince: '',
+			range: '',
 			profileData: ''
 		}
 	},
@@ -77,10 +77,16 @@ export default {
 		myGames,
 	},
 	created() {
-		console.log(localStorage.getItem('email'));
-		this.$accounts.profile(localStorage.getItem('email')).then(response => {
+		console.log(localStorage.getItem('profile'));
+		this.$accounts.profile(localStorage.getItem('profile')).then(response => {
 			this.name = response.perfil.name;
-
+			this.username = response.perfil.nick
+			this.flag = response.perfil.pais.bandera
+			this.birthday = response.perfil.birthDate
+			//this.numFriends el backend no nos lo da
+			//this.userSince el backend no nos lo da
+			this.range = response.perfil.range
+			document.getElementById("profliePic").setAttribute("src",localStorage.getItem('profilePic'))
 			console.log(response);
 		});
 	},

@@ -225,7 +225,7 @@
                   <div class="field"> 
                     <label for="imagen">Foto de perfil</label>
                     <div class="p-inputgroup">
-                      <FileUpload id="image" v-model="createAc.image" class="resize" style="width : 440px;" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                      <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                     </div>
                   </div>
                   <!--PASSWORD-->
@@ -310,7 +310,15 @@ export default {
   },
   methods: {
     uploadFile() {
-      this.Images = this.$refs.file.files[0];
+      let file = this.$refs.file.files[0];
+      console.log(file)
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+          this.Images = reader.result.split(',')[1];
+          console.log("PUTA")
+          console.log(this.Images)
+     };
     },
 
     loginImage() {
@@ -328,7 +336,8 @@ export default {
         return;
       }
       // La form ha sido validada correctamente en front
-      this.$accounts.createAccount(this.v$.createAc.nickname.$model, this.v$.createAc.name.$model, this.v$.createAc.email.$model, this.v$.createAc.date.$model, this.v$.createAc.country.$model, this.v$.createAc.password.$model).then(success => { //this.createAc.image
+
+      this.$accounts.createAccount(this.v$.createAc.nickname.$model, this.v$.createAc.name.$model, this.v$.createAc.email.$model, this.v$.createAc.date.$model, this.v$.createAc.country.$model, this.v$.createAc.password.$model,this.Images).then(success => { //this.createAc.image
         if (success) {
           this.dialog.display = false;
           this.dialog.accountCreated = true;
@@ -360,8 +369,8 @@ export default {
           this.login.failed = true;
 
           //COMENTAR!!!!!!!!!!!!!! <------------------------------------------
-          this.$router.push('/profile');
-          this.$loggedStatus.logged = true;
+          //this.$router.push('/profile');
+          //this.$loggedStatus.logged = true;
         }
       });
     },
