@@ -306,8 +306,10 @@ export default {
     }
   },
   created(){
-      //this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
-      //this.socket.on('connect', () =>{})
+    const email = window.location.href.split('?')[1].split('=')[1]
+    console.log(email);
+    this.$accounts.validate(email)
+    this.$router.push('/');
   },
   methods: {
     uploadFile() {
@@ -360,9 +362,8 @@ export default {
       }
       // La form ha sido validada correctamente en front
       this.$accounts.login(this.vLogin$.login.email.$model, this.vLogin$.login.password.$model).then(success => {
-        console.log(success)
         if (success.ok) {
-          if (success.validacion){ // Correo verificado, y ok, entramos
+          if (success.validation){ // Correo verificado, y ok, entramos
             this.dialog.display = false;
             this.$router.push('/profile');
             this.$loggedStatus.logged = true;
@@ -393,18 +394,13 @@ export default {
       if (this.vForgot$.forgotPsw.email.$invalid) {
         return;
       }
-
       //Enviar al backend el email
-      var email = this.vForgot$.forgotPsw.email.$model
-      this.$accounts.forgotPwd(email).then(success => {
-        console.log(success)
-        if(success){
-          this.forgotPsw.sent = true;
-        } else {
-          this.forgotPsw.failed = true;
-        }
-      });
-        
+      //if (Si el backend responde que el email existe) {
+        //Mostrar mensaje que ok, se ha mandado el mail
+        this.forgotPsw.sent = true;
+      //} else {
+        //Muestra el mensaje en rojo de que no se ha encontrado el mail y cambia el tamanyo del dialog
+        this.forgotPsw.failed = true;
     },
 
     /* 

@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Login from './pages/Login.vue';
+import Validate from './components/Validate.vue';
 import Game from './pages/Game.vue';
 import Profile from './pages/Profile.vue';
 import Friends from './pages/Friends.vue';
@@ -14,6 +15,11 @@ const routes = [
         path: '/',
         name: 'login',
         component: Login,
+    },
+    {
+        path: '/itsukieslamejorquintilliza',
+        name: 'validate',
+        component: Validate,
     },
     {
         path: '/game',

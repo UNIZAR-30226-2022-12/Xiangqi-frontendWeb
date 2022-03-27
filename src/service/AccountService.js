@@ -39,11 +39,11 @@ class AccountService {
                     localStorage.setItem('email', email);
                     localStorage.setItem('profile', email);
                     this.authenticated = true;
-                    return true;
+                    return response.data;
                 }
-                return false;
+                return {'ok': false};
             }, () => {
-                return false;
+                return  {'ok': false};
             });
     }
 
@@ -60,6 +60,26 @@ class AccountService {
             .then(response => {
                 console.log(response.data)
                 localStorage.setItem('profilePic', "data:image/png;base64," + String(response.data.perfil.foto) );
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+    validate(email){
+        return http
+            .post('/do-validate', {'email': email})
+            .then(response => {
+                console.log(response.data)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+    forgotPwd(email){
+        return http
+            .post('/do-forgotPwd', {'email': email})
+            .then(response => {
+                console.log(response.data)
                 return response.data;
             }, () => {
                 return false;
