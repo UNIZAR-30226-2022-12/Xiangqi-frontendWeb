@@ -1,7 +1,7 @@
 <template>
 
   <!--ACCOUNT CREATED DIALOG-->
-  <Dialog v-model:visible="dialog.accountCreated" class="dialog-account-created dialog-login resize-dialog" :draggable="false" :modal="true">
+  <Dialog v-model:visible="dialog.accountCreated" :closable="false" class="dialog-account-created dialog-login resize-dialog" :draggable="false" :modal="true">
       <template #header :class="colorHeader">
         <h3>Cuenta creada correctamente</h3>
       </template>
@@ -370,6 +370,7 @@ export default {
 
           //COMENTAR!!!!!!!!!!!!!! <------------------------------------------
           //this.$router.push('/profile');
+          this.$router.push('/recPwd');
           //this.$loggedStatus.logged = true;
         }
       });

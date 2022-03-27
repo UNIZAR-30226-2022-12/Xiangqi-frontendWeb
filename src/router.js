@@ -8,6 +8,7 @@ import Store from './pages/Store.vue';
 import Historial from './pages/Historial.vue';
 import MyBoards from './pages/MyBoards.vue';
 import Error from './pages/Error.vue';
+import RecPwd from './pages/RecPwd.vue';
 
 const routes = [
     {
@@ -49,6 +50,11 @@ const routes = [
         path: '/myBoards',
         name: 'myBoards',
         component: MyBoards,
+    },
+    {
+        path: '/recPwd',
+        name: 'recPwd',
+        component: RecPwd,
     },
     {
         path: '/error',
