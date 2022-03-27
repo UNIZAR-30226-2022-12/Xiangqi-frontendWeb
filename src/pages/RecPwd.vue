@@ -121,7 +121,7 @@ export default {
         handleSubmit() {
             this.submitted = true;
             if (this.vRecPwd$.password.$invalid || this.vRecPwd$.confPassword.$invalid) {
-            return;
+                return;
             }
             // La form ha sido validada correctamente en front
 
@@ -135,12 +135,11 @@ export default {
     },
     validations() {
         return {
-        //para que autotrackee el estado $dirty
-        "$autoDirty": true,
-        //que no autovalide hasta que le meta algo osea hasta que $dirty, lo quito porque da problemas (deja enviar forms vacias)
-        //"$lazy": true,
-        password: { required, min: minLength(8), alpha: helpers.withMessage('Debe contener al menos mayusculas, minusculas y números', alpha) },
-        confPassword: { required },
+            //para que autotrackee el estado $dirty
+            "$autoDirty": true,
+
+            password: { required, min: minLength(8), alpha: helpers.withMessage('Debe contener al menos mayusculas, minusculas y números', alpha) },
+            confPassword: { required },
         }
     },
 }
