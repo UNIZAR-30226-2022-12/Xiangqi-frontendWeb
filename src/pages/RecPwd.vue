@@ -115,8 +115,8 @@ export default {
             return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
         },
         /*
-        * Funcion que se ejecuta al hacer click en crear cuenta.
-        * Solo ejecuta algo si la form de login es valida.     
+        * Funcion que se ejecuta al hacer click en reestablecer contraseña.
+        * Solo ejecuta algo si la form de reestablecer es valida.     
         */
         handleSubmit() {
             this.submitted = true;
