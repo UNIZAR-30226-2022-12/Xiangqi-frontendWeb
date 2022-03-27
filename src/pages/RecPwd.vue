@@ -1,7 +1,8 @@
 <template>
+    <!--METEMOS EL LOGIN PARA YA ESTAR UNA VEZ QUE REESTABLEZCAMOS-->
     <login/>
 
-    <!--ACCOUNT CREATED DIALOG-->
+    <!--SUCCEEDED DIALOG-->
     <Dialog v-model:visible="dialogSuccess.display" :closable="false" class="dialog-success dialog-login" :draggable="false" :modal="true">
         <template #header :class="colorHeader">
         <h3>Contraseña reestablecida</h3>
@@ -12,6 +13,7 @@
         </div>
     </Dialog>
 
+    <!--RECOVER PWD DIALOG-->
     <Dialog v-model:visible="dialog.display" :closable="false" class="dialog-recpwd dialog-login" :draggable="false" :modal="true">
         <template #header :class="colorHeader">
             <div class="grid m-auto text-center">
@@ -125,6 +127,7 @@ export default {
 
             //this.$accountscount(this.vRecPwd$.nickname.$model, this.vRecPwd$.name.$model, this.vRecPwd$.email.$model, this.vRecPwd$.date.$model, this.vRecPwd$.country.$model, this.vRecPwd$.password.$model,this.Images).then(success => { //this.image
             //if (success) {
+                //Ocultar el dialogo de crear reestablecer y mostar el de contraseña reestablecida
                 this.dialog.display = false;
                 this.dialogSuccess.display = true;
             //});
