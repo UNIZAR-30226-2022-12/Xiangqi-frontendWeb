@@ -85,6 +85,15 @@ class AccountService {
                 return false;
             });
     }
+    getCountries(){
+        return http
+            .get('/do-getCountries')
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 }
 
 export default new AccountService({
