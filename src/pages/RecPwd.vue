@@ -89,6 +89,7 @@ import { required, minLength, helpers } from "@vuelidate/validators";
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
 export default {
+    inject: ['$accounts'],
     setup () {
     return {
         vRecPwd$: useVuelidate(),
@@ -126,10 +127,18 @@ export default {
             // La form ha sido validada correctamente en front
 
             //this.$accountscount(this.vRecPwd$.nickname.$model, this.vRecPwd$.name.$model, this.vRecPwd$.email.$model, this.vRecPwd$.date.$model, this.vRecPwd$.country.$model, this.vRecPwd$.password.$model,this.Images).then(success => { //this.image
+            const email = window.location.href.split('?')[1].split('=')[1]
+            console.log(email);
+            this.$accounts.changePwd(email, this.vRecPwd$.confPassword.$model).then(success => { 
+                if (success) {
+                    this.dialog.display = false;
+                    this.dialogSuccess.display = true;
+                    this.$router.push('/');
+                }
+            });
             //if (success) {
                 //Ocultar el dialogo de crear reestablecer y mostar el de contraseña reestablecida
-                this.dialog.display = false;
-                this.dialogSuccess.display = true;
+                
             //});
         },
     },

@@ -85,6 +85,16 @@ class AccountService {
                 return false;
             });
     }
+    changePwd(email, pwd){
+        return http
+            .post('/do-changePwd', {'email': email, 'pwd': pwd})
+            .then(response => {
+                console.log(response.data)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 }
 
 export default new AccountService({

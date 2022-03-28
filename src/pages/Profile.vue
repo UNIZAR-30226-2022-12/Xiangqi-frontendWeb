@@ -83,11 +83,10 @@ export default {
 			this.username = response.perfil.nick
 			this.flag = response.perfil.pais.bandera
 			this.birthday = response.perfil.birthDate
+			this.userSince = response.perfil.registerDate
 			//this.numFriends el backend no nos lo da
-			//this.userSince el backend no nos lo da
-			this.range = response.perfil.range
+			this.range = response.perfil.rango
 			document.getElementById("profliePic").setAttribute("src",localStorage.getItem('profilePic'))
-			console.log(response);
 		});
 	},
 
