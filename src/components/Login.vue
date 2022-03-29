@@ -454,6 +454,7 @@ export default {
       this.login.email = '';
       this.login.password = '';
       this.login.failed = false;
+      this.login.validationFail = false;
       this.login.submitted = false;
     },
 
