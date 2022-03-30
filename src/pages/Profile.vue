@@ -3,7 +3,7 @@
 	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
 			<div class="grid m-auto">
 				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
-					<img id=profliePic src="images/profilePlaceholder.svg" class="foto-perfil" style="" alt="Preview">
+					<img id=profliePic :src="profileImage" class="foto-perfil" style="" alt="foto de perfil">
 				</div>
 				<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
 					<h2 class="mb-1">{{name}}</h2>
@@ -70,23 +70,28 @@ export default {
 			numFriends: '',
 			userSince: '',
 			range: '',
-			profileData: ''
+			profileData: '',
+			profileImage: '',
 		}
 	},
 	components: {
 		myGames,
 	},
 	created() {
-		console.log(localStorage.getItem('profile'));
-		this.$accounts.profile(localStorage.getItem('profile')).then(response => {
+		/*this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
 			this.name = response.perfil.name;
-			this.username = response.perfil.nick
-			this.flag = response.perfil.pais.bandera
-			this.birthday = response.perfil.birthDate
-			this.userSince = response.perfil.registerDate
+			this.username = response.perfil.nick;
+			this.flag = response.perfil.pais.bandera;
+			this.birthday = response.perfil.birthDate;
 			//this.numFriends el backend no nos lo da
-			this.range = response.perfil.rango
-			document.getElementById("profliePic").setAttribute("src",localStorage.getItem('profilePic'))
+			//this.userSince el backend no nos lo da
+			this.range = response.perfil.range;*
+			//document.getElementById("profliePic").setAttribute("src",localStorage.getItem('profilePic'))
+			console.log(response);
+		});*/
+
+		this.$accounts.getProfileImage(localStorage.getItem('token')).then(data => {
+			this.profileImage = data;
 		});
 	},
 

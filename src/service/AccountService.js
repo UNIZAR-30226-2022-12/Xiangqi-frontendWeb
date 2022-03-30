@@ -12,7 +12,6 @@ class AccountService {
     }
 
     // CREAR UNA CUENTA
-    // Pasarle al back por post los parámetros que el front te da
     createAccount(nickname, name, email, date, country, password, image){
         console.log(image)
         return http
@@ -36,8 +35,7 @@ class AccountService {
             .then(response => {
                 console.log(response.data)
                 if (response.data.ok) {
-                    localStorage.setItem('email', email);
-                    localStorage.setItem('profile', email);
+                    localStorage.setItem('token', response.data.token);
                     this.authenticated = true;
                     return response.data;
                 }
@@ -54,17 +52,7 @@ class AccountService {
     logout() {
         localStorage.removeItem('email');
     }
-    profile(email){
-        return http
-            .post('/do-profile', {'email': email})
-            .then(response => {
-                console.log(response.data)
-                localStorage.setItem('profilePic', "data:image/png;base64," + String(response.data.perfil.foto) );
-                return response.data;
-            }, () => {
-                return false;
-            });
-    }
+
     validate(email){
         return http
             .post('/do-validate', {'email': email})
@@ -75,11 +63,45 @@ class AccountService {
                 return false;
             });
     }
+
     forgotPwd(email){
         return http
             .post('/do-forgotPwd', {'email': email})
             .then(response => {
                 console.log(response.data)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    getCountries(){
+        return http
+            .get('/do-getCountries')
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    // PERFIL DE USUARIO
+    getProfile(){
+        return http
+            .post('/do-getProfile')
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    getProfileImage() {
+        //var userToken = localStorage.getItem('token');
+        //request.headers.set('x-access-token', userToken);
+        return http
+            .get('/do-getProfileImage')
+            .then(response => {
                 return response.data;
             }, () => {
                 return false;

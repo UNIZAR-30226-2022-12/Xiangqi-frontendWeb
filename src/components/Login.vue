@@ -305,10 +305,15 @@ export default {
       vForgot$: useVuelidate(),
     }
   },
+
   created(){
       //this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000")
       //this.socket.on('connect', () =>{})
+      this.$accounts.getCountries().then(data => {
+        this.countries = data;
+      });
   },
+
   methods: {
     uploadFile() {
       let file = this.$refs.file.files[0];
@@ -379,7 +384,7 @@ export default {
 
           //COMENTAR!!!!!!!!!!!!!! <------------------------------------------
           //this.$router.push('/profile');
-          this.$router.push('/recPwd');
+          //this.$router.push('/recPwd');
           //this.$loggedStatus.logged = true;
         }
       });
@@ -449,6 +454,7 @@ export default {
       this.login.email = '';
       this.login.password = '';
       this.login.failed = false;
+      this.login.validationFail = false;
       this.login.submitted = false;
     },
 
@@ -534,18 +540,7 @@ export default {
         checkBox: false,
       },
       Images: '',
-      countries: [
-          {name: 'Australia', code: 'AU'},
-          {name: 'Brazil', code: 'BR'},
-          {name: 'China', code: 'CN'},
-          {name: 'Egypt', code: 'EG'},
-          {name: 'France', code: 'FR'},
-          {name: 'Germany', code: 'DE'},
-          {name: 'India', code: 'IN'},
-          {name: 'Japan', code: 'JP'},
-          {name: 'Spain', code: 'ES'},
-          {name: 'United States', code: 'US'}
-      ],
+      countries: '',
     }
   },
   //vuelidate
