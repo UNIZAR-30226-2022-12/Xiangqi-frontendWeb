@@ -2,3 +2,4 @@
 node_modules/
 src/assets/images/boards/boards.psd
 src/assets/images/boards/basic_board.svg
+dist/
