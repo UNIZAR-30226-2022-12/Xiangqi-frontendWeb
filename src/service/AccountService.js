@@ -101,14 +101,13 @@ class AccountService {
     }
 
     getProfileImage() {
-        const headers = {'x-access-token': localStorage.getItem('token')};
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}, 'responseType': 'blob'};
 
-        let id = localStorage.getItem('id')
+        let id = localStorage.getItem('id');
         return http
-            .get('/do-getProfileImage/' + id , {headers})
-            .then(() => {
-                let msg = 'http://ec2-3-82-235-243.compute-1.amazonaws.com:3000/do-getProfileImage/' + id;
-                return msg;
+            .get('/do-getProfileImage/' + id, headers)
+            .then(response => {
+                return URL.createObjectURL(response.data);
             }, () => {
                 return false;
             });
@@ -129,17 +128,3 @@ export default new AccountService({
     //url: "http://" + window.location.hostname + ":8000"
     url: "http://ec2-3-82-235-243.compute-1.amazonaws.com:3000"
 });
-
-/*
-            .then(response => {
-                let x = response.blob();
-                console.log(x);
-                return x;
-            })
-            .then(imageBlob => {
-                const imageObjectURL = URL.createObjectURL(imageBlob);
-                console.log('RESPUESTA', imageObjectURL);
-                return imageObjectURL;
-            }, () => {
-                return false;
-            });*/
