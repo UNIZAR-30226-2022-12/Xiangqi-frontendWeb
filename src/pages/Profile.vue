@@ -124,7 +124,6 @@ export default {
 .flag {
 	vertical-align: middle;
 	width: 2rem;
-	height: 2rem;
 	object-fit: cover;
 }
 
