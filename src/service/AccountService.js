@@ -15,7 +15,7 @@ class AccountService {
     createAccount(nickname, name, email, date, country, password, image){
         console.log(image)
         return http
-            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password, 'image': String(image)})
+            .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password, 'image': image})
             //la respuesta que da el backend
             .then(response => {
                 //le pido al back, ¿hay cambios? ¿hay cambios?
@@ -37,7 +37,7 @@ class AccountService {
                 if (response.data.ok) {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('id', response.data.id);
-
+                    localStorage.setItem('email', email);
                     console.log('id', response.data.id);
                     this.authenticated = true;
                     return response.data;
@@ -91,8 +91,9 @@ class AccountService {
     // PERFIL DE USUARIO
     getProfile(){
         return http
-            .post('/do-getProfile')
+            .get('/do-getProfile/' + String(localStorage.getItem("email")))
             .then(response => {
+                response.data.perfil.foto = "data:image/png;base64," + String(response.data.perfil.foto)
                 return response.data;
             }, () => {
                 return false;
@@ -100,15 +101,14 @@ class AccountService {
     }
 
     getProfileImage() {
-        //const headers = {'x-access-token': localStorage.getItem('token')};
+        const headers = {'x-access-token': localStorage.getItem('token')};
 
         let id = localStorage.getItem('id')
         return http
-            .get('/do-getProfileImage/', id) //, {headers})
-            .then(response => {
-                console.log('RESPONSE', response.data);
-                //let msg = 'http://ec2-3-82-235-243.compute-1.amazonaws.com:3000/do-getProfileImage/' + id;
-                return response.data;
+            .get('/do-getProfileImage/' + id , {headers})
+            .then(() => {
+                let msg = 'http://ec2-3-82-235-243.compute-1.amazonaws.com:3000/do-getProfileImage/' + id;
+                return msg;
             }, () => {
                 return false;
             });

@@ -78,21 +78,23 @@ export default {
 		myGames,
 	},
 	created() {
-		/*this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
+		this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
+			console.log(response);
 			this.name = response.perfil.name;
 			this.username = response.perfil.nick;
 			this.flag = response.perfil.pais.bandera;
 			this.birthday = response.perfil.birthDate;
 			//this.numFriends el backend no nos lo da
 			//this.userSince el backend no nos lo da
-			this.range = response.perfil.range;*
-			//document.getElementById("profliePic").setAttribute("src",localStorage.getItem('profilePic'))
+			this.range = response.perfil.rango;
+			
 			console.log(response);
-		});*/
+		});
 
 		this.$accounts.getProfileImage().then(data => {
 			this.profileImage = data;
-		});
+			console.log(this.profileImage)
+		})
 	},
 
 	//document.getElementById("profliePic").src="../assets/images/1.png";
