@@ -90,7 +90,7 @@ export default {
 			console.log(response);
 		});*/
 
-		this.$accounts.getProfileImage(localStorage.getItem('token')).then(data => {
+		this.$accounts.getProfileImage().then(data => {
 			this.profileImage = data;
 		});
 	},
