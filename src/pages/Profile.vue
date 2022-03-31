@@ -25,14 +25,22 @@ export default {
 		myStatics,
 	},
 	created() {
+		//LO QUE CAMBIARÍA ES PASARLE MI ID Y EL TOKEN EN TODO CASO, ASI CON EL ID QUE LE PASEMOS
+		//SE OBTIENE LA INFO DEL BACK Y EL TOKEN SE USA SOLO PARA AUTENTICAR
+
+
+		//TO-DO
+		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
 		this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
 			this.perfil = response.perfil;
 		});
 
+		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
 		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
 			this.profileImage = data;
 		})
 
+		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
 		this.$accounts.getGames().then(response => {
             this.games = response
 		});
