@@ -64,6 +64,7 @@
 import vClickOutside from 'click-outside-vue3';
 
 export default {
+	inject: ['$accounts'],
 	data() {
 		return {
 			mostrarPanel: false,
@@ -89,6 +90,7 @@ export default {
 					//this.$toast.add({severity:'info', summary:'Sesión cerrada', detail:'Has cerrado sesión', life: 3000});
 					this.$loggedStatus.logged = false;
 					this.mostrarPanel = false;
+					this.$accounts.logout();
 					this.$router.push('/');
                 },
                 reject: () => {

@@ -53,7 +53,9 @@ class AccountService {
     }
 
     logout() {
-        localStorage.removeItem('email');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        console.log('logout');
     }
 
     validate(email){
