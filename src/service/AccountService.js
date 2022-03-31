@@ -122,7 +122,7 @@ class AccountService {
                 return false;
             });
     }
-    getPartidas(){
+    getGames(){
         return http
             .get('/do-getPartidas/' + String(localStorage.getItem("id")))
             .then(response => {

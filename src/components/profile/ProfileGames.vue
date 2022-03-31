@@ -1,69 +1,77 @@
 
 <template>
-    <DataTable :value="columns" :paginator="true" :rows="10"
-    :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
-    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    :globalFilterFields="['nickname']" responsiveLayout="scroll">
-        <template #header>
-            <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                <h5 class="m-0">Partidas</h5>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search" />
-                    <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
-                </span>
-            </div>
-        </template>
-        <template #empty>
-            No se han encontrado partidas
-        </template>
-        <template #loading>
-            Cargando partidas. Por favor, espere.
-        </template>
-        <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
-            <template #body="{data}">
-                <div class="card">
-                    <div class="card-container blue-container overflow-hidden">
-                        <div class="flex">
-                            <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
-                            <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
-                        </div>
-                    </div>
+    <h2>Mis partidas</h2>
+	<div class="surface-section section p-6">
+        <DataTable :value="games" :paginator="true" :rows="10"
+        :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        :globalFilterFields="['nickname']" responsiveLayout="scroll">
+            <template #header>
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="m-0">Partidas</h5>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search" />
+                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
+                    </span>
                 </div>
             </template>
-        </Column>
-        <Column field="flag" header="País" sortable style="min-width: 14rem">
-            <template #body="{data}">
-                <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                <span class="ml-2 image-text">{{data.country}}</span>
+            <template #empty>
+                No se han encontrado partidas
             </template>
-        </Column>
-        <Column field="startDate" header="Inicio de juego" sortable></Column>
-        <Column field="lastMovDate" header="Último movimiento" sortable></Column>
-        <Column field="myTurn" header="Toca mover" sortable>
-            <template #body="{data}">
-                <i v-if="data.myTurn" class="pi pi-check-circle text-green-600"></i>
-                <i v-else class="pi pi-times-circle text-pink-600"></i>
+            <template #loading>
+                Cargando partidas. Por favor, espere.
             </template>
-        </Column>
-        <Column header="Continuar">
-            <template #body>
-                <Button class="p-button-raised" style="border-radius: 1rem" label="Continuar"></Button>
-            </template>
-        </Column>
-    </DataTable>    
+            <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
+                <template #body="{data}">
+                    <div class="card">
+                        <div class="card-container blue-container overflow-hidden">
+                            <div class="flex">
+                                <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
+                                <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </Column>
+            <Column field="flag" header="País" sortable style="min-width: 14rem">
+                <template #body="{data}">
+                    <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                    <span class="ml-2 image-text">{{data.country}}</span>
+                </template>
+            </Column>
+            <Column field="startDate" header="Inicio de juego" sortable></Column>
+            <Column field="lastMovDate" header="Último movimiento" sortable></Column>
+            <Column field="myTurn" header="Toca mover" sortable>
+                <template #body="{data}">
+                    <i v-if="data.myTurn" class="pi pi-check-circle text-green-600"></i>
+                    <i v-else class="pi pi-times-circle text-pink-600"></i>
+                </template>
+            </Column>
+            <Column header="Continuar">
+                <template #body>
+                    <Button class="p-button-raised" style="border-radius: 1rem" label="Continuar"></Button>
+                </template>
+            </Column>
+        </DataTable>    
+    </div>
 </template>
 
 <script>
-//import CustomerService from './service/CustomerService';
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
 
 export default {
     inject: ['$accounts'],
+    // Para obtener el parametro columns
+    props: {
+        games: {
+            type: Object,
+            required: true
+        },
+    },
     data() {
         return {
-            data: null,
-            columns: null,
+            //columns: null,
             filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
@@ -93,19 +101,9 @@ export default {
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
         ];*/
-        this.$accounts.getPartidas().then(response => {
-            this.columns = response
-		});
-
     },
     mounted() {
         this.loading = false;
-        /*this.customerService.getCustomersLarge().then(data => {
-            this.customers = data;
-            this.customers.forEach(customer => customer.date = new Date(customer.date));
-            this.loading = false;
-        });*/
-        //this.loading = false;
     },
     methods: {
         formatDate(value) {

@@ -30,7 +30,6 @@
 export default {
   data() {
     return {
-      //esto se ejecuta al cargar por lo que aqui se ponen peticiones al back
       display: false,
       temporizador: false,
       amigo: false,
