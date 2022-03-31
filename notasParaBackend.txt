@@ -1,0 +1,2 @@
+Para el perfil necesitamos el numero de amigos
+LLamada getPartidas con el id

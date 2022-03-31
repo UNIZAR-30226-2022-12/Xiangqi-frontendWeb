@@ -113,6 +113,16 @@ class AccountService {
                 return false;
             });
     }
+    getPartidas(){
+        return http
+            .get('/do-getPartidas/' + String(localStorage.getItem("id")))
+            .then(response => {
+                response.data.perfil.foto = "data:image/png;base64," + String(response.data.perfil.foto)
+                return true;
+            }, () => {
+                return [{image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false}];
+            });
+    }
     changePwd(email, pwd){
         return http
             .post('/do-changePwd', {'email': email, 'pwd': pwd})

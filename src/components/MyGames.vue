@@ -59,6 +59,7 @@
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
 
 export default {
+    inject: ['$accounts'],
     data() {
         return {
             data: null,
@@ -72,7 +73,7 @@ export default {
     },
     
     created() {
-        //this.customerService = new CustomerService();
+        /*this.customerService = new CustomerService();
         this.columns= [
                 {image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
                 {image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-fr', country: 'France', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
@@ -91,7 +92,11 @@ export default {
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
                 {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-        ];
+        ];*/
+        this.$accounts.getPartidas().then(response => {
+            this.columns = response
+		});
+
     },
     mounted() {
         this.loading = false;

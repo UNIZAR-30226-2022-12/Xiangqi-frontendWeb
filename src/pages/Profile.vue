@@ -85,7 +85,7 @@ export default {
 			this.flag = response.perfil.pais.bandera;
 			this.birthday = response.perfil.birthDate;
 			//this.numFriends el backend no nos lo da
-			//this.userSince el backend no nos lo da
+			this.userSince = response.perfil.registerDate;
 			this.range = response.perfil.rango;
 			
 			console.log(response);
