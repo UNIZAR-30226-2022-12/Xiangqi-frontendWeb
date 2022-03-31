@@ -26,7 +26,7 @@
                     <div class="card-container blue-container overflow-hidden">
                         <div class="flex">
                             <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
-                            <span class="ml-2 flex align-items-center" @click="otherProfile(data.id)">{{data.nickname}}</span>
+                            <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                         </div>
                     </div>
                 </div>

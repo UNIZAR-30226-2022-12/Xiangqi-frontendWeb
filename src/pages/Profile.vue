@@ -1,19 +1,19 @@
 <template>
 	<h2> Mi perfil </h2>
 	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
-			<div class="grid m-auto">
-				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
-					<img id=profliePic :src="profileImage" class="foto-perfil" style="" alt="foto de perfil">
-				</div>
-				<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
-					<h2 class="mb-1">{{name}}</h2>
-					<p class="mb-1">#{{username}}</p>
-					<img class="flag h-auto" :class="[flag]" src="images/flags/flag_placeholder.png">
-				</div>
-				<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
-					<Button class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
-				</div>
+		<div class="grid m-auto">
+			<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
+				<img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50" style="" alt="foto de perfil">
 			</div>
+			<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
+				<h2 class="mb-1">{{name}}</h2>
+				<p class="mb-1">#{{username}}</p>
+				<img class="flag h-auto" :class="[flag]" src="images/flags/flag_placeholder.png">
+			</div>
+			<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
+				<Button class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
+			</div>
+		</div>
 		<div class="surface-section section mt-4 p-6 text-center">
 			<div class="grid">
 				<div class="col-6 md:col-3 mb-4 px-5">
@@ -115,9 +115,6 @@ export default {
 	width: 8rem;
 	height: 8rem;
 	border-radius: 50%;
-	border-style: solid;
-	border-width: 1.5px;
-	border-color: var(--surface-400);
 	object-fit: cover;
 }
 
