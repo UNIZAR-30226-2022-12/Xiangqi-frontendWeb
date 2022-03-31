@@ -55,7 +55,6 @@ class AccountService {
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('id');
-        console.log('logout');
     }
 
     validate(email){
