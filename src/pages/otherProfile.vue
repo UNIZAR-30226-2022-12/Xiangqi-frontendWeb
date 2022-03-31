@@ -1,5 +1,5 @@
 <template>
-	<h2> Mi perfil </h2>
+	<h2>Perfil de {{username}}</h2>
 	<div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
 			<div class="grid m-auto">
 				<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
@@ -9,9 +9,6 @@
 					<h2 class="mb-1">{{name}}</h2>
 					<p class="mb-1">#{{username}}</p>
 					<img class="flag h-auto" :class="[flag]" src="images/flags/flag_placeholder.png">
-				</div>
-				<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
-					<Button class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
 				</div>
 			</div>
 		<div class="surface-section section mt-4 p-6 text-center">
@@ -47,17 +44,12 @@
 			</div>
 		</div>
 	</div>
-	<h2>Mis partidas</h2>
-	<div class="surface-section section p-6">
-			<myGames/>
-	</div>
 	<h2>Estadísticas</h2>
 	<div class="surface-section section p-6 text-center">
 	</div>
 </template>
 
 <script>
-import myGames from '../components/MyGames.vue';
 
 export default {
 	inject: ['$accounts'],
@@ -74,11 +66,8 @@ export default {
 			profileImage: '',
 		}
 	},
-	components: {
-		myGames,
-	},
 	created() {
-		this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
+		this.$accounts.getOtherProfile(localStorage.getItem('token')).then(response => {
 			console.log(response);
 			this.name = response.perfil.name;
 			this.username = response.perfil.nick;
@@ -91,7 +80,7 @@ export default {
 			console.log(response);
 		});
 
-		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+		this.$accounts.getProfileImage(localStorage.getItem('idAconsultar')).then(data => {
 			this.profileImage = data;
 			console.log(this.profileImage)
 		})

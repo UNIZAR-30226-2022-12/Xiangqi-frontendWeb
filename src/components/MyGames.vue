@@ -26,7 +26,7 @@
                     <div class="card-container blue-container overflow-hidden">
                         <div class="flex">
                             <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
-                            <span class="ml-2 flex align-items-center">{{data.nickname}}</span>
+                            <span class="ml-2 flex align-items-center" @click="otherProfile(data.id)">{{data.nickname}}</span>
                         </div>
                     </div>
                 </div>
@@ -117,6 +117,10 @@ export default {
         },
         formatCurrency(value) {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+        },
+        otherProfile(id){
+            localStorage.setItem("idAconsultar", id)
+            this.$router.push('/otherProfile');
         }
     }
 }

@@ -3,6 +3,7 @@ import Login from './pages/Login.vue';
 import Validate from './components/Validate.vue';
 import Game from './pages/Game.vue';
 import Profile from './pages/Profile.vue';
+import otherProfile from './pages/otherProfile.vue';
 import Friends from './pages/Friends.vue';
 import Ranking from './pages/Ranking.vue';
 import Store from './pages/Store.vue';
@@ -31,6 +32,11 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: Profile,
+    },
+    {
+        path: '/otherProfile',
+        name: 'otherProfile',
+        component: otherProfile,
     },
     {
         path: '/friends',

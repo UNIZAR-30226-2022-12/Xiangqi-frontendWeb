@@ -37,6 +37,7 @@ class AccountService {
                 if (response.data.ok) {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('id', response.data.id);
+                    localStorage.setItem('idAconsultar', response.data.id);
                     localStorage.setItem('email', email);
                     console.log('id', response.data.id);
                     this.authenticated = true;
@@ -92,21 +93,29 @@ class AccountService {
     // PERFIL DE USUARIO
     getProfile(){
         return http
-            .get('/do-getProfile/' + String(localStorage.getItem("email")))
+            .get('/do-getProfile/' + String(localStorage.getItem("id")))
             .then(response => {
-                response.data.perfil.foto = "data:image/png;base64," + String(response.data.perfil.foto)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+    getOtherProfile(){
+        return http
+            .get('/do-getProfile/' + String(localStorage.getItem("idAconsultar")))
+            .then(response => {
                 return response.data;
             }, () => {
                 return false;
             });
     }
 
-    getProfileImage() {
+    getProfileImage(idAconsultar) {
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}, 'responseType': 'blob'};
 
         let id = localStorage.getItem('id');
         return http
-            .get('/do-getProfileImage/' + id, headers)
+            .get('/do-getProfileImage/' +  idAconsultar + "/" + id, headers)
             .then(response => {
                 return URL.createObjectURL(response.data);
             }, () => {
@@ -120,7 +129,7 @@ class AccountService {
                 response.data.perfil.foto = "data:image/png;base64," + String(response.data.perfil.foto)
                 return true;
             }, () => {
-                return [{image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false}];
+                return [{id:20, image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false}];
             });
     }
     changePwd(email, pwd){
