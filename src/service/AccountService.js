@@ -12,11 +12,14 @@ class AccountService {
     }
 
     // CREAR UNA CUENTA
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+     * Crea una cuenta a partir del nickname, name, email, birthDay, country, password, image
+     * proporcionados en la form de login.
+     */
     createAccount(nickname, name, email, date, country, password, image){
-        console.log(image)
         return http
             .post('/do-create', {'nickname': nickname, 'name': name, 'email': email, 'date': date, 'country': country, 'pwd': password, 'image': image})
-            //la respuesta que da el backend
             .then(response => {
                 //le pido al back, ¿hay cambios? ¿hay cambios?
                 //setTimeout(this.authenticate, 1000);
@@ -29,17 +32,18 @@ class AccountService {
     }
 
     // AUTENTICAR AL USUARIO
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+     * Autentica al usuario con el email y la contraseña dadas llamando al método
+     * /do-login del backend.
+     */
     login(email, password){
         return http
             .post('/do-login', {'email': email, 'pwd': password})
             .then(response => {
-                console.log(response.data)
                 if (response.data.ok) {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('id', response.data.id);
-                    localStorage.setItem('idAconsultar', response.data.id);
-                    localStorage.setItem('email', email);
-                    console.log('id', response.data.id);
                     this.authenticated = true;
                     return response.data;
                 }
@@ -49,37 +53,59 @@ class AccountService {
             });
     }
 
+    /*
+     * Si existe un token en el localStorage pone authenticated a true.
+     * Pone authenticated a false en caso contrario.
+     */
     isAuthenticated(){
+        if(localStorage.getItem('token') != null){
+            this.authenticated = true;
+        } else {
+            this.authenticated = false;
+        }
         return this.authenticated;
     }
 
+    /*
+     * Función para desloguear al usuario. Retira del local storage el token, el id y
+     * pone authenticated a false.
+     */
     logout() {
+        this.authenticated = false;
         localStorage.removeItem('token');
         localStorage.removeItem('id');
     }
 
+    /*
+     * Valida el usuario registrado dado su email.
+     */
     validate(email){
         return http
             .post('/do-validate', {'email': email})
             .then(response => {
-                console.log(response.data)
                 return response.data;
             }, () => {
                 return false;
             });
     }
 
+    /*
+     * Si el usuario olvida su contraseña llama a do-forgotPwd del backend con
+     * el email dado.
+     */
     forgotPwd(email){
         return http
             .post('/do-forgotPwd', {'email': email})
             .then(response => {
-                console.log(response.data)
                 return response.data;
             }, () => {
                 return false;
             });
     }
 
+    /*
+     * Obtiene la lista de paises del backend. 
+     */
     getCountries(){
         return http
             .get('/do-getCountries')
@@ -90,19 +116,30 @@ class AccountService {
             });
     }
 
+    //CAMBIAR CONTRASEÑA
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+     * Permite el cambio de contraseña de un usuario dado su email y su nueva contraseña.
+     */
+        changePwd(email, pwd){
+            return http
+                .post('/do-changePwd', {'email': email, 'pwd': pwd})
+                .then(response => {
+                    return response.data;
+                }, () => {
+                    return false;
+                });
+        }
+
     // PERFIL DE USUARIO
-    getProfile(){
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+     * Obtiene el perfil del usuario (mail, nickname, name, birthday, country, range, points y registerDate) dado su id.
+     */
+    getProfile(id){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}};
         return http
-            .get('/do-getProfile/' + String(localStorage.getItem("id")))
-            .then(response => {
-                return response.data;
-            }, () => {
-                return false;
-            });
-    }
-    getOtherProfile(){
-        return http
-            .get('/do-getProfile/' + String(localStorage.getItem("idAconsultar")))
+            .get('/do-getProfile/' + id, headers)
             .then(response => {
                 return response.data;
             }, () => {
@@ -110,36 +147,32 @@ class AccountService {
             });
     }
 
-    getProfileImage(idAconsultar) {
+    /*
+     * Obtiene la URL de la imagen del perfil del usuario dado su id.
+     */
+    getProfileImage(id) {
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}, 'responseType': 'blob'};
 
-        let id = localStorage.getItem('id');
         return http
-            .get('/do-getProfileImage/' +  idAconsultar + "/" + id, headers)
+            .get('/do-getProfileImage/' + id, headers)
             .then(response => {
                 return URL.createObjectURL(response.data);
             }, () => {
                 return false;
             });
     }
-    getGames(){
+
+    /*
+     * Obtiene la lista de partidas asincronas asociadas al usuario dado su id.
+     */
+    getGames(id){
         return http
-            .get('/do-getPartidas/' + String(localStorage.getItem("id")))
+            .get('/do-getPartidas/' + id)
             .then(response => {
                 response.data.perfil.foto = "data:image/png;base64," + String(response.data.perfil.foto)
                 return true;
             }, () => {
                 return [{id:20, image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false}];
-            });
-    }
-    changePwd(email, pwd){
-        return http
-            .post('/do-changePwd', {'email': email, 'pwd': pwd})
-            .then(response => {
-                console.log(response.data)
-                return response.data;
-            }, () => {
-                return false;
             });
     }
 }

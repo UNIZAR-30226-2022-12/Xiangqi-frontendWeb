@@ -12,9 +12,6 @@
 			<img alt="Logo" :src="topbarImage()" />
 			<span>Xiangqi online</span>
 		</router-link>
-		<!--<button class="p-link layout-topbar-menu-button layout-topbar-button ml-0 mr-3" style="display: inline-flex;">
-			<i class="pi pi-cog"></i>
-		</button>-->
 		<button v-if="$loggedStatus.logged" class="p-link layout-topbar-menu-button layout-topbar-button"
 			v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', 
 			leaveToClass: 'hidden', leaveActiveClass: 'fadeout', hideOnOutsideClick: true}">
@@ -68,7 +65,6 @@ export default {
 	data() {
 		return {
 			mostrarPanel: false,
-			logged: false,
 			checked: false,
 
 			//menu overlaypanel
@@ -78,6 +74,9 @@ export default {
 	},
 	directives: {
 		clickOutside: vClickOutside.directive
+	},
+	created() {
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 	},
     methods: {
 		confirm() {

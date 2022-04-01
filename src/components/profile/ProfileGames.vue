@@ -77,6 +77,7 @@ export default {
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
             loading: true,
+            selectedRival: null
         }
     },
     
@@ -117,8 +118,7 @@ export default {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
         },
         otherProfile(id){
-            localStorage.setItem("idAconsultar", id)
-            this.$router.push('/otherProfile');
+            this.$router.push({name: 'otherProfile', params: { id: id}});
         }
     }
 }

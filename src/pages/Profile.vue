@@ -1,7 +1,7 @@
 <template>
-	<myProfile :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
-	<myGames :games="games"/>
-	<myStatics :myProfile="true"/>
+	<myProfile v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
+	<myGames v-if="games!=null" :games="games"/>
+	<myStatics v-if="perfil!=null" :perfil="perfil" :myProfile="true"/>
 </template>
 
 <script>
@@ -14,8 +14,8 @@ export default {
 	data() {
 		return {
 			perfil: null,
+			games: null,
 			columns: null,
-			profileData: '',
 			profileImage: '',
 		}
 	},
@@ -25,23 +25,15 @@ export default {
 		myStatics,
 	},
 	created() {
-		//LO QUE CAMBIARÍA ES PASARLE MI ID Y EL TOKEN EN TODO CASO, ASI CON EL ID QUE LE PASEMOS
-		//SE OBTIENE LA INFO DEL BACK Y EL TOKEN SE USA SOLO PARA AUTENTICAR
-
-
-		//TO-DO
-		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
-		this.$accounts.getProfile(localStorage.getItem('token')).then(response => {
+		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
 			this.perfil = response.perfil;
 		});
 
-		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
 		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
 			this.profileImage = data;
 		})
 
-		//localStorage.getItem('id'), localStorage.getItem('token') <-----PARAMETROS
-		this.$accounts.getGames().then(response => {
+		this.$accounts.getGames(localStorage.getItem('id')).then(response => {
             this.games = response
 		});
 	},

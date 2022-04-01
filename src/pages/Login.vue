@@ -175,9 +175,12 @@
 <script>
 import loginButton from '../components/Login.vue';
 export default {
-  components: {
-    loginButton,
-  },
+    created() {
+        this.$loggedStatus.logged = false;
+    },
+    components: {
+        loginButton,
+    },
 }
 </script>
 

@@ -368,8 +368,13 @@ export default {
         console.log(success)
         if (success.ok) {
           if (success.validacion){ // Correo verificado, y ok, entramos
+            const id = localStorage.getItem("id");
+            console.log(id)
             this.dialog.display = false;
-            this.$router.push('/profile');
+            this.$router.push({
+              name: 'profile',
+              //params: { id: id, myProfile: true }
+            });
             this.$loggedStatus.logged = true;
           }
           else{

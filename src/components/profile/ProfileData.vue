@@ -1,6 +1,6 @@
 <template>
 	<h2 v-if="myProfile">Mi perfil</h2>
-	<h2 v-else>Perfil de {{perfil.nombre}}</h2>
+	<h2 v-else>Perfil de {{perfil.name}}</h2>
 	
     <div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
 		<div class="grid m-auto">
@@ -56,7 +56,7 @@ export default {
     props: {
         perfil: {
             type: Object,
-            required: true
+            required: false
         },
         profileImage: {
             type: String,
