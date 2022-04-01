@@ -98,7 +98,7 @@
                     <div class="field"> 
                         <label for="password" :class="{'p-error':(vEdit$.edit.password.$invalid && edit.submitted && !edit.passwordDisable) || (vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '')}">Contraseña</label>
                         <div class="p-inputgroup">
-                        <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.passwordDisable = !edit.passwordDisable; editDialog.isActive = !editDialog.isActive" icon="pi pi-pencil" />
+                        <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.passwordDisable = !edit.passwordDisable; editDialog.isActive = !editDialog.isActive; edit.password = ''" icon="pi pi-pencil" />
                         <Password id="password" v-model="edit.password" placeholder="Contraseña" :disabled="edit.passwordDisable" :class="{'p-invalid':(vEdit$.edit.password.$invalid && edit.submitted && !edit.passwordDisable) || (vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '')}" toggleMask>
                             <template #header>
                             <h6>Elija una contraseña</h6>
@@ -192,8 +192,15 @@ export default {
     methods: {
         handleSubmit() {
             this.edit.submitted = true;
-            if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid || this.vEdit$.edit.email.$invalid || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
-                console.log('NOOOOPE');
+            //No hemos cambiado el password passwordDisable = true
+            if (this.edit.passwordDisable) {
+                console.log('NO ME CAMBIAS EL PASS');
+                if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid || this.vEdit$.edit.email.$invalid) {
+                    console.log('NO VALE Y NO ME CAMBIAS EL PASS');
+                    return;
+                }
+            } else if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid || this.vEdit$.edit.email.$invalid || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
+                console.log('NO VALE Y ME CAMBIAS EL PASS');
                 return;
             }
             // La form ha sido validada correctamente en front
