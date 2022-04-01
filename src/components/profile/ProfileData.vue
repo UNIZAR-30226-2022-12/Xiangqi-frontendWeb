@@ -13,7 +13,8 @@
 				<img class="flag h-auto" :class="[perfil.country.flag]" src="images/flags/flag_placeholder.png">
 			</div>
 			<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
-				<Button v-if="myProfile" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>
+				<!--<Button v-if="myProfile" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>-->
+				<profileEdit v-if="myProfile"/>
 			</div>
 		</div>
 		<div class="surface-section section mt-4 p-6 text-center">
@@ -52,7 +53,10 @@
 </template>
 
 <script>
+import profileEdit from './ProfileEdit.vue';
+
 export default {
+	inject: ['$accounts'],
     props: {
         perfil: {
             type: Object,
@@ -67,6 +71,9 @@ export default {
 			required: true
 		}
     },
+	components: {
+		profileEdit
+	},
 }
 </script>
 
