@@ -94,7 +94,7 @@
                         <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                         </div>
                     </div>
-                    <!--PASSWORD MMMMMM HAY QUE HACERLO A PARTE SIP...-->
+                    <!--PASSWORD-->
                     <div class="field"> 
                         <label for="password" :class="{'p-error':(vEdit$.edit.password.$invalid && edit.submitted && !edit.passwordDisable) || (vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '')}">Contraseña</label>
                         <div class="p-inputgroup">
@@ -173,7 +173,7 @@ export default {
                 date: '',
                 dateDisable: true,
                 country: '',
-                countryDisable: false,
+                countryDisable: true,
                 password: "",
                 confPassword: '',
                 passwordDisable: true,
@@ -189,15 +189,18 @@ export default {
         });
         console.log(this.perfil)
         this.edit.nickname = this.perfil.nickname
-        this.edit.nicknameDisable = false
         this.edit.name = this.perfil.name
-        this.edit.nameDisable = false
         this.edit.date = this.perfil.date
-        this.edit.dateDisable = false
         this.edit.country = this.perfil.country
-        this.edit.countryDisable = false
         this.edit.password = ""
+
+        /* por defecto todo deshabilitado y que el usuario elija que edita
+        this.edit.nicknameDisable = false
+        this.edit.nameDisable = false
+        this.edit.dateDisable = false
+        this.edit.countryDisable = false
         this.edit.passwordDisable = false
+        */
         /*
         this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
             console.log(response.perfil)
