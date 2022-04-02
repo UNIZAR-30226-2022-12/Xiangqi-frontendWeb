@@ -175,8 +175,10 @@
 <script>
 import loginButton from '../components/Login.vue';
 export default {
+    inject: ['$accounts'],
     created() {
         this.$loggedStatus.logged = false;
+		this.$accounts.logout();
     },
     components: {
         loginButton,

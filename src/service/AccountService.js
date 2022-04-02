@@ -121,15 +121,15 @@ class AccountService {
     /*
      * Permite el cambio de contraseña de un usuario dado su email y su nueva contraseña.
      */
-        changePwd(email, pwd){
-            return http
-                .post('/do-changePwd', {'email': email, 'pwd': pwd})
-                .then(response => {
-                    return response.data;
-                }, () => {
-                    return false;
-                });
-        }
+    changePwd(email, pwd){
+        return http
+            .post('/do-changePwd', {'email': email, 'pwd': pwd})
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 
     // PERFIL DE USUARIO
     //------------------------------------------------------------------------------------------------------------------
