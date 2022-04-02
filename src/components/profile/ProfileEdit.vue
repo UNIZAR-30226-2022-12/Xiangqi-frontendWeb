@@ -65,7 +65,7 @@
                         <div class="p-inputgroup">
                         <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.countryDisable = !edit.countryDisable" icon="pi pi-pencil" />
                         <Dropdown id="country" v-model="edit.country" :options="countries" :disabled="edit.countryDisable" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
-                             <template #value="slotProps">
+                        <template #value="slotProps">
                           <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
                             <img src="images/flags/flag_placeholder.png" :class="'flag ' + edit.country.flag" />
                             {{edit.country.name}}
