@@ -28,6 +28,8 @@ export default {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
+			console.log(response.perfil)
+			localStorage.setItem("pefil", response.perfil)
 			this.perfil = response.perfil;
 		});
 

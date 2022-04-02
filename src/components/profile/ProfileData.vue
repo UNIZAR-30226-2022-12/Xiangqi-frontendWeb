@@ -14,7 +14,7 @@
 			</div>
 			<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
 				<!--<Button v-if="myProfile" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>-->
-				<profileEdit v-if="myProfile"/>
+				<profileEdit v-if="myProfile" :perfil="perfil"/>
 			</div>
 		</div>
 		<div class="surface-section section mt-4 p-6 text-center">

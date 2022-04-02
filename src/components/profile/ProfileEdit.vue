@@ -1,5 +1,5 @@
 <template>
-	<Button v-on:click="editDialog.display = true, getEditParameters()" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left" />
+	<Button v-on:click="editDialog.display = true" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left" />
     <Dialog v-model:visible="editDialog.display" :draggable="false" :modal="true" class="edit-dialog" :class="{ 'edit-dialog-sm-size': editDialog.isActive, 'edit-dialog-lg-size': !editDialog.isActive}">
         <template #header :class="colorHeader">
             <h3 class="text-center"> Editar perfil </h3> 
@@ -64,22 +64,22 @@
                         <label for="country" :class="{'p-error':vEdit$.edit.country.$invalid && edit.submitted}">Seleccione su país de residencia</label>
                         <div class="p-inputgroup">
                         <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.countryDisable = !edit.countryDisable" icon="pi pi-pencil" />
-                        <Dropdown id="country" v-model="edit.country" :options="countries" :disabled="edit.countryDisable" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
-                            <!--<template #value="slotProps">
-                            <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
-                                <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.value.code.toLowerCase()" />
-                                {{slotProps.value.name}}
-                            </div>
-                            <span v-else>
-                                {{slotProps.placeholder}}
-                            </span>
-                            </template>-->
-                            <template #option="slotProps">
-                            <div class="country-item">
-                                <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
-                                {{slotProps.option.name}}
-                            </div>
-                            </template>
+                        <Dropdown id="country" v-model="edit.country" :options="countries" :disabled="edit.countryDisable" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
+                             <template #value="slotProps">
+                          <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
+                            <img src="images/flags/flag_placeholder.png" :class="'flag ' + edit.country.flag" />
+                            {{edit.country.name}}
+                          </div>
+                          <span v-else>
+                            {{slotProps.placeholder}}
+                          </span>
+                        </template>
+                        <template #option="slotProps">
+                          <div class="country-item">
+                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
+                              {{slotProps.option.name}}
+                          </div>
+                        </template>
                         </Dropdown>
                         <span class="p-inputgroup-addon">
                             <i class="pi pi-globe"></i>
@@ -153,6 +153,7 @@ const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/)
 
 export default {
     inject: ['$accounts'],
+    props: ['perfil'],
     setup () {
         return {
         vEdit$: useVuelidate(),
@@ -167,15 +168,13 @@ export default {
             edit: {
                 nickname: '',
                 nicknameDisable: true,
-                email: '',
-                emailDisable: true,
                 name:'',
                 nameDisable: true,
                 date: '',
                 dateDisable: true,
                 country: '',
-                countryDisable: true,
-                password: '',
+                countryDisable: false,
+                password: "",
                 confPassword: '',
                 passwordDisable: true,
 
@@ -188,7 +187,33 @@ export default {
         this.$accounts.getCountries().then(data => {
             this.countries = data;
         });
+        console.log(this.perfil)
+        this.edit.nickname = this.perfil.nickname
+        this.edit.nicknameDisable = false
+        this.edit.name = this.perfil.name
+        this.edit.nameDisable = false
+        this.edit.date = this.perfil.date
+        this.edit.dateDisable = false
+        this.edit.country = this.perfil.country
+        this.edit.countryDisable = false
+        this.edit.password = ""
+        this.edit.passwordDisable = false
+        /*
+        this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
+            console.log(response.perfil)
+			this.edit.nickname = response.perfil.nickname
+            this.edit.nicknameDisable = false
+            this.edit.name = response.perfil.name
+            this.edit.nameDisable = false
+            this.edit.date = response.perfil.date
+            this.edit.dateDisable = false
+            this.edit.country = response.perfil.country
+            this.edit.countryDisable = false
+            this.edit.password = response.perfil.password
+            this.edit.passwordDisable = false
+		});
         this.edit.country = "Spain";
+        */
     },
     methods: {
         handleSubmit() {
