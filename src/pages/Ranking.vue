@@ -15,10 +15,14 @@
 
 <script>
 export default {
+	inject: ['$accounts'],
 	data() {
 		return {
 			show: true,
 		}
+	},
+	created() {
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 	}
 }
 </script>

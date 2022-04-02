@@ -9,7 +9,7 @@ import Ranking from './pages/Ranking.vue';
 import Store from './pages/Store.vue';
 import Historial from './pages/Historial.vue';
 import MyBoards from './pages/MyBoards.vue';
-import Error from './pages/Error.vue';
+import NotFound from './pages/NotFound.vue';
 import RecPwd from './pages/RecPwd.vue';
 
 const routes = [
@@ -69,9 +69,9 @@ const routes = [
         component: RecPwd,
     },
     {
-        path: '/error',
-        name: 'error',
-        component: Error,
+        path: '/:pathMatch(.*)*',
+        name: 'not-found',
+        component: NotFound,
     },
 ];
 
@@ -79,5 +79,10 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes,
 });
+
+router.resolve({
+    name: 'not-found',
+    params: { pathMatch: ['not', 'found'] },
+}).href; // '/not/found'
 
 export default router;

@@ -11,6 +11,9 @@
 
 <script>
 export default {
-
+	inject: ['$accounts'],
+	created() {
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+	}
 }
 </script>

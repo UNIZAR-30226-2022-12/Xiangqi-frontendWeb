@@ -324,7 +324,7 @@ export default {
           this.Images = reader.result.split(',')[1];
           console.log("PUTA")
           console.log(this.Images)
-     };
+      };
     },
 
     loginImage() {

@@ -25,6 +25,8 @@ export default {
 		myStatics,
 	},
 	created() {
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
 			this.perfil = response.perfil;
 		});

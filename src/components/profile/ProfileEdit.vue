@@ -188,10 +188,14 @@ export default {
         this.$accounts.getCountries().then(data => {
             this.countries = data;
         });
+        this.edit.country = "Spain";
     },
     methods: {
         handleSubmit() {
             this.edit.submitted = true;
+
+            console.log("Selected country: ", this.edit.country);
+            console.log("Selected country: ", this.edit.country.name);
             //No hemos cambiado el password passwordDisable = true
             if (this.edit.passwordDisable) {
                 console.log('NO ME CAMBIAS EL PASS');
@@ -212,7 +216,6 @@ export default {
             this.edit.email = "sacar@del.back";
             this.edit.name = "sacarDelBack";
             this.edit.date = "sacarDelBack";
-            this.edit.country = "sacarDelBack";
 
             //Volver a desabilitar todos los botones (clicks consecutivos)
             this.$nextTick(() => { this.vEdit$.$reset() });
@@ -231,8 +234,6 @@ export default {
             reader.readAsDataURL(file);
             reader.onload = () => {
                 this.Images = reader.result.split(',')[1];
-                console.log("PUTA")
-                console.log(this.Images)
             };
         }
     },

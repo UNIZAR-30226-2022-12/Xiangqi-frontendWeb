@@ -22,6 +22,8 @@ export default {
 		otherStatics,
 	},
 	created() {
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+
         this.$accounts.getProfile(this.$route.params.id).then(response => {
 			this.perfil = response.perfil;
 		});
