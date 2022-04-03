@@ -94,6 +94,21 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 
+//Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faCakeCandles } from "@fortawesome/free-solid-svg-icons";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faPhone)
+library.add(faCakeCandles)
+library.add(faCoins)
+library.add(faCalendar)
+library.add(faArrowTrendUp)
+
 //Importar el account service
 import accounts from '@/service/AccountService';
 
@@ -201,6 +216,7 @@ app.component('TreeSelect', TreeSelect);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 
+app.component("font-awesome-icon", FontAwesomeIcon)
 /*
 router.beforeEach(function (to, from, next) {
     var hasLogin = parseInt(process.env.VUE_APP_HAS_LOGIN);

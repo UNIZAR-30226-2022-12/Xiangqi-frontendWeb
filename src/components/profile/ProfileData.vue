@@ -21,28 +21,30 @@
 			<div class="grid">
 				<div class="col-6 md:col-3 mb-4 px-5">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
-						<i class="pi pi-star text-4xl text-primary"></i>
+						<font-awesome-icon class="text-4xl text-primary" icon="cake-candles" />
 					</span>
 					<div class="text-900 mb-3 font-medium">Cumpleaños</div>
 					<span class="text-700 text-sm line-height-3">{{perfil.birthday}}</span>
 				</div>
 				<div class="col-6 md:col-3 mb-4 px-5">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
-						<i class="pi pi-users text-4xl text-primary"></i>
+						<!--<i class="pi pi-money-bill text-4xl text-primary"></i>-->
+						<!--<font-awesome-icon class="text-4xl text-primary" icon="phone" />-->
+						<font-awesome-icon class="text-4xl text-primary" icon="coins" />
 					</span>
-					<div class="text-900 mb-3 font-medium">Punos</div>
+					<div class="text-900 mb-3 font-medium">Puntos</div>
 					<span class="text-700 text-sm line-height-3">{{perfil.points}} puntos</span>
 				</div>
 				<div class="col-6 md:col-3 mb-4 px-5">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
-						<i class="pi pi-calendar text-4xl text-primary"></i>
+						<font-awesome-icon class="text-4xl text-primary" icon="calendar" />
 					</span>
 					<div class="text-900 mb-3 font-medium">Usuario desde</div>
 					<span class="text-700 text-sm line-height-3">{{perfil.registerDate}}</span>
 				</div>
 				<div class="col-6 md:col-3 mb-4 px-5">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
-						<i class="pi pi-sort-amount-up text-4xl text-primary"></i>
+						<font-awesome-icon class="text-4xl text-primary" icon="arrow-trend-up" />
 					</span>
 					<div class="text-900 mb-3 font-medium">Clasificacion</div>
 					<span class="text-700 text-sm line-height-3">Puesto {{perfil.range}}</span>

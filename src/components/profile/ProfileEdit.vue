@@ -1,5 +1,5 @@
 <template>
-	<Button v-on:click="editDialog.display = true" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left" />
+	<Button v-on:click="editDialog.display = true; getEditParameters()" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left" />
     <Dialog v-model:visible="editDialog.display" :draggable="false" :modal="true" class="edit-dialog" :class="{ 'edit-dialog-sm-size': editDialog.isActive, 'edit-dialog-lg-size': !editDialog.isActive}">
         <template #header :class="colorHeader">
             <h3 class="text-center"> Editar perfil </h3> 
@@ -33,23 +33,6 @@
                         </div>
                         <small v-if="(vEdit$.edit.name.$invalid && edit.submitted) || vEdit$.edit.name.$pending.$response" class="p-error">{{'Por favor, indique su nombre'}}</small>
                     </div>
-                    <!--EMAIL
-                    <div class="field">
-                        <label for="emailLog" :class="{'p-error':vEdit$.edit.email.$invalid && edit.submitted}">Email</label>
-                        <div class="p-inputgroup">
-                            <Button v-on:click="edit.emailDisable = !edit.emailDisable" icon="pi pi-pencil" />
-                            <InputText id="emailLog" :disabled="edit.emailDisable" placeholder="cuenta@correo.com" v-model="edit.email" :class="{'p-invalid':vEdit$.edit.email.$invalid && edit.submitted}" aria-describedby="email-error"/>
-                            <span class="p-inputgroup-addon">
-                            <i class="pi pi-envelope"></i>
-                            </span>
-                        </div>
-                        <span v-if="vEdit$.edit.email.$error && edit.submitted">
-                            <span id="email-error" v-for="(error, index) of vEdit$.edit.email.$errors" :key="index">
-                                <small class="p-error">{{error.$message}}</small>
-                            </span>
-                        </span>
-                    <small v-else-if="(vEdit$.edit.email.$invalid && edit.submitted) || vEdit$.edit.email.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
-                    </div> -->
                     <!--BIRTHDAY-->
                     <div class="field">
                         <label for="date" :class="{'p-error':vEdit$.edit.date.$invalid && edit.submitted}">Fecha de nacimiento</label>
@@ -107,8 +90,8 @@
                             {{sp.level}}
                             <Divider />
                                 <small v-if="(vEdit$.edit.password.$invalid && vEdit$.edit.password.$model == '' && edit.submitted && !edit.passwordDisable) || vEdit$.edit.password.$pending.$response" class="p-error">{{vEdit$.edit.password.required.$message.replace('Value is required', 'Por favor, especifique una contraseña')}}</small>
-                                <!--<small v-else-if="(vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '' && vEdit$.edit.password.$model.length < 8)" class="p-error"> {{'La contraseña debe tener al menos 8 caracteres'}} </small>
-                                <small v-else-if="(vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '')" class="p-error"> {{vEdit$.edit.password.alpha.$message}} </small>-->
+                                <small v-else-if="(vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '' && vEdit$.edit.password.$model.length < 8)" class="p-error"> {{'La contraseña debe tener al menos 8 caracteres'}} </small>
+                                <small v-else-if="(vEdit$.edit.password.$invalid && vEdit$.edit.password.$model != '')" class="p-error"> {{vEdit$.edit.password.alpha.$message}} </small>
                                 <p class="mt-2">Obligatorio</p>
                                 <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
                                 <li>Debe contener 8 caracteres como mínimo</li>
@@ -138,7 +121,11 @@
                         <small v-if="(vEdit$.edit.confPassword.$invalid && edit.submitted) || vEdit$.edit.confPassword.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
                         <small v-else-if="(vEdit$.edit.password.$model != vEdit$.edit.confPassword.$model && edit.submitted)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
                     </div>
-                    <Button type="submit" label="Crear cuenta" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+                    <Button type="submit" icon="pi pi-check" label="Editar cuenta" class="mt-2 mb-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+                    <Divider class="p-divider-center" layout="horizontal">
+                        <b>O bien</b>
+                    </Divider>
+                    <Button v-on:click="confirm()" type="submit" icon="pi pi-times" label="Eliminar cuenta" class="mt-2 p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" />
                 </form>
             </div>
         </div>
@@ -188,12 +175,6 @@ export default {
         this.$accounts.getCountries().then(data => {
             this.countries = data;
         });
-        console.log(this.perfil)
-        this.edit.nickname = this.perfil.nickname
-        this.edit.name = this.perfil.name
-        this.edit.date = this.perfil.birthday
-        this.edit.country = this.perfil.country
-        this.edit.password = ""
 
         /* por defecto todo deshabilitado y que el usuario elija que edita
         this.edit.nicknameDisable = false
@@ -230,6 +211,7 @@ export default {
             console.log("Selected date: ", this.edit.date);
             console.log("Selected password: ", this.edit.password.length);
             console.log("Selected image: ", this.Images);
+
             //No hemos cambiado el password passwordDisable = true
             if (this.edit.passwordDisable) {
                 console.log('NO ME CAMBIAS EL PASS');
@@ -249,16 +231,16 @@ export default {
             //Hay que mirar si this.password es vacio es que no se ha cambiado la contraseña creo
         },
         getEditParameters() {
-            this.edit.nickname = "sacarDelBack";
-            this.edit.email = "sacar@del.back";
-            this.edit.name = "sacarDelBack";
-            this.edit.date = "sacarDelBack";
+            this.edit.nickname = this.perfil.nickname;
+            this.edit.name = this.perfil.name;
+            this.edit.date = this.perfil.birthday;
+            this.edit.country = this.perfil.country;
+            this.edit.password = "";
 
             //Volver a desabilitar todos los botones (clicks consecutivos)
             this.$nextTick(() => { this.vEdit$.$reset() });
             this.editDialog.isActive = true;
             this.edit.nicknameDisable = true;
-            this.edit.emailDisable = true;
             this.edit.nameDisable = true;
             this.edit.dateDisable = true;
             this.edit.countryDisable = true;
@@ -273,7 +255,23 @@ export default {
             reader.onload = () => {
                 this.Images = reader.result.split(',')[1];
             };
-        }
+        },
+        confirm() {
+            this.$confirm.require({
+                message: '¿Estás seguro de que eliminar tu cuenta? Se borrararán todos tus datos y no podrá recuperarlos.',
+                header: 'Eliminar cuenta',
+                icon: 'pi pi-exclamation-triangle',
+                rejectLabel: 'Si',
+				acceptLabel: 'No',
+                accept: () => {
+					this.$toast.add({severity:'info', summary:'Cuenta no eliminada', detail:'Su cuenta no ha sido eliminada', life: 3000});
+                },
+                reject: () => {
+                    //Borrarle la cuenta
+                    //this.$toast.add({severity:'error', summary:'Sesión activa', detail:'Sesión no cerrada', life: 3000});
+                }
+            });
+		},
     },
     validations() {
         return {
@@ -284,7 +282,6 @@ export default {
             edit: {
                 nickname: { required, max: maxLength(15) },
                 name: { required },
-                //email: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
                 date: { required },
                 password: { required, min: minLength(8), alpha: helpers.withMessage('Debe contener al menos mayusculas, minusculas y números', alpha) },
                 confPassword: { required },
@@ -305,12 +302,12 @@ export default {
 }
 
 .edit-dialog-sm-size {
-    height: 54rem;
+    height: 55rem;
     width: 40rem;
 }
 
 .edit-dialog-lg-size {
-    height: 59rem;
+    height: 62rem;
     width: 40rem;
 }
 </style>
