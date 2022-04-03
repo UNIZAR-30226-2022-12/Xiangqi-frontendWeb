@@ -258,8 +258,8 @@ export default {
         },
         confirm() {
             this.$confirm.require({
-                message: '¿Estás seguro de que eliminar tu cuenta? Se borrararán todos tus datos y no podrá recuperarlos.',
-                header: 'Eliminar cuenta',
+                message: 'Se borrararán todos sus datos y no podrá recuperarlos.',
+                header: '¿Seguro que desea eliminar su cuenta?',
                 icon: 'pi pi-exclamation-triangle',
                 rejectLabel: 'Si',
 				acceptLabel: 'No',
