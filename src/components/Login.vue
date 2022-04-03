@@ -226,7 +226,7 @@
                   <div class="field"> 
                     <label for="imagen">Foto de perfil</label>
                     <div class="p-inputgroup">
-                      <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                      <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" chooseLabel="Subir foto" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                     </div>
                   </div>
                   <!--PASSWORD-->

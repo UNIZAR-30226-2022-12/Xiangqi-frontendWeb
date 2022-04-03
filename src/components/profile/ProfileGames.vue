@@ -5,7 +5,7 @@
         <DataTable :value="games" :paginator="true" :rows="10"
         :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
         :globalFilterFields="['nickname']" responsiveLayout="scroll">
             <template #header>
                 <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">

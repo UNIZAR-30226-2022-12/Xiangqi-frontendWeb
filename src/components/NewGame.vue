@@ -19,7 +19,7 @@
       </div>
     </div>
     <template #footer>
-      <Button label="Nueva partida" class="p-button p-button-raised w-full" v-on:click="nuevaPartida()"/>
+      <Button label="Nueva partida" class="p-button p-button-raised w-full" style="border-radius: 1rem" v-on:click="nuevaPartida()"/>
     </template>
   </Dialog>
 </template>
@@ -57,6 +57,11 @@ export default {
 <style>
 
 .dialogo-partida {
+  background-color: var(--surface-a); /* Get el current background del tema */
+  border-radius: 15px;
+  animation-duration: 0.6s;
+  animation-name: lineIns derted;
+  transition: height 0.6s, width 0.6s;
   border-radius: 15px;
   width: 23rem;
 }

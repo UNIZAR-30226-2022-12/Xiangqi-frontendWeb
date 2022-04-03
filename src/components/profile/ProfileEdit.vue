@@ -74,7 +74,7 @@
                     <div class="field"> 
                         <label for="imagen">Foto de perfil</label>
                         <div class="p-inputgroup">
-                        <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" @click="Images=''" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                        <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" @click="Images=''" chooseLabel="Subir foto" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                         </div>
                     </div>
                     <!--PASSWORD-->
@@ -235,7 +235,7 @@ export default {
             this.edit.name = this.perfil.name;
             this.edit.date = this.perfil.birthday;
             this.edit.country = this.perfil.country;
-            this.edit.password = "";
+            this.edit.password = '';
 
             //Volver a desabilitar todos los botones (clicks consecutivos)
             this.$nextTick(() => { this.vEdit$.$reset() });
