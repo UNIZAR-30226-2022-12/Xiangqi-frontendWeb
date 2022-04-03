@@ -67,7 +67,7 @@
                         <Dropdown id="country" v-model="edit.country" :options="countries" :disabled="edit.countryDisable" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
                         <template #value="slotProps">
                           <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
-                            <img src="images/flags/flag_placeholder.png" :class="'flag ' + edit.country.flag" />
+                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + edit.country.code.toLowerCase()"  />
                             {{edit.country.name}}
                           </div>
                           <span v-else>
@@ -185,6 +185,7 @@ export default {
     },
     created() {
         this.$accounts.getCountries().then(data => {
+            console.log(data)
             this.countries = data;
         });
         console.log(this.perfil)
