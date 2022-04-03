@@ -1,2 +1,2 @@
 Para el perfil necesitamos el numero de amigos
-LLamada getPartidas con el id
+si se envia una contra vacia no se cambia

@@ -33,7 +33,7 @@
                         </div>
                         <small v-if="(vEdit$.edit.name.$invalid && edit.submitted) || vEdit$.edit.name.$pending.$response" class="p-error">{{'Por favor, indique su nombre'}}</small>
                     </div>
-                    <!--EMAIL-->
+                    <!--EMAIL
                     <div class="field">
                         <label for="emailLog" :class="{'p-error':vEdit$.edit.email.$invalid && edit.submitted}">Email</label>
                         <div class="p-inputgroup">
@@ -49,7 +49,7 @@
                             </span>
                         </span>
                     <small v-else-if="(vEdit$.edit.email.$invalid && edit.submitted) || vEdit$.edit.email.$pending.$response" class="p-error">{{'Por favor, indique su correo'}}</small>
-                    </div>
+                    </div> -->
                     <!--BIRTHDAY-->
                     <div class="field">
                         <label for="date" :class="{'p-error':vEdit$.edit.date.$invalid && edit.submitted}">Fecha de nacimiento</label>
@@ -91,7 +91,7 @@
                     <div class="field"> 
                         <label for="imagen">Foto de perfil</label>
                         <div class="p-inputgroup">
-                        <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
+                        <FileUpload id="image"  class="resize" style="width : 440px;" @change="uploadFile" @click="Images=''" ref="file" mode="basic" url="./upload" :maxFileSize="1000000" accept="image/*"/>
                         </div>
                     </div>
                     <!--PASSWORD-->
@@ -148,7 +148,7 @@
 
 <script>
 import { useVuelidate } from "@vuelidate/core";
-import { email, required, minLength, maxLength, helpers } from "@vuelidate/validators";
+import { required, minLength, maxLength, helpers } from "@vuelidate/validators";
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
 export default {
@@ -180,18 +180,18 @@ export default {
 
                 submitted: false,
             },
+            Images: '',
             countries: '',
         }
     },
     created() {
         this.$accounts.getCountries().then(data => {
-            console.log(data)
             this.countries = data;
         });
         console.log(this.perfil)
         this.edit.nickname = this.perfil.nickname
         this.edit.name = this.perfil.name
-        this.edit.date = this.perfil.date
+        this.edit.date = this.perfil.birthday
         this.edit.country = this.perfil.country
         this.edit.password = ""
 
@@ -225,19 +225,27 @@ export default {
 
             console.log("Selected country: ", this.edit.country);
             console.log("Selected country: ", this.edit.country.name);
+            console.log("Selected name: ", this.edit.name);
+            console.log("Selected nick: ", this.edit.nickname);
+            console.log("Selected date: ", this.edit.date);
+            console.log("Selected password: ", this.edit.password.length);
+            console.log("Selected image: ", this.Images);
             //No hemos cambiado el password passwordDisable = true
             if (this.edit.passwordDisable) {
                 console.log('NO ME CAMBIAS EL PASS');
-                if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid || this.vEdit$.edit.email.$invalid) {
+                if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid ) {
                     console.log('NO VALE Y NO ME CAMBIAS EL PASS');
                     return;
                 }
-            } else if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid || this.vEdit$.edit.email.$invalid || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
+            } else if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid  || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
                 console.log('NO VALE Y ME CAMBIAS EL PASS');
                 return;
             }
             // La form ha sido validada correctamente en front
             console.log('Formulario validado correctamente');
+            this.$accounts.changeProfile(localStorage.getItem("id"), this.edit.nickname, this.edit.name, this.edit.date, this.edit.country.name, this.edit.password,this.Images).then(data => {
+                console.log(data)
+            });
             //Hay que mirar si this.password es vacio es que no se ha cambiado la contraseña creo
         },
         getEditParameters() {
@@ -257,6 +265,7 @@ export default {
             this.edit.passwordDisable = true;
         },
         uploadFile() {
+            this.Images = ''
             let file = this.$refs.file.files[0];
             console.log(file)
             const reader = new FileReader();
@@ -275,7 +284,7 @@ export default {
             edit: {
                 nickname: { required, max: maxLength(15) },
                 name: { required },
-                email: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
+                //email: { required: helpers.withMessage('Por favor, especifique una dirección de correo electrónico', required), email: helpers.withMessage('El correo introducido no es válido', email) },
                 date: { required },
                 password: { required, min: minLength(8), alpha: helpers.withMessage('Debe contener al menos mayusculas, minusculas y números', alpha) },
                 confPassword: { required },

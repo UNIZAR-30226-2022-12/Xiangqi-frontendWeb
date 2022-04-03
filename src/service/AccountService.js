@@ -175,6 +175,21 @@ class AccountService {
                 return [{id:20, image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false}];
             });
     }
+    // MODIFICAR PERFIL DE USUARIO
+    //------------------------------------------------------------------------------------------------------------------
+     /*
+     * Envia los datos a modificar del perfil al backend
+     */
+     changeProfile(id, nickname, name, date, country, password, image){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        return http
+            .post('/do-changeProfile/' + id + '/' + nickname + '/' + name + '/' + date + '/' + country + '/' + 'a', {'image': image}, headers)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 }
 
 export default new AccountService({
