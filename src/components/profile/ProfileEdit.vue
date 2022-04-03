@@ -47,22 +47,22 @@
                         <label for="country" :class="{'p-error':vEdit$.edit.country.$invalid && edit.submitted}">Seleccione su país de residencia</label>
                         <div class="p-inputgroup">
                         <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.countryDisable = !edit.countryDisable" icon="pi pi-pencil" />
-                        <Dropdown id="country" v-model="edit.country" :options="countries" :disabled="edit.countryDisable" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
-                        <template #value="slotProps">
-                          <div id="country-item" class="country-item country-item-value" v-if="slotProps.value">
-                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + edit.country.code.toLowerCase()"  />
-                            {{edit.country.name}}
-                          </div>
-                          <span v-else>
-                            {{slotProps.placeholder}}
-                          </span>
-                        </template>
-                        <template #option="slotProps">
-                          <div class="country-item">
-                            <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
-                              {{slotProps.option.name}}
-                          </div>
-                        </template>
+                        <Dropdown id="country" v-model="edit.country" :disabled="edit.countryDisable" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':vEdit$.edit.country.$invalid && edit.submitted}">
+                            <template #value="edit">
+                            <div id="country-item" class="country-item country-item-value" v-if="edit.value">
+                                <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + edit.value.code.toLowerCase()" />
+                                {{edit.value.name}}
+                            </div>
+                            <span v-else>
+                                {{edit.placeholder}}
+                            </span>
+                            </template>
+                            <template #option="slotProps">
+                            <div class="country-item">
+                                <img src="images/flags/flag_placeholder.png" :class="'flag flag-' + slotProps.option.code.toLowerCase()" style="height: auto !important"/>
+                                {{slotProps.option.name}}
+                            </div>
+                            </template>
                         </Dropdown>
                         <span class="p-inputgroup-addon">
                             <i class="pi pi-globe"></i>
