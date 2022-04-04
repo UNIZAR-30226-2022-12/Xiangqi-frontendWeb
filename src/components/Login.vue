@@ -192,7 +192,7 @@
                   <!--BIRTHDAY-->
                   <div class="field">
                     <label for="date" :class="{'p-error':v$.createAc.date.$invalid && createAc.submitted}">Fecha de nacimiento</label>
-                    <Calendar id="date" placeholder="01/01/2000" v-model="createAc.date" :showIcon="true" :class="{'p-invalid':v$.createAc.date.$invalid && createAc.submitted}"/>
+                    <Calendar id="date" dateFormat="dd/mm/yy" v-model="createAc.date" :showIcon="true" :class="{'p-invalid':v$.createAc.date.$invalid && createAc.submitted}"/>
                     <small v-if="(v$.createAc.date.$invalid && createAc.submitted) || v$.createAc.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
                   </div>
                   <!--COUNTRY-->
@@ -317,13 +317,10 @@ export default {
   methods: {
     uploadFile() {
       let file = this.$refs.file.files[0];
-      console.log(file)
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
           this.Images = reader.result.split(',')[1];
-          console.log("PUTA")
-          console.log(this.Images)
       };
     },
 
@@ -338,8 +335,10 @@ export default {
      */
     handleSubmit() {
       this.createAc.submitted = true;
+
+      this.v$.createAc.date.$model.setDate(this.v$.createAc.date.$model.getDate() + 1);
       let date = new Date(this.v$.createAc.date.$model)
-      console.log(date)
+
       if (this.v$.createAc.email.$invalid || this.v$.createAc.password.$invalid || this.v$.createAc.confPassword.$invalid || this.v$.createAc.nickname.$invalid || this.v$.createAc.date.$invalid || this.v$.createAc.country.$invalid || this.v$.createAc.accept.$invalid || this.v$.createAc.name.$invalid) { //|| this.v$.imagen.$invalid) {
         return;
       }
@@ -367,11 +366,8 @@ export default {
       }
       // La form ha sido validada correctamente en front
       this.$accounts.login(this.vLogin$.login.email.$model, this.vLogin$.login.password.$model).then(success => {
-        console.log(success)
         if (success.ok) {
           if (success.validacion){ // Correo verificado, y ok, entramos
-            const id = localStorage.getItem("id");
-            console.log(id)
             this.dialog.display = false;
             this.$router.push({
               name: 'profile',
@@ -388,11 +384,6 @@ export default {
           //El email o la contraseña son incorrectos (del backend)
           this.login.altura = false;
           this.login.failed = true;
-
-          //COMENTAR!!!!!!!!!!!!!! <------------------------------------------
-          //this.$router.push('/profile');
-          //this.$router.push('/recPwd');
-          //this.$loggedStatus.logged = true;
         }
       });
     },
@@ -410,7 +401,6 @@ export default {
       //Enviar al backend el email
       var email = this.vForgot$.forgotPsw.email.$model
       this.$accounts.forgotPwd(email).then(success => {
-        console.log(success)
         if(success){
           this.forgotPsw.sent = true;
         } else {

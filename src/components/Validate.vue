@@ -1,6 +1,6 @@
 <template>
   <login/>
-  <Dialog v-model:visible="display" class="dialog-success dialog-login" :draggable="false" :modal="true">
+  <Dialog v-model:visible="display" class="dialog-success-verified" :draggable="false" :modal="true">
       <template #header :class="colorHeader">
       <h3>Cuenta validada correctamente</h3>
       </template>
@@ -34,7 +34,13 @@ export default {
 </script>
 
 <style>
-.dialog-success {
+
+.dialog-success-verified {
+  background-color: var(--surface-a); /* Get el current background del tema */
+  border-radius: 15px;
+  animation-duration: 0.6s;
+  animation-name: lineIns derted;
+  transition: height 0.6s, width 0.6s;
   width: 450px;
   height: 280px;
 }

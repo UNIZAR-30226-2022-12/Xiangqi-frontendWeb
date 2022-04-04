@@ -38,7 +38,7 @@
                         <label for="date" :class="{'p-error':vEdit$.edit.date.$invalid && edit.submitted}">Fecha de nacimiento</label>
                         <div class="grid m-auto">
                             <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.dateDisable = !edit.dateDisable" icon="pi pi-pencil" />
-                            <Calendar contentStyle="border-radius: 0px !important" id="date" class="col p-0" :disabled="edit.dateDisable" placeholder="01/01/2000" v-model="edit.date" :showIcon="true" :class="{'p-invalid':vEdit$.edit.date.$invalid && edit.submitted}"/>
+                            <Calendar contentStyle="border-radius: 0px !important" dateFormat="dd/mm/yy" id="date" class="col p-0" :disabled="edit.dateDisable" placeholder="01/01/2000" v-model="edit.date" :showIcon="true" :class="{'p-invalid':vEdit$.edit.date.$invalid && edit.submitted}"/>
                         </div>
                         <small v-if="(vEdit$.edit.date.$invalid && edit.submitted) || vEdit$.edit.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
                     </div>
@@ -176,6 +176,9 @@ export default {
             this.countries = data;
         });
 
+
+
+
         /* por defecto todo deshabilitado y que el usuario elija que edita
         this.edit.nicknameDisable = false
         this.edit.nameDisable = false
@@ -201,6 +204,7 @@ export default {
         */
     },
     methods: {
+
         handleSubmit() {
             this.edit.submitted = true;
 
@@ -225,8 +229,10 @@ export default {
             }
             // La form ha sido validada correctamente en front
             console.log('Formulario validado correctamente');
+
+            //Sumarle 1 a la fecha xD
+            this.edit.date.setDate(this.edit.date.getDate() + 1);
             this.$accounts.changeProfile(this.edit.nickname, this.edit.name, this.edit.date.toISOString().split('T')[0], this.edit.country.name, this.edit.password,this.Images).then(data => {
-                console.log(data)
                 if(data){
                     this.editDialog.display = false;
                     this.$router.go()
@@ -237,7 +243,14 @@ export default {
         getEditParameters() {
             this.edit.nickname = this.perfil.nickname;
             this.edit.name = this.perfil.name;
-            this.edit.date = new Date(this.perfil.birthday);
+
+            let auxDate = new Date(this.perfil.birthday);
+            let dd = String(auxDate.getDate());
+            let mm = String(auxDate.getMonth() + 1); //empieza en 0
+            let yyyy = String(auxDate.getFullYear());
+
+            this.edit.date = new Date(dd + '/' + mm + '/' + yyyy);
+
             this.edit.country = this.perfil.country;
             this.edit.password = '';
 
