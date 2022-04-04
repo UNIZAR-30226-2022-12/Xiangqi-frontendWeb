@@ -102,12 +102,14 @@ import { faCakeCandles } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
+import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faPhone)
 library.add(faCakeCandles)
 library.add(faCoins)
 library.add(faCalendar)
 library.add(faArrowTrendUp)
+library.add(faUserGroup)
 
 //Importar el account service
 import accounts from '@/service/AccountService';
