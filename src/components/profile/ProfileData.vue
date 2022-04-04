@@ -49,6 +49,13 @@
 					<div class="text-900 mb-3 font-medium">Clasificacion</div>
 					<span class="text-700 text-sm line-height-3">Puesto {{perfil.range}}</span>
 				</div>
+				<div class="col-6 md:col-3 mb-4 px-5">
+					<span class="p-3 shadow-2 mb-3 inline-block surface-50" style="border-radius: 1rem">
+						<font-awesome-icon class="text-4xl text-primary" icon="arrow-trend-up" />
+					</span>
+					<div class="text-900 mb-3 font-medium">Numero de amigos</div>
+					<span class="text-700 text-sm line-height-3">Amigos {{perfil.nFriends}}</span>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -125,8 +125,8 @@
                     <Divider class="p-divider-center" layout="horizontal">
                         <b>O bien</b>
                     </Divider>
-                    <Button v-on:click="confirm()" type="submit" icon="pi pi-times" label="Eliminar cuenta" class="mt-2 p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" />
                 </form>
+                    <Button v-on:click="confirm()" type="submit" icon="pi pi-times" label="Eliminar cuenta" class="mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" />
             </div>
         </div>
         <template #footer></template>
@@ -225,8 +225,9 @@ export default {
             }
             // La form ha sido validada correctamente en front
             console.log('Formulario validado correctamente');
-            this.$accounts.changeProfile(localStorage.getItem("id"), this.edit.nickname, this.edit.name, this.edit.date, this.edit.country.name, this.edit.password,this.Images).then(data => {
+            this.$accounts.changeProfile(this.edit.nickname, this.edit.name, this.edit.date, this.edit.country.name, this.edit.password,this.Images).then(data => {
                 console.log(data)
+                this.editDialog.display = false;
             });
             //Hay que mirar si this.password es vacio es que no se ha cambiado la contraseña creo
         },

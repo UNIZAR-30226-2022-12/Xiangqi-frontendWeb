@@ -180,10 +180,10 @@ class AccountService {
      /*
      * Envia los datos a modificar del perfil al backend
      */
-     changeProfile(id, nickname, name, date, country, password, image){
+     changeProfile(nickname, name, date, country, password, image){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
         return http
-            .post('/do-changeProfile/' + id + '/' + nickname + '/' + name + '/' + date + '/' + country + '/' + 'a', {'image': image}, headers)
+            .post('/do-changeProfile/' + nickname + '/' + name + '/' + date + '/' + country + '/' + 'a', {'image': image}, headers)
             .then(response => {
                 return response.data;
             }, () => {
