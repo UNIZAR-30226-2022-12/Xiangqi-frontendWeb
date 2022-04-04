@@ -29,15 +29,13 @@ export default {
 
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
 			this.perfil = response.perfil;
+			this.games = response.partidas
+			console.log(response.estadisticas)
 		});
 
 		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
 			this.profileImage = data;
 		})
-
-		this.$accounts.getGames(localStorage.getItem('id')).then(response => {
-            this.games = response
-		});
 	},
 }
 </script>

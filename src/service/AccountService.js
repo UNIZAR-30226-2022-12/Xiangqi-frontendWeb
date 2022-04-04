@@ -182,8 +182,33 @@ class AccountService {
      */
      changeProfile(nickname, name, date, country, password, image){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
-        return http
+        if(password.length == 0){
+            return http
             .post('/do-changeProfile/' + nickname + '/' + name + '/' + date + '/' + country + '/' + 'a', {'image': image}, headers)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+        } else {
+            return http
+            .post('/do-changeProfile/' + nickname + '/' + name + '/' + date + '/' + country + '/' + password, {'image': image}, headers)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+        }
+    }
+    // ELIMINAR PERFIL DE USUARIO
+    //------------------------------------------------------------------------------------------------------------------
+     /*
+     * Elimina el perfil
+     */
+     deleteAccount(){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        return http
+            .get('/do-deleteAccount/', headers)
             .then(response => {
                 return response.data;
             }, () => {

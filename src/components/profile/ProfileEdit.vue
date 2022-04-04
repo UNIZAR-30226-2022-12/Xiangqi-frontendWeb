@@ -225,16 +225,19 @@ export default {
             }
             // La form ha sido validada correctamente en front
             console.log('Formulario validado correctamente');
-            this.$accounts.changeProfile(this.edit.nickname, this.edit.name, this.edit.date, this.edit.country.name, this.edit.password,this.Images).then(data => {
+            this.$accounts.changeProfile(this.edit.nickname, this.edit.name, this.edit.date.toISOString().split('T')[0], this.edit.country.name, this.edit.password,this.Images).then(data => {
                 console.log(data)
-                this.editDialog.display = false;
+                if(data){
+                    this.editDialog.display = false;
+                    this.$router.go()
+                }
             });
             //Hay que mirar si this.password es vacio es que no se ha cambiado la contraseña creo
         },
         getEditParameters() {
             this.edit.nickname = this.perfil.nickname;
             this.edit.name = this.perfil.name;
-            this.edit.date = this.perfil.birthday;
+            this.edit.date = new Date(this.perfil.birthday);
             this.edit.country = this.perfil.country;
             this.edit.password = '';
 
@@ -269,6 +272,12 @@ export default {
                 },
                 reject: () => {
                     //Borrarle la cuenta
+                    this.$accounts.deleteAccount().then(data => {
+                        if(data){
+                            this.$accounts.logout()
+                            this.$router.push("/")
+                        }
+                    });
                     //this.$toast.add({severity:'error', summary:'Sesión activa', detail:'Sesión no cerrada', life: 3000});
                 }
             });
