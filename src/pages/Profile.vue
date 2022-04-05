@@ -1,7 +1,7 @@
 <template>
 	<myProfile v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
 	<myGames v-if="games!=null" :games="games"/>
-	<myStatics v-if="perfil!=null" :perfil="perfil" :myProfile="true"/>
+	<myStatics v-if="stats!=null" :perfil="perfil" :myProfile="true" :games="stats"/>
 </template>
 
 <script>
@@ -17,6 +17,7 @@ export default {
 			games: null,
 			columns: null,
 			profileImage: '',
+			stats: null,
 		}
 	},
 	components: {
@@ -29,8 +30,8 @@ export default {
 
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
 			this.perfil = response.perfil;
-			this.games = response.partidas
-			console.log(response.estadisticas)
+			this.games = response.partidas;
+			this.stats = response.estadisticas;
 		});
 
 		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
