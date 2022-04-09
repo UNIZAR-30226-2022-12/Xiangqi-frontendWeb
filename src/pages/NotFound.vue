@@ -1,5 +1,5 @@
 <template>
-    <div class="surface-section section flex align-items-center justify-content-center min-h-screen overflow-hidden">
+    <div class="surface-section section flex align-items-center justify-content-center overflow-hidden" style="height: calc(100vh - 9rem); min-height:40rem">
         <div class="grid justify-content-center p-2 lg:p-0" style="min-width:80%;">
             <div class="col-11 xl:col-9 pt-7" style="border-radius:3rem; background: linear-gradient(180deg, var(--surface-50) 38.9%, var(--surface-0));">
                 <div class="grid flex flex-column align-items-center">

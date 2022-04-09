@@ -1,17 +1,20 @@
 <template>
-	<div class="grid">
-		<div class="col-12">
-			<div class="card">
-				<h5>Store</h5>
-				<p>Página por hacer.</p>
-			</div>
-		</div>
-	</div>
+	<loader v-if="this.loading"/>
 </template>
 
 <script>
+import loader from '../components/Loader.vue';
+
 export default {
 	inject: ['$accounts'],
+	data() {
+		return {
+			loading: true,
+		}
+	},
+	components: {
+		loader,
+	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 	}

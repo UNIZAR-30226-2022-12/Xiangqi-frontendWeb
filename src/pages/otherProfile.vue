@@ -1,9 +1,11 @@
 <template>
+	<loader v-if="this.loading"/>
 	<otherData v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="false"/>
 	<otherStatics v-if="perfil!=null" :perfil="perfil" :myProfile="false"/>
 </template>
 
 <script>
+import loader from '../components/Loader.vue';
 import otherData from '../components/profile/ProfileData.vue';
 import otherStatics from '../components/profile/ProfileStatics.vue';
 
@@ -11,6 +13,7 @@ export default {
 	inject: ['$accounts'],
 	data() {
 		return {
+			loading: true,
 			perfil: null,
 			columns: null,
 			profileData: '',
@@ -18,6 +21,7 @@ export default {
 		}
 	},
 	components: {
+		loader,
 		otherData,
 		otherStatics,
 	},
@@ -27,10 +31,13 @@ export default {
         this.$accounts.getProfile(this.$route.params.id).then(response => {
 			this.perfil = response.perfil;
 		});
-
-		this.$accounts.getProfileImage(this.$route.params.id).then(data => {
-			this.profileImage = data;
-		})
+		if (this.perfil.hasImage) {
+			this.$accounts.getProfileImage(this.$route.params.id).then(data => {
+				this.profileImage = data;
+			});
+		} else {
+			this.profileImage = "images/profilePlaceholder.svg";
+		}
 	},
 }
 </script>

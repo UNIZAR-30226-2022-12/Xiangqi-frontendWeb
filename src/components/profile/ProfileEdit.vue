@@ -38,7 +38,7 @@
                         <label for="date" :class="{'p-error':vEdit$.edit.date.$invalid && edit.submitted}">Fecha de nacimiento</label>
                         <div class="grid m-auto">
                             <Button class="col-fixed" style="border-top-right-radius: 0; border-bottom-right-radius: 0" v-on:click="edit.dateDisable = !edit.dateDisable" icon="pi pi-pencil" />
-                            <Calendar contentStyle="border-radius: 0px !important" dateFormat="dd/mm/yy" id="date" class="col p-0" :disabled="edit.dateDisable" placeholder="01/01/2000" v-model="edit.date" :showIcon="true" :class="{'p-invalid':vEdit$.edit.date.$invalid && edit.submitted}"/>
+                            <Calendar contentStyle="border-radius: 0px !important" dateFormat="dd/mm/yy" id="date" :maxDate="new Date()" class="col p-0" :disabled="edit.dateDisable" placeholder="01/01/2000" v-model="edit.date" :showIcon="true" :class="{'p-invalid':vEdit$.edit.date.$invalid && edit.submitted}"/>
                         </div>
                         <small v-if="(vEdit$.edit.date.$invalid && edit.submitted) || vEdit$.edit.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
                     </div>
@@ -121,12 +121,21 @@
                         <small v-if="(vEdit$.edit.confPassword.$invalid && edit.submitted) || vEdit$.edit.confPassword.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
                         <small v-else-if="(vEdit$.edit.password.$model != vEdit$.edit.confPassword.$model && edit.submitted)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
                     </div>
-                    <Button type="submit" icon="pi pi-check" label="Editar cuenta" class="mt-2 mb-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+                    <Button type="submit" :disabled="this.edit.editing || (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid) || (!this.edit.passwordDisable && (this.vEdit$.edit.$invalid))" class="mt-2 mb-2 p-button-raised font-semibold h-3rem" style="border-radius: 1rem">
+                        <div class="flex justify-content-center flex-wrap card-container w-full">
+                            <div id="spinner" class="flex align-items-center justify-content-center mr-2">
+                                <ProgressSpinner v-if="this.edit.editing" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                            </div>                   
+                            <div v-if="!this.edit.editing" class="flex align-items-center justify-content-center font-bold text-white">Guardar cambios</div>
+                            <div v-else class="flex align-items-center justify-content-center font-bold text-white">Guardando cambios...</div>
+                        </div>
+                    </Button>
+
                     <Divider class="p-divider-center" layout="horizontal">
                         <b>O bien</b>
                     </Divider>
                 </form>
-                    <Button v-on:click="confirm()" type="submit" icon="pi pi-times" label="Eliminar cuenta" class="mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" />
+                    <Button v-on:click="confirm()" type="submit" label="Eliminar cuenta" class="mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" />
             </div>
         </div>
         <template #footer></template>
@@ -158,14 +167,15 @@ export default {
                 name:'',
                 nameDisable: true,
                 date: '',
+                maxDate: '',
                 dateDisable: true,
                 country: '',
                 countryDisable: true,
                 password: "",
                 confPassword: '',
                 passwordDisable: true,
-
                 submitted: false,
+                editing: false,
             },
             Images: '',
             countries: '',
@@ -175,56 +185,23 @@ export default {
         this.$accounts.getCountries().then(data => {
             this.countries = data;
         });
-
-
-
-
-        /* por defecto todo deshabilitado y que el usuario elija que edita
-        this.edit.nicknameDisable = false
-        this.edit.nameDisable = false
-        this.edit.dateDisable = false
-        this.edit.countryDisable = false
-        this.edit.passwordDisable = false
-        */
-        /*
-        this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
-            console.log(response.perfil)
-			this.edit.nickname = response.perfil.nickname
-            this.edit.nicknameDisable = false
-            this.edit.name = response.perfil.name
-            this.edit.nameDisable = false
-            this.edit.date = response.perfil.date
-            this.edit.dateDisable = false
-            this.edit.country = response.perfil.country
-            this.edit.countryDisable = false
-            this.edit.password = response.perfil.password
-            this.edit.passwordDisable = false
-		});
-        this.edit.country = "Spain";
-        */
     },
     methods: {
-
         handleSubmit() {
             this.edit.submitted = true;
-
-            console.log("Selected country: ", this.edit.country);
-            console.log("Selected country: ", this.edit.country.name);
-            console.log("Selected name: ", this.edit.name);
-            console.log("Selected nick: ", this.edit.nickname);
-            console.log("Selected date: ", this.edit.date);
-            console.log("Selected password: ", this.edit.password.length);
-            console.log("Selected image: ", this.Images);
+            this.edit.editing = true;
 
             //No hemos cambiado el password passwordDisable = true
             if (this.edit.passwordDisable) {
                 console.log('NO ME CAMBIAS EL PASS');
                 if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid ) {
                     console.log('NO VALE Y NO ME CAMBIAS EL PASS');
+                    this.edit.editing = false;
                     return;
                 }
             } else if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid  || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
                 console.log('NO VALE Y ME CAMBIAS EL PASS');
+                this.edit.editing = false;
                 return;
             }
             // La form ha sido validada correctamente en front
@@ -234,11 +211,11 @@ export default {
             this.edit.date.setDate(this.edit.date.getDate() + 1);
             this.$accounts.changeProfile(this.edit.nickname, this.edit.name, this.edit.date.toISOString().split('T')[0], this.edit.country.name, this.edit.password,this.Images).then(data => {
                 if(data){
+                    this.edit.editing = false;
                     this.editDialog.display = false;
                     this.$router.go()
                 }
             });
-            //Hay que mirar si this.password es vacio es que no se ha cambiado la contraseña creo
         },
         getEditParameters() {
             this.edit.nickname = this.perfil.nickname;
@@ -332,5 +309,27 @@ export default {
 .edit-dialog-lg-size {
     height: 62rem;
     width: 40rem;
+}
+
+/* Color del spinner */
+@keyframes p-progress-spinner-color {
+    100% {
+        stroke: white;
+    }
+    0% {
+        stroke: white;
+    }
+    40% {
+        stroke: white;
+    }
+    66% {
+        stroke: white;
+    }
+    80% {
+        stroke: white;
+    }
+    90% {
+        stroke: white;
+    }
 }
 </style>

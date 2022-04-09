@@ -1,10 +1,12 @@
 <template>
+	<loader v-if="this.loading"/>
 	<myProfile v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
 	<myGames v-if="games!=null" :games="games"/>
 	<myStatics v-if="stats!=null" :perfil="perfil" :myProfile="true" :games="stats"/>
 </template>
 
 <script>
+import loader from '../components/Loader.vue';
 import myProfile from '../components/profile/ProfileData.vue';
 import myGames from '../components/profile/ProfileGames.vue';
 import myStatics from '../components/profile/ProfileStatics.vue';
@@ -13,6 +15,7 @@ export default {
 	inject: ['$accounts'],
 	data() {
 		return {
+			loading: true,
 			perfil: null,
 			games: null,
 			columns: null,
@@ -21,22 +24,29 @@ export default {
 		}
 	},
 	components: {
+		loader,
 		myProfile,
 		myGames,
 		myStatics,
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
+			this.loading = false;
 			this.perfil = response.perfil;
 			this.games = response.partidas;
 			this.stats = response.estadisticas;
 		});
-
-		this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
-			this.profileImage = data;
-		})
+		var falso = false
+		if (falso) {
+		//if (this.perfil.hasImage) {
+			// Pedir al back la foto
+			this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+				this.profileImage = data;
+			});
+		} else {
+			this.profileImage = "images/profilePlaceholder.svg";
+		}
 	},
 }
 </script>

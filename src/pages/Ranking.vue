@@ -1,12 +1,5 @@
 <template>
-	<div class="grid">
-		<div class="col-12">
-			<div class="card">
-				<h5>Ranking</h5>
-				<p>Página por hacer.</p>
-			</div>
-		</div>
-	</div>
+	<loader v-if="this.loading"/>
 	<button @click="show = !show">Testea la animacion</button>
 	<Transition name="bounce">
 		<h1 v-if="show">OH MAI GOD!!</h1>
@@ -14,12 +7,18 @@
 </template>
 
 <script>
+import loader from '../components/Loader.vue';
+
 export default {
 	inject: ['$accounts'],
 	data() {
 		return {
 			show: true,
+			loading: true,
 		}
+	},
+	components: {
+		loader,
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();

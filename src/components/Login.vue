@@ -135,8 +135,16 @@
                 </div>
                 <div class="field flex justify-content-center">
                   <Button v-on:click="dialog.display = false, dialog.displayPsw = true" label="¿Has olvidado tu contraseña?" class="p-button-link" />
-                </div>
-                <Button type="submit" label="Iniciar sesión" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+                </div>              
+                <Button type="submit" :disabled="login.submitDisabled || this.v$.login.$invalid" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem">
+                  <div class="flex justify-content-center flex-wrap card-container w-full">
+                      <div id="spinner" class="flex align-items-center justify-content-center mr-2">
+                        <ProgressSpinner v-if="this.login.loging" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                      </div>                   
+                      <div v-if="!this.login.loging" class="flex align-items-center justify-content-center font-bold text-white">Iniciar sesión</div>
+                      <div v-else class="flex align-items-center justify-content-center font-bold text-white">Entrando...</div>
+                  </div>
+                </Button>            
               </form>
           </div>
       </div>
@@ -148,11 +156,11 @@
           <div class="card resize" style="width: 440px">
               <!--FIELD-->
               <h4 class="text-center mt-3"> {{dialog.texto}} </h4>
-              <Message v-if="createAc.failed" severity="error" :closable="false">El correo introducido ya existe</Message>
               <form @submit.prevent="handleSubmit(!v$.$invalid)" class="p-fluid">
+                  <h6>(*) Campos obligatorios</h6>
                   <!--NICKNAME-->
                   <div class="field">
-                    <label for="nickname" :class="{'p-error':(v$.createAc.nickname.$invalid && createAc.submitted) || (v$.createAc.nickname.$invalid && v$.createAc.nickname.$model != '')}">Nombre de usuario</label>
+                    <label for="nickname" :class="{'p-error':(v$.createAc.nickname.$invalid && createAc.submitted) || (v$.createAc.nickname.$invalid && v$.createAc.nickname.$model != '')}">Nombre de usuario *</label>
                     <div class="p-inputgroup">
                       <InputText id="nickname" placeholder="Nombre de usuario" v-model="createAc.nickname" :class="{'p-invalid':(v$.createAc.nickname.$invalid && createAc.submitted) || (v$.createAc.nickname.$invalid && v$.createAc.nickname.$model != '')}" />
                       <span class="p-inputgroup-addon">
@@ -164,7 +172,7 @@
                   </div>
                   <!--NAME-->
                   <div class="field">
-                    <label for="name" :class="{'p-error':v$.createAc.name.$invalid && createAc.submitted}">Nombre completo</label>
+                    <label for="name" :class="{'p-error':v$.createAc.name.$invalid && createAc.submitted}">Nombre completo *</label>
                       <div class="p-inputgroup">
                       <InputText id="name" placeholder="Nombre Apellido" v-model="createAc.name" :class="{'p-invalid':v$.createAc.name.$invalid && createAc.submitted}" />
                       <span class="p-inputgroup-addon">
@@ -175,7 +183,7 @@
                   </div>
                   <!--EMAIL-->
                   <div class="field">
-                    <label for="email" :class="{'p-error':v$.createAc.email.$invalid && createAc.submitted}">Email</label>
+                    <label for="email" :class="{'p-error':v$.createAc.email.$invalid && createAc.submitted}">Email *</label>
                     <div class="p-inputgroup">
                       <InputText id="email" placeholder="cuenta@correo.com" v-model="v$.createAc.email.$model" :class="{'p-invalid':v$.createAc.email.$invalid && createAc.submitted}" aria-describedby="email-error"/>
                       <span class="p-inputgroup-addon">
@@ -191,13 +199,13 @@
                   </div>
                   <!--BIRTHDAY-->
                   <div class="field">
-                    <label for="date" :class="{'p-error':v$.createAc.date.$invalid && createAc.submitted}">Fecha de nacimiento</label>
-                    <Calendar id="date" dateFormat="dd/mm/yy" v-model="createAc.date" :showIcon="true" :class="{'p-invalid':v$.createAc.date.$invalid && createAc.submitted}"/>
+                    <label for="date" :class="{'p-error':v$.createAc.date.$invalid && createAc.submitted}">Fecha de nacimiento *</label>
+                    <Calendar id="date" dateFormat="dd/mm/yy" v-model="createAc.date" :maxDate="new Date()" :showIcon="true" :class="{'p-invalid':v$.createAc.date.$invalid && createAc.submitted}"/>
                     <small v-if="(v$.createAc.date.$invalid && createAc.submitted) || v$.createAc.date.$pending.$response" class="p-error">{{'Por favor, indique su fecha de nacimiento'}}</small>
                   </div>
                   <!--COUNTRY-->
                   <div class="field">
-                    <label for="country" :class="{'p-error':v$.createAc.country.$invalid && createAc.submitted}">Seleccione su país de residencia</label>
+                    <label for="country" :class="{'p-error':v$.createAc.country.$invalid && createAc.submitted}">Seleccione su país de residencia *</label>
                     <div class="p-inputgroup">
                       <Dropdown id="country" v-model="createAc.country" :options="countries" optionLabel="name" :filter="true" placeholder="Seleccione su país" :showClear="true" :class="{'p-invalid':v$.createAc.country.$invalid && createAc.submitted}">
                         <template #value="slotProps">
@@ -231,7 +239,7 @@
                   </div>
                   <!--PASSWORD-->
                   <div class="field"> 
-                    <label for="password" :class="{'p-error':(v$.createAc.password.$invalid && createAc.submitted) || (v$.createAc.password.$invalid && v$.createAc.password.$model != '')}">Contraseña</label>
+                    <label for="password" :class="{'p-error':(v$.createAc.password.$invalid && createAc.submitted) || (v$.createAc.password.$invalid && v$.createAc.password.$model != '')}">Contraseña *</label>
                     <div class="p-inputgroup">
                       <Password id="password" v-model="createAc.password" :class="{'p-invalid':(v$.createAc.password.$invalid && createAc.submitted) || (v$.createAc.password.$invalid && v$.createAc.password.$model != '')}" toggleMask>
                         <template #header>
@@ -262,7 +270,7 @@
                   </div>
                   <!--PASSWORD-->
                   <div class="field">
-                    <label for="confPassword" :class="{'p-error':(v$.createAc.confPassword.$invalid && createAc.submitted) || (v$.createAc.password.$model != v$.createAc.confPassword.$model)}">Confirmar contraseña</label>
+                    <label for="confPassword" :class="{'p-error':(v$.createAc.confPassword.$invalid && createAc.submitted) || (v$.createAc.password.$model != v$.createAc.confPassword.$model)}">Confirmar contraseña *</label>
                     <div class="p-inputgroup">
                       <Password id="confPassword" v-model="createAc.confPassword" :feedback="false" :class="{'p-invalid':(v$.createAc.confPassword.$invalid && createAc.submitted) || (v$.createAc.password.$model != v$.createAc.confPassword.$model)}" toggleMask></Password>
                       <span class="p-inputgroup-addon">
@@ -277,7 +285,17 @@
                     <Checkbox :disabled="createAc.checkBox == false" id="accept" name="accept" value="Accept" v-model="createAc.accept" :class="{'p-invalid':v$.createAc.accept.$invalid && createAc.submitted}" />
                     <Button v-on:click="dialog.terms = true, createAc.checkBox = true" label="Aceptar los términos y condiciones" class="text-left p-button-link" />
                   </div>
-                  <Button type="submit" label="Crear cuenta" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem" />
+                  <Message v-if="(this.v$.createAc.$invalid) && this.createAc.submitted"  severity="error" :closable="false">Por favor compruebe errores en el formulario</Message>
+                  <Message v-if="createAc.failed" severity="error" :closable="false">El correo introducido ya existe</Message>
+                  <Button type="submit" :disabled="createAc.submitDisabled || this.v$.createAc.$invalid" class="mt-2 mb-6 p-button-raised font-semibold h-3rem" style="border-radius: 1rem">
+                    <div class="flex justify-content-center flex-wrap card-container w-full">
+                        <div id="spinner" class="flex align-items-center justify-content-center mr-2">
+                          <ProgressSpinner v-if="this.createAc.creating" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                        </div>                   
+                        <div v-if="!this.createAc.creating" class="flex align-items-center justify-content-center font-bold text-white">Crear cuenta</div>
+                        <div v-else class="flex align-items-center justify-content-center font-bold text-white">Creando cuenta...</div>
+                    </div>
+                  </Button>
               </form>
           </div>
       </div>
@@ -335,21 +353,26 @@ export default {
      */
     handleSubmit() {
       this.createAc.submitted = true;
+      this.createAc.submitDisabled = true;
 
       this.v$.createAc.date.$model.setDate(this.v$.createAc.date.$model.getDate() + 1);
       let date = new Date(this.v$.createAc.date.$model)
 
       if (this.v$.createAc.email.$invalid || this.v$.createAc.password.$invalid || this.v$.createAc.confPassword.$invalid || this.v$.createAc.nickname.$invalid || this.v$.createAc.date.$invalid || this.v$.createAc.country.$invalid || this.v$.createAc.accept.$invalid || this.v$.createAc.name.$invalid) { //|| this.v$.imagen.$invalid) {
+        this.createAc.submitDisabled = false;
         return;
       }
       // La form ha sido validada correctamente en front
-      
+      this.createAc.creating = true;
       this.$accounts.createAccount(this.v$.createAc.nickname.$model, this.v$.createAc.name.$model, this.v$.createAc.email.$model, date, this.v$.createAc.country.$model, this.v$.createAc.password.$model,this.Images).then(success => { //this.createAc.image
         if (success) {
+          this.createAc.creating = false;
           this.dialog.display = false;
           this.dialog.accountCreated = true;
         } else {
           //El email ya estaba registrado (del backend)
+          this.createAc.creating = false;
+          this.createAc.submitDisabled = false;
           this.createAc.failed = true;
         }
       });
@@ -361,14 +384,18 @@ export default {
      */
     handleSubmitLog() {
       this.login.submitted = true;
+      this.login.submitDisabled = true;
       if (this.vLogin$.login.email.$invalid || this.vLogin$.login.password.$invalid) {
+        this.login.submitDisabled = false;
         return;
       }
       // La form ha sido validada correctamente en front
+      this.login.loging = true;
       this.$accounts.login(this.vLogin$.login.email.$model, this.vLogin$.login.password.$model).then(success => {
         if (success.ok) {
           if (success.validacion){ // Correo verificado, y ok, entramos
             this.dialog.display = false;
+            this.login.loging = false;
             this.$router.push({
               name: 'profile',
               //params: { id: id, myProfile: true }
@@ -376,12 +403,15 @@ export default {
             this.$loggedStatus.logged = true;
           }
           else{
+            this.login.loging = false;
             this.login.altura = false;
             this.login.validationFail = true;
           }
           
         } else {
           //El email o la contraseña son incorrectos (del backend)
+          this.login.loging = false;
+          this.login.submitDisabled = false;
           this.login.altura = false;
           this.login.failed = true;
         }
@@ -428,6 +458,8 @@ export default {
       this.createAc.failed = false;
       this.createAc.submitted = false;
       this.createAc.checkBox = false;
+      this.createAc.submitDisabled = false;
+      this.createAc.creating = false;
     },
 
     /* 
@@ -453,6 +485,8 @@ export default {
       this.login.failed = false;
       this.login.validationFail = false;
       this.login.submitted = false;
+      this.createAc.submitDisabled = false;
+      this.login.loging = false;
     },
 
     /* 
@@ -469,6 +503,7 @@ export default {
       this.login.failed = false;
       this.createAc.failed = false;
       this.createAc.submitted = false;
+      this.createAc.submitDisabled = false;
     },
 
     /*
@@ -521,6 +556,8 @@ export default {
         email: '',
         password: '',
         failed: false,
+        submitDisabled: false,
+        loging: false,
       },
       createAc: {
         submitted: false,
@@ -535,6 +572,8 @@ export default {
         accept: null,
         failed: false,
         checkBox: false,
+        creating: false,
+        submitDisabled: true,
       },
       Images: '',
       countries: '',
@@ -682,6 +721,13 @@ body {
 .logo-size {
   width: 100px;
   height: 100px;
+}
+
+/* Color del spinner */
+#spinner .p-progress-spinner-circle{
+	-webkit-animation: p-progress-spinner-dash 1.5s ease-in-out infinite !important;
+	animation: p-progress-spinner-dash 1.5s ease-in-out infinite !important;
+  stroke: white !important;
 }
 
 </style>
