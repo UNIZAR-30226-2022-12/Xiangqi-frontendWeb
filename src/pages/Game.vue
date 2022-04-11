@@ -2,8 +2,8 @@
     <div class="card">
         <div class="col-12 fondo m-auto board-width">
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
-                <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="tile(indexFil, indexCol, itemFila.pieza, itemFila.color)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-500 border-1 flex-grow-1 flex align-items-center justify-content-center font-bold text-white">
-                    <img v-if="itemFila.pieza != ''" class="pieza" style="border-radius: 100%; box-shadow: 2px 2px 5px red;" :src="'images/pieces/set1/' + itemFila.pieza + itemFila.color + '.svg'">  
+                <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="tile(indexFil, indexCol, itemFila.pieza, itemFila.color)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center font-bold text-white casilla">
+                    <img v-if="itemFila.pieza != ''" class="pieza" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/pieces/set1/' + itemFila.pieza + itemFila.color + '.svg'">  
                 </div>
             </div>
         </div>
@@ -51,7 +51,15 @@ export default  {
     background-position: center center;
     background-size: 100% 100%;
     background-repeat:no-repeat;
-    background-image: url("/images/boards/wooden1.jpg");
+    background-image: url("/images/boards/wooden2.jpg");
+    border-radius: 2.2rem;
+    box-shadow: 4px 4px 10px black;
+}
+
+.casilla:hover {
+    background-color: #3f3fff2a;
+    cursor: pointer;
+    border-radius: 100%;
 }
 
 @media (min-width: 768px) {
