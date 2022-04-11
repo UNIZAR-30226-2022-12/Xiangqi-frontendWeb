@@ -1,7 +1,7 @@
 <template>
 	<loader v-if="this.loading"/>
 	<otherData v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="false"/>
-	<otherStatics v-if="perfil!=null" :perfil="perfil" :myProfile="false"/>
+	<otherStatics v-if="stats!=null" :perfil="perfil" :myProfile="false" :games="stats"/>
 </template>
 
 <script>
@@ -18,6 +18,7 @@ export default {
 			columns: null,
 			profileData: '',
 			profileImage: '',
+			stats: null,
 		}
 	},
 	components: {
@@ -29,15 +30,19 @@ export default {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
         this.$accounts.getProfile(this.$route.params.id).then(response => {
+			this.loading = false;
 			this.perfil = response.perfil;
+
+			if (this.perfil.hasImage) {
+				// Pedir al back la foto
+				console.log("tiene foto");
+				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+					this.profileImage = data;
+				});
+			} else {
+				this.profileImage = "images/profilePlaceholder.svg";
+			}
 		});
-		if (this.perfil.hasImage) {
-			this.$accounts.getProfileImage(this.$route.params.id).then(data => {
-				this.profileImage = data;
-			});
-		} else {
-			this.profileImage = "images/profilePlaceholder.svg";
-		}
 	},
 }
 </script>

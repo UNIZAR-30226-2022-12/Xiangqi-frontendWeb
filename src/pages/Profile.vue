@@ -36,17 +36,16 @@ export default {
 			this.perfil = response.perfil;
 			this.games = response.partidas;
 			this.stats = response.estadisticas;
+
+			if (this.perfil.hasImage) {
+				// Pedir al back la foto
+				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+					this.profileImage = data;
+				});
+			} else {
+				this.profileImage = "images/profilePlaceholder.svg";
+			}
 		});
-		var falso = false
-		if (falso) {
-		//if (this.perfil.hasImage) {
-			// Pedir al back la foto
-			this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
-				this.profileImage = data;
-			});
-		} else {
-			this.profileImage = "images/profilePlaceholder.svg";
-		}
 	},
 }
 </script>
