@@ -1,12 +1,11 @@
 <template>
     <div class="card">
-        <div class="flex card-container blue-container overflow-hidden">
-            <div v-for="(item, index) in tablero.filas.fila" :key="index" class="border-500 border-3 flex-grow-1 flex align-items-center justify-content-center bg-blue-500 font-bold text-white">{{ index }} {{ item.pieza }}</div>
-        </div>
-    </div>
-    <div class="grid">
-        <div class="col-12 flex justify-content-center">
-            <img class="board" src="../assets/images/boards/wooden2.jpg" alt="Tablero">
+        <div class="col-12 fondo m-auto board-width">
+            <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
+                <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="tile(indexFil, indexCol, itemFila.pieza, itemFila.color)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-500 border-1 flex-grow-1 flex align-items-center justify-content-center font-bold text-white">
+                    <img v-if="itemFila.pieza != ''" class="pieza" style="border-radius: 100%; box-shadow: 2px 2px 5px red;" :src="'images/pieces/set1/' + itemFila.pieza + itemFila.color + '.svg'">  
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -17,26 +16,86 @@ export default  {
 	inject: ['$accounts'],
       data() {
         return {
-            tablero: [{
-                filas: [{
-                        fila: [{ pieza: "Torre" }, { pieza: "Caballo" }, { pieza: "Elefante" }, { pieza: "Oficial" }, { pieza: "General" }, { pieza: "Oficial" }, { pieza: "Elefante" }, { pieza: "Caballo" }, { pieza: "Torre" }]
-                    },
-                    {
-                        fila: [{ pieza: "" }, { pieza: "Caballo" }, { pieza: "Elefante" }, { pieza: "Oficial" }, { pieza: "General" }, { pieza: "Oficial" }, { pieza: "Elefante" }, { pieza: "Caballo" }, { pieza: "Torre" }]
-                    },
+            tablero: {
+                filas: [
+                    [{ pieza: "torre", color: "negro"}, { pieza: "caballo", color: "negro" }, { pieza: "elefante", color: "negro" }, { pieza: "oficial", color: "negro" }, { pieza: "general", color: "negro" }, { pieza: "oficial", color: "negro" }, { pieza: "elefante", color: "negro" }, { pieza: "caballo", color: "negro" }, { pieza: "torre", color: "negro" }],
+                    [{ pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: ""}, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }],
+                    [{ pieza: "", color: "" }, { pieza: "canyon", color: "negro" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "canyon", color: "negro" }, { pieza: "", color: "" }],
+                    [{ pieza: "soldado", color: "negro" }, { pieza: "", color: "" }, { pieza: "soldado", color: "negro" }, { pieza: "", color: "" }, { pieza: "soldado", color: "negro" }, { pieza: "", color: "" }, { pieza: "soldado", color: "negro" }, { pieza: "", color: "" }, { pieza: "soldado", color: "negro" }],
+                    [{ pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }],
+                    [{ pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }],
+                    [{ pieza: "soldado", color: "rojo" }, { pieza: "", color: "" }, { pieza: "soldado", color: "rojo" }, { pieza: "", color: "" }, { pieza: "soldado", color: "rojo" }, { pieza: "", color: "" }, { pieza: "soldado", color: "rojo" }, { pieza: "", color: "" }, { pieza: "soldado", color: "rojo" }],
+                    [{ pieza: "", color: "" }, { pieza: "canyon", color: "rojo" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "canyon", color: "rojo" }, { pieza: "", color: "" }],
+                    [{ pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }, { pieza: "", color: "" }],
+                    [{ pieza: "torre", color: "rojo" }, { pieza: "caballo", color: "rojo" }, { pieza: "elefante", color: "rojo" }, { pieza: "oficial", color: "rojo" }, { pieza: "general", color: "rojo" }, { pieza: "oficial", color: "rojo" }, { pieza: "elefante", color: "rojo" }, { pieza: "caballo", color: "rojo" }, { pieza: "torre", color: "rojo" }],
                 ]
-            }]
+            },
+            selectedTile: '',
         }
     },
 	created() {
         //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
-	}
+	},
+    methods: {
+        tile(indexFil, indexCol, pieza, color) {
+            console.log(indexFil, indexCol, pieza, color);
+        }
+    }
 }
 </script>
 
 <style scoped>
 
+.fondo {
+    background-position: center center;
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-image: url("/images/boards/wooden1.jpg");
+}
+
+@media (min-width: 768px) {
+    .board-width{
+        max-width: 46rem
+    }
+}
+
+@media (max-width: 768px) {
+    .board-width{
+        max-width: 40rem;
+        height: 41rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .board-width{
+        max-width: 38rem;
+        height: auto;
+    }
+}
+
+@media (max-width: 575px) {
+    .board-width{
+        max-width: 29rem;
+        height: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .pieza {
+        vertical-align: middle;
+        margin: 0.5rem;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .pieza {
+        vertical-align: middle;
+        margin: 0.4rem;
+        object-fit: cover;
+    }
+}
 
 /* Este estilo se activa cuando el tamaño de la ventana es > 768px */
 @media (min-width: 768px) {
