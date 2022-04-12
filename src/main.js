@@ -115,6 +115,7 @@ library.add(faUserGroup)
 
 //Importar el account service
 import accounts from '@/service/AccountService';
+import game from '@/service/GameService';
 
 router.beforeEach(function(to, from, next) {
     window.scrollTo(0, 0);
@@ -125,6 +126,8 @@ const app = createApp(AppWrapper);
 
 //Servicio para login y para crear cuentas
 app.provide('$accounts', accounts);
+
+app.provide('$game', game);
 
 //Cambiar tema por defecto aquí y en index.html
 app.config.globalProperties.$appState = reactive({ theme: 'saga-blue', darkTheme: false });
