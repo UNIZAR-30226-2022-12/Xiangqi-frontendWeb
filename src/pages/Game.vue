@@ -1,15 +1,15 @@
 <template>
     <div class="grid">
         <!--BARRA LATERAL-->
-        <div class="col-12 lg:col-4 surface-section section p-6 text-left mb-4 lg:mb-0"> 
+        <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <div class="field col-12 mb-0">
                     <h1>Partida contra {{rival.name}}</h1>
                     <div class="flex card-container overflow-hidden">
                         <div class="flex-none align-items-left justify-content-left mr-4">
-                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50" style="" alt="foto de perfil">
+                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50 ml-1 mt-1" style="" alt="foto de perfil">
                         </div>
-                        <div class="flex-grow-1  align-items-left justify-content-left">
+                        <div class="flex-grow-1 align-items-left justify-content-left">
                             <p>
                                 <img class="flag h-auto mr-1" :class="[rival.country.flag]" src="images/flags/flag_placeholder.png">
                                  #{{ rival.nickname }}
@@ -58,7 +58,7 @@
                 <!--Tema de los iconos-->
                 <div class="field col-12">
                     <h5>Selección de temas:</h5>
-                    <label>Seleccione el tema de sus iconos:</label>
+                    <label>Seleccione el tema de sus iconos:</label><br>
                     <Dropdown class="w-full" v-model="selectedPiecesSet" :options="setsPieces" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
                         <template #option="slotProps">
                             <div class="card">
@@ -74,7 +74,7 @@
                 </div>
                 <!--Tema del tablero-->
                 <div class="field col-12">
-                    <label>Seleccione el tema de su tablero:</label>
+                    <label>Seleccione el tema de su tablero:</label><br>
                     <Dropdown class="w-full" v-model="selectedBoard" :options="setsBoards" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
                         <template #option="slotProps">
                             <div class="card">
@@ -92,7 +92,7 @@
                 <div class="field col-12">
                     <h5>Terminar partida:</h5>
                     <ConfirmDialog></ConfirmDialog>
-                    <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
+                    <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" icon="pi pi-save" label="Guardar y salir"/>
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@ export default  {
             rival: {
                 mail:'',
                 nickname: 'juanksp', 
-                name: 'Juan Plo', 
+                name: 'Juan Plo Andrés', 
                 birthday: '05/10/2001', 
                 country: {
                     flag: 'flag-es',
@@ -800,6 +800,12 @@ export default  {
     background: rgba(39, 62, 84, 0.6);
     cursor: pointer;
     border-radius: 100%;
+}
+
+@media (max-width: 1000px) {
+    .centrar-mauto{
+        margin: auto;
+    }
 }
 
 @media (min-width: 768px) {
