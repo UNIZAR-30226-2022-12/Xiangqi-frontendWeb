@@ -196,6 +196,9 @@ export default  {
 	},
     methods: {
         moves(indexFil, indexCol, item) {
+            this.selectedPiece.fil = indexFil;
+            this.selectedPiece.col = indexCol;
+            this.selectedPiece.selected = true;
             console.log(indexFil, indexCol);
             this.selectedTile = this.tablero.filas[indexFil][indexCol]
             if(item.moves.length == 0){ //Cada vez que movamos una ficha sus movimientos pasaran a 0, pero si no calculamos sus movimientos y los guardamos hasta el movimiento
