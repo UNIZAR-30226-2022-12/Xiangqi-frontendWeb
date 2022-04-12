@@ -3,15 +3,33 @@
         <!--BARRA LATERAL-->
         <div class="col-12 lg:col-4 surface-section section p-6 text-left mb-4 lg:mb-0"> 
             <div class="grid">
-                <div class="field col-12">
-                    <h1 class="mt-0 mb-0">Partida contra {{this.rival}}</h1>
+                <div class="field col-12 mb-0">
+                    <h1>Partida contra {{rival.name}}</h1>
+                    <div class="flex card-container overflow-hidden">
+                        <div class="flex-none align-items-left justify-content-left mr-4">
+                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50" style="" alt="foto de perfil">
+                        </div>
+                        <div class="flex-grow-1  align-items-left justify-content-left">
+                            <p>
+                                <img class="flag h-auto mr-1" :class="[rival.country.flag]" src="images/flags/flag_placeholder.png">
+                                 #{{ rival.nickname }}
+                            </p>
+                            <p>Cumpleaños: {{ rival.birthday }} </p>
+                            <p>Puesto en ranking: {{ rival.range }} </p>
+                            <p>Usuario desde: {{ rival.registerDate }} </p>
+                        </div>
+                    </div>
+                    <Button v-on:click="confirm()" class="col-12 mt-4 w-full p-button-raised font-semibold h-3rem" style="border-radius: 1rem" icon="pi pi-save" label="Añadir como amigo"/>
                 </div>
+                <Divider />
                 <!--Temporizador-->
                 <div class="field col-12">
-                    <label>Temporizador:</label>
-                    <h2 class="mt-0 mb-0">{{this.timer}}</h2>
+                    <h5>Temporizador:</h5>
+                    <h1 class="mt-0 mb-0">{{this.timer}}</h1>
                 </div>
+                <Divider />
                 <!--Chat-->
+                <chat style="z-index: 100"/>
                 <!--<div class="field col-12">
                     <label>Chat:</label>
                     <div class="section text-left" style="border-radius: 5px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;">
@@ -39,6 +57,7 @@
                 </div>-->
                 <!--Tema de los iconos-->
                 <div class="field col-12">
+                    <h5>Selección de temas:</h5>
                     <label>Seleccione el tema de sus iconos:</label>
                     <Dropdown class="w-full" v-model="selectedPiecesSet" :options="setsPieces" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
                         <template #option="slotProps">
@@ -69,8 +88,9 @@
                         </template>
                     </Dropdown>
                 </div>
+                <Divider />
                 <div class="field col-12">
-                    <label>Terminar partida:</label>
+                    <h5>Terminar partida:</h5>
                     <ConfirmDialog></ConfirmDialog>
                     <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 </div>
@@ -82,9 +102,13 @@
             'marbled1': selectedBoard.set == 'marbled1', 'marbled2': selectedBoard.set == 'marbled2', 'marbled3': selectedBoard.set == 'marbled3', 'marbled4': selectedBoard.set == 'marbled4', 'checker1': selectedBoard.set == 'checker1', 'concrete1': selectedBoard.set == 'concrete1', 'concrete2': selectedBoard.set == 'concrete2'}">
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
                 <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center font-bold text-white">
+                    <!--Casilla sin pieza-->
                     <div v-if="itemFila.pieza == null" class="casilla w-3rem h-3rem"></div>
+                    <!--Casilla con pieza-->
                     <div v-else class="h-full w-full">
+                        <!--Hemos seleccionado una pieza-->
                         <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">
+                        <!--Pieza no seleccionada-->
                         <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">  
                     </div>
                 </div>
@@ -95,8 +119,12 @@
 
 <script>
 
+import chat from '../components/Chat.vue';
 export default  {
 	inject: ['$accounts'],
+    components: {
+        chat,
+    },
       data() {
         return {
             //Tablero inicial
@@ -116,21 +144,33 @@ export default  {
                 ]
                 */
                filas: [
-                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: "caballo", color: "negro" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},  { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}],
-                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: "" , moves: [], turno: 0}, { pieza: "soldado", color: "negro" , moves: [], turno: 0}],]
+                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: "caballo", color: "negro" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},  { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
+                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "negro" , moves: [], turno: 0}],]
             
             },
             //BARRA LATERAL
             //------------------------------------------------------
-            rival:'juanksp',
+            rival: {
+                mail:'',
+                nickname: 'juanksp', 
+                name: 'Juan Plo', 
+                birthday: '05/10/2001', 
+                country: {
+                    flag: 'flag-es',
+                },
+                range: '2',
+                points: '',
+                registerDate: '20/02/2022',
+            },
+            profileImage: 'images/profilePlaceholder.svg',
 
             timer: '00:00:00',
 
