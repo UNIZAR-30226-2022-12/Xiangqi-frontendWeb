@@ -638,7 +638,7 @@ body {
   background-color: var(--surface-a); /* Get el current background del tema */
   border-radius: 15px;
   animation-duration: 0.6s;
-  animation-name: lineIns derted;
+  animation-name: lineInserted;
   transition: height 0.6s, width 0.6s;
 }
 
