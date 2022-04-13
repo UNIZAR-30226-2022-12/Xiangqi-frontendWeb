@@ -19,7 +19,7 @@
                             <p>Usuario desde: {{ rival.registerDate }} </p>
                         </div>
                     </div>
-                    <Button v-on:click="confirm()" class="col-12 mt-4 w-full p-button-raised font-semibold h-3rem" style="border-radius: 1rem" icon="pi pi-save" label="Añadir como amigo"/>
+                    <Button v-on:click="confirm()" class="col-12 mt-4 w-full p-button-raised font-semibold h-3rem" style="border-radius: 1rem" icon="pi pi-user-plus" label="Añadir como amigo"/>
                 </div>
                 <Divider />
                 <!--Temporizador-->
@@ -30,7 +30,7 @@
                 <Divider />
                 <!--Chat-->
                 <chat style="z-index: 100"/>
-                <!--<div class="field col-12">
+                <div class="field col-12">
                     <label>Chat:</label>
                     <div class="section text-left" style="border-radius: 5px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;">
                         <VirtualScroller ref="chat" :items="messages" :itemSize="50" class="h-30rem">
@@ -54,7 +54,7 @@
                         <InputText v-model="message" style="border-top-left-radius: 0; border-top-right-radius: 0;" placeholder="Mensaje" />
                         <Button class="col-fixed p-button-secondary" v-on:click="sendMessage()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0" icon="pi pi-send" label="Enviar"/>
                     </div>
-                </div>-->
+                </div>
                 <!--Tema de los iconos-->
                 <div class="field col-12">
                     <h5>Selección de temas:</h5>
@@ -92,7 +92,7 @@
                 <div class="field col-12">
                     <h5>Terminar partida:</h5>
                     <ConfirmDialog></ConfirmDialog>
-                    <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" icon="pi pi-save" label="Guardar y salir"/>
+                    <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
                 <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center font-bold text-white">
                     <!--Casilla sin pieza-->
-                    <div v-if="itemFila.pieza == null" class="casilla w-3rem h-3rem"></div>
+                    <div v-if="itemFila.pieza == null" class="casilla w-3rem h-3rem" :class="{'casilla-pista': itemFila.esPista}" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)"></div>
                     <!--Casilla con pieza-->
                     <div v-else class="h-full w-full">
                         <!--Hemos seleccionado una pieza-->
@@ -144,16 +144,16 @@ export default  {
                 ]
                 */
                filas: [
-                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: "caballo", color: "negro" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},  { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}],
-                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0}, { pieza: null, color: null, moves: [], turno: 0}, { pieza: "soldado", color: "negro" , moves: [], turno: 0}],]
+                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},  { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}],]
             
             },
             //BARRA LATERAL
@@ -176,7 +176,7 @@ export default  {
 
             //CHAT
             //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
-            /*messages: [
+            messages: [
                 {nickname: 'pikanachi', message: 'Hola', mine: true},
                 {nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
                 {nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
@@ -187,7 +187,7 @@ export default  {
             ],
 
             //Aqui es donde se pone el nuevo mensaje a enviar, habrá que appendearlo a la lista de mensajes para mostrarlo en el front tbn
-            message: null,*/
+            message: null,
 
             //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
             setsPieces: [
@@ -236,6 +236,13 @@ export default  {
 	},
     methods: {
         moves(indexFil, indexCol, item) {
+            if (this.selectedPiece.fil != null) {
+                console.log("Entramos")
+                this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
+                    this.tablero.filas[move.f][move.c].esPista = false;
+                });
+            }
+
             this.selectedPiece.fil = indexFil;
             this.selectedPiece.col = indexCol;
             this.selectedPiece.selected = true;
@@ -245,25 +252,25 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL GENERAL
                 if(item.pieza == "general"){
                     if(indexCol != 5){
-                        if (this.tablero.filas[indexFil][indexCol + 1].pieza == "" || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                        if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil, c: indexCol + 1})
                         }
                     }
                     if(indexCol != 3){
-                        if (this.tablero.filas[indexFil][indexCol - 1].pieza == "" || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                        if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil, c: indexCol - 1})
                         }
                     }
                     if(indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol].pieza == "" || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                        if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil + 1, c: indexCol})
                         }
                     }
                     if(indexFil != 7){
-                        if (this.tablero.filas[indexFil - 1][indexCol].pieza == "" || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                        if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil - 1, c: indexCol})
                         }
@@ -274,25 +281,25 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL OFICIAL
                 else if(item.pieza == "oficial"){
                     if(indexCol != 5 && indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == "" || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
+                        if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil + 1, c: indexCol + 1})
                         }
                     }
                     if(indexCol != 3 && indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == "" || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
+                        if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil + 1, c: indexCol - 1})
                         }
                     }
                     if(indexCol != 5 && indexFil != 3){
-                        if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == "" || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
+                        if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil - 1, c: indexCol + 1})
                         }
                     }
                     if(indexCol != 3 && indexFil != 3){
-                        if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == "" || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
+                        if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil - 1, c: indexCol - 1})
                         }
@@ -303,32 +310,32 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL ELEFANTE
                 else if(item.pieza == "elefante"){
                     if(indexCol != 8 && indexFil != 9){
-                        if(this.tablero.filas[indexFil + 1][indexCol + 1].pieza == ""){
-                            if (this.tablero.filas[indexFil + 2][indexCol + 2].pieza == "" || this.tablero.filas[indexFil + 2][indexCol + 2].color != item.color){
+                        if(this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null){
+                            if (this.tablero.filas[indexFil + 2][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 2][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 2, c: indexCol + 2})
                             }
                         }
                     }
                     if(indexCol != 0 && indexFil != 9){
-                        if(this.tablero.filas[indexFil + 1][indexCol - 1].pieza == ""){
-                            if (this.tablero.filas[indexFil + 2][indexCol - 2].pieza == "" || this.tablero.filas[indexFil + 2][indexCol - 2].color != item.color){
+                        if(this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null){
+                            if (this.tablero.filas[indexFil + 2][indexCol - 2].pieza == null || this.tablero.filas[indexFil + 2][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 2, c: indexCol - 2})
                             }
                         }
                     }
                     if(indexCol != 8 && indexFil != 5){
-                        if(this.tablero.filas[indexFil - 1][indexCol + 1].pieza == ""){
-                            if (this.tablero.filas[indexFil - 2][indexCol + 2].pieza == "" || this.tablero.filas[indexFil - 2][indexCol + 2].color != item.color){
+                        if(this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null){
+                            if (this.tablero.filas[indexFil - 2][indexCol + 2].pieza == null || this.tablero.filas[indexFil - 2][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 2, c: indexCol + 2})
                             }
                         }
                     }
                     if(indexCol != 0 && indexFil != 5){
-                        if(this.tablero.filas[indexFil - 1][indexCol - 1].pieza == ""){
-                            if (this.tablero.filas[indexFil - 2][indexCol - 2].pieza == "" || this.tablero.filas[indexFil - 2][indexCol - 2].color != item.color){
+                        if(this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null){
+                            if (this.tablero.filas[indexFil - 2][indexCol - 2].pieza == null || this.tablero.filas[indexFil - 2][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 2, c: indexCol - 2})
                             }
@@ -340,64 +347,64 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL CABALLO
                 else if(item.pieza == "caballo"){
                     if(indexCol > 1 && indexFil < 9){
-                        if(this.tablero.filas[indexFil][indexCol - 1].pieza == ""){
-                            if (this.tablero.filas[indexFil + 1][indexCol - 2].pieza == "" || this.tablero.filas[indexFil + 1][indexCol - 2].color != item.color){
+                        if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
+                            if (this.tablero.filas[indexFil + 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 1, c: indexCol - 2})
                             }
                         }
                     }
                     if(indexCol < 7 && indexFil < 9){
-                        if(this.tablero.filas[indexFil][indexCol + 1].pieza == ""){
-                            if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == "" || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
+                        if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
+                            if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 1, c: indexCol + 2})
                             }
                         }
                     }
                     if(indexCol > 1 && indexFil > 0){
-                        if(this.tablero.filas[indexFil][indexCol - 1].pieza == ""){
-                            if (this.tablero.filas[indexFil - 1][indexCol - 2].pieza == "" || this.tablero.filas[indexFil - 1][indexCol - 2].color != item.color){
+                        if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
+                            if (this.tablero.filas[indexFil - 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 1, c: indexCol - 2})
                             }
                         }
                     }
                     if(indexCol < 7 && indexFil > 0){
-                        if(this.tablero.filas[indexFil][indexCol + 1].pieza == ""){
-                            if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == "" || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
+                        if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
+                            if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 1, c: indexCol + 2})
                             }
                         }
                     }
                     if(indexCol < 8 && indexFil > 1){
-                        if(this.tablero.filas[indexFil - 1][indexCol].pieza == ""){
-                            if (this.tablero.filas[indexFil - 2][indexCol + 1].pieza == "" || this.tablero.filas[indexFil - 2][indexCol + 1].color != item.color){
+                        if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
+                            if (this.tablero.filas[indexFil - 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol + 1].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 2, c: indexCol + 1})
                             }
                         }
                     }
                     if(indexCol > 0 && indexFil > 1){
-                        if(this.tablero.filas[indexFil - 1][indexCol].pieza == ""){
-                            if (this.tablero.filas[indexFil - 2][indexCol - 1].pieza == "" || this.tablero.filas[indexFil - 2][indexCol - 1].color != item.color){
+                        if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
+                            if (this.tablero.filas[indexFil - 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol - 1].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 2, c: indexCol - 1})
                             }
                         }
                     }
                     if(indexCol < 8 && indexFil < 8){
-                        if(this.tablero.filas[indexFil + 1][indexCol].pieza == ""){
-                            if (this.tablero.filas[indexFil + 2][indexCol + 1].pieza == "" || this.tablero.filas[indexFil + 2][indexCol + 1].color != item.color){
+                        if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
+                            if (this.tablero.filas[indexFil + 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol + 1].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 2, c: indexCol + 1})
                             }
                         }
                     }
                     if(indexCol > 0 && indexFil < 8){
-                        if(this.tablero.filas[indexFil + 1][indexCol].pieza == ""){
-                            if (this.tablero.filas[indexFil + 2][indexCol - 1].pieza == "" || this.tablero.filas[indexFil + 2][indexCol - 1].color != item.color){
+                        if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
+                            if (this.tablero.filas[indexFil + 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol - 1].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 2, c: indexCol - 1})
                             }
@@ -411,7 +418,7 @@ export default  {
                     //Iterar al norte
                     let it = 1
                     for(let i = indexFil; i > 0; i --){
-                        if(this.tablero.filas[indexFil - it][indexCol].pieza == ""){
+                        if(this.tablero.filas[indexFil - it][indexCol].pieza == null){
                              item.moves.push({f: indexFil - it, c: indexCol})
                         } else{
                             if(this.tablero.filas[indexFil - it][indexCol].color != item.color){
@@ -424,7 +431,7 @@ export default  {
                     //Iterar al sur
                     it = 1
                     for(let i = indexFil; i < 9; i ++){
-                        if(this.tablero.filas[indexFil + it][indexCol].pieza == ""){
+                        if(this.tablero.filas[indexFil + it][indexCol].pieza == null){
                              item.moves.push({f: indexFil + it, c: indexCol})
                         } else{
                             if(this.tablero.filas[indexFil + it][indexCol].color != item.color){
@@ -437,7 +444,7 @@ export default  {
                     //Iterar al este
                     it = 1
                     for(let i = indexCol; i < 8; i ++){
-                        if(this.tablero.filas[indexFil][indexCol + it].pieza == ""){
+                        if(this.tablero.filas[indexFil][indexCol + it].pieza == null){
                              item.moves.push({f: indexFil, c: indexCol + it})
                         } else{
                             if(this.tablero.filas[indexFil][indexCol + it].color != item.color){
@@ -450,7 +457,7 @@ export default  {
                     //Iterar al oeste
                     it = 1
                     for(let i = indexCol; i > 0; i --){
-                        if(this.tablero.filas[indexFil][indexCol - it].pieza == ""){
+                        if(this.tablero.filas[indexFil][indexCol - it].pieza == null){
                              item.moves.push({f: indexFil, c: indexCol - it})
                         } else{
                             if(this.tablero.filas[indexFil][indexCol - it].color != item.color){
@@ -466,25 +473,25 @@ export default  {
                 else if(item.pieza == "soldado"){
                     if(item.color == "rojo"){
                         if(indexFil > 5){ // Solo para arriba
-                            if (this.tablero.filas[indexFil - 1][indexCol].pieza == "" || this.tablero.filas[indexFil - 1][indexCol].color != item.color){
+                            if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 1, c: indexCol})
                             }
                         } else{ // Norte, este y oeste
                             if(indexCol != 8){ // Oeste
-                                if (this.tablero.filas[indexFil][indexCol + 1].pieza == "" || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                                if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil, c: indexCol + 1})
                                 }
                             }
                             if(indexCol != 0){
-                                if (this.tablero.filas[indexFil][indexCol - 1].pieza == "" || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                                if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil, c: indexCol - 1})
                                 }
                             }
                             if(indexFil != 0){
-                                if (this.tablero.filas[indexFil - 1][indexCol].pieza == "" || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil - 1, c: indexCol})
                                 }
@@ -492,25 +499,25 @@ export default  {
                         }
                     } else{
                         if(indexFil <= 5){ // Solo para abajo
-                            if (this.tablero.filas[indexFil + 1][indexCol].pieza == "" || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                            if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil + 1, c: indexCol})
                             }
                         } else{ // Norte, este y oeste
                             if(indexCol != 8){ // Oeste
-                                if (this.tablero.filas[indexFil][indexCol + 1].pieza == "" || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                                if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil, c: indexCol + 1})
                                 }
                             }
                             if(indexCol != 0){
-                                if (this.tablero.filas[indexFil][indexCol - 1].pieza == "" || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                                if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil, c: indexCol - 1})
                                 }
                             }
                             if(indexFil != 9){
-                                if (this.tablero.filas[indexFil + 1][indexCol].pieza == "" || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil + 1, c: indexCol})
                                 }
@@ -526,7 +533,7 @@ export default  {
                     let it = 1
                     let saltar = false
                     for(let i = indexFil; i > 0; i --){
-                        if(this.tablero.filas[indexFil - it][indexCol].pieza == ""){
+                        if(this.tablero.filas[indexFil - it][indexCol].pieza == null){
                             if(!saltar){
                                 console.log("MOVEMOS")
                                 item.moves.push({f: indexFil - it, c: indexCol})
@@ -564,7 +571,7 @@ export default  {
                     it = 1
                     saltar = false
                     for(let i = indexFil; i < 9; i ++){
-                        if(this.tablero.filas[indexFil + it][indexCol].pieza == ""){
+                        if(this.tablero.filas[indexFil + it][indexCol].pieza == null){
                              if(!saltar){
                                 console.log("MOVEMOS")
                                 item.moves.push({f: indexFil + it, c: indexCol})
@@ -602,7 +609,7 @@ export default  {
                     it = 1
                     saltar = false
                     for(let i = indexCol; i < 8; i ++){
-                        if(this.tablero.filas[indexFil][indexCol + it].pieza == ""){
+                        if(this.tablero.filas[indexFil][indexCol + it].pieza == null){
                              if(!saltar){
                                 console.log("MOVEMOS")
                                 item.moves.push({f: indexFil, c: indexCol + it})
@@ -640,7 +647,7 @@ export default  {
                     it = 1
                     saltar = false
                     for(let i = indexCol; i > 0; i --){
-                        if(this.tablero.filas[indexFil][indexCol - it].pieza == ""){
+                        if(this.tablero.filas[indexFil][indexCol - it].pieza == null){
                              if(!saltar){
                                 console.log("MOVEMOS")
                                 item.moves.push({f: indexFil, c: indexCol - it})
@@ -678,11 +685,13 @@ export default  {
                     
                 item.moves.forEach(move => {
                     console.log(move)
+                    this.tablero.filas[move.f][move.c].esPista = true;
                 });
             } else{
                 if(item.turno == this.turno){
                     item.moves.forEach(move => {
                         console.log(move)
+                        this.tablero.filas[move.f][move.c].esPista = true;
                     });
                     console.log("Ya visto")
                 } else{
@@ -692,6 +701,10 @@ export default  {
                 }
             }
         },
+        moveSelectedPiece(indexFil, indexCol, itemFila) {
+            console.log(indexFil, indexCol, itemFila);
+        },
+        
         /*
          * Devuelve la casilla, pieza, y color de la pieza seleccionada
          */
@@ -701,7 +714,7 @@ export default  {
             this.selectedPiece.selected = true;
             console.log(indexFil, indexCol, pieza, color);
         },
-        /*
+
         sendMessage() {
             var messages = [...this.messages];
             messages.push({nickname: 'pikanachi', message: this.message, mine: true});
@@ -709,7 +722,7 @@ export default  {
             this.$refs.chat.scrollInView(this.messages.length - 1, 'to-end','auto');
             //this.$refs.chat.scrollTo(0, this.messages.length * 1000, 'auto');
             this.message = null;
-        },*/
+        },
 
         confirm() {
             this.$confirm.require({
@@ -800,6 +813,10 @@ export default  {
     background: rgba(39, 62, 84, 0.6);
     cursor: pointer;
     border-radius: 100%;
+}
+
+.casilla-pista {
+    background-color: red !important;
 }
 
 @media (max-width: 1000px) {

@@ -22,7 +22,7 @@
       :disableUserListToggle="false"
       :messageStyling="messageStyling"
       @onType="handleOnType"
-      @edit="editMessage" />
+      @edit="editMessage"/>
   </div>
 </template>
 
@@ -37,11 +37,6 @@ export default {
           name: 'Matteo',
           imageUrl: 'https://avatars3.githubusercontent.com/u/1915989?s=230&v=4'
         },
-        {
-          id: 'user2',
-          name: 'Support',
-          imageUrl: 'https://avatars3.githubusercontent.com/u/37018832?s=200&v=4'
-        }
       ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: [
