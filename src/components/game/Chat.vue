@@ -22,7 +22,7 @@
       </div>
       <div class="p-inputgroup">
           <InputText v-model="message" style="border-top-left-radius: 0; border-top-right-radius: 0;" placeholder="Mensaje" />
-          <Button class="col-fixed p-button-secondary" v-on:click="sendMessage()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0" icon="pi pi-send" label="Enviar"/>
+          <Button class="col-fixed p-button-secondary" v-on:click="sendMessage()" :disabled="this.message == null" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0" icon="pi pi-send" label="Enviar"/>
       </div>
   </div>
 </template>

@@ -40,7 +40,7 @@
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
                                     <div class="flex">
-                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" :src="'images/themes/pieces/' + slotProps.option.set + '/canyonrojo.svg'" />
+                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" :src="'images/themes/pieces/' + slotProps.option.id + '/canyonrojo.svg'" />
                                         <div class="flex align-items-center justify-content-center font-bold">{{slotProps.option.name}}</div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
                                     <div class="flex">
-                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" style="border-radius: 0.5rem" :src="'images/themes/boards/' + slotProps.option.set + '.jpg'" />
+                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" style="border-radius: 0.5rem" :src="'images/themes/boards/' + slotProps.option.id + '.jpg'" />
                                         <div class="flex align-items-center justify-content-center font-bold">{{slotProps.option.name}}</div>
                                     </div>
                                 </div>
@@ -68,8 +68,8 @@
         </div>
 
         <!--Tablero-->
-        <div class="col-12 lg:col-8 tema-fondo m-auto board-width" :class="{'wooden1': selectedBoard.set == 'wooden1', 'wooden2': selectedBoard.set == 'wooden2', 'wooden3': selectedBoard.set == 'wooden3', 'metal1': selectedBoard.set == 'metal1', 'metal2': selectedBoard.set == 'metal2', 
-            'marbled1': selectedBoard.set == 'marbled1', 'marbled2': selectedBoard.set == 'marbled2', 'marbled3': selectedBoard.set == 'marbled3', 'marbled4': selectedBoard.set == 'marbled4', 'checker1': selectedBoard.set == 'checker1', 'concrete1': selectedBoard.set == 'concrete1', 'concrete2': selectedBoard.set == 'concrete2'}">
+        <div class="col-12 lg:col-8 tema-fondo m-auto board-width" :class="{'wooden1': selectedBoard.id == '1', 'wooden2': selectedBoard.id == '2', 'wooden3': selectedBoard.id == '3', 'metal1': selectedBoard.id == '4', 'metal2': selectedBoard.id == '5', 
+            'marbled1': selectedBoard.id == '6', 'marbled2': selectedBoard.id == '7', 'marbled3': selectedBoard.id == '8', 'marbled4': selectedBoard.id == '9', 'checker1': selectedBoard.id == '10', 'concrete1': selectedBoard.id == '11', 'concrete2': selectedBoard.id == '12'}">
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
                 <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center">
                     <!--Casilla sin pieza-->
@@ -77,10 +77,10 @@
                     <!--Casilla con pieza-->
                     <div v-else class="h-full w-full">
                         <!--Hemos seleccionado una pieza-->
-                        <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">
+                        <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">
                         <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza-->
-                        <img v-else-if="itemFila.esPista" class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
-                        <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">  
+                        <img v-else-if="itemFila.esPista" class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
+                        <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">  
                     </div>
                 </div>
             </div>
@@ -147,33 +147,33 @@ export default  {
 
             //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
             setsPieces: [
-                {name: 'Iconos occidentales', set: 'set1'},
-                {name: 'Iconos en Chino', set: 'set2'},
+                {id:'1', name: 'Iconos occidentales'},
+                {id:'2', name: 'Iconos en Chino'},
             ],
 
             //Set de piezas seleccionado por defecto
-            selectedPiecesSet: {name: 'Iconos occidentales', set: 'set1'},
+            selectedPiecesSet: {id: '1', name: 'Iconos occidentales'},
 
             //Estos son los sets que tiene el usuario, habra que pedirlos al back
             setsBoards: [
-                {name: 'Madera 1', set: 'wooden1'},
-                {name: 'Madera 2', set: 'wooden2'},
-                {name: 'Madera 3', set: 'wooden3'},
-                {name: 'Metal 1', set: 'metal1'},
-                {name: 'Metal 2', set: 'metal2'},
-                {name: 'Marmol 1', set: 'marbled1'},
-                {name: 'Marmol 2', set: 'marbled2'},
-                {name: 'Marmol 3', set: 'marbled3'},
-                {name: 'Marmol 4', set: 'marbled4'},
-                {name: 'Checker 1', set: 'checker1'},
-                {name: 'Cemento 1', set: 'concrete1'},
-                {name: 'Cemento 2', set: 'concrete2'},
+                {id: '1', name: 'Madera 1'},
+                {id: '2', name: 'Madera 2'},
+                {id: '3', name: 'Madera 3'},
+                {id: '4', name: 'Metal 1'},
+                {id: '5', name: 'Metal 2'},
+                {id: '6', name: 'Marmol 1'},
+                {id: '7', name: 'Marmol 2'},
+                {id: '8', name: 'Marmol 3'},
+                {id: '9', name: 'Marmol 4'},
+                {id: '10', name: 'Checker 1'},
+                {id: '11', name: 'Cemento 1'},
+                {id: '12', name: 'Cemento 2'},
             ],
             //Turno actual
             turno: 0,
 
             //Tema por defecto del tablero
-            selectedBoard: {name: 'Madera 1', set: 'wooden1'},
+            selectedBoard: {id: '1', name: 'Madera 1'},
 
             //Casilla seleccionada por defecto
             selectedTile: null,
@@ -709,51 +709,51 @@ export default  {
 }
 
 .wooden1 {
-    background-image: url("/images/themes/boards/wooden1.jpg");
+    background-image: url("/images/themes/boards/1.jpg");
 }
 
 .wooden2 {
-    background-image: url("/images/themes/boards/wooden2.jpg");
+    background-image: url("/images/themes/boards/2.jpg");
 }
 
 .wooden3 {
-    background-image: url("/images/themes/boards/wooden3.jpg");
+    background-image: url("/images/themes/boards/3.jpg");
 }
 
 .metal1 {
-    background-image: url("/images/themes/boards/metal1.jpg");
+    background-image: url("/images/themes/boards/4.jpg");
 }
 
 .metal2 {
-    background-image: url("/images/themes/boards/metal2.jpg");
+    background-image: url("/images/themes/boards/5.jpg");
 }
 
 .marbled1 {
-    background-image: url("/images/themes/boards/marbled1.jpg");
+    background-image: url("/images/themes/boards/6.jpg");
 }
 
 .marbled2 {
-    background-image: url("/images/themes/boards/marbled2.jpg");
+    background-image: url("/images/themes/boards/7.jpg");
 }
 
 .marbled3 {
-    background-image: url("/images/themes/boards/marbled3.jpg");
+    background-image: url("/images/themes/boards/8.jpg");
 }
 
 .marbled4 {
-    background-image: url("/images/themes/boards/marbled4.jpg");
+    background-image: url("/images/themes/boards/9.jpg");
 }
 
 .checker1 {
-    background-image: url("/images/themes/boards/checker1.jpg");
+    background-image: url("/images/themes/boards/10.jpg");
 }
 
 .concrete1 {
-    background-image: url("/images/themes/boards/concrete1.jpg");
+    background-image: url("/images/themes/boards/11.jpg");
 }
 
 .concrete2 {
-    background-image: url("/images/themes/boards/concrete2.jpg");
+    background-image: url("/images/themes/boards/12.jpg");
 }
 
 .casilla {
