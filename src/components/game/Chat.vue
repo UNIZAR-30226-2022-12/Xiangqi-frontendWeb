@@ -2,8 +2,8 @@
   <!--Chat-->
   <div class="field col-12 mb-0">
       <h5>Chat:</h5>
-      <div id="chat" class="section text-left" style="border-radius: 5px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;">
-          <div class="h-20rem" style="overflow-y: visible; overflow-x: hidden">
+      <div class="section text-left" :class="{'chat-dark': this.$appState.darkTheme, 'chat-light': !this.$appState.darkTheme}" style="border-radius: 5px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;">
+          <div class="h-20rem" :class="{'chat-dark-bkg': this.$appState.darkTheme}" id="chat" style="overflow-y: scroll; overflow-x: hidden">
               <div id="message" v-for="(item, index) in messages" :key="index">
                   <div v-if="item.mine" class="flex justify-content-end flex-wrap">
                       <div class="bg-blue-500 font-bold text-white m-2" style="border-radius: 1.5rem; padding: 0.8rem">
@@ -49,16 +49,39 @@ export default {
   },
   methods: {
     sendMessage() {
-    this.messages.push({nickname: 'pikanachi', message: this.message, mine: true});
-    const scrollIntoViewOptions = { behavior: "smooth", inline: 'start' }; //block: 'nearest'
-    const chat = document.getElementById('chat');
-    chat.scrollIntoView(scrollIntoViewOptions);
-    this.message = null;
+      this.messages.push({nickname: 'pikanachi', message: this.message, mine: true});
+      const chat = document.getElementById('chat');
 
-    var audio = new Audio('sounds/sendMessage.wav');
-    audio.loop = false;
-    audio.play();
+      //El evento de scroll tiene que llegar desopues de los del vue
+      setTimeout(() => {
+        chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
+      }, 1);
+
+      //Borrar el mensaje
+      this.message = null;
+
+      //Rep sonido
+      var audio = new Audio('sounds/sendMessage.wav');
+      audio.loop = false;
+      audio.play();
     },
   }
 }
 </script>
+
+<style>
+
+.chat-dark {
+  border-color: #304562 !important;
+}
+
+.chat-dark-bkg {
+  background-color: #17212f !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.chat-ligh {
+  border-color: #ced4da !important;
+}
+</style>

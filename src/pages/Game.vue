@@ -189,6 +189,7 @@ export default  {
 	created() {
         //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
+        this.$playing.game = true;
 	},
     methods: {
         moves(indexFil, indexCol, item) {

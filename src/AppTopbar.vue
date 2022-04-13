@@ -3,7 +3,7 @@
 		<button v-if="$loggedStatus.logged" class="p-link layout-menu-button layout-topbar-button ml-0 mr-3" @click="onMenuToggle">
 			<i class="pi pi-bars"></i>
 		</button>
-		<router-link v-if="!$loggedStatus.logged" to="/" class="layout-topbar-logo">
+		<router-link v-if="!$loggedStatus.logged && !$playing.game" to="/" class="layout-topbar-logo">
 			<img alt="Logo" :src="topbarImage()" />
 			<span>Xiangqi online</span>
 		</router-link>
@@ -12,14 +12,14 @@
 			<img alt="Logo" :src="topbarImage()" />
 			<span>Xiangqi online</span>
 		</router-link>
-		<button v-if="$loggedStatus.logged" class="p-link layout-topbar-menu-button layout-topbar-button"
+		<button v-if="$loggedStatus.logged || $playing.game" class="p-link layout-topbar-menu-button layout-topbar-button"
 			v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', 
 			leaveToClass: 'hidden', leaveActiveClass: 'fadeout', hideOnOutsideClick: true}">
 			<i class="pi pi-ellipsis-v"></i>
 		</button>
-		<ul v-if="$loggedStatus.logged" class="layout-topbar-menu hidden lg:flex origin-top">
+		<ul v-if="$loggedStatus.logged || $playing.game" class="layout-topbar-menu hidden lg:flex origin-top">
 			<li>
-				<button class="p-link layout-topbar-button">
+				<button class="p-link layout-topbar-button" v-on:click="goToProfile()">
 					<i class="pi pi-user"></i>
 					<span>Profile</span>
 				</button>
@@ -77,6 +77,7 @@ export default {
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+		this.$playing.game = false;
 	},
     methods: {
 		confirm() {
@@ -137,6 +138,9 @@ export default {
 				this.checked = false;
 				this.$emit('change-theme', {theme: 'saga-blue', dark: false});
 			}
+		},
+		goToProfile() {
+			this.$router.push('/profile');
 		}
     },
 	computed: {
