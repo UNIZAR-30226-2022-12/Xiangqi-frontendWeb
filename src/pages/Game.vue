@@ -4,59 +4,35 @@
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <div class="field col-12 mb-0">
-                    <h1>Partida contra {{rival.name}}</h1>
-                    <div class="flex card-container overflow-hidden">
-                        <div class="flex-none align-items-left justify-content-left mr-4">
-                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50 ml-1 mt-1" style="" alt="foto de perfil">
+                    <h3 class="m-0 p-0">Partida contra {{rival.name}}</h3>
+                    <div class="flex card-container overflow-hidden mt-4">
+                        <div class="flex-none align-items-left justify-content-left mr-3">
+                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50 ml-1 mt-1 mb-2" style="" alt="foto de perfil">
                         </div>
                         <div class="flex-grow-1 align-items-left justify-content-left">
                             <p>
                                 <img class="flag h-auto mr-1" :class="[rival.country.flag]" src="images/flags/flag_placeholder.png">
                                  #{{ rival.nickname }}
                             </p>
-                            <p>Cumpleaños: {{ rival.birthday }} </p>
                             <p>Puesto en ranking: {{ rival.range }} </p>
-                            <p>Usuario desde: {{ rival.registerDate }} </p>
+                            <p>Cumpleaños: {{ rival.birthday }} </p>
                         </div>
                     </div>
-                    <Button v-on:click="confirm()" class="col-12 mt-4 w-full p-button-raised font-semibold h-3rem" style="border-radius: 1rem" icon="pi pi-user-plus" label="Añadir como amigo"/>
+                    <Button v-on:click="confirm()" class="col-12 w-full mt-2 w-full p-button-raised font-semibold h-3rem  font-semibold" style="border-radius: 1rem" label="Añadir a mis amigos" icon="pi pi-user-plus"/>
                 </div>
                 <Divider />
                 <!--Temporizador-->
-                <div class="field col-12">
-                    <h5>Temporizador:</h5>
-                    <h1 class="mt-0 mb-0">{{this.timer}}</h1>
+                <div class="field col-12 mb-0">
+                    <h6>Temporizador:</h6>
+                    <h2 class="mt-0 mb-0">{{this.timer}}</h2>
                 </div>
+                <ConfirmDialog></ConfirmDialog>
+                <Button v-on:click="confirm()" class="col-12 mt-2  mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 <Divider />
-                <!--Chat-->
-                <chat style="z-index: 100"/>
-                <div class="field col-12">
-                    <label>Chat:</label>
-                    <div class="section text-left" style="border-radius: 5px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;">
-                        <VirtualScroller ref="chat" :items="messages" :itemSize="50" class="h-30rem">
-                            <template v-slot:item="{ item }">
-                                <div v-if="item.mine" class="flex justify-content-end flex-wrap">
-                                    <div class="bg-blue-500 font-bold text-white m-2" style="border-radius: 1.5rem; padding: 0.8rem">
-                                        <p class="m-0 text-sm">{{ item.nickname }}</p>
-                                        <p class="m-0">{{ item.message }}</p>
-                                    </div>
-                                </div>
-                                <div v-else class="flex justify-content-start flex-wrap">
-                                    <div class="surface-200 font-bold m-2" style="border-radius: 1.5rem; padding: 0.8rem">
-                                        <p class="m-0 text-sm">{{ item.nickname }}</p>
-                                        <p class="m-0">{{ item.message }}</p>
-                                    </div>
-                                </div>
-                            </template>
-                        </VirtualScroller>                
-                    </div>
-                    <div class="p-inputgroup">
-                        <InputText v-model="message" style="border-top-left-radius: 0; border-top-right-radius: 0;" placeholder="Mensaje" />
-                        <Button class="col-fixed p-button-secondary" v-on:click="sendMessage()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0" icon="pi pi-send" label="Enviar"/>
-                    </div>
-                </div>
+                <chat />
+                <Divider />
                 <!--Tema de los iconos-->
-                <div class="field col-12">
+                <div class="field col-12 mb-0">
                     <h5>Selección de temas:</h5>
                     <label>Seleccione el tema de sus iconos:</label><br>
                     <Dropdown class="w-full" v-model="selectedPiecesSet" :options="setsPieces" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
@@ -73,9 +49,9 @@
                     </Dropdown>
                 </div>
                 <!--Tema del tablero-->
-                <div class="field col-12">
+                <div class="field col-12 mb-0">
                     <label>Seleccione el tema de su tablero:</label><br>
-                    <Dropdown class="w-full" v-model="selectedBoard" :options="setsBoards" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
+                    <Dropdown class="w-full" v-model="selectedBoard" :options="setsBoards" optionLabel="name" :filter="true" placeholder="Seleccione un tema para el tablero">
                         <template #option="slotProps">
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
@@ -88,12 +64,6 @@
                         </template>
                     </Dropdown>
                 </div>
-                <Divider />
-                <div class="field col-12">
-                    <h5>Terminar partida:</h5>
-                    <ConfirmDialog></ConfirmDialog>
-                    <Button v-on:click="confirm()" class="col-12 mt-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
-                </div>
             </div>
         </div>
 
@@ -101,14 +71,15 @@
         <div class="col-12 lg:col-8 tema-fondo m-auto board-width" :class="{'wooden1': selectedBoard.set == 'wooden1', 'wooden2': selectedBoard.set == 'wooden2', 'wooden3': selectedBoard.set == 'wooden3', 'metal1': selectedBoard.set == 'metal1', 'metal2': selectedBoard.set == 'metal2', 
             'marbled1': selectedBoard.set == 'marbled1', 'marbled2': selectedBoard.set == 'marbled2', 'marbled3': selectedBoard.set == 'marbled3', 'marbled4': selectedBoard.set == 'marbled4', 'checker1': selectedBoard.set == 'checker1', 'concrete1': selectedBoard.set == 'concrete1', 'concrete2': selectedBoard.set == 'concrete2'}">
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
-                <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center font-bold text-white">
+                <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center">
                     <!--Casilla sin pieza-->
-                    <div v-if="itemFila.pieza == null" class="casilla w-3rem h-3rem" :class="{'casilla-pista': itemFila.esPista}" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)"></div>
+                    <div v-if="itemFila.pieza == null" class="casilla w-2rem h-2rem" :class="{'casilla-pista': itemFila.esPista}" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)"></div>
                     <!--Casilla con pieza-->
                     <div v-else class="h-full w-full">
                         <!--Hemos seleccionado una pieza-->
                         <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">
-                        <!--Pieza no seleccionada-->
+                        <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza-->
+                        <img v-else-if="itemFila.esPista" class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
                         <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.set + '/' + itemFila.pieza + itemFila.color + '.svg'">  
                     </div>
                 </div>
@@ -119,7 +90,7 @@
 
 <script>
 
-import chat from '../components/Chat.vue';
+import chat from '../components/game/Chat.vue';
 export default  {
 	inject: ['$accounts'],
     components: {
@@ -174,21 +145,6 @@ export default  {
 
             timer: '00:00:00',
 
-            //CHAT
-            //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
-            messages: [
-                {nickname: 'pikanachi', message: 'Hola', mine: true},
-                {nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
-                {nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
-                {nickname: 'juanksp', message: 'soy muy gracioso porque me gusta Itsuki, no como Nacho que es un Lolicon', mine: false},
-                {nickname: 'pikanachi', message: 'jaja Lolicon pues que te den por culo un montón', mine: true},
-                {nickname: 'pikanachi', message: 'bueno la cosa, esto el chat y ta wapo', mine: true},
-                {nickname: 'juanksp', message: 'ta wapo, ta wapo', mine: false},
-            ],
-
-            //Aqui es donde se pone el nuevo mensaje a enviar, habrá que appendearlo a la lista de mensajes para mostrarlo en el front tbn
-            message: null,
-
             //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
             setsPieces: [
                 {name: 'Iconos occidentales', set: 'set1'},
@@ -217,7 +173,7 @@ export default  {
             turno: 0,
 
             //Tema por defecto del tablero
-            selectedBoard: {set: 'wooden1'},
+            selectedBoard: {name: 'Madera 1', set: 'wooden1'},
 
             //Casilla seleccionada por defecto
             selectedTile: null,
@@ -236,6 +192,11 @@ export default  {
 	},
     methods: {
         moves(indexFil, indexCol, item) {
+            //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
+            var audio = new Audio('sounds/move.wav');
+            audio.loop = false;
+            audio.play();
+
             if (this.selectedPiece.fil != null) {
                 console.log("Entramos")
                 this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
@@ -704,7 +665,7 @@ export default  {
         moveSelectedPiece(indexFil, indexCol, itemFila) {
             console.log(indexFil, indexCol, itemFila);
         },
-        
+
         /*
          * Devuelve la casilla, pieza, y color de la pieza seleccionada
          */
@@ -713,15 +674,6 @@ export default  {
             this.selectedPiece.col = indexCol;
             this.selectedPiece.selected = true;
             console.log(indexFil, indexCol, pieza, color);
-        },
-
-        sendMessage() {
-            var messages = [...this.messages];
-            messages.push({nickname: 'pikanachi', message: this.message, mine: true});
-            this.messages = messages;
-            this.$refs.chat.scrollInView(this.messages.length - 1, 'to-end','auto');
-            //this.$refs.chat.scrollTo(0, this.messages.length * 1000, 'auto');
-            this.message = null;
         },
 
         confirm() {
@@ -810,13 +762,12 @@ export default  {
 }
 
 .casilla:hover {
-    background: rgba(39, 62, 84, 0.6);
+    background: rgba(91, 137, 184);
     cursor: pointer;
-    border-radius: 100%;
 }
 
 .casilla-pista {
-    background-color: red !important;
+    background-color: rgba(255, 107, 110);
 }
 
 @media (max-width: 1000px) {
