@@ -79,7 +79,7 @@
                         <!--Hemos seleccionado una pieza-->
                         <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">
                         <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza-->
-                        <img v-else-if="itemFila.esPista" class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
+                        <img v-else-if="itemFila.esPista" class="pieza-responsive" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
                         <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">  
                     </div>
                 </div>
@@ -171,6 +171,14 @@ export default  {
             ],
             //Turno actual
             turno: 0,
+            reyRojo:{
+                fil: 9,
+                col:4
+            },
+            reyNegro:{
+                fil: 0,
+                col:4
+            },
 
             //Tema por defecto del tablero
             selectedBoard: {id: '1', name: 'Madera 1'},
@@ -192,6 +200,46 @@ export default  {
         this.$playing.game = true;
 	},
     methods: {
+        checkCheck(){
+            let reyCheck = null
+            if(this.turno%2 == 0){//Comprobar el rojo
+                reyCheck = this.reyRojo
+            } else{ //Comprobar el negro
+                reyCheck = this.reyNegro
+            }
+            console.log(reyCheck)
+        },
+
+        moveSelectedPiece(indexFil, indexCol, itemFila) {
+            if(itemFila.esPista){
+                //Comprobar si es valido el movimiento
+                let valido = true; // funcion que lo compruebe
+                if(valido){
+                    console.log("AAAAA", this.selectedPiece)
+                    console.log(itemFila)
+                    this.turno += 1
+                    //let aux = itemFila
+                    this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza
+                    this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].color
+                    this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].esPista
+                    this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = null
+                    if(this.tablero.filas[indexFil][indexCol].pieza == "general"){
+                        if(this.tablero.filas[indexFil][indexCol].color == "rojo"){
+                            this.reyRojo.fil = indexFil
+                            this.reyRojo.col = indexCol
+                        } else{
+                            this.reyNegro.fil = indexFil
+                            this.reyNegro.col = indexCol
+                        }
+                    }
+                } else{
+                    console.log("Movimiento no valido")
+                }
+                console.log(indexFil, indexCol, itemFila);
+            }
+            
+        },
+
         moves(indexFil, indexCol, item) {
             //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
             var audio = new Audio('sounds/move.wav');
@@ -663,9 +711,7 @@ export default  {
                 }
             }
         },
-        moveSelectedPiece(indexFil, indexCol, itemFila) {
-            console.log(indexFil, indexCol, itemFila);
-        },
+        
 
         /*
          * Devuelve la casilla, pieza, y color de la pieza seleccionada
