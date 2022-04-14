@@ -5,9 +5,9 @@
 <style type="text/css">
 	.st0{fill:#FF9999;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;}
 	.st1{fill:#FF9999;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3.5826;}
-	.st2{fill:#FEDAA4;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.2136;}
-	.st3{fill:#FEDAA4;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:6.2136;}
-	.st4{fill:#FEDAA4;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-miterlimit:6.2136;}
+	.st2{fill:#FEDAA4;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:9.6522;}
+	.st3{fill:#FEDAA4;stroke:#000000;stroke-linejoin:round;stroke-miterlimit:9.6522;}
+	.st4{fill:#FEDAA4;stroke:#000000;stroke-linecap:round;stroke-miterlimit:9.6522;}
 </style>
 <g transform="translate(-217.69 -10.75)">
 	<text transform="matrix(1 0 0 1 11.542 51.5312)" style="font-family:'Arial-ItalicMT'; font-size:18px;"> </text>

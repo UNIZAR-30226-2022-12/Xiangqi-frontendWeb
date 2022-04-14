@@ -5,8 +5,9 @@
 <style type="text/css">
 	.st0{fill:#FF9999;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;}
 	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3.5826;}
-	.st2{fill:#FFCC99;stroke:#000000;stroke-width:1.2503;stroke-linejoin:round;}
-	.st3{fill:#FFCC99;stroke:#000000;stroke-width:1.6796;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:#FFCC99;}
+	.st3{fill:#FFCC99;stroke:#000000;stroke-linejoin:round;}
+	.st4{fill:#FFCC99;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g transform="translate(-209.06 -10.25)">
 	<g transform="translate(-19.937 .5)">
@@ -14,16 +15,12 @@
 			<circle class="st0" cx="262.5" cy="43.2" r="32.5"/>
 			<circle class="st1" cx="262.5" cy="43.2" r="29.1"/>
 		</g>
-		<g transform="matrix(0 1.652 -1.549 0 1259.5 -543.02)">
-			<g>
-				<path class="st2" d="M356,643.1c1.9-1.1,5.3-1.5,8.4-1.1l-0.2,14.4c0,2.9-11.4-0.9-11.4-0.9"/>
-				<path class="st2" d="M354.4,646.9c0,0,3,0.7,3.8,2.7s-1.6,8.2-1.6,8.2s-9.7-4.5-10.4-5.8s0.3-4.6,0.3-4.6
-					c-4.2-7.8,3.7-9.6,9.2-10.7l0.3-2l-4.8-1.2l0.1-2.2c6.9,1.2,14.3,3.6,7.2,8.9c0,0,0.4,1.6,0.3,3S354.4,646.9,354.4,646.9
-					L354.4,646.9z"/>
-				<path class="st2" d="M358.5,642.3l-1.6-12.8l-1.7,13L358.5,642.3z"/>
-			</g>
-			<ellipse class="st3" cx="351.1" cy="640.3" rx="0.9" ry="0.9"/>
-		</g>
 	</g>
 </g>
+<rect x="20.6" y="29.5" class="st2" width="13.6" height="12.1"/>
+<path class="st3" d="M34.4,40.2c1.7,2.1,2.4,5.7,1.7,9L13.8,49c-4.6,0,1.4-12.2,1.4-12.2"/>
+<path class="st3" d="M28.5,32.6c0,0-1,5-4.1,6.3s-12.7-2.7-12.7-2.7s7-16.1,9-17.1c2-1,7.1,0.4,7.1,0.4c12.1-6.9,14.8,6.1,16.5,15.3
+	l3,0.5l1.9-8l3.3,0.1c-1.8,11.4-5.6,23.7-13.8,11.9c0,0-2.4,0.7-4.7,0.5C31.6,39.8,28.5,32.6,28.5,32.6L28.5,32.6z"/>
+<path class="st3" d="M35.6,39.4l19.8-2.7l-20.1-2.8L35.6,39.4z"/>
+<ellipse class="st4" cx="38.7" cy="27.1" rx="0.9" ry="0.9"/>
 </svg>

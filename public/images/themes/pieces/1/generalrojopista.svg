@@ -5,8 +5,8 @@
 <style type="text/css">
 	.st0{fill:#FF9999;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;}
 	.st1{fill:none;stroke:#CC0000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3.5826;}
-	.st2{fill:#FFCC99;stroke:#CC0000;stroke-width:3.294;stroke-miterlimit:6.588;}
-	.st3{fill:#FFCC99;stroke:#CC0000;stroke-width:3.294;stroke-linejoin:round;stroke-miterlimit:6.588;}
+	.st2{fill:#FFCC99;stroke:#CC0000;stroke-width:2;stroke-miterlimit:10.8504;}
+	.st3{fill:#FFCC99;stroke:#CC0000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:10.8504;}
 </style>
 <g transform="translate(-44.438 -9.75)">
 	<text transform="matrix(1 0 0 1 11.542 51.5312)" style="font-family:'Arial-ItalicMT'; font-size:18px;"> </text>

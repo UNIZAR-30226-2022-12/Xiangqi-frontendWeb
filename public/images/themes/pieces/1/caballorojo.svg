@@ -1,1 +1,27 @@
-<svg viewBox="0 0 67 67" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-52.996 -7.8769)"><text x="10.8125" y="51.5312" fill="#000000" font-family="'DejaVu Serif'" font-style="italic"  text-anchor="end" style="line-height:0%" xml:space="preserve"><tspan x="16.542969" y="51.5312" font-size="18px" style="line-height:1"> </tspan></text><g transform="translate(-7.9753 -3.182)"><g stroke-linecap="round" stroke-linejoin="bevel"><circle transform="translate(51.971 2.0589)" cx="42.5" cy="42.5" r="32.5" fill="#fedaa4" stroke="#000" stroke-width="2"/><circle transform="matrix(.89566 0 0 .89566 56.405 6.4933)" cx="42.5" cy="42.5" r="32.5" fill="none" stroke="#c00" stroke-width="2.233"/></g><g transform="matrix(-.57488 1.564 -1.564 -.57488 1341.1 -416.26)" stroke="#c00"><path d="m509.85 611.92c4.0276 6.2063 12.506 4.9669 20.506 1.1536l-5.7143-15.714c-2.3309 1.6559-3.7214 2.5256-6.0714 5.3571l-.71429-5.7143c.11905-1.369-1.7262-3.4524-3.9286-1.4286l-3.5714 7.8571h-2.8571c.10009 2.0132.37569 3.7518.80253 5.2426" fill="none" stroke-width="1.2003"/><circle transform="matrix(.66867 0 0 .66867 169.71 199.5)" cx="514.11" cy="602.81" r=".98214" color="#000000" fill="#a00" stroke-width="1.795"/><path d="m512.05 607.36-7.2321 2.0536c1.8548 2.0784 5.5009 3.023 8.4821 2.3214" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2003"/></g></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 67 67" style="enable-background:new 0 0 67 67;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FEDAA4;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;}
+	.st1{fill:none;stroke:#CC0000;stroke-width:2;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:3.5826;}
+	.st2{fill:none;stroke:#CC0000;stroke-miterlimit:6.6652;}
+	.st3{fill:none;stroke:#CC0000;stroke-miterlimit:4.4568;}
+	.st4{fill:none;stroke:#CC0000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:6.6652;}
+</style>
+<g transform="translate(-52.996 -7.8769)">
+	<text transform="matrix(1 0 0 1 11.542 51.5312)" style="font-family:'Arial-ItalicMT'; font-size:18px;"> </text>
+	<g transform="translate(-7.9753 -3.182)">
+		<g>
+			<circle class="st0" cx="94.5" cy="44.6" r="32.5"/>
+			<circle class="st1" cx="94.5" cy="44.6" r="29.1"/>
+		</g>
+		<g transform="matrix(-.57488 1.564 -1.564 -.57488 1341.1 -416.26)">
+			<path class="st2" d="M509.9,611.9c4,6.2,12.5,5,20.5,1.2l-5.7-15.7c-2.3,1.7-3.7,2.5-6.1,5.4l-0.7-5.7c0.1-1.4-1.7-3.5-3.9-1.4
+				l-3.6,7.9h-2.9c0.1,2,0.4,3.8,0.8,5.2"/>
+			<circle class="st3" cx="513.5" cy="602.6" r="0.7"/>
+			<path class="st4" d="M512,607.4l-7.2,2.1c1.9,2.1,5.5,3,8.5,2.3"/>
+		</g>
+	</g>
+</g>
+</svg>
