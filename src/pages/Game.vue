@@ -99,6 +99,7 @@ export default  {
         return {
             //Tablero inicial
             tablero: {
+                /*
                 filas: [
                     [{ pieza: "torre", color: "negro", moves: [], turno: 0, esPista: false }, { pieza: "caballo", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "elefante", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "oficial", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "general", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "oficial", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "elefante", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "caballo", color: "negro" , moves: [], turno: 0, esPista: false }, { pieza: "torre", color: "negro" , moves: [], turno: 0, esPista: false }],
                     [{ pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }],
@@ -111,10 +112,10 @@ export default  {
                     [{ pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }, { pieza: null, color: null  , moves: [], turno: 0, esPista: false }],
                     [{ pieza: "torre", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "caballo", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "elefante", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "oficial", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "general", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "oficial", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "elefante", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "caballo", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: "torre", color: "rojo" , moves: [], turno: 0, esPista: false }],
                 ]
-
-                /*
+                */
+                
                filas: [
-                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "oficial", color: "negro", moves: [], turno: 0, esPista: false},{ pieza: "general", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
@@ -123,8 +124,8 @@ export default  {
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},  { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
-                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}],]
-                */            
+                    [{ pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "canyon", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}],]
+                           
             },
             //BARRA LATERAL
             //------------------------------------------------------
@@ -201,12 +202,148 @@ export default  {
     methods: {
         checkCheck(){
             let reyCheck = null
+            let amenaza = null
             if(this.turno%2 == 0){//Comprobar el rojo
                 reyCheck = this.reyRojo
+                amenaza = "negro"
             } else{ //Comprobar el negro
                 reyCheck = this.reyNegro
+                amenaza = "rojo"
             }
-            console.log(reyCheck)
+            //Mirar el norte(Torre, soldado) | canyon cuando encuentre pieza
+            let canyon = false
+            let amenzas = ["soldado","torre"]
+            let it = 1
+            for(let i = reyCheck.fil; i > 0; i --){
+                if(this.tablero.filas[reyCheck.fil - it][reyCheck.col].pieza != null){ // Encontramos fihca
+                    if(this.tablero.filas[reyCheck.fil - it][reyCheck.col].color == amenaza){//Ficha 
+                        if(amenzas.includes(this.tablero.filas[reyCheck.fil - it][reyCheck.col].pieza)){
+                                console.log("jaque", this.tablero.filas[reyCheck.fil - it][reyCheck.col].pieza, amenaza)
+                            return false //Hay jaque
+                        }
+                    }
+                    if(canyon == false){ // no nos amenazaba un canyon asi que ahora nos puede amenazar
+                        canyon = true
+                        amenzas.push("canyon")
+                    } else { // ya nos amenazaba un canyon y se ha caido
+                        break
+                    }
+                }
+                if(it ==  1){ // ya no nos amenaza un soldado
+                    amenzas.shift()
+                }
+                it += 1
+            }
+
+            //Mirar el sur(Torre, soldado) | canyon cuando encuentre pieza
+            canyon = false
+            amenzas = ["soldado","torre"]
+            it = 1
+            for(let i = reyCheck.fil; i < 9; i ++){
+                if(this.tablero.filas[reyCheck.fil + it][reyCheck.col].pieza != null){ // Encontramos fihca
+                    if(this.tablero.filas[reyCheck.fil + it][reyCheck.col].color == amenaza){//Ficha 
+                        if(amenzas.includes(this.tablero.filas[reyCheck.fil + it][reyCheck.col].pieza)){
+                                console.log("jaque", this.tablero.filas[reyCheck.fil + it][reyCheck.col].pieza, amenaza)
+                            return false //Hay jaque
+                        }
+                    }
+                    if(canyon == false){ // no nos amenazaba un canyon asi que ahora nos puede amenazar
+                        canyon = true
+                        amenzas.push("canyon")
+                    } else { // ya nos amenazaba un canyon y se ha caido
+                        break
+                    }
+                }
+                if(it ==  1){ // ya no nos amenaza un soldado
+                    amenzas.shift()
+                }
+                it += 1
+            }
+
+            //Mirar el este(Torre, soldado) | canyon cuando encuentre pieza
+            canyon = false
+            amenzas = ["soldado","torre"]
+            it = 1
+            for(let i = reyCheck.col; i < 8; i ++){
+                if(this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza != null){ // Encontramos fihca
+                    if(this.tablero.filas[reyCheck.fil][reyCheck.col + it].color == amenaza){//Ficha 
+                        if(amenzas.includes(this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza)){
+                                console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza, amenaza)
+                            return false //Hay jaque
+                        }
+                    }
+                    if(canyon == false){ // no nos amenazaba un canyon asi que ahora nos puede amenazar
+                        canyon = true
+                        amenzas.push("canyon")
+                    } else { // ya nos amenazaba un canyon y se ha caido
+                        break
+                    }
+                }
+                if(it ==  1){ // ya no nos amenaza un soldado
+                    amenzas.shift()
+                }
+                it += 1
+            }
+
+            //Mirar el oeste(Torre, soldado) | canyon cuando encuentre pieza
+            canyon = false
+            amenzas = ["soldado","torre"]
+            it = 1
+
+            for(let i = reyCheck.col;  i > 0; i --){
+                if(this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza != null){ // Encontramos fihca
+                    if(this.tablero.filas[reyCheck.fil][reyCheck.col - it].color == amenaza){//Ficha 
+                        if(amenzas.includes(this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza)){
+                                console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza, amenaza)
+                            return false //Hay jaque
+                        }
+                    }
+                    if(canyon == false){ // no nos amenazaba un canyon asi que ahora nos puede amenaza
+                        canyon = true
+                        amenzas.push("canyon")
+                    } else { // ya nos amenazaba un canyon y se ha caido
+                        break
+                    }
+                }
+                if(it ==  1){ // ya no nos amenaza un soldado
+                    amenzas.shift()
+                }
+                it += 1
+            }
+
+            // MIRAR LOS CABALLOS
+            let posicionesAmenazantes = [{f:reyCheck.fil + 1, c: reyCheck.col + 2}, {f:reyCheck.fil + 2, c: reyCheck.col + 1}, {f:reyCheck.fil + 1, c: reyCheck.col - 2},{f:reyCheck.fil + 2, c: reyCheck.col - 1}, {f:reyCheck.fil - 1, c: reyCheck.col + 2}, {f:reyCheck.fil - 2, c: reyCheck.col + 1}, {f:reyCheck.fil - 1, c: reyCheck.col - 2}, {f:reyCheck.fil - 2, c: reyCheck.col - 1}]
+            if(reyCheck.fil != 9){
+                if(this.tablero.filas[reyCheck.fil + 1][reyCheck.col + 1].pieza != null){ // El caballo no pasa por el este y el sureste
+                    let ind = posicionesAmenazantes.indexOf({f:reyCheck.fil + 1, c: reyCheck.col + 2})
+                    console.log(ind)
+                    posicionesAmenazantes.splice(ind,1)
+                }
+                if(this.tablero.filas[reyCheck.fil + 1][reyCheck.col - 1].pieza != null){ // El caballo no pasa por el este y el sureste
+                    let ind = posicionesAmenazantes.indexOf({f:reyCheck.fil + 1, c: reyCheck.col - 2})
+                    posicionesAmenazantes.splice(ind,2)
+                }
+            }
+            if(reyCheck.fil != 0){
+                if(this.tablero.filas[reyCheck.fil - 1][reyCheck.col + 1].pieza != null){ // El caballo no pasa por el este y el sureste
+                    let ind = posicionesAmenazantes.indexOf({f:reyCheck.fil - 1, c: reyCheck.col + 2})
+                    posicionesAmenazantes.splice(ind,2)
+                }
+                if(this.tablero.filas[reyCheck.fil - 1][reyCheck.col - 1].pieza != null){ // El caballo no pasa por el este y el sureste
+                    let ind = posicionesAmenazantes.indexOf({f:reyCheck.fil - 1, c: reyCheck.col - 2})
+                    posicionesAmenazantes.splice(ind,2)
+                }
+            }
+            console.log(posicionesAmenazantes)
+            posicionesAmenazantes.forEach(pos => {
+                if(pos.f >= 0 && pos.f <= 9 ){
+                    if(this.tablero.filas[pos.f][pos.c].pieza == "caballo" && this.tablero.filas[pos.f][pos.cº].color == amenaza){
+                        console.log("Jaque caballo", amenaza)
+                        return false
+                    }
+                }
+            });
+            console.log("Jaque de", amenaza)
         },
 
         moveSelectedPiece(indexFil, indexCol, itemFila) {
@@ -231,6 +368,7 @@ export default  {
                             this.reyNegro.col = indexCol
                         }
                     }
+                    console.log("movido")
                 } else{
                     console.log("Movimiento no valido")
                 }
@@ -240,6 +378,7 @@ export default  {
         },
 
         moves(indexFil, indexCol, item) {
+            this.checkCheck()
             //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
             var audio = new Audio('sounds/move.wav');
             audio.loop = false;
@@ -261,58 +400,113 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL GENERAL
                 if(item.pieza == "general"){
                     if(indexCol != 5){
+                        console.log("1")
                         if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil, c: indexCol + 1})
                         }
                     }
                     if(indexCol != 3){
+                        console.log(2)
                         if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
                             //COMPROBAR JAQUE
                             item.moves.push({f: indexFil, c: indexCol - 1})
                         }
                     }
-                    if(indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil + 1, c: indexCol})
-                        }
+                    if(indexFil < 9){
+                        console.log(3)
+                        if(item.color == "rojo"){
+                            if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol})
+                            }
+                        }  
                     }
-                    if(indexFil != 7){
-                        if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil - 1, c: indexCol})
-                        }
+                    if(indexFil < 2){
+                        console.log(4)
+                        if(item.color == "negro"){
+                            if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol})
+                            }
+                        }  
+                    }
+                    if(indexFil > 7){
+                        console.log(5)
+                        if(item.color == "rojo"){
+                            if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol})
+                            } 
+                        }   
+                    }
+
+                    if(indexFil > 0){
+                        console.log(5)
+                        if(item.color == "negro"){
+                            if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol})
+                            } 
+                        }   
                     }
                 }
 
                 // -------------------------------------------------------------------------------------------------
                 //MOVIMIENTOS POSIBLES DEL OFICIAL
                 else if(item.pieza == "oficial"){
-                    if(indexCol != 5 && indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil + 1, c: indexCol + 1})
+                    if(item.pieza == "rojo"){
+                        if(indexCol != 5 && indexFil != 9){
+                            if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol + 1})
+                            }
+                        }
+                        if(indexCol != 3 && indexFil != 9){
+                            if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol - 1})
+                            }
+                        }
+                        if(indexCol != 5 && indexFil != 7){
+                            if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol + 1})
+                            }
+                        }
+                        if(indexCol != 3 && indexFil != 7){
+                            if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol - 1})
+                            }
+                        }
+                    } else {
+                        if(indexCol != 5 && indexFil != 2){
+                            if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol + 1})
+                            }
+                        }
+                        if(indexCol != 3 && indexFil != 2){
+                            if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil + 1, c: indexCol - 1})
+                            }
+                        }
+                        if(indexCol != 5 && indexFil != 0){
+                            if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol + 1})
+                            }
+                        }
+                        if(indexCol != 3 && indexFil != 0){
+                            if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil - 1, c: indexCol - 1})
+                            }
                         }
                     }
-                    if(indexCol != 3 && indexFil != 9){
-                        if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil + 1, c: indexCol - 1})
-                        }
-                    }
-                    if(indexCol != 5 && indexFil != 3){
-                        if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil - 1, c: indexCol + 1})
-                        }
-                    }
-                    if(indexCol != 3 && indexFil != 3){
-                        if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
-                            //COMPROBAR JAQUE
-                            item.moves.push({f: indexFil - 1, c: indexCol - 1})
-                        }
-                    }
+                    
                 }
 
                 // -------------------------------------------------------------------------------------------------
@@ -356,6 +550,7 @@ export default  {
                 //MOVIMIENTOS POSIBLES DEL CABALLO
                 else if(item.pieza == "caballo"){
                     if(indexCol > 1 && indexFil < 9){
+                        console.log("1")
                         if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
                             if (this.tablero.filas[indexFil + 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
@@ -364,6 +559,7 @@ export default  {
                         }
                     }
                     if(indexCol < 7 && indexFil < 9){
+                        console.log("2")
                         if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
                             if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
@@ -372,6 +568,7 @@ export default  {
                         }
                     }
                     if(indexCol > 1 && indexFil > 0){
+                        console.log("3")
                         if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
                             if (this.tablero.filas[indexFil - 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 2].color != item.color){
                                 //COMPROBAR JAQUE
@@ -380,14 +577,16 @@ export default  {
                         }
                     }
                     if(indexCol < 7 && indexFil > 0){
+                        console.log("4")
                         if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
-                            if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
+                            if (this.tablero.filas[indexFil - 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 2].color != item.color){
                                 //COMPROBAR JAQUE
                                 item.moves.push({f: indexFil - 1, c: indexCol + 2})
                             }
                         }
                     }
                     if(indexCol < 8 && indexFil > 1){
+                        console.log("5")
                         if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
                             if (this.tablero.filas[indexFil - 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol + 1].color != item.color){
                                 //COMPROBAR JAQUE
@@ -396,6 +595,7 @@ export default  {
                         }
                     }
                     if(indexCol > 0 && indexFil > 1){
+                        console.log("6")
                         if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
                             if (this.tablero.filas[indexFil - 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol - 1].color != item.color){
                                 //COMPROBAR JAQUE
@@ -404,6 +604,7 @@ export default  {
                         }
                     }
                     if(indexCol < 8 && indexFil < 8){
+                        console.log("7")
                         if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
                             if (this.tablero.filas[indexFil + 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol + 1].color != item.color){
                                 //COMPROBAR JAQUE
@@ -412,6 +613,7 @@ export default  {
                         }
                     }
                     if(indexCol > 0 && indexFil < 8){
+                        console.log("8")
                         if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
                             if (this.tablero.filas[indexFil + 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol - 1].color != item.color){
                                 //COMPROBAR JAQUE
@@ -555,6 +757,7 @@ export default  {
                                 if(saltar){
                                     console.log("COMEMOS")
                                     item.moves.push({f: indexFil - it, c: indexCol})
+                                    break
                                 } else{
                                     if(saltar){
                                         console.log("NOS CAEMOS")
@@ -593,6 +796,7 @@ export default  {
                                 if(saltar){
                                     console.log("COMEMOS")
                                     item.moves.push({f: indexFil + it, c: indexCol})
+                                    break
                                 } else{
                                     if(saltar){
                                         console.log("NOS CAEMOS")
@@ -631,6 +835,7 @@ export default  {
                                 if(saltar){
                                     console.log("COMEMOS")
                                     item.moves.push({f: indexFil, c: indexCol  + it})
+                                    break
                                 } else{
                                     if(saltar){
                                         console.log("NOS CAEMOS")
@@ -669,6 +874,7 @@ export default  {
                                 if(saltar){
                                     console.log("COMEMOS")
                                     item.moves.push({f: indexFil, c: indexCol  - it})
+                                    break
                                 } else{
                                     if(saltar){
                                         console.log("NOS CAEMOS")
