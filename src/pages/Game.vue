@@ -116,14 +116,14 @@ export default  {
                 
                filas: [
                     [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false }, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "oficial", color: "negro", moves: [], turno: 0, esPista: false},{ pieza: "general", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}],
-                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "torre", color: "negro", moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
-                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "torre", color: "negro", moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "caballo", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},  { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
-                    [{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
+                    [{ pieza: "torre", color: "rojo", moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}],
                     [{ pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}, { pieza: null, color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false},{ pieza: "general", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: 0, esPista: false}, { pieza: null, color: null, moves: [], turno: 0, esPista: false}, { pieza: "soldado", color: "negro" , moves: [], turno: 0, esPista: false}],]
                            
             },
@@ -170,7 +170,7 @@ export default  {
                 {id: '12', name: 'Cemento 2'},
             ],
             //Turno actual
-            turno: 0,
+            turno: 1,
             reyRojo:{
                 fil: 9,
                 col:4
@@ -179,6 +179,7 @@ export default  {
                 fil: 0,
                 col:4
             },
+
 
             //Tema por defecto del tablero
             selectedBoard: {id: '1', name: 'Madera 1'},
@@ -200,16 +201,16 @@ export default  {
         this.$playing.game = true;
 	},
     methods: {
-        checkCheck(){
-            let reyCheck = null
-            let amenaza = null
-            if(this.turno%2 == 0){//Comprobar el rojo
-                reyCheck = this.reyRojo
-                amenaza = "negro"
-            } else{ //Comprobar el negro
-                reyCheck = this.reyNegro
-                amenaza = "rojo"
-            }
+        /*
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        */
+        checkCheck(reyCheck, amenaza){
             //Mirar el norte(Torre, soldado) | canyon cuando encuentre pieza
             let canyon = false
             let amenzas = ["soldado","torre","general"]
@@ -333,7 +334,7 @@ export default  {
                     posicionesAmenazantes.push({f:reyCheck.fil - 2, c: reyCheck.col - 1})
                 }
             }
-            console.log(posicionesAmenazantes)
+            //console.log(posicionesAmenazantes)
             posicionesAmenazantes.forEach(pos => {
                 if(pos.f >= 0 && pos.f <= 9 ){
                     if(this.tablero.filas[pos.f][pos.c].pieza == "caballo" && this.tablero.filas[pos.f][pos.c].color == amenaza){
@@ -346,46 +347,657 @@ export default  {
             return true
         },
 
+
+        /*
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        */
+
         moveSelectedPiece(indexFil, indexCol, itemFila) {
             if(itemFila.esPista){
                 //Comprobar si es valido el movimiento
-                let valido = true; // funcion que lo compruebe
-                if(valido){
-                    console.log("AAAAA", this.selectedPiece)
-                    console.log(itemFila)
-                    this.turno += 1
-                    let aux = {'pieza': this.tablero.filas[indexFil][indexCol].pieza, 'color': this.tablero.filas[indexFil][indexCol].color, 'esPista':this.tablero.filas[indexFil][indexCol].esPista}
-                    this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza
-                    this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].color
-                    this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].esPista
-                    this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = null
-                    if(this.tablero.filas[indexFil][indexCol].pieza == "general"){
+                let aux = {pieza: this.tablero.filas[indexFil][indexCol].pieza, color: this.tablero.filas[indexFil][indexCol].color, esPista:this.tablero.filas[indexFil][indexCol].esPista}
+                this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza
+                this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].color
+                this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].esPista
+                this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = null
+                let auxRey = null
+                if(this.tablero.filas[indexFil][indexCol].pieza == "general"){
+                    if(this.tablero.filas[indexFil][indexCol].color == "rojo"){
+                        auxRey = {fil:this.reyRojo.fil, col: this.reyRojo.col}
+                        this.reyRojo.fil = indexFil
+                        this.reyRojo.col = indexCol
+                        console.log("Muevo al rey rojo: ", this.reyRojo)
+                    } else{
+                        auxRey = {fil:this.reyNegro.fil, col: this.reyNegro.col}
+                        this.reyNegro.fil = indexFil
+                        this.reyNegro.col = indexCol
+                        console.log("Muevo al rey negro: ", this.reyNegro)
+                    }
+                }
+                var reyCheck
+                var amenaza
+                if(this.turno%2 == 0){//Comprobar el rojo
+                    reyCheck = this.reyNegro
+                    amenaza = "rojo"
+                } else{ //Comprobar el negro
+                    reyCheck = this.reyRojo
+                    amenaza = "negro"
+                }
+                if(this.checkCheck(reyCheck, amenaza) == false){
+                    console.log("Movimiento no valido")
+                    if(auxRey != null){
+                        console.log(this.tablero.filas[indexFil][indexCol])
                         if(this.tablero.filas[indexFil][indexCol].color == "rojo"){
-                            this.reyRojo.fil = indexFil
-                            this.reyRojo.col = indexCol
+                            this.reyRojo.fil = auxRey.fil
+                            this.reyRojo.col = auxRey.col
+                            console.log("El rey vuelve a: ", this.reyRojo)
                         } else{
-                            this.reyNegro.fil = indexFil
-                            this.reyNegro.col = indexCol
+                            auxRey = {fil:this.reyNegro.fil, col: this.reyNegro.col}
+                            this.reyNegro.fil = auxRey.fil
+                            this.reyNegro.col = auxRey.col
+                            console.log("El rey vuelve a: ", this.reyNegro)
                         }
                     }
-                    if(!this.checkCheck()){
-                        console.log("Movimiento no valido")
-                        this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = this.tablero.filas[indexFil][indexCol].pieza
-                        this.tablero.filas[indexFil][indexCol].pieza = aux.pieza
-                        this.tablero.filas[indexFil][indexCol].color = aux.color
-                        this.tablero.filas[indexFil][indexCol].esPista = aux.esPista
-                    } else{
-                        console.log("movido")
-                    }
+                    this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = this.tablero.filas[indexFil][indexCol].pieza
+                    this.tablero.filas[indexFil][indexCol].pieza = aux.pieza
+                    this.tablero.filas[indexFil][indexCol].color = aux.color
+                    this.tablero.filas[indexFil][indexCol].esPista = aux.esPista
+                    this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves = this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.filter(function(item) {
+                        return (item.f != indexFil || item.c != indexCol)
+                    })
+                    this.tablero.filas[indexFil][indexCol].esPista = false
                     
                 } else{
-                    console.log("Movimiento no valido")
-                }
-                console.log(indexFil, indexCol, itemFila);
+                    this.turno += 1
+                    console.log("movido, Truno actual: ", this.turno)
+                        if(this.turno%2 == 0){//Comprobar el rojo
+                        let reyCheck = {fil: this.reyNegro.fil, col: this.reyNegro.col}
+                        let amenaza = "rojo"
+                        if(this.checkCheck(reyCheck, amenaza) == false){
+                            console.log("Jaque a negro")
+                            this.calcMovesJaque("negro","rojo", reyCheck)
+                        } 
+                        console.log("Mueve Negro")
+                    } else{ //Comprobar el negro
+                        let reyCheck = {fil: this.reyRojo.fil, col: this.reyRojo.col}
+                        let amenaza = "negro"
+                        if(this.checkCheck(reyCheck, amenaza) == false){
+                            console.log("Jaque a rojo")
+                            this.calcMovesJaque("rojo","negro", reyCheck)
+                        } 
+                        console.log("Mueve Rojo")
+                    }
+                }    
             }
             
         },
 
+/*
+        *-----o-------------o-------------------o----------------------------------------------------------------------
+        *-----o-o---------o-o-------------------o----------------------------------------------------------------------
+        *-----o--o-------o--o-------------------o-----------------------------------------------------------------------
+        *-----o---o-----o---o-------------------o-----------------------------------------------------------------------
+        *-----o----o---o----o---------o---------o-----------------------------------------------------------------------
+        *-----o-----o-o-----o----------o--------o-----------------------------------------------------------------------
+        *-----o------o------o-----------o-o-o-o-o-----------------------------------------------------------------------
+        */
+       moveJaque(filaActual, columnaActual, filaMov, columnaMov, pMover, general, reyCheck, amenaza){
+           let returnValue = 0
+           console.log(this.tablero.filas[filaActual][columnaActual], filaActual, columnaActual)
+           let aux = {pieza: this.tablero.filas[filaMov][columnaMov].pieza, color: this.tablero.filas[filaMov][columnaMov].color, esPista:this.tablero.filas[filaMov][columnaMov].esPista}
+            this.tablero.filas[filaMov][columnaMov].pieza = this.tablero.filas[filaActual][columnaActual].pieza
+            this.tablero.filas[filaMov][columnaMov].color = this.tablero.filas[filaActual][columnaActual].color
+            this.tablero.filas[filaMov][columnaMov].esPista = this.tablero.filas[filaActual][columnaActual].esPista
+            this.tablero.filas[filaActual][columnaActual].pieza = null
+            let auxRey = null
+            if(general == true){
+                if(pMover == "rojo"){
+                    auxRey = {fil:this.reyRojo.fil, col: this.reyRojo.col}
+                    this.reyRojo.fil = filaMov
+                    this.reyRojo.col = columnaMov
+                    console.log("Muevo al rey rojo: ", this.reyRojo)
+                    reyCheck = this.reyRojo
+                } else{
+                    auxRey = {fil:this.reyNegro.fil, col: this.reyNegro.col}
+                    this.reyNegro.fil = filaMov
+                    this.reyNegro.col = columnaMov
+                    console.log("Muevo al rey negro: ", this.reyNegro)
+                    reyCheck = this.reyNegro
+                }
+            }
+            let valido = this.checkCheck(reyCheck, amenaza)
+            if(general == true){
+                if(pMover == "rojo"){
+                    this.reyRojo.fil = auxRey.fil
+                    this.reyRojo.col = auxRey.col
+                    console.log("El rey vuelve a: ", this.reyRojo)
+                } else{
+                    auxRey = {fil:this.reyNegro.fil, col: this.reyNegro.col}
+                    this.reyNegro.fil = auxRey.fil
+                    this.reyNegro.col = auxRey.col
+                    console.log("El rey vuelve a: ", this.reyNegro)
+                }
+            }
+            this.tablero.filas[filaActual][columnaActual].pieza = this.tablero.filas[filaMov][columnaMov].pieza
+            this.tablero.filas[filaMov][columnaMov].pieza = aux.pieza
+            this.tablero.filas[filaMov][columnaMov].color = aux.color
+            this.tablero.filas[filaMov][columnaMov].esPista = aux.esPista
+            this.tablero.filas[filaActual][columnaActual].moves = this.tablero.filas[filaActual][columnaActual].moves.filter(function(item) {
+                return (item.f != filaMov || item.c != (columnaMov))
+            })
+            this.tablero.filas[filaMov][columnaMov].esPista = false
+            if(valido == true){
+                returnValue = 1
+                this.tablero.filas[filaActual][columnaActual].moves.push({f: filaMov, c: columnaMov})
+            }
+            return returnValue
+        },
+        
+
+/*
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        */
+       calcMovesJaque(pMover, amenaza, reyCheck){
+           let totalMoves = 0
+           for(let i = 0; i <= 8; i++){//Recorrer las columnas
+                for(let j = 0; j <= 9; j++){//Recorrer las filas
+                    console.log(i, j)
+                    if(this.tablero.filas[j][i].pieza != null){
+                        if(this.tablero.filas[j][i].color == pMover){
+                            if(this.tablero.filas[j][i].pieza == "general"){
+                                if(i != 5){
+                                    if (this.tablero.filas[j][i + 1].pieza == null || this.tablero.filas[j][i + 1].color != this.tablero.filas[j][i].color){
+                                        totalMoves += this.moveJaque(j, i, j, i+1,pMover ,true, reyCheck, amenaza)
+                                    }
+                                }
+                                if(i != 3){
+                                    if (this.tablero.filas[j][i - 1].pieza == null || this.tablero.filas[j][i - 1].color != this.tablero.filas[j][i].color){
+                                        totalMoves += this.moveJaque(j, i, j, i-1,pMover ,true, reyCheck, amenaza)
+                                    }
+                                }
+                                if(j < 9){
+                                    if(this.tablero.filas[j][i].color == "rojo"){
+                                        if (this.tablero.filas[j + 1][i].pieza == null || this.tablero.filas[j + 1][i].color != this.tablero.filas[j][i].color ){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,true, reyCheck, amenaza)
+                                        }
+                                    }  
+                                }
+                                if(j < 2){
+                                    if(this.tablero.filas[j][i].color == "negro"){
+                                        if (this.tablero.filas[j + 1][i].pieza == null || this.tablero.filas[j + 1][i].color != this.tablero.filas[j][i].color ){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,true, reyCheck, amenaza)
+                                        }
+                                    }  
+                                }
+                                if(j > 7){
+                                    if(this.tablero.filas[j][i].color == "rojo"){
+                                        if (this.tablero.filas[j - 1][i].pieza == null || this.tablero.filas[j - 1][i].color != this.tablero.filas[j][i].color ){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i,pMover ,true, reyCheck, amenaza)
+                                        } 
+                                    }   
+                                }
+
+                                if(j > 0){
+                                    if(this.tablero.filas[j][i].color == "negro"){
+                                        if (this.tablero.filas[j - 1][i].pieza == null || this.tablero.filas[j - 1][i].color != this.tablero.filas[j][i].color ){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i,pMover ,true, reyCheck, amenaza)
+                                        } 
+                                    }   
+                                }
+                            }
+
+                            // -------------------------------------------------------------------------------------------------
+                            //MOVIMIENTOS POSIBLES DEL OFICIAL
+                            else if(this.tablero.filas[j][i].pieza == "oficial"){
+                                if(this.tablero.filas[j][i].pieza == "rojo"){
+                                    if(i != 5 && j != 9){
+                                        if (this.tablero.filas[j + 1][i + 1].pieza == null || this.tablero.filas[j + 1][i + 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 3 && j != 9){
+                                        if (this.tablero.filas[j + 1][i - 1].pieza == null || this.tablero.filas[j + 1][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 5 && j != 7){
+                                        if (this.tablero.filas[j - 1][i + 1].pieza == null || this.tablero.filas[j - 1][i + 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 3 && j != 7){
+                                        if (this.tablero.filas[j - 1][i - 1].pieza == null || this.tablero.filas[j - 1][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                } else {
+                                    if(i != 5 && j != 2){
+                                        if (this.tablero.filas[j + 1][i + 1].pieza == null || this.tablero.filas[j + 1][i + 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 3 && j != 2){
+                                        if (this.tablero.filas[j + 1][i - 1].pieza == null || this.tablero.filas[j + 1][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 5 && j != 0){
+                                        if (this.tablero.filas[j - 1][i + 1].pieza == null || this.tablero.filas[j - 1][i + 1].color != this.tablero.filas[j][i].color){
+                                            //COMPROBAR JAQUE
+                                            totalMoves += this.moveJaque(j, i, j - 1, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                    if(i != 3 && j != 0){
+                                        if (this.tablero.filas[j - 1][i - 1].pieza == null || this.tablero.filas[j - 1][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                
+                            }
+
+                            // -------------------------------------------------------------------------------------------------
+                            //MOVIMIENTOS POSIBLES DEL ELEFANTE
+                            else if(this.tablero.filas[j][i].pieza == "elefante"){
+                                if(i != 8 && j != 9){
+                                    if(this.tablero.filas[j + 1][i + 1].pieza == null){
+                                        if (this.tablero.filas[j + 2][i + 2].pieza == null || this.tablero.filas[j + 2][i + 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 2, i + 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i != 0 && j != 9){
+                                    if(this.tablero.filas[j + 1][i - 1].pieza == null){
+                                        if (this.tablero.filas[j + 2][i - 2].pieza == null || this.tablero.filas[j + 2][i - 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 2, i - 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i != 8 && j != 5){
+                                    if(this.tablero.filas[j - 1][i + 1].pieza == null){
+                                        if (this.tablero.filas[j - 2][i + 2].pieza == null || this.tablero.filas[j - 2][i + 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 2, i + 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i != 0 && j != 5){
+                                    if(this.tablero.filas[j - 1][i - 1].pieza == null){
+                                        if (this.tablero.filas[j - 2][i - 2].pieza == null || this.tablero.filas[j - 2][i - 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 2, i - 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                            }
+
+                            // -------------------------------------------------------------------------------------------------
+                            //MOVIMIENTOS POSIBLES DEL CABALLO
+                            else if(this.tablero.filas[j][i].pieza == "caballo"){
+                                if(i > 1 && j < 9){
+                                    if(this.tablero.filas[j][i - 1].pieza == null){
+                                        if (this.tablero.filas[j + 1][i - 2].pieza == null || this.tablero.filas[j + 1][i - 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i - 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i < 7 && j < 9){
+                                    if(this.tablero.filas[j][i + 1].pieza == null){
+                                        if (this.tablero.filas[j + 1][i + 2].pieza == null || this.tablero.filas[j + 1][i + 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i + 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i > 1 && j > 0){
+                                    if(this.tablero.filas[j][i - 1].pieza == null){
+                                        if (this.tablero.filas[j - 1][i - 2].pieza == null || this.tablero.filas[j - 1][i - 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i - 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i < 7 && j > 0){
+                                    if(this.tablero.filas[j][i + 1].pieza == null){
+                                        if (this.tablero.filas[j - 1][i + 2].pieza == null || this.tablero.filas[j - 1][i + 2].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i + 2,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i < 8 && j > 1){
+                                    if(this.tablero.filas[j - 1][i].pieza == null){
+                                        if (this.tablero.filas[j - 2][i + 1].pieza == null || this.tablero.filas[j - 2][i + 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 2, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i > 0 && j > 1){
+                                    if(this.tablero.filas[j - 1][i].pieza == null){
+                                        if (this.tablero.filas[j - 2][i - 1].pieza == null || this.tablero.filas[j - 2][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 2, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i < 8 && j < 8){
+                                    if(this.tablero.filas[j + 1][i].pieza == null){
+                                        if (this.tablero.filas[j + 2][i + 1].pieza == null || this.tablero.filas[j + 2][i + 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 2, i + 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                                if(i > 0 && j < 8){
+                                    if(this.tablero.filas[j + 1][i].pieza == null){
+                                        if (this.tablero.filas[j + 2][i - 1].pieza == null || this.tablero.filas[j + 2][i - 1].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + 2, i - 1,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    }
+                                }
+                            }
+
+                            // -------------------------------------------------------------------------------------------------
+                            //MOVIMIENTOS POSIBLES DE LA TORRE
+                            else if(this.tablero.filas[j][i].pieza == "torre"){
+                                //Iterar al norte
+                                let it = 1
+                                for(let k = j; k > 0; k --){
+                                    console.log("NORTE")
+                                    if(this.tablero.filas[j - it][i].pieza == null){
+                                        totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
+                                    } else{
+                                        if(this.tablero.filas[j - it][i].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
+                                        }
+                                        break
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al sur
+                                it = 1
+                                for(let k = j; k < 9; k ++){
+                                    console.log("SUR")
+                                    if(this.tablero.filas[j + it][i].pieza == null){
+                                        totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
+                                    } else{
+                                        if(this.tablero.filas[j + it][i].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
+                                        }
+                                        break
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al este
+                                it = 1
+                                for(let k = i; k < 8; k ++){
+                                    console.log("ESTE")
+                                    if(this.tablero.filas[j][i + it].pieza == null){
+                                        totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
+                                        console.log(this.tablero.filas[j][i].moves)
+                                    } else{
+                                        if(this.tablero.filas[j][i + it].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
+                                            console.log(this.tablero.filas[j][i].moves)
+                                        }
+                                        break
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al oeste
+                                it = 1
+                                for(let k = i; k > 0; k --){
+                                    console.log("WEST")
+                                    if(this.tablero.filas[j][i - it].pieza == null){
+                                        totalMoves += this.moveJaque(j, i, j, i - it,pMover ,false, reyCheck, amenaza)
+                                    } else{
+                                        if(this.tablero.filas[j][i - it].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
+                                        }
+                                        break
+                                    }
+                                    it += 1
+                                }
+                            }
+
+                            //MOVIMIENTOS POSIBLES DEL SOLDADO
+                            else if(this.tablero.filas[j][i].pieza == "soldado"){
+                                if(this.tablero.filas[j][i].color == "rojo"){
+                                    if(j > 5){ // Solo para arriba
+                                        if (this.tablero.filas[j - 1][i].pieza == null || this.tablero.filas[j - 1][i].color != this.tablero.filas[j][i].color){
+                                            totalMoves += this.moveJaque(j, i, j - 1, i,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    } else{ // Norte, este y oeste
+                                        if(i != 8){ // Oeste
+                                            if (this.tablero.filas[j][i + 1].pieza == null || this.tablero.filas[j][i + 1].color != this.tablero.filas[j][i].color){
+                                                totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                        if(i != 0){
+                                            if (this.tablero.filas[j][i - 1].pieza == null || this.tablero.filas[j][i - 1].color != this.tablero.filas[j][i].color){
+                                                totalMoves += this.moveJaque(j, i, j, i - 1,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                        if(j != 0){
+                                            if (this.tablero.filas[j - 1][i].pieza == null || this.tablero.filas[j - 1][i].color != this.tablero.filas[j][i].color ){
+                                                totalMoves += this.moveJaque(j, i, j - 1, i,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                    }
+                                } else{
+                                    if(j <= 5){ // Solo para abajo
+                                        if (this.tablero.filas[j + 1][i].pieza == null || this.tablero.filas[j + 1][i].color != this.tablero.filas[j][i].color ){
+                                            totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,false, reyCheck, amenaza)
+                                        }
+                                    } else{ // Norte, este y oeste
+                                        if(i != 8){ // Oeste
+                                            if (this.tablero.filas[j][i + 1].pieza == null || this.tablero.filas[j][i + 1].color != this.tablero.filas[j][i].color){
+                                                totalMoves += this.moveJaque(j, i, j, i + 1,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                        if(i != 0){
+                                            if (this.tablero.filas[j][i - 1].pieza == null || this.tablero.filas[j][i - 1].color != this.tablero.filas[j][i].color){
+                                                totalMoves += this.moveJaque(j, i, j, i - 1,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                        if(j != 9){
+                                            if (this.tablero.filas[j + 1][i].pieza == null || this.tablero.filas[j + 1][i].color != this.tablero.filas[j][i].color ){
+                                                totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,false, reyCheck, amenaza)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // -------------------------------------------------------------------------------------------------
+                            //MOVIMIENTOS POSIBLES DE LA CANYON
+                            else if(this.tablero.filas[j][i].pieza == "canyon"){
+                                //Iterar al norte
+                                let it = 1
+                                let saltar = false
+                                for(let k = j; k > 0; k --){
+                                    if(this.tablero.filas[j - it][i].pieza == null){
+                                        if(!saltar){
+                                            console.log("MOVEMOS")
+                                            totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
+                                        } else{
+                                            console.log("VOLAMOS")
+                                        }
+                                        
+                                    } else{ // Encontramos una pieza
+                                        if(this.tablero.filas[j - it][i].color != this.tablero.filas[j][i].color){
+                                            if(saltar){
+                                                console.log("COMEMOS")
+                                                totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
+                                                break
+                                            } else{
+                                                if(saltar){
+                                                    console.log("NOS CAEMOS")
+                                                    break
+                                                } else{
+                                                    console.log("SALTAMOS")
+                                                    saltar = true
+                                                }
+                                            }
+                                        } else {// SALTAR
+                                            if(saltar){
+                                                console.log("NOS CAEMOS")
+                                                break
+                                            } else{
+                                                console.log("SALTAMOS")
+                                                saltar = true
+                                            }
+                                        }
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al sur
+                                it = 1
+                                saltar = false
+                                for(let k = j; k < 9; k ++){
+                                    if(this.tablero.filas[j + it][i].pieza == null){
+                                        if(!saltar){
+                                            console.log("MOVEMOS")
+                                            totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
+                                        } else{
+                                            console.log("VOLAMOS")
+                                        }
+                                        
+                                    } else{ // Encontramos una pieza
+                                        if(this.tablero.filas[j + it][i].color != this.tablero.filas[j][i].color){
+                                            if(saltar){
+                                                console.log("COMEMOS")
+                                                totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
+                                                break
+                                            } else{
+                                                if(saltar){
+                                                    console.log("NOS CAEMOS")
+                                                    break
+                                                } else{
+                                                    console.log("SALTAMOS")
+                                                    saltar = true
+                                                }
+                                            }
+                                        } else {// SALTAR
+                                            if(saltar){
+                                                console.log("NOS CAEMOS")
+                                                break
+                                            } else{
+                                                console.log("SALTAMOS")
+                                                saltar = true
+                                            }
+                                        }
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al este
+                                it = 1
+                                saltar = false
+                                for(let k = i; k < 8; k ++){
+                                    if(this.tablero.filas[j][i + it].pieza == null){
+                                        if(!saltar){
+                                            console.log("MOVEMOS")
+                                            totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
+                                        } else{
+                                            console.log("VOLAMOS")
+                                        }
+                                        
+                                    } else{ // Encontramos una pieza
+                                        if(this.tablero.filas[j][i + it].color != this.tablero.filas[j][i].color){
+                                            if(saltar){
+                                                console.log("COMEMOS")
+                                                totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
+                                                break
+                                            } else{
+                                                if(saltar){
+                                                    console.log("NOS CAEMOS")
+                                                    break
+                                                } else{
+                                                    console.log("SALTAMOS")
+                                                    saltar = true
+                                                }
+                                            }
+                                        } else {// SALTAR
+                                            if(saltar){
+                                                console.log("NOS CAEMOS")
+                                                break
+                                            } else{
+                                                console.log("SALTAMOS")
+                                                saltar = true
+                                            }
+                                        }
+                                    }
+                                    it += 1
+                                }
+                                //Iterar al oeste
+                                it = 1
+                                saltar = false
+                                for(let k = i; k > 0; k --){
+                                    if(this.tablero.filas[j][i - it].pieza == null){
+                                        if(!saltar){
+                                            console.log("MOVEMOS")
+                                            totalMoves += this.moveJaque(j, i, j, i - it,pMover ,false, reyCheck, amenaza)
+                                        } else{
+                                            console.log("VOLAMOS")
+                                        }
+                                        
+                                    } else{ // Encontramos una pieza
+                                        if(this.tablero.filas[j][i - it].color != this.tablero.filas[j][i].color){
+                                            if(saltar){
+                                                console.log("COMEMOS")
+                                                totalMoves += this.moveJaque(j, i, j, i - it,pMover ,false, reyCheck, amenaza)
+                                                break
+                                            } else{
+                                                if(saltar){
+                                                    console.log("NOS CAEMOS")
+                                                    break
+                                                } else{
+                                                    console.log("SALTAMOS")
+                                                    saltar = true
+                                                }
+                                            }
+                                        } else {// SALTAR
+                                            if(saltar){
+                                                console.log("NOS CAEMOS")
+                                                break
+                                            } else{
+                                                console.log("SALTAMOS")
+                                                saltar = true
+                                            }
+                                        }
+                                    }
+                                    it += 1
+                                }
+                            }
+                        }
+                        console.log(this.tablero.filas[j][i])
+                        this.tablero.filas[j][i].turno = this.turno
+                    }
+                }
+           }
+           console.log("Tiene ", totalMoves, "Movimientos posibles")
+           if(totalMoves == 0){
+               console.log("Jaque mate")
+           }
+       },
+
+
+
+
+/*
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *
         moves(indexFil, indexCol, item) {
             //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
             var audio = new Audio('sounds/move.wav');
@@ -395,6 +1007,7 @@ export default  {
             if (this.selectedPiece.fil != null) {
                 console.log("Entramos")
                 this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
+
                     this.tablero.filas[move.f][move.c].esPista = false;
                 });
             }
@@ -896,6 +1509,7 @@ export default  {
                     this.tablero.filas[move.f][move.c].esPista = true;
                 });
             } else{
+                console.log("Turno de la ficha: ",item.turno,"Turno Actual: " ,this.turno)
                 if(item.turno == this.turno){
                     item.moves.forEach(move => {
                         console.log(move)
@@ -909,7 +1523,535 @@ export default  {
                 }
             }
         },
-        
+        /*
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        *---------------------------------------------------------------------------------------------------------------
+        */
+
+       moves(indexFil, indexCol, item) {
+            //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
+            if (this.selectedPiece.fil != null) {
+                console.log("Entramos", this.selectedPiece)
+                this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
+                    this.tablero.filas[move.f][move.c].esPista = false;
+                });
+            }
+            var audio = new Audio('sounds/move.wav');
+            audio.loop = false;
+            audio.play();
+            this.selectedPiece.fil = indexFil;
+            this.selectedPiece.col = indexCol;
+            this.selectedPiece.selected = true;
+            if(item.turno == this.turno){
+                    item.moves.forEach(move => {
+                    //console.log(move)
+                    this.tablero.filas[move.f][move.c].esPista = true;
+                });
+                console.log("Ya visto")
+            } else{
+                item.moves = []
+                item.turno = this.turno
+
+                this.selectedTile = this.tablero.filas[indexFil][indexCol]
+                if(item.moves.length == 0){ //Cada vez que movamos una ficha sus movimientos pasaran a 0, pero si no calculamos sus movimientos y los guardamos hasta el movimiento
+                    //MOVIMIENTOS POSIBLES DEL GENERAL
+                    if(item.pieza == "general"){
+                        if(indexCol != 5){
+                            if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil, c: indexCol + 1})
+                            }
+                        }
+                        if(indexCol != 3){
+                            if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                                //COMPROBAR JAQUE
+                                item.moves.push({f: indexFil, c: indexCol - 1})
+                            }
+                        }
+                        if(indexFil < 9){
+                            if(item.color == "rojo"){
+                                if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol})
+                                }
+                            }  
+                        }
+                        if(indexFil < 2){
+                            if(item.color == "negro"){
+                                if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol})
+                                }
+                            }  
+                        }
+                        if(indexFil > 7){
+                            if(item.color == "rojo"){
+                                if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol})
+                                } 
+                            }   
+                        }
+
+                        if(indexFil > 0){
+                            if(item.color == "negro"){
+                                if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol})
+                                } 
+                            }   
+                        }
+                    }
+
+                    // -------------------------------------------------------------------------------------------------
+                    //MOVIMIENTOS POSIBLES DEL OFICIAL
+                    else if(item.pieza == "oficial"){
+                        if(item.pieza == "rojo"){
+                            if(indexCol != 5 && indexFil != 9){
+                                if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol + 1})
+                                }
+                            }
+                            if(indexCol != 3 && indexFil != 9){
+                                if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol - 1})
+                                }
+                            }
+                            if(indexCol != 5 && indexFil != 7){
+                                if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol + 1})
+                                }
+                            }
+                            if(indexCol != 3 && indexFil != 7){
+                                if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol - 1})
+                                }
+                            }
+                        } else {
+                            if(indexCol != 5 && indexFil != 2){
+                                if (this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol + 1})
+                                }
+                            }
+                            if(indexCol != 3 && indexFil != 2){
+                                if (this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol - 1})
+                                }
+                            }
+                            if(indexCol != 5 && indexFil != 0){
+                                if (this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol + 1})
+                                }
+                            }
+                            if(indexCol != 3 && indexFil != 0){
+                                if (this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol - 1})
+                                }
+                            }
+                        }
+                        
+                    }
+
+                    // -------------------------------------------------------------------------------------------------
+                    //MOVIMIENTOS POSIBLES DEL ELEFANTE
+                    else if(item.pieza == "elefante"){
+                        if(indexCol != 8 && indexFil != 9){
+                            if(this.tablero.filas[indexFil + 1][indexCol + 1].pieza == null){
+                                if (this.tablero.filas[indexFil + 2][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 2][indexCol + 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 2, c: indexCol + 2})
+                                }
+                            }
+                        }
+                        if(indexCol != 0 && indexFil != 9){
+                            if(this.tablero.filas[indexFil + 1][indexCol - 1].pieza == null){
+                                if (this.tablero.filas[indexFil + 2][indexCol - 2].pieza == null || this.tablero.filas[indexFil + 2][indexCol - 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 2, c: indexCol - 2})
+                                }
+                            }
+                        }
+                        if(indexCol != 8 && indexFil != 5){
+                            if(this.tablero.filas[indexFil - 1][indexCol + 1].pieza == null){
+                                if (this.tablero.filas[indexFil - 2][indexCol + 2].pieza == null || this.tablero.filas[indexFil - 2][indexCol + 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 2, c: indexCol + 2})
+                                }
+                            }
+                        }
+                        if(indexCol != 0 && indexFil != 5){
+                            if(this.tablero.filas[indexFil - 1][indexCol - 1].pieza == null){
+                                if (this.tablero.filas[indexFil - 2][indexCol - 2].pieza == null || this.tablero.filas[indexFil - 2][indexCol - 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 2, c: indexCol - 2})
+                                }
+                            }
+                        }
+                    }
+
+                    // -------------------------------------------------------------------------------------------------
+                    //MOVIMIENTOS POSIBLES DEL CABALLO
+                    else if(item.pieza == "caballo"){
+                        if(indexCol > 1 && indexFil < 9){
+                            if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
+                                if (this.tablero.filas[indexFil + 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol - 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol - 2})
+                                }
+                            }
+                        }
+                        if(indexCol < 7 && indexFil < 9){
+                            if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
+                                if (this.tablero.filas[indexFil + 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil + 1][indexCol + 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol + 2})
+                                }
+                            }
+                        }
+                        if(indexCol > 1 && indexFil > 0){
+                            if(this.tablero.filas[indexFil][indexCol - 1].pieza == null){
+                                if (this.tablero.filas[indexFil - 1][indexCol - 2].pieza == null || this.tablero.filas[indexFil - 1][indexCol - 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol - 2})
+                                }
+                            }
+                        }
+                        if(indexCol < 7 && indexFil > 0){
+                            if(this.tablero.filas[indexFil][indexCol + 1].pieza == null){
+                                if (this.tablero.filas[indexFil - 1][indexCol + 2].pieza == null || this.tablero.filas[indexFil - 1][indexCol + 2].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol + 2})
+                                }
+                            }
+                        }
+                        if(indexCol < 8 && indexFil > 1){
+                            if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
+                                if (this.tablero.filas[indexFil - 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 2, c: indexCol + 1})
+                                }
+                            }
+                        }
+                        if(indexCol > 0 && indexFil > 1){
+                            if(this.tablero.filas[indexFil - 1][indexCol].pieza == null){
+                                if (this.tablero.filas[indexFil - 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil - 2][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 2, c: indexCol - 1})
+                                }
+                            }
+                        }
+                        if(indexCol < 8 && indexFil < 8){
+                            if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
+                                if (this.tablero.filas[indexFil + 2][indexCol + 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol + 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 2, c: indexCol + 1})
+                                }
+                            }
+                        }
+                        if(indexCol > 0 && indexFil < 8){
+                            if(this.tablero.filas[indexFil + 1][indexCol].pieza == null){
+                                if (this.tablero.filas[indexFil + 2][indexCol - 1].pieza == null || this.tablero.filas[indexFil + 2][indexCol - 1].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 2, c: indexCol - 1})
+                                }
+                            }
+                        }
+                    }
+
+                    // -------------------------------------------------------------------------------------------------
+                    //MOVIMIENTOS POSIBLES DE LA TORRE
+                    else if(item.pieza == "torre"){
+                        //Iterar al norte
+                        let it = 1
+                        for(let i = indexFil; i > 0; i --){
+                            if(this.tablero.filas[indexFil - it][indexCol].pieza == null){
+                                item.moves.push({f: indexFil - it, c: indexCol})
+                            } else{
+                                if(this.tablero.filas[indexFil - it][indexCol].color != item.color){
+                                    item.moves.push({f: indexFil - it, c: indexCol})
+                                }
+                                break
+                            }
+                            it += 1
+                        }
+                        //Iterar al sur
+                        it = 1
+                        for(let i = indexFil; i < 9; i ++){
+                            if(this.tablero.filas[indexFil + it][indexCol].pieza == null){
+                                item.moves.push({f: indexFil + it, c: indexCol})
+                            } else{
+                                if(this.tablero.filas[indexFil + it][indexCol].color != item.color){
+                                    item.moves.push({f: indexFil + it, c: indexCol})
+                                }
+                                break
+                            }
+                            it += 1
+                        }
+                        //Iterar al este
+                        it = 1
+                        for(let i = indexCol; i < 8; i ++){
+                            if(this.tablero.filas[indexFil][indexCol + it].pieza == null){
+                                item.moves.push({f: indexFil, c: indexCol + it})
+                            } else{
+                                if(this.tablero.filas[indexFil][indexCol + it].color != item.color){
+                                    item.moves.push({f: indexFil, c: indexCol + it})
+                                }
+                                break
+                            }
+                            it += 1
+                        }
+                        //Iterar al oeste
+                        it = 1
+                        for(let i = indexCol; i > 0; i --){
+                            if(this.tablero.filas[indexFil][indexCol - it].pieza == null){
+                                item.moves.push({f: indexFil, c: indexCol - it})
+                            } else{
+                                if(this.tablero.filas[indexFil][indexCol - it].color != item.color){
+                                    item.moves.push({f: indexFil, c: indexCol - it})
+                                }
+                                break
+                            }
+                            it += 1
+                        }
+                    }
+
+                    //MOVIMIENTOS POSIBLES DEL SOLDADO
+                    else if(item.pieza == "soldado"){
+                        if(item.color == "rojo"){
+                            if(indexFil > 5){ // Solo para arriba
+                                if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil - 1, c: indexCol})
+                                }
+                            } else{ // Norte, este y oeste
+                                if(indexCol != 8){ // Oeste
+                                    if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil, c: indexCol + 1})
+                                    }
+                                }
+                                if(indexCol != 0){
+                                    if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil, c: indexCol - 1})
+                                    }
+                                }
+                                if(indexFil != 0){
+                                    if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color ){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil - 1, c: indexCol})
+                                    }
+                                }
+                            }
+                        } else{
+                            if(indexFil <= 5){ // Solo para abajo
+                                if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                    //COMPROBAR JAQUE
+                                    item.moves.push({f: indexFil + 1, c: indexCol})
+                                }
+                            } else{ // Norte, este y oeste
+                                if(indexCol != 8){ // Oeste
+                                    if (this.tablero.filas[indexFil][indexCol + 1].pieza == null || this.tablero.filas[indexFil][indexCol + 1].color != item.color){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil, c: indexCol + 1})
+                                    }
+                                }
+                                if(indexCol != 0){
+                                    if (this.tablero.filas[indexFil][indexCol - 1].pieza == null || this.tablero.filas[indexFil][indexCol - 1].color != item.color){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil, c: indexCol - 1})
+                                    }
+                                }
+                                if(indexFil != 9){
+                                    if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
+                                        //COMPROBAR JAQUE
+                                        item.moves.push({f: indexFil + 1, c: indexCol})
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // -------------------------------------------------------------------------------------------------
+                    //MOVIMIENTOS POSIBLES DE LA CANYON
+                    else if(item.pieza == "canyon"){
+                        //Iterar al norte
+                        let it = 1
+                        let saltar = false
+                        for(let i = indexFil; i > 0; i --){
+                            if(this.tablero.filas[indexFil - it][indexCol].pieza == null){
+                                if(!saltar){
+                                    //console.log("MOVEMOS")
+                                    item.moves.push({f: indexFil - it, c: indexCol})
+                                } /*else{
+                                    console.log("VOLAMOS")
+                                }*/
+                                
+                            } else{ // Encontramos una pieza
+                                if(this.tablero.filas[indexFil - it][indexCol].color != item.color){
+                                    if(saltar){
+                                        console.log("COMEMOS")
+                                        item.moves.push({f: indexFil - it, c: indexCol})
+                                        break
+                                    } else{
+                                        if(saltar){
+                                            console.log("NOS CAEMOS")
+                                            break
+                                        } else{
+                                            //console.log("SALTAMOS")
+                                            saltar = true
+                                        }
+                                    }
+                                } else {// SALTAR
+                                    if(saltar){
+                                        //console.log("NOS CAEMOS")
+                                        break
+                                    } else{
+                                        //console.log("SALTAMOS")
+                                        saltar = true
+                                    }
+                                }
+                            }
+                            it += 1
+                        }
+                        //Iterar al sur
+                        it = 1
+                        saltar = false
+                        for(let i = indexFil; i < 9; i ++){
+                            if(this.tablero.filas[indexFil + it][indexCol].pieza == null){
+                                if(!saltar){
+                                    //console.log("MOVEMOS")
+                                    item.moves.push({f: indexFil + it, c: indexCol})
+                                } /*else{
+                                    console.log("VOLAMOS")
+                                }*/
+                                
+                            } else{ // Encontramos una pieza
+                                if(this.tablero.filas[indexFil + it][indexCol].color != item.color){
+                                    if(saltar){
+                                        //console.log("COMEMOS")
+                                        item.moves.push({f: indexFil + it, c: indexCol})
+                                        break
+                                    } else{
+                                        if(saltar){
+                                            //console.log("NOS CAEMOS")
+                                            break
+                                        } else{
+                                            //console.log("SALTAMOS")
+                                            saltar = true
+                                        }
+                                    }
+                                } else {// SALTAR
+                                    if(saltar){
+                                        //console.log("NOS CAEMOS")
+                                        break
+                                    } else{
+                                        //console.log("SALTAMOS")
+                                        saltar = true
+                                    }
+                                }
+                            }
+                            it += 1
+                        }
+                        //Iterar al este
+                        it = 1
+                        saltar = false
+                        for(let i = indexCol; i < 8; i ++){
+                            if(this.tablero.filas[indexFil][indexCol + it].pieza == null){
+                                if(!saltar){
+                                    //console.log("MOVEMOS")
+                                    item.moves.push({f: indexFil, c: indexCol + it})
+                                } else{
+                                    //console.log("VOLAMOS")
+                                }
+                                
+                            } else{ // Encontramos una pieza
+                                if(this.tablero.filas[indexFil][indexCol + it].color != item.color){
+                                    if(saltar){
+                                        //console.log("COMEMOS")
+                                        item.moves.push({f: indexFil, c: indexCol  + it})
+                                        break
+                                    } else{
+                                        if(saltar){
+                                            //console.log("NOS CAEMOS")
+                                            break
+                                        } else{
+                                            //console.log("SALTAMOS")
+                                            saltar = true
+                                        }
+                                    }
+                                } else {// SALTAR
+                                    if(saltar){
+                                        //console.log("NOS CAEMOS")
+                                        break
+                                    } else{
+                                        //console.log("SALTAMOS")
+                                        saltar = true
+                                    }
+                                }
+                            }
+                            it += 1
+                        }
+                        //Iterar al oeste
+                        it = 1
+                        saltar = false
+                        for(let i = indexCol; i > 0; i --){
+                            if(this.tablero.filas[indexFil][indexCol - it].pieza == null){
+                                if(!saltar){
+                                    //console.log("MOVEMOS")
+                                    item.moves.push({f: indexFil, c: indexCol - it})
+                                } else{
+                                    ////console.log("VOLAMOS")
+                                }
+                                
+                            } else{ // Encontramos una pieza
+                                if(this.tablero.filas[indexFil][indexCol - it].color != item.color){
+                                    if(saltar){
+                                       //console.log("COMEMOS")
+                                        item.moves.push({f: indexFil, c: indexCol  - it})
+                                        break
+                                    } else{
+                                        if(saltar){
+                                            //console.log("NOS CAEMOS")
+                                            break
+                                        } else{
+                                            //console.log("SALTAMOS")
+                                            saltar = true
+                                        }
+                                    }
+                                } else {// SALTAR
+                                    if(saltar){
+                                        //console.log("NOS CAEMOS")
+                                        break
+                                    } else{
+                                        //console.log("SALTAMOS")
+                                        saltar = true
+                                    }
+                                }
+                            }
+                            it += 1
+                        }
+                    }
+                        
+                    item.moves.forEach(move => {
+                        this.tablero.filas[move.f][move.c].esPista = true;
+                    });
+                }
+            }
+       },
 
         /*
          * Devuelve la casilla, pieza, y color de la pieza seleccionada
