@@ -6,7 +6,6 @@ import './assets/demo/flags/flags.css';
 
 import axios from 'axios';
 
-import Chat from 'vue3-beautiful-chat'
 import { createApp, reactive } from 'vue';
 import router from './router';
 import AppWrapper from './AppWrapper.vue';
@@ -137,7 +136,6 @@ app.config.globalProperties.$appState = reactive({ theme: 'saga-blue', darkTheme
 app.config.globalProperties.$loggedStatus = reactive({logged: false});
 app.config.globalProperties.$playing = reactive({game: false});
 
-app.use(Chat);
 app.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });
 app.use(ConfirmationService);
 app.use(ToastService);
