@@ -19,6 +19,23 @@
         <!--FEATURES-->
         <div class="py-4 px-4 lg:px-8 mx-0 lg:mx-8" id="features">
             <div class="grid justify-content-center">
+                <div class="col-12 text-center mt-8">
+                    <h2 class="text-900 font-normal mb-2">Reglas del juego</h2>
+                    <span class="text-600 text-2xl">Puede que aún no conozcas el Xiangqi. ¡Echa un vistazo a sus reglas!</span>
+                    <div class="card">
+                        <div class="flex justify-content-center flex-wrap card-container yellow-container">
+                            <div class="flex align-items-center justify-content-center mt-4 w-20rem">
+                                <gameRules/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--FEATURES-->
+        <div class="py-4 px-4 lg:px-8 mx-0 lg:mx-8" id="features">
+            <div class="grid justify-content-center">
                 <div class="col-12 text-center mt-8 mb-4">
                     <h2 class="text-900 font-normal mb-2">Características</h2>
                     <span class="text-600 text-2xl">Xiangqi online te ofrece todo esto ¡Y más!</span>
@@ -174,6 +191,7 @@
 
 <script>
 import loginButton from '../components/Login.vue';
+import gameRules from '../components/game/GameRules.vue';
 export default {
     inject: ['$accounts'],
     created() {
@@ -182,6 +200,7 @@ export default {
     },
     components: {
         loginButton,
+        gameRules
     },
 }
 </script>
