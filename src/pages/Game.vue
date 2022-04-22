@@ -722,7 +722,7 @@ export default  {
                             //MOVIMIENTOS POSIBLES DEL SOLDADO
                             else if(this.tablero.filas[j][i].pieza == "soldado"){
                                 if(this.tablero.filas[j][i].color == "rojo"){
-                                    if(j > 5){ // Solo para arriba
+                                    if(j > 4){ // Solo para arriba
                                         if (this.tablero.filas[j - 1][i].pieza == null || this.tablero.filas[j - 1][i].color != this.tablero.filas[j][i].color){
                                             totalMoves += this.moveJaque(j, i, j - 1, i,pMover ,false, reyCheck, amenaza)
                                         }
@@ -744,7 +744,7 @@ export default  {
                                         }
                                     }
                                 } else{
-                                    if(j <= 5){ // Solo para abajo
+                                    if(j <= 4){ // Solo para abajo
                                         if (this.tablero.filas[j + 1][i].pieza == null || this.tablero.filas[j + 1][i].color != this.tablero.filas[j][i].color ){
                                             totalMoves += this.moveJaque(j, i, j + 1, i,pMover ,false, reyCheck, amenaza)
                                         }
@@ -1786,7 +1786,7 @@ export default  {
                     //MOVIMIENTOS POSIBLES DEL SOLDADO
                     else if(item.pieza == "soldado"){
                         if(item.color == "rojo"){
-                            if(indexFil > 5){ // Solo para arriba
+                            if(indexFil > 4){ // Solo para arriba
                                 if (this.tablero.filas[indexFil - 1][indexCol].pieza == null || this.tablero.filas[indexFil - 1][indexCol].color != item.color){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil - 1, c: indexCol})
@@ -1812,7 +1812,7 @@ export default  {
                                 }
                             }
                         } else{
-                            if(indexFil <= 5){ // Solo para abajo
+                            if(indexFil <= 4){ // Solo para abajo
                                 if (this.tablero.filas[indexFil + 1][indexCol].pieza == null || this.tablero.filas[indexFil + 1][indexCol].color != item.color ){
                                     //COMPROBAR JAQUE
                                     item.moves.push({f: indexFil + 1, c: indexCol})
