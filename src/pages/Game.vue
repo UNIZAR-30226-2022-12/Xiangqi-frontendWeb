@@ -3,23 +3,8 @@
         <!--BARRA LATERAL-->
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
-                <div class="field col-12 mb-0">
-                    <h3 class="m-0 p-0">Partida contra {{rival.name}}</h3>
-                    <div class="flex card-container overflow-hidden mt-4">
-                        <div class="flex-none align-items-left justify-content-left mr-3">
-                            <img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50 ml-1 mt-1 mb-2" style="" alt="foto de perfil">
-                        </div>
-                        <div class="flex-grow-1 align-items-left justify-content-left">
-                            <p>
-                                <img class="flag h-auto mr-1" :class="[rival.country.flag]" src="images/flags/flag_placeholder.png">
-                                 #{{ rival.nickname }}
-                            </p>
-                            <p>Puesto en ranking: {{ rival.range }} </p>
-                            <p>Cumpleaños: {{ rival.birthday }} </p>
-                        </div>
-                    </div>
-                    <Button class="col-12 w-full mt-2 w-full p-button-raised font-semibold h-3rem  font-semibold" style="border-radius: 1rem" label="Añadir a mis amigos" icon="pi pi-user-plus"/>
-                </div>
+                <!--rivalInfo-->
+                <rivalInfo :isFriend="false"/>
                 <Divider />
                 <!--Temporizador-->
                 <div class="field col-12 mb-0">
@@ -28,46 +13,16 @@
                 </div>
                 <Button v-on:click="confirm()" class="col-12 mt-2  mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 <Divider />
+                <!--Chat-->
                 <chat />
                 <Divider />
-                <!--Tema de los iconos-->
-                <div class="field col-12 mb-0">
-                    <h5>Selección de temas:</h5>
-                    <label>Seleccione el tema de sus iconos:</label><br>
-                    <Dropdown class="w-full" v-model="selectedPiecesSet" :options="setsPieces" optionLabel="name" :filter="true" placeholder="Seleccione un set de piezas">
-                        <template #option="slotProps">
-                            <div class="card">
-                                <div class="card-container blue-container overflow-hidden">
-                                    <div class="flex">
-                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" :src="'images/themes/pieces/' + slotProps.option.id + '/canyonrojo.svg'" />
-                                        <div class="flex align-items-center justify-content-center font-bold">{{slotProps.option.name}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </Dropdown>
-                </div>
-                <!--Tema del tablero-->
-                <div class="field col-12 mb-0">
-                    <label>Seleccione el tema de su tablero:</label><br>
-                    <Dropdown class="w-full" v-model="selectedBoard" :options="setsBoards" optionLabel="name" :filter="true" placeholder="Seleccione un tema para el tablero">
-                        <template #option="slotProps">
-                            <div class="card">
-                                <div class="card-container blue-container overflow-hidden">
-                                    <div class="flex">
-                                        <img class="h-3rem flex align-items-center justify-content-center mr-3" style="border-radius: 0.5rem" :src="'images/themes/boards/' + slotProps.option.id + '.jpg'" />
-                                        <div class="flex align-items-center justify-content-center font-bold">{{slotProps.option.name}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </Dropdown>
-                </div>
+                <!--Theme changer-->
+                <themeChanger ref="themeChanger" @change-board="changeBoard" @change-icons="changeIcons"/>
             </div>
         </div>
 
         <!--Tablero-->
-        <div class="col-12 lg:col-8 tema-fondo m-auto board-width" :class="{'wooden1': selectedBoard.id == '1', 'wooden2': selectedBoard.id == '2', 'wooden3': selectedBoard.id == '3', 'metal1': selectedBoard.id == '4', 'metal2': selectedBoard.id == '5', 
+        <div v-if="selectedPiecesSet!=null" class="col-12 lg:col-8 tema-fondo m-auto board-width" :class="{'wooden1': selectedBoard.id == '1', 'wooden2': selectedBoard.id == '2', 'wooden3': selectedBoard.id == '3', 'metal1': selectedBoard.id == '4', 'metal2': selectedBoard.id == '5', 
             'marbled1': selectedBoard.id == '6', 'marbled2': selectedBoard.id == '7', 'marbled3': selectedBoard.id == '8', 'marbled4': selectedBoard.id == '9', 'checker1': selectedBoard.id == '10', 'concrete1': selectedBoard.id == '11', 'concrete2': selectedBoard.id == '12'}">
             <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
                 <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila)" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center">
@@ -89,11 +44,15 @@
 
 <script>
 
+import rivalInfo from '../components/game/RivalInfo.vue'
 import chat from '../components/game/Chat.vue';
+import themeChanger from '../components/game/ThemeChanger.vue';
 export default  {
 	inject: ['$accounts'],
     components: {
+        rivalInfo,
         chat,
+        themeChanger,
     },
       data() {
         return {
@@ -130,46 +89,16 @@ export default  {
             
             //BARRA LATERAL
             //------------------------------------------------------
-            rival: {
-                mail:'',
-                nickname: 'juanksp', 
-                name: 'Juan Plo Andrés', 
-                birthday: '05/10/2001', 
-                country: {
-                    flag: 'flag-es',
-                },
-                range: '2',
-                points: '',
-                registerDate: '20/02/2022',
-            },
-            profileImage: 'images/profilePlaceholder.svg',
+
 
             timer: '00:00:00',
 
-            //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
-            setsPieces: [
-                {id:'1', name: 'Iconos occidentales'},
-                {id:'2', name: 'Iconos en Chino'},
-            ],
+            //Set de piezas seleccionado por defecto, lo ponemos en el themechanger
+            selectedPiecesSet: null,
 
-            //Set de piezas seleccionado por defecto
-            selectedPiecesSet: {id: '1', name: 'Iconos occidentales'},
+            //Tema por defecto del tablero, lo ponemos en el themechanger
+            selectedBoard: null,
 
-            //Estos son los sets que tiene el usuario, habra que pedirlos al back
-            setsBoards: [
-                {id: '1', name: 'Madera 1'},
-                {id: '2', name: 'Madera 2'},
-                {id: '3', name: 'Madera 3'},
-                {id: '4', name: 'Metal 1'},
-                {id: '5', name: 'Metal 2'},
-                {id: '6', name: 'Marmol 1'},
-                {id: '7', name: 'Marmol 2'},
-                {id: '8', name: 'Marmol 3'},
-                {id: '9', name: 'Marmol 4'},
-                {id: '10', name: 'Checker 1'},
-                {id: '11', name: 'Cemento 1'},
-                {id: '12', name: 'Cemento 2'},
-            ],
             //Turno actual
             turno: 1,
             reyRojo:{
@@ -180,10 +109,6 @@ export default  {
                 fil: 0,
                 col:4
             },
-
-
-            //Tema por defecto del tablero
-            selectedBoard: {id: '1', name: 'Madera 1'},
 
             //Casilla seleccionada por defecto
             selectedTile: null,
@@ -201,7 +126,17 @@ export default  {
 		this.$loggedStatus.logged = false;
         this.$playing.game = true;
 	},
+    mounted(){
+        this.selectedPiecesSet = this.$refs.themeChanger.getSelectedPiecesSet();
+        this.selectedBoard = this.$refs.themeChanger.getSelectedBoard();
+    },
     methods: {
+        changeBoard(board){
+            this.selectedBoard = board;
+        },
+        changeIcons(piecesSet){
+            this.selectedPiecesSet = piecesSet;
+        },
         /*
         *---------------------------------------------------------------------------------------------------------------
         *---------------------------------------------------------------------------------------------------------------
