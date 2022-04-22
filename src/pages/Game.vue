@@ -36,7 +36,7 @@
                         <!--Hemos seleccionado una pieza-->
                         <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col && this.selectedPiece.selected" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">
                         <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza-->
-                        <img v-else-if="itemFila.esPista" class="pieza-responsive" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
+                        <img v-else-if="itemFila.esPista && this.selectedPiece.selected" class="pieza-responsive" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila)" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
                         <img v-else class="pieza-responsive" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">  
                     </div>
                 </div>
