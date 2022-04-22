@@ -6,7 +6,7 @@
           <div class="h-20rem" :class="{'chat-dark-bkg': this.$appState.darkTheme}" id="chat" style="overflow-y: scroll; overflow-x: hidden">
               <div id="message" v-for="(item, index) in messages" :key="index">
                   <div v-if="item.mine" class="flex justify-content-end flex-wrap">
-                      <div class="bg-blue-500 font-bold text-white m-2" style="border-radius: 1.5rem; padding: 0.8rem">
+                      <div class="bg-green-500 font-bold text-white m-2" style="border-radius: 1.5rem; padding: 0.8rem">
                           <p class="m-0 text-sm">{{ item.nickname }}</p>
                           <p class="m-0">{{ item.message }}</p>
                       </div>
@@ -81,7 +81,7 @@ export default {
   border-top-right-radius: 4px;
 }
 
-.chat-ligh {
-  border-color: #ced4da !important;
+.chat-light {
+  border-color: #CED4DA !important;
 }
 </style>
