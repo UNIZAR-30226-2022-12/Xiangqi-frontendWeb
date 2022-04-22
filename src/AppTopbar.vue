@@ -18,12 +18,12 @@
 			<i class="pi pi-ellipsis-v"></i>
 		</button>
 		<ul v-if="$loggedStatus.logged || $playing.game" class="layout-topbar-menu hidden lg:flex origin-top">
-			<li>
+			<!--<li>
 				<button class="p-link layout-topbar-button" v-on:click="goToProfile()">
 					<i class="pi pi-user"></i>
 					<span>Profile</span>
 				</button>
-			</li>
+			</li>-->
 			<li>
 				<button id="miboton" class="p-link layout-topbar-button" @click="toggle" aria:haspopup="true" aria-controls="overlay_panel" >
 					<i class="pi pi-cog"></i>

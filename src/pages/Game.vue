@@ -16,6 +16,9 @@
                 <!--Chat-->
                 <chat />
                 <Divider />
+                <!--Game rules-->
+                <gameRules />
+                <Divider />
                 <!--Theme changer-->
                 <themeChanger ref="themeChanger" @change-board="changeBoard" @change-icons="changeIcons"/>
             </div>
@@ -47,12 +50,15 @@
 import rivalInfo from '../components/game/RivalInfo.vue'
 import chat from '../components/game/Chat.vue';
 import themeChanger from '../components/game/ThemeChanger.vue';
+import gameRules from '../components/game/GameRules.vue';
+
 export default  {
 	inject: ['$accounts'],
     components: {
         rivalInfo,
         chat,
         themeChanger,
+        gameRules
     },
       data() {
         return {
@@ -1483,15 +1489,16 @@ export default  {
 
        moves(indexFil, indexCol, item) {
             //Hay otro sonido "capture.wav" que reproduciremos al caoturar una pieza
+            var audio = new Audio('sounds/move.wav');
+            audio.loop = false;
+            audio.play();
+
             if (this.selectedPiece.fil != null) {
                 console.log("Entramos", this.selectedPiece)
                 this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
                     this.tablero.filas[move.f][move.c].esPista = false;
                 });
             }
-            var audio = new Audio('sounds/move.wav');
-            audio.loop = false;
-            audio.play();
             this.selectedPiece.fil = indexFil;
             this.selectedPiece.col = indexCol;
             this.selectedPiece.selected = true;
@@ -1501,7 +1508,7 @@ export default  {
                     this.tablero.filas[move.f][move.c].esPista = true;
                 });
                 console.log("Ya visto")
-            } else{
+            } else {
                 item.moves = []
                 item.turno = this.turno
 
