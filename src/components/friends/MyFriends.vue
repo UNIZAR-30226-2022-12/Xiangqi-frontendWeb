@@ -58,19 +58,19 @@ export default {
 
 		//this.customerService = new CustomerService();
         this.friends= [
-                {nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain'},
-                {nickname: 'John', name:"John Doe", flag: 'flag-fr', country: 'France'},
-                {nickname: 'Juanksp', name:"Juan Plo", flag: 'flag-es', country: 'Spain'},
-                {nickname: 'AlexZheng', name:"Alex Zheng", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-				{nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-                {nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain'},
+                {id: '1', nickname: 'John', name:"John Doe", flag: 'flag-fr', country: 'France'},
+                {id: '1', nickname: 'Juanksp', name:"Juan Plo", flag: 'flag-es', country: 'Spain'},
+                {id: '1', nickname: 'AlexZheng', name:"Alex Zheng", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
         ];
 	},      
 }

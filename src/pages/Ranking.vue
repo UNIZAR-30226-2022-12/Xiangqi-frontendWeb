@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img :src="data.image" class="foto-perfil-table" style="vertical-align: middle">
+                                <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -87,19 +87,19 @@ export default {
 
 		//this.customerService = new CustomerService();
         this.columns= [
-                {position: '1', image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
-                {position: '2', image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
-                {position: '3', image: 'images/profilePlaceholder.svg', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
-                {position: '4', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '5', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '6', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '7', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '8', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '9', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '10', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-				{position: '11', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '12', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {position: '13', image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '3', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '4', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '6', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '7', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '8', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '9', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '10', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+				{id:'1,', position: '11', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '12', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'1,', position: '13', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
         ];
 	},
 	methods: {

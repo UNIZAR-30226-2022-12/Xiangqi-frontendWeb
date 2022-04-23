@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img :src="data.image" class="foto-perfil-table" style="vertical-align: middle">
+                                <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -79,19 +79,19 @@ export default {
 
 		//this.customerService = new CustomerService();
         this.columns= [
-                {image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-				{image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
         ];
 	},
     mounted() {
