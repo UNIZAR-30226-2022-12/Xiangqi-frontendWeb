@@ -40,7 +40,7 @@ const routes = [
     },
     {
         path: '/friends',
-        name: 'friends',
+        name: 'Amigos',
         component: Friends,
     },
     {

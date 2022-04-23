@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img :src="data.image" class="foto-perfil" style="vertical-align: middle">
+                                <img :src="data.image" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -124,9 +124,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
-.foto-perfil {
+.foto-perfil-table {
     display: block; 
 	vertical-align: middle;
 	width: 2rem;
