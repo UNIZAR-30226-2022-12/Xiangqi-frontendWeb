@@ -15,27 +15,27 @@ import RecPwd from './pages/RecPwd.vue';
 const routes = [
     {
         path: '/',
-        name: 'login',
+        name: 'Xiangqi Online',
         component: Login,
     },
     {
         path: '/itsukieslamejorquintilliza',
-        name: 'validate',
+        name: 'Validacion de correo',
         component: Validate,
     },
     {
         path: '/game',
-        name: 'game',
+        name: 'Partida',
         component: Game,
     },
     {
         path: '/profile',
-        name: 'profile',
+        name: 'Perfil',
         component: Profile,
     },
     {
         path: '/otherProfile/:id',
-        name: 'otherProfile',
+        name: 'Perfil de otro usuario',
         component: OtherProfile,
     },
     {
@@ -45,27 +45,27 @@ const routes = [
     },
     {
         path: '/ranking',
-        name: 'ranking',
+        name: 'Ranking',
         component: Ranking,
     },
     {
         path: '/store',
-        name: 'store',
+        name: 'Tienda',
         component: Store,
     },
     {
         path: '/historial',
-        name: 'historial',
+        name: 'Historial',
         component: Historial,
     },
     {
         path: '/myBoards',
-        name: 'myBoards',
+        name: 'Mis tableros',
         component: MyBoards,
     },
     {
         path: '/recPwd',
-        name: 'recPwd',
+        name: 'Recuperar contraseña',
         component: RecPwd,
     },
     {
@@ -84,5 +84,10 @@ router.resolve({
     name: 'not-found',
     params: { pathMatch: ['not', 'found'] },
 }).href; // '/not/found'
+
+router.beforeEach((to, from, next) => {
+    document.title = to.name;
+    next();
+});
 
 export default router;

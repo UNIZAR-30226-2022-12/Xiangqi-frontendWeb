@@ -27,6 +27,7 @@ export default {
 		otherStatics,
 	},
 	created() {
+		document.title = 'Perfil de ' + this.perfil.nickname;
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
         this.$accounts.getProfile(this.$route.params.id).then(response => {

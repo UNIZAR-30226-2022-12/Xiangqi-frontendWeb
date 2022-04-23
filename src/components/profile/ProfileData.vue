@@ -83,6 +83,9 @@ export default {
 	components: {
 		profileEdit
 	},
+	created() {
+		document.title = 'Perfil de ' + this.perfil.nickname;
+	}
 }
 </script>
 

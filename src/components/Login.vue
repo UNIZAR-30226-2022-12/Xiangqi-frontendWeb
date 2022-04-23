@@ -394,13 +394,16 @@ export default {
       this.$accounts.login(this.vLogin$.login.email.$model, this.vLogin$.login.password.$model).then(success => {
         if (success.ok) {
           if (success.validacion){ // Correo verificado, y ok, entramos
+          console.log("entramos")
             this.dialog.display = false;
             this.login.loging = false;
-            this.$router.push({
-              name: 'profile',
+            
+            //this.$router.push({
+              //name: 'profile',
               //params: { id: id, myProfile: true }
-            });
+            //});
             this.$loggedStatus.logged = true;
+            this.$router.push('/profile');
           }
           else{
             this.login.loging = false;

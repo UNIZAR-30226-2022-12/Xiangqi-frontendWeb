@@ -1,7 +1,7 @@
 <!--BOTÓN Y DIALOGO PARA CREAR UN JUEGO NUEVO-->
 <template>
   <Button v-on:click="this.display = true" class="col-12 mt-2  mb-2 w-full p-button-raised font-semibold h-3rem" style="border-radius: 1rem" icon="pi pi-search" label="Ver reglas del juego"/>
-  <Dialog v-model:visible="display" class="dialogo-partida" :draggable="false" :modal="true"> <!--v-model:visible asociado con variable contentStyle="padding: 0px;"-->
+  <Dialog v-model:visible="display" class="dialogo-rules" :draggable="false" :modal="true"> <!--v-model:visible asociado con variable contentStyle="padding: 0px;"-->
     <template #header>
       <h3 class="mr-2">Reglas del juego</h3> 
     </template>
@@ -55,7 +55,7 @@ export default {
 
 <style>
 
-.dialogo-partida {
+.dialogo-rules {
   background-color: var(--surface-a); /* Get el current background del tema */
   border-radius: 15px;
   animation-duration: 0.6s;
