@@ -278,7 +278,7 @@
                       </span>
                     </div>
                     <small v-if="(v$.createAc.confPassword.$invalid && createAc.submitted) || v$.createAc.confPassword.$pending.$response" class="p-error">{{'Por favor, especifique una contraseña'}}</small>
-                    <small v-else-if="(v$.createAc.password.$model != v$.createAc.confPassword.$model && createAc.submitted)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
+                    <small v-else-if="(v$.createAc.password.$model != v$.createAc.confPassword.$model)" class="p-error">{{'Las contraseñas no coinciden'}}</small>
                   </div>
                   <!--CONDICIONES-->
                   <div class="field-checkbox">
