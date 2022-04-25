@@ -85,7 +85,6 @@ export default {
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
-		//this.customerService = new CustomerService();
         this.columns= [
                 {id:'1,', position: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
                 {id:'1,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},

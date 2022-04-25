@@ -25,7 +25,7 @@
 </template>
 
 <script>
-
+import io from "socket.io-client"
 
 export default {
   data() {
@@ -39,6 +39,7 @@ export default {
         'pikanachi',
         'alexzheng',
       ],
+      socket: null,
     }
   },
   methods: {
@@ -47,8 +48,19 @@ export default {
     },
     nuevaPartida() {
       //Pasarle al back las opciones de la partida
-      this.display = false;
-      this.$router.push('/game');
+      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000");
+      this.socket.on("returnConnect" ,(data)=>{
+          console.log(data)
+          this.socket.off('returnConnect')
+      })
+      this.socket.emit("searchRandomOpponent",{'id':4}, ()=> {
+        this.socket.on("returnSearch" ,(data)=>{
+          console.log(data)
+        })
+      })
+      console.log("CLICK")
+      //this.display = false;
+      //this.$router.push('/game');
     }
   }
 }

@@ -205,7 +205,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 /* Este estilo se activa cuando el tamaño de la ventana es > 768px */
 @media (min-width: 768px) {

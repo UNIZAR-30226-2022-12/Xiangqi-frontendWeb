@@ -308,7 +308,6 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { email, required, minLength, maxLength, helpers } from "@vuelidate/validators";
-//import io from "socket.io-client"
 //Debe contener al menos mayusculas, minusculas y numeros [0-9]{2} le fuerza a q sean 2 numeros
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 

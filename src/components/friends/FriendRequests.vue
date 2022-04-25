@@ -53,7 +53,6 @@
             </Column>
         </DataTable>    
     </div>
-	
 </template>
 
 <script>

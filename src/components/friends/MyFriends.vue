@@ -56,7 +56,6 @@ export default {
         
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
-		//this.customerService = new CustomerService();
         this.friends= [
                 {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain'},
                 {id: '1', nickname: 'John', name:"John Doe", flag: 'flag-fr', country: 'France'},
