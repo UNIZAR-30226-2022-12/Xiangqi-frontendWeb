@@ -34,14 +34,15 @@ export default {
     return {
       //CHAT
       //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
+      //CAMBIAR A SI EL ID == AL DEL LOCALSTORAGE ES MIO
       messages: [
-          {nickname: 'pikanachi', message: 'Hola', mine: true},
-          {nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
-          {nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
-          {nickname: 'juanksp', message: 'soy muy gracioso porque me gusta Itsuki, no como Nacho que es un Lolicon', mine: false},
-          {nickname: 'pikanachi', message: 'jaja Lolicon pues que te den por culo un montón', mine: true},
-          {nickname: 'pikanachi', message: 'bueno la cosa, esto el chat y ta wapo', mine: true},
-          {nickname: 'juanksp', message: 'ta wapo, ta wapo', mine: false},
+          {id: '1', nickname: 'pikanachi', message: 'Hola', mine: true},
+          {id: '1', nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
+          {id: '2', nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
+          {id: '2', nickname: 'juanksp', message: 'soy muy gracioso porque me gusta Itsuki, no como Nacho que es un Lolicon', mine: false},
+          {id: '1', nickname: 'pikanachi', message: 'jaja Lolicon pues que te den por culo un montón', mine: true},
+          {id: '1', nickname: 'pikanachi', message: 'bueno la cosa, esto el chat y ta wapo', mine: true},
+          {id: '2', nickname: 'juanksp', message: 'ta wapo, ta wapo', mine: false},
       ],
       //Aqui es donde se pone el nuevo mensaje a enviar, habrá que appendearlo a la lista de mensajes para mostrarlo en el front tbn
       message: null,

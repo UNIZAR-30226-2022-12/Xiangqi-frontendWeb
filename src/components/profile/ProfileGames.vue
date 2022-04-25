@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img :src="data.image" class="foto-perfil-table" style="vertical-align: middle">
+                                <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -77,32 +77,19 @@ export default {
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
             loading: true,
-            selectedRival: null
+            selectedRival: null,
+            /*
+            games: [
+                {id: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
+                {id: '5', nickname: 'John', flag: 'flag-fr', country: 'France', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {id: '5', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
+                {id: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/02/2020', lastMovDate:'01/01/2021', myTurn: true},
+                {id: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2022', lastMovDate:'01/01/2021', myTurn: true},
+                {id: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
+            ]*/
         }
     },
-    
-    created() {
-        /*this.customerService = new CustomerService();
-        this.columns= [
-                {image: 'images/profilePlaceholder.svg', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
-                {image: 'images/profilePlaceholder.svg', nickname: 'John', flag: 'flag-fr', country: 'France', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/02/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2022', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'10/20/2022', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-                {image: 'images/profilePlaceholder.svg', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: true},
-        ];*/
-    },
+
     mounted() {
         this.loading = false;
     },
