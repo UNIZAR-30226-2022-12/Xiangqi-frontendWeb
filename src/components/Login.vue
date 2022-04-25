@@ -355,7 +355,7 @@ export default {
       this.createAc.submitDisabled = true;
 
       this.v$.createAc.date.$model.setDate(this.v$.createAc.date.$model.getDate() + 1);
-      let date = new Date(this.v$.createAc.date.$model)
+      let date = new Date(this.v$.createAc.date.$model).toISOString()
 
       if (this.v$.createAc.email.$invalid || this.v$.createAc.password.$invalid || this.v$.createAc.confPassword.$invalid || this.v$.createAc.nickname.$invalid || this.v$.createAc.date.$invalid || this.v$.createAc.country.$invalid || this.v$.createAc.accept.$invalid || this.v$.createAc.name.$invalid) { //|| this.v$.imagen.$invalid) {
         this.createAc.submitDisabled = false;
@@ -363,6 +363,7 @@ export default {
       }
       // La form ha sido validada correctamente en front
       this.createAc.creating = true;
+
       this.$accounts.createAccount(this.v$.createAc.nickname.$model, this.v$.createAc.name.$model, this.v$.createAc.email.$model, date, this.v$.createAc.country.$model, this.v$.createAc.password.$model,this.Images).then(success => { //this.createAc.image
         if (success) {
           this.createAc.creating = false;
