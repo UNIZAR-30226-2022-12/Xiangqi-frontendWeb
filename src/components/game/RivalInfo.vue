@@ -24,7 +24,15 @@ export default {
         isFriend: {
             type: Boolean,
             required: true
-        }
+        },
+        perfil: {
+            type: Object,
+            required: false
+        },
+        profileImage: {
+            type: String,
+            required: true
+        },
     },
     data() {
         return {
@@ -40,8 +48,10 @@ export default {
                 points: '',
                 registerDate: '20/02/2022',
             },
-            profileImage: 'images/profilePlaceholder.svg',
         }    
+    },
+    created(){
+        this.rival = this.perfil
     }
 }
 </script>

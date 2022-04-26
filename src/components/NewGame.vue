@@ -51,14 +51,20 @@ export default {
       if(this.socket == null){
         this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
       }
-      this.socket.on("returnConnect" ,(data)=>{
+      this.socket.emit("searchRandomOpponent",{'id':localStorage.getItem("id")})
+      this.socket.on("startGame" ,(data)=>{
           console.log(data)
-          this.socket.off('returnConnect')
-      })
-      this.socket.emit("searchRandomOpponent",{'id':4}, ()=> {
-        this.socket.on("returnSearch" ,(data)=>{
-          console.log(data)
-        })
+          this.display = false;
+          localStorage.setItem("idOponente", data.idOponent)
+          localStorage.setItem("idSala", data.idOponent)
+          if(data.rojo){
+            localStorage.setItem("color", "rojo")
+          } else {
+            localStorage.setItem("color","negro")
+          }
+          //Pasarle los parametros a game
+          this.socket.off("startGame")
+          this.$router.push('/game');
       })
       console.log("CLICK")
       //this.display = false;

@@ -4,7 +4,7 @@
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <!--rivalInfo-->
-                <rivalInfo :isFriend="false"/>
+                <rivalInfo  v-if="perfilOponent!=null" :isFriend="false" :perfil="perfilOponent" :profileImage="profileImage"/>
                 <Divider />
                 <!--Temporizador-->
                 <div class="field col-12 mb-0">
@@ -96,7 +96,9 @@ export default  {
              */              
             },
                         //Selecciona el set de piezas con el que juegas
-            playerColor: 'rojo', //negro,
+            playerColor: null, //negro,
+            perfil: null,
+            profileImage: null,
 
             //Turno actual
             turno: 1,
@@ -132,6 +134,20 @@ export default  {
     },
 	created() {
         //para ocultar de manera guarra el menu
+        this.playerColor = localStorage.getItem("color")
+        this.$accounts.getProfile(localStorage.getItem('idOponente')).then(response => {
+			this.perfil = response.perfil;
+
+
+			if (this.perfil.hasImage) {
+				// Pedir al back la foto
+				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+					this.profileImage = data;
+				});
+			} else {
+				this.profileImage = "images/profilePlaceholder.svg";
+			}
+		});
 		this.$loggedStatus.logged = false;
         this.$playing.game = true;
 	},
