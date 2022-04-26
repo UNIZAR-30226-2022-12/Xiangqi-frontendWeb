@@ -55,6 +55,37 @@ export default {
       this.socket.on("startGame" ,(data)=>{
           console.log(data)
           this.display = false;
+          //En vez de guardar en localStorage los parametros q se que te gusta
+          //Mejor pasarlos via router siue estos pasos ej:
+          
+          
+          /*
+          1- En router.js cambiar el route de game para pasarle los params por URL
+
+          {
+            path: '/game/:idOponent/:idSala/:color',
+            name: 'Partida',
+            component: Game,
+          },
+
+          2- Aqui hacer el push así pasandole los params
+
+          this.$router.push({
+            name: "game",
+            params: { idOponent: data.idOponent, idSala: data.idOponent, color: "rojo"}
+          });
+
+
+          3- En game.vue para pillar los params haz esto
+
+          this.$route.params.idOponent
+
+          this.$route.params.idSala
+
+          this.$route.params.color
+          */
+          
+          
           localStorage.setItem("idOponente", data.idOponent)
           localStorage.setItem("idSala", data.idOponent)
           if(data.rojo){
