@@ -1,19 +1,9 @@
 <template>
 	<loader v-if="this.loading"/>
-	<searchFriends @search-friends-pressed="searchFriendsPressed"/>
-	<!--<Transition name="slide-fade">
-		<div v-if="this.showResults">
-			<h3> Debe de salir la tabla con la info de la busqueda que le paso </h3>
-			<h4>Add another one</h4>
-			<h4>Add another one</h4>
-			<h4>Add another one</h4>
-			<h4>Add another one</h4>
-			<h4>Add another one</h4>
-			<h4>Add another one</h4>
-		</div>-->
-		<!-- pasarle al search table el show results!!-->
-		<searchTable/>
-	<!--</Transition>-->
+	<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
+	<searchFriends @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
+	<searchTable :show="this.showResults" :searchedItem="this.searchFriendField"/>
+	<!--<div class="animate-down" :class="{'push-down': this.showResults }">-->
 	<friendReq />
 	<myFriends />
 </template>
@@ -21,7 +11,7 @@
 <script>
 import loader from '../components/Loader.vue';
 import searchFriends from '../components/friends/SearchFriends.vue';
-//import searchTable from '../components/friends/SearchTable.vue';
+import searchTable from '../components/friends/SearchTable.vue';
 import friendReq from '../components/friends/FriendRequests.vue';
 import myFriends from '../components/friends/MyFriends.vue';
 
@@ -31,12 +21,13 @@ export default {
 		return {
 			showResults: false,
 			loading: false,
+			searchFriendField: '',
 		}
 	},
 	components: {
 		loader,
 		searchFriends,
-		//searchTable,
+		searchTable,
 		friendReq,
 		myFriends,
 	},
@@ -44,12 +35,26 @@ export default {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 	},
 	methods: {
+		//Metodos que recogen los eventos definidos en searchFriends
 		searchFriendsPressed(results){
-			console.log("eventoo");
-			console.log(results);
             this.showResults = results;
         },
+		getSearchFriendField(results) {
+			this.searchFriendField = results;
+		}
 	}
 }
 </script>
+
+<style>
+/*
+.push-down {
+	transform: translateY(1rem);
+}
+
+.animate-down {
+	transition: transform 1000ms ease-in-out;
+}
+*/
+</style>
 
