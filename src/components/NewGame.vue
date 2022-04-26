@@ -48,7 +48,9 @@ export default {
     },
     nuevaPartida() {
       //Pasarle al back las opciones de la partida
-      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3000");
+      if(this.socket == null){
+        this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+      }
       this.socket.on("returnConnect" ,(data)=>{
           console.log(data)
           this.socket.off('returnConnect')
