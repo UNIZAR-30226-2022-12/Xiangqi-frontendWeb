@@ -91,6 +91,8 @@ export default {
             color = "negro"
           }
           this.socket.off("startGame")
+          localStorage.setItem("socket", this.socket)
+          this.socket.emit("leaveRoom", {'id': data.idSala})
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
           
 
