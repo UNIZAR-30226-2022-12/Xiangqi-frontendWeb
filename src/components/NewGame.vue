@@ -84,18 +84,17 @@ export default {
 
           this.$route.params.color
           */
-          
-          
-          localStorage.setItem("idOponente", data.idOponent)
-          localStorage.setItem("idSala", data.idOponent)
-          if(data.rojo){
-            localStorage.setItem("color", "rojo")
+         var color;
+         if(data.rojo){
+            color = "rojo"
           } else {
-            localStorage.setItem("color","negro")
+            color = "negro"
           }
-          //Pasarle los parametros a game
           this.socket.off("startGame")
-          this.$router.push('/game');
+          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
+          
+
+
       })
       console.log("CLICK")
       //this.display = false;

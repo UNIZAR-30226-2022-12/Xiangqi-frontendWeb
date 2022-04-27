@@ -24,7 +24,7 @@ const routes = [
         component: Validate,
     },
     {
-        path: '/game',
+        path: '/game/:idOponent/:idSala/:color',
         name: 'Partida',
         component: Game,
     },

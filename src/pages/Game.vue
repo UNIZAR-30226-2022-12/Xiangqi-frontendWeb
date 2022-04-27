@@ -4,7 +4,7 @@
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <!--rivalInfo-->
-                <rivalInfo  v-if="perfilOponent!=null" :isFriend="false" :perfil="perfilOponent" :profileImage="profileImage"/>
+                <rivalInfo  v-if="perfil!=null" :isFriend="false" :perfil="perfil" :profileImage="profileImage"/>
                 <Divider />
                 <!--Temporizador-->
                 <div class="field col-12 mb-0">
@@ -99,6 +99,7 @@ export default  {
             playerColor: null, //negro,
             perfil: null,
             profileImage: null,
+            idSala: null,
 
             //Turno actual
             turno: 1,
@@ -134,14 +135,15 @@ export default  {
     },
 	created() {
         //para ocultar de manera guarra el menu
-        this.playerColor = localStorage.getItem("color")
-        this.$accounts.getProfile(localStorage.getItem('idOponente')).then(response => {
+        this.playerColor = this.$route.params.color
+        this.idSala = this.$route.params.idSala
+        this.$accounts.getProfile(this.$route.params.idOponent).then(response => {
 			this.perfil = response.perfil;
 
 
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto
-				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+				this.$accounts.getProfileImage(this.$route.params.idOponent).then(data => {
 					this.profileImage = data;
 				});
 			} else {
