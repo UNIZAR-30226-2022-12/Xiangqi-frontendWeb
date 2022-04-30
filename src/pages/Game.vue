@@ -31,16 +31,16 @@
                 <div v-for="(itemFila, indexCol) in item" :key="indexCol" v-on:click="moves(indexFil, indexCol, itemFila);" class="h-3rem w-3rem sm:h-4rem sm:w-4rem md:h-5rem md:w-5rem border-600 border-0 flex-grow-1 flex align-items-center justify-content-center">
                     <!--Casilla sin pieza-->
                     <div v-if="itemFila.pieza == null" v-on:click="if (this.selectedPiece.selected) this.selectedPiece.selected = false;" class="flex align-content-center flex-wrap card-container w-full h-full">
-                        <!--Lo que sale dentro si es pista y moverla-->
-                        <div v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila, true)" class="flex align-items-center justify-content-center m-auto casilla w-2rem h-2rem" :class="{'casilla-pista': itemFila.esPista  && this.selectedPiece.selected}"></div>
+                        <!--Lo que sale dentro si es pista y moverla, casilla movida se activa en amarillo para cuando el oponente mueve una ficha-->
+                        <div v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila, true)" class="flex align-items-center justify-content-center m-auto casilla w-2rem h-2rem" :class="{'casilla-pista': itemFila.esPista  && this.selectedPiece.selected, 'casilla-movida': indexFil == this.movedPiece.filini && indexCol == this.movedPiece.colini && this.movedPiece.filini != null && this.movedPiece.colini != null}"></div>
                     </div>
                     <!--Casilla con pieza-->
                     <div v-else class="h-full w-full">
                         <!--Hemos seleccionado una pieza-->
                         <img v-if="indexFil == this.selectedPiece.fil && indexCol == this.selectedPiece.col && this.selectedPiece.selected" class="pieza-responsive-selected selectedPiece" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">
-                        <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza-->
+                        <!--Pieza no seleccionada, vemos si es pista y la marcamos con otra pieza, moved piece se activa cuando el rival mueve su pieza-->
                         <img v-else-if="itemFila.esPista && this.selectedPiece.selected" class="pieza-player" v-on:click="moveSelectedPiece(indexFil, indexCol, itemFila, true)" style="border-radius: 100%; box-shadow: 4px 4px 10px black; cursor: pointer" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + 'pista.svg'">
-                        <img v-else class="pieza-responsive" :class="{'pieza-player-responsive': this.playerColor == itemFila.color}" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">  
+                        <img v-else class="pieza-responsive" :class="{'pieza-player-responsive': this.playerColor == itemFila.color, 'moved-piece': indexFil == this.movedPiece.fil && indexCol == this.movedPiece.col && this.movedPiece.fil != null && this.movedPiece.col != null}" style="border-radius: 100%; box-shadow: 4px 4px 10px black;" :src="'images/themes/pieces/' + this.selectedPiecesSet.id + '/' + itemFila.pieza + itemFila.color + '.svg'">
                     </div>
                 </div>
             </div>
@@ -137,10 +137,10 @@ export default  {
             },
 
             movedPiece: {
-                fil: null,
-                col: null,
-                filini: null,
-                colini: null
+                fil: 0,
+                col: 0,
+                filini: 1,
+                colini: 1
             },
             
             //BARRA LATERAL
@@ -1665,6 +1665,10 @@ export default  {
     cursor: pointer;
 }
 
+.casilla-movida {
+    background-color: rgb(255, 255, 0);
+}
+
 @media (max-width: 1000px) {
     .centrar-mauto{
         margin: auto;
@@ -1713,6 +1717,12 @@ export default  {
 
 .selectedPiece:hover {
     cursor: pointer;
+}
+
+.moved-piece {
+    border-width: 2px;
+    border-style: solid;
+    border-color: yellow;
 }
 
 .pieza-responsive {
