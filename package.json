@@ -24,6 +24,7 @@
     "socket.io-client": "^4.4.1",
     "v-click-outside": "^3.1.2",
     "vue": "^3.0.0",
+    "vue-confetti-explosion": "^1.0.1",
     "vue-router": "^4.0.12",
     "vue-socket.io": "^3.0.10",
     "vue3-beautiful-chat": "^3.2.0"

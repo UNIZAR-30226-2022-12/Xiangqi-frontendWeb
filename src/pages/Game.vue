@@ -45,6 +45,9 @@
                 </div>
             </div>
         </div>
+        <!--GameOver-->
+        <gameover v-if="this.gameOverDispay" :ganador="ganador" />
+        <confetti v-if="this.gameOverDispay && this.myid == this.ganador.id" />
     </div>
 </template>
 
@@ -54,7 +57,9 @@ import rivalInfo from '../components/game/RivalInfo.vue'
 import chat from '../components/game/Chat.vue';
 import themeChanger from '../components/game/ThemeChanger.vue';
 import gameRules from '../components/game/GameRules.vue';
+import gameover from '../components/game/GameOver.vue';
 import io from "socket.io-client";
+import confetti from '../components/game/Confetti.vue';
 
 export default  {
 	inject: ['$accounts'],
@@ -62,7 +67,9 @@ export default  {
         rivalInfo,
         chat,
         themeChanger,
-        gameRules
+        gameRules,
+        gameover,
+        confetti,
     },
       data() {
         return {
@@ -108,12 +115,14 @@ export default  {
                     [{ pieza: "soldado", color: "negro" , moves: [], turno: -1, esPista: false}, { pieza: null, color: "rojo" , moves: [{f:1,c:1}], turno: -1}, { pieza: null, color: null, moves: [], turno: -1, esPista: false}, { pieza: null, color: null, moves: [], turno: -1, esPista: false},{ pieza: "general", color: "rojo" , moves: [], turno: -1, esPista: false}, { pieza: null, color: null, moves: [], turno: -1, esPista: false}, { pieza: "soldado", color: "rojo" , moves: [], turno: -1, esPista: false}, { pieza: null, color: null, moves: [], turno: -1, esPista: false}, { pieza: "soldado", color: "negro" , moves: [], turno: -1, esPista: false}],]
              */              
             },
-                        //Selecciona el set de piezas con el que juegas
+            
+            //Selecciona el set de piezas con el que juegas
             playerColor: null, //negro,
             perfil: null,
             profileImage: null,
             idSala: null,
             socket: null,
+            myid: null,
 
             //Turno actual
             turno: 0,
@@ -133,7 +142,7 @@ export default  {
             selectedPiece: {
                 fil: null,
                 col: null,
-                selected: false,
+                selected: false
             },
 
             //Pieza movida por el oponente
@@ -141,9 +150,18 @@ export default  {
                 fil: null,
                 col: null,
                 filini: null,
-                colini: null,
+                colini: null
             },
-            
+
+            //Ha acabado la partida
+            gameOverDispay: false,
+
+            //Ganador de la partida
+            ganador: {
+                id: '11', 
+                name: 'Nacho Ortega'
+            },
+
             //BARRA LATERAL
             //------------------------------------------------------
             timer: '00:00:00',
@@ -156,8 +174,8 @@ export default  {
         }
     },
 	created() {
-        //para ocultar de manera guarra el menu
-        this.idSala = this.$route.params.idSala
+        this.idSala = this.$route.params.idSala;
+        this.myid = localStorage.getItem('id');
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
@@ -183,6 +201,7 @@ export default  {
 				this.profileImage = "images/profilePlaceholder.svg";
 			}
 		});
+        //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
         this.$playing.game = true;
 	},
@@ -229,6 +248,12 @@ export default  {
                 audio.play();
             }
         },
+        playCaptureSound() {
+            var audio = new Audio('sounds/capture.wav');
+            audio.loop = false;
+            audio.play();
+        },
+
         /*
         *---------------------------------------------------------------------------------------------------------------
         *---------------------------------------------------------------------------------------------------------------
@@ -1032,13 +1057,14 @@ export default  {
            }
            //console.log("Tiene ", totalMoves, "Movimientos posibles")
            if(totalMoves == 0){
-               //console.log("Jaque mate")
+                //console.log("Jaque mate")
 
-               // emit le dire al back quien ha ganado
+                // emit le dire al back quien ha ganado
 
-               // cosas del front
-
-               //------------------
+                //Asigname estas variables para el dialogo
+                this.ganador.id = 11
+                this.ganador.name = 'Nacho'
+                this.this.gameOverDispay = true;
            }
        },
 
