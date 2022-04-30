@@ -8,18 +8,32 @@
     <div class="card p-2">
       <div class="flex align-items-center flex-wrap card-container">
           <div class="flex align-items-center justify-content-center mb-5">
-            <InputSwitch v-model="temporizador" id="temporizador"/>
+            <InputSwitch v-model="timer" id="timer"/>
             <div class="ml-3">Partida con temporizador</div>
           </div>
           <div class="flex align-items-center justify-content-center mb-5">
-            <InputSwitch v-model="amigo" id="amigo"/>
-            <div class="ml-3">Partida contra un amigo</div>
+            <InputSwitch v-model="friend" id="friend"/>
+            <div class="ml-3">Partida contra un amigo conectado</div>
           </div>
-          <Dropdown v-if="amigo" v-model="amigoSeleccionado" :filter="true" :options="amigos" class="m-auto w-full" placeholder="Selecciona un amigo" />
+          <Dropdown v-if="friend" v-model="friendSeleccionado" :filter="true" :options="friends" optionLabel="name" class="m-auto w-full" placeholder="Selecciona un amigo">
+            <template #option="slotProps">
+            {{slotProps.option.name}}
+            </template>
+          </Dropdown>
       </div>
     </div>
     <template #footer>
-      <Button label="Nueva partida" class="p-button p-button-raised w-full" style="border-radius: 1rem" v-on:click="nuevaPartida()"/>
+      <Button v-on:click="nuevaPartida()" :disabled="this.searchingOponent || (friendSeleccionado.name == null && friend)" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem">
+        <div class="flex justify-content-center flex-wrap card-container w-full">
+            <div id="spinner" class="flex align-items-center justify-content-center mr-2">
+              <ProgressSpinner v-if="this.searchingOponent" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+            </div>                   
+            <div v-if="!this.searchingOponent && !friend" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida aleatoria</div>
+            <div v-else-if="!this.searchingOponent && friendSeleccionado.name != null" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida contra {{friendSeleccionado.name}}</div>
+            <div v-else-if="friendSeleccionado.name == null && friend" class="flex align-items-center justify-content-center font-bold text-white">Por favor seleccione un amigo de su lista</div>
+            <div v-else class="flex align-items-center justify-content-center font-bold text-white">Buscando oponente...</div>
+        </div>
+      </Button> 
     </template>
   </Dialog>
 </template>
@@ -31,24 +45,35 @@ export default {
   data() {
     return {
       display: false,
-      temporizador: false,
-      amigo: false,
-      amigoSeleccionado: null,
-      amigos: [
-        'juanksp',
-        'pikanachi',
-        'alexzheng',
+      timer: false,
+      friend: false,
+      friendSeleccionado: {id: null, name: null},
+      friends: [
+        {id: 1, name: 'juanksp'},
+        {id: 2, name: 'pikanachi'},
+        {id: 3, name: 'alexzheng'},
       ],
       socket: null,
+      searchingOponent: false,
     }
   },
   methods: {
     openDialog() {
       this.display = true;
+      //Juan aqui reseteo el socket así ok??
+      this.socket = null;
+      this.searchingOponent = false;
+      this.friend = false;
+      this.timer = false;
+      this.friendSeleccionado.id = null, 
+      this.friendSeleccionado.name = null
     },
     nuevaPartida() {
+      //Ponemos el spinner
+      this.searchingOponent = true;
+
       //Pasarle al back las opciones de la partida
-      if(this.socket == null){
+      if(this.socket == null) {
         this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
       }
       this.socket.emit("searchRandomOpponent",{'id':localStorage.getItem("id")})
@@ -57,8 +82,6 @@ export default {
           this.display = false;
           //En vez de guardar en localStorage los parametros q se que te gusta
           //Mejor pasarlos via router siue estos pasos ej:
-          
-          
           /*
           1- En router.js cambiar el route de game para pasarle los params por URL
 
@@ -94,13 +117,7 @@ export default {
           localStorage.setItem("socket", this.socket)
           this.socket.emit("leaveRoom", {'id': data.idSala})
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
-          
-
-
       })
-      console.log("CLICK")
-      //this.display = false;
-      //this.$router.push('/game');
     }
   }
 }
@@ -115,7 +132,7 @@ export default {
   animation-name: lineIns derted;
   transition: height 0.6s, width 0.6s;
   border-radius: 15px;
-  width: 23rem;
+  width: 30rem;
 }
 
 </style>
