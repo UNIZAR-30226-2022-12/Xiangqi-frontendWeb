@@ -12,7 +12,7 @@
                     <h5 class="m-0">Partidas</h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search" />
-                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
+                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
                     </span>
                 </div>
             </template>

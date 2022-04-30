@@ -3,7 +3,7 @@
         <div v-if="show">
             <h2 class="mt-4">Usuarios encontrados por {{searchedItem}}</h2>
             <div class="surface-section section p-6">
-                <DataTable :value="columns" :paginator="true" :rows="10"
+                <DataTable :value="notFriendOf" :paginator="true" :rows="10"
                 :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
                 currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
@@ -13,7 +13,7 @@
                             <h5 class="m-0">Solicitudes</h5>
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search" />
-                                <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
+                                <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
                             </span>
                         </div>
                     </template>
@@ -23,7 +23,7 @@
                     <template #loading>
                         Cargando solicitudes. Por favor, espere.
                     </template>
-                    <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
+                    <Column field="nickname" header="Nombre de usuario" sortable style="min-width: 14rem">
                         <template #body="{data}">
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
@@ -35,17 +35,17 @@
                             </div>
                         </template>
                     </Column>
-                    <Column field="flag" header="País" sortable style="min-width: 14rem">
+                    <Column field="name" header="Nombre" sortable></Column>
+                    <Column field="flag" header="País" sortable>
                         <template #body="{data}">
                             <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
                             <span class="ml-2 image-text">{{data.country}}</span>
                         </template>
                     </Column>
                     <Column field="birthday" header="Cumpleaños" sortable></Column>
-                    <Column field="requestDate" header="Fecha de solicitud" sortable></Column>
                     <Column header="Enviar solicitud">
                         <template #body>
-                            <Button icon="pi pi-check" class="p-button-rounded p-button-success p-button-outlined" />
+                            <Button class="p-button-raised" style="border-radius: 1rem" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
                         </template>
                     </Column>
                 </DataTable>    
@@ -72,7 +72,7 @@ export default {
     },
 	data() {
 		return {
-			columns: null,
+			notFriendOf: null,
             loading: true,
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
@@ -85,10 +85,11 @@ export default {
         
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
-        this.columns= [
-                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
+        //Que el back nos devuelva solo de los que no somos amigos
+        this.notFriendOf= [
+                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
+                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010'},
+                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
         ];
 	},
     mounted() {

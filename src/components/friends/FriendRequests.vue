@@ -1,7 +1,7 @@
 <template>
     <h2>Solicitudes de amistad</h2>
 	<div class="surface-section section p-6">
-        <DataTable :value="columns" :paginator="true" :rows="10"
+        <DataTable :value="friendRequests" :paginator="true" :rows="10"
         :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
         currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
@@ -11,7 +11,7 @@
                     <h5 class="m-0">Solicitudes</h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search" />
-                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
+                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
                     </span>
                 </div>
             </template>
@@ -63,7 +63,7 @@ export default {
 	inject: ['$accounts'],
 	data() {
 		return {
-			columns: null,
+			friendRequests: null,
             loading: true,
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
@@ -77,7 +77,7 @@ export default {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
 		//this.customerService = new CustomerService();
-        this.columns= [
+        this.friendRequests= [
                 {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},

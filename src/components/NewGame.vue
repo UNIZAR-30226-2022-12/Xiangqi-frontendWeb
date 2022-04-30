@@ -15,7 +15,7 @@
             <InputSwitch v-model="friend" id="friend"/>
             <div class="ml-3">Partida contra un amigo conectado</div>
           </div>
-          <Dropdown v-if="friend" v-model="friendSeleccionado" :filter="true" :options="friends" optionLabel="name" class="m-auto w-full" placeholder="Selecciona un amigo">
+          <Dropdown v-if="friend" v-model="selectedFriend" :filter="true" :options="friends" optionLabel="name" class="m-auto w-full" placeholder="Selecciona un amigo">
             <template #option="slotProps">
             {{slotProps.option.name}}
             </template>
@@ -23,14 +23,15 @@
       </div>
     </div>
     <template #footer>
-      <Button v-on:click="nuevaPartida()" :disabled="this.searchingOponent || (friendSeleccionado.name == null && friend)" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem">
+      <Button v-on:click="nuevaPartida()" :disabled="this.searchingOponent || (selectedFriend.name == null && friend)" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem">
         <div class="flex justify-content-center flex-wrap card-container w-full">
             <div id="spinner" class="flex align-items-center justify-content-center mr-2">
               <ProgressSpinner v-if="this.searchingOponent" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
             </div>                   
             <div v-if="!this.searchingOponent && !friend" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida aleatoria</div>
-            <div v-else-if="!this.searchingOponent && friendSeleccionado.name != null" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida contra {{friendSeleccionado.name}}</div>
-            <div v-else-if="friendSeleccionado.name == null && friend" class="flex align-items-center justify-content-center font-bold text-white">Por favor seleccione un amigo de su lista</div>
+            <div v-else-if="!this.searchingOponent && selectedFriend.name != null" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida contra {{selectedFriend.name}}</div>
+            <div v-else-if="selectedFriend.name == null && friend" class="flex align-items-center justify-content-center font-bold text-white">Por favor seleccione un amigo de su lista</div>
+            <div v-else-if="selectedFriend.name != null && friend" class="flex align-items-center justify-content-center font-bold text-white">Conectando con {{selectedFriend.name}}</div>
             <div v-else class="flex align-items-center justify-content-center font-bold text-white">Buscando oponente...</div>
         </div>
       </Button> 
@@ -47,7 +48,7 @@ export default {
       display: false,
       timer: false,
       friend: false,
-      friendSeleccionado: {id: null, name: null},
+      selectedFriend: {id: null, name: null},
       friends: [
         {id: 1, name: 'juanksp'},
         {id: 2, name: 'pikanachi'},
@@ -65,8 +66,8 @@ export default {
       this.searchingOponent = false;
       this.friend = false;
       this.timer = false;
-      this.friendSeleccionado.id = null, 
-      this.friendSeleccionado.name = null
+      this.selectedFriend.id = null, 
+      this.selectedFriend.name = null
     },
     nuevaPartida() {
       //Ponemos el spinner
