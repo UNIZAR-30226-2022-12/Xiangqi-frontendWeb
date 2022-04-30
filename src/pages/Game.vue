@@ -136,11 +136,12 @@ export default  {
                 selected: false,
             },
 
+            //Pieza movida por el oponente
             movedPiece: {
-                fil: 0,
-                col: 0,
-                filini: 1,
-                colini: 1
+                fil: null,
+                col: null,
+                filini: null,
+                colini: null,
             },
             
             //BARRA LATERAL
