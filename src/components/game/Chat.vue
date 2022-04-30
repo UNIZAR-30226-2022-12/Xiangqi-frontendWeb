@@ -36,7 +36,7 @@ export default {
       //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
       //CAMBIAR A SI EL ID == AL DEL LOCALSTORAGE ES MIO
       messages: [
-          {id: '1', nickname: 'pikanachi', message: 'Hola', mine: true},
+          {id: '1', nickname: 'pikanachi', message: 'Hola', mine: true}, // SIN MINE, comprobamos id del mensaje y el mio
           {id: '1', nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
           {id: '2', nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
           {id: '2', nickname: 'juanksp', message: 'soy muy gracioso porque me gusta Itsuki, no como Nacho que es un Lolicon', mine: false},
