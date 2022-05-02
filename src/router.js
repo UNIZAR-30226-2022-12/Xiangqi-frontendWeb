@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Login from './pages/Login.vue';
 import Validate from './components/Validate.vue';
 import Game from './pages/Game.vue';
+import GameDebug from './pages/GameDebug.vue';
 import Profile from './pages/Profile.vue';
 import OtherProfile from './pages/OtherProfile.vue';
 import Friends from './pages/Friends.vue';
@@ -27,6 +28,11 @@ const routes = [
         path: '/game/:idOponent/:idSala/:color',
         name: 'Partida',
         component: Game,
+    },
+    {
+        path: '/gamedebug/',
+        name: 'PartidaDEBUG',
+        component: GameDebug,
     },
     {
         path: '/profile',
