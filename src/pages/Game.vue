@@ -14,7 +14,7 @@
                 <Button v-on:click="confirm()" class="col-12 mt-2  mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 <Divider />
                 <!--Chat-->
-                <chat />
+                <chat v-if="perfil!=null" :idSala="idSala" :myId="myid" :idOp="idOp"/>
                 <Divider />
                 <!--Game rules-->
                 <gameRules />
@@ -123,6 +123,7 @@ export default  {
             idSala: null,
             socket: null,
             myid: null,
+            idOp: null,
 
             //Turno actual
             turno: 0,
@@ -188,13 +189,14 @@ export default  {
             this.reyNegro.fil = 9
             this.reyNegro.col = 4
         }
-        this.$accounts.getProfile(this.$route.params.idOponent).then(response => {
+        this.idOp = this.$route.params.idOponent
+        this.$accounts.getProfile(this.idOp).then(response => {
 			this.perfil = response.perfil;
-
+            console.log(this.perfil)
 
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto
-				this.$accounts.getProfileImage(this.$route.params.idOponent).then(data => {
+				this.$accounts.getProfileImage(this.idOp).then(data => {
 					this.profileImage = data;
 				});
 			} else {
@@ -231,6 +233,10 @@ export default  {
             var audio = new Audio('sounds/move.wav');
             audio.loop = false;
             audio.play();
+        })
+        this.socket.on("win", (data)=>{
+            console.log(data)
+            //AQUI ES DONDE HE GANADO
         })
     },
     methods: {
@@ -1118,10 +1124,11 @@ console.log("W")
 
                 // emit le dire al back quien ha ganado
 
-                //Asigname estas variables para el dialogo
-                this.ganador.id = 11
-                this.ganador.name = 'Nacho'
-                this.this.gameOverDispay = true;
+                /*ESTO LE SALE AL PERDEDOR
+                this.ganador.id = this.myid
+                this.ganador.name = this.perfil.name
+                this.gameOverDispay = true;
+                */
            }
        },
 

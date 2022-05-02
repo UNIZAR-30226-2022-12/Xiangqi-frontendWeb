@@ -28,36 +28,83 @@
 </template>
 
 <script>
+
+import io from "socket.io-client";
+
 export default {
+  inject: ['$accounts'],
   name: 'app',
+  props: {
+      idSala: {
+          type: String,
+          required: true
+      },
+      myId: {
+          type: String,
+          required: true
+      },
+      idOp: {
+          type: String,
+          required: true
+      },
+  },
   data() {
     return {
       //CHAT
       //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
       //CAMBIAR A SI EL ID == AL DEL LOCALSTORAGE ES MIO
       messages: [
-          {id: '1', nickname: 'pikanachi', message: 'Hola', mine: true}, // SIN MINE, comprobamos id del mensaje y el mio
-          {id: '1', nickname: 'pikanachi', message: 'Te he traido los 5', mine: true},
-          {id: '2', nickname: 'juanksp', message: 'Jaja pues por el culo te la hinco!', mine: false},
-          {id: '2', nickname: 'juanksp', message: 'soy muy gracioso porque me gusta Itsuki, no como Nacho que es un Lolicon', mine: false},
-          {id: '1', nickname: 'pikanachi', message: 'jaja Lolicon pues que te den por culo un montón', mine: true},
-          {id: '1', nickname: 'pikanachi', message: 'bueno la cosa, esto el chat y ta wapo', mine: true},
-          {id: '2', nickname: 'juanksp', message: 'ta wapo, ta wapo', mine: false},
       ],
       //Aqui es donde se pone el nuevo mensaje a enviar, habrá que appendearlo a la lista de mensajes para mostrarlo en el front tbn
       message: null,
+      socket: null,
+      nicknameOp: null,
+      myNickname: null
     }
+  },
+  mounted(){
+    this.$accounts.getProfile(this.idOp).then(response => {
+      console.log(response.perfil)
+      this.nicknameOp = response.perfil.nickname
+		});
+    this.$accounts.getProfile(this.myId).then(response => {
+      console.log(response.perfil)
+      this.myNickname = response.perfil.nickname
+		});
+    if(this.socket == null){
+        this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+    }
+    this.socket.on("my msg", (data)=>{
+      console.log(data)
+      this.messages.push({nickname: this.nicknameOp, message: data, mine: false});
+      const chat = document.getElementById('chat');
+      setTimeout(() => {
+        chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
+      }, 1);
+      //Borrar el mensaje
+      this.message = null;
+
+      //Rep sonido
+      var audio = new Audio('sounds/sendMessage.wav');
+      audio.loop = false;
+      audio.play();
+    })
+    this.socket.emit("enterRoom", {'id': this.idSala})
+    console.log("idsala", this.idSala)
+  },
+  unmounted(){
+    this.socket.off("my msg")
+    this.socket.emit("leaveRoom", {'id': this.idSala})
   },
   methods: {
     sendMessage() {
-      this.messages.push({nickname: 'pikanachi', message: this.message, mine: true});
+      this.messages.push({nickname: this.myNickname, message: this.message, mine: true});
       const chat = document.getElementById('chat');
-
       //El evento de scroll tiene que llegar desopues de los del vue
       setTimeout(() => {
         chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
       }, 1);
-
+      this.socket.emit("sendMsg", {'id': this.idSala, 'msg': this.message})
       //Borrar el mensaje
       this.message = null;
 
