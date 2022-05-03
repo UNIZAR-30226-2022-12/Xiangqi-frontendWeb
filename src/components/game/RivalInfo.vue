@@ -37,16 +37,16 @@ export default {
     data() {
         return {
             rival: {
-                mail:'',
-                nickname: 'juanksp', 
-                name: 'Juan Plo Andrés', 
-                birthday: '05/10/2001', 
+                mail: null,
+                nickname: null, 
+                name: null, 
+                birthday: null, 
                 country: {
-                    flag: 'flag-es',
+                    flag: null,
                 },
-                range: '2',
-                points: '',
-                registerDate: '20/02/2022',
+                range: null,
+                points: null,
+                registerDate: null,
             },
         }    
     },

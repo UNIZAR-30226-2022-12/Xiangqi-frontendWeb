@@ -82,10 +82,10 @@ export default {
         chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
       }, 1);
       //Borrar el mensaje
-      this.message = null;
+      //this.message = null;
 
       //Rep sonido
-      var audio = new Audio('sounds/sendMessage.wav');
+      var audio = new Audio('sounds/receiveMessage.wav');
       audio.loop = false;
       audio.play();
     })

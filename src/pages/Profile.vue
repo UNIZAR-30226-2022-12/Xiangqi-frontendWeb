@@ -30,10 +30,7 @@ export default {
 		myStatics,
 	},
 	created() {
-		// VOLVER A METER!!!!!!
-		//---------------------
-		//this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-		this.$loggedStatus.logged = true;
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
 			this.loading = false;
 			this.perfil = response.perfil;
