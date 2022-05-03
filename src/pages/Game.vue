@@ -4,7 +4,7 @@
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <!--rivalInfo-->
-                <rivalInfo v-if="perfil!=null" :isFriend="false" :perfil="perfil" :profileImage="profileImage"/>
+                <rivalInfo v-if="rivalProfile!=null" :isFriend="false" :perfil="rivalProfile" :profileImage="rivalProfileImage"/>
                 <div v-else class="field col-12 mb-0">
                     <Skeleton width="100%" height="1.8rem" />
                     <div class="flex card-container overflow-hidden mt-4">
@@ -25,7 +25,7 @@
                     <h6>Temporizador:</h6>
                     <h2 class="mt-0 mb-0">{{this.timer}}</h2>
                 </div>
-                <Button v-on:click="confirm()" class="col-12 mt-2  mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
+                <Button v-on:click="confirm()" class="col-12 mt-2 mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 <Divider />
                 <!--Chat-->
                 <chat :idSala="idSala" :myId="myid" :idOp="idOp"/>
@@ -38,9 +38,53 @@
             </div>
         </div>
 
-        <!--Tablero-->
+        <!--Divs del tablero-->
         <div class="col-12 lg:col-8 my-auto">
-            <h3 v-if="perfil!=null" class="text-center"> Turno de {{ this.perfil.name}} </h3>
+
+            <!--Info de la persona-->
+            <div v-if="rivalProfile!=null" class="text-center">
+                <!-- Si soy rojo y no es mi turno-->
+                <div v-if="this.turno%2 != 0 && this.playerColor == 'rojo'">
+                    <h3 class="mb-0">
+                        <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        Turno de {{ this.rivalProfile.name }}
+                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                    <h4 class="mt-1">
+                        <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                        Esperando jugada
+                    </h4>
+                </div>
+                <div v-if="this.turno%2 != 0 && this.playerColor == 'negro'">
+                    <h3>
+                        <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        {{ this.rivalProfile.name }} 
+                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>   
+                <!--Si yo soy rojo y es mi turno-->
+                <div v-if="this.turno%2 == 0 && this.playerColor == 'rojo'">
+                    <h3>
+                        <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        {{ this.rivalProfile.name }} 
+                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>
+                <!--Si yo soy negro y no es mi turno-->
+                <div v-if="this.turno%2 == 0 && this.playerColor == 'negro'">
+                    <h3 class="mb-0">
+                        <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        Turno de {{ this.rivalProfile.name }}
+                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                    <h4 class="mt-1">
+                        <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                        Esperando jugada
+                    </h4>
+                </div>
+            </div>
+
+            <!--Tablero-->
             <div v-if="selectedPiecesSet != null" class="col-12 tema-fondo mx-auto board-width" :class="{'wooden1': selectedBoard.id == '1', 'wooden2': selectedBoard.id == '2', 'wooden3': selectedBoard.id == '3', 'metal1': selectedBoard.id == '4', 'metal2': selectedBoard.id == '5', 
                 'marbled1': selectedBoard.id == '6', 'marbled2': selectedBoard.id == '7', 'marbled3': selectedBoard.id == '8', 'marbled4': selectedBoard.id == '9', 'checker1': selectedBoard.id == '10', 'concrete1': selectedBoard.id == '11', 'concrete2': selectedBoard.id == '12'}">
                 <div v-for="(item, indexFil) in tablero.filas" :key="indexFil" class="flex">
@@ -61,7 +105,42 @@
                     </div>
                 </div>
             </div>
-            <h3 v-if="perfil!=null" class="text-center"> Turno de {{ this.myPerfil.name }} </h3>
+
+            <!--Info de la persona-->
+            <div v-if="myPerfil!=null" class="mt-4 text-center">
+                <!--Si yo soy rojo no es mi turno-->
+                <div v-if="this.turno%2 != 0 && this.playerColor == 'rojo'">
+                    <h3>
+                        <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        {{ this.myPerfil.name }}
+                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>         
+                <!--Si yo soy negro y es mi turno-->
+                <div v-if="this.turno%2 != 0 && this.playerColor == 'negro'">
+                    <h3>
+                        <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        Turno de {{ this.myPerfil.name }}
+                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>
+                <!--Si yo soy rojo y es mi turno-->
+                <div v-if="this.turno%2 == 0 && this.playerColor == 'rojo'">
+                    <h3>
+                        <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        Turno de {{ this.myPerfil.name }}
+                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>
+                <!--Si yo soy negro y no es mi turno-->
+                <div v-if="this.turno%2 == 0 && this.playerColor == 'negro'">
+                    <h3>
+                        <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
+                        {{ this.myPerfil.name }}
+                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                    </h3>
+                </div>
+            </div>            
         </div>
         <!--GameOver-->
         <gameover v-if="this.gameOverDispay" :ganador="ganador" />
@@ -136,9 +215,10 @@ export default  {
             
             //Selecciona el set de piezas con el que juegas
             playerColor: null, //negro,
-            perfil: null,
+            rivalProfile: null,
             myPerfil: null,
-            profileImage: null,
+            myProfileImage: '',
+            rivalProfileImage: '',
             idSala: null,
             socket: null,
             myid: null,
@@ -213,20 +293,28 @@ export default  {
         this.idOp = this.$route.params.idOponent
         this.$accounts.getProfile(this.idOp).then(response => {
             this.loading = false;
-			this.perfil = response.perfil;
+			this.rivalProfile = response.perfil;
 
-			if (this.perfil.hasImage) {
+			if (this.rivalProfile.hasImage) {
 				// Pedir al back la foto
 				this.$accounts.getProfileImage(this.idOp).then(data => {
-					this.profileImage = data;
+					this.rivalProfileImage = data;
 				});
 			} else {
-				this.profileImage = "images/profilePlaceholder.svg";
+				this.rivalProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
 
         this.$accounts.getProfile(this.myid).then(response => {
 			this.myPerfil = response.perfil;
+            if (this.myPerfil.hasImage) {
+				// Pedir al back la foto
+				this.$accounts.getProfileImage(this.myid).then(data => {
+					this.myProfileImage = data;
+				});
+			} else {
+				this.myProfileImage = "images/profilePlaceholder.svg";
+			}
 		});
         //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
@@ -1929,4 +2017,13 @@ console.log("W")
     display: flex;
     align-items: center;
 }
+
+.foto-perfil-sm {
+    vertical-align: middle;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
 </style>
