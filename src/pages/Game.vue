@@ -1,5 +1,6 @@
 <template>
-    <div class="grid">
+    <loader v-if="this.loading"/>
+    <div v-else class="grid">
         <!--BARRA LATERAL v-if="perfil != null"-->
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
@@ -157,6 +158,7 @@ import gameRules from '../components/game/GameRules.vue';
 import gameover from '../components/game/GameOver.vue';
 import io from "socket.io-client";
 import confetti from '../components/game/Confetti.vue';
+import loader from '../components/Loader.vue';
 
 export default  {
 	inject: ['$accounts'],
@@ -167,6 +169,7 @@ export default  {
         gameRules,
         gameover,
         confetti,
+        loader,
     },
       data() {
         return {
@@ -326,9 +329,7 @@ export default  {
         this.socket.off("opMov")
     },
     mounted(){
-        this.selectedPiecesSet = this.$refs.themeChanger.getSelectedPiecesSet();
-        this.selectedBoard = this.$refs.themeChanger.getSelectedBoard();
-
+        this.loadThemeChanger();
         this.socket.emit("enterRoom", {'id': this.idSala})
         this.socket.on("opMov", (data)=>{
             //console.log(data)
@@ -354,6 +355,13 @@ export default  {
         })
     },
     methods: {
+        loadThemeChanger(){
+            if (this.$refs.themeChanger != null){
+                this.selectedPiecesSet = this.$refs.themeChanger.getSelectedPiecesSet();
+                this.selectedBoard = this.$refs.themeChanger.getSelectedBoard();
+            }else
+                setTimeout(this.loadThemeChanger, 100);
+        },
         changeBoard(board){
             this.selectedBoard = board;
         },
