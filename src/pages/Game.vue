@@ -6,20 +6,6 @@
             <div class="grid">
                 <!--rivalInfo-->
                 <rivalInfo v-if="rivalProfile!=null" :isFriend="false" :perfil="rivalProfile" :profileImage="rivalProfileImage"/>
-                <div v-else class="field col-12 mb-0">
-                    <Skeleton width="100%" height="1.8rem" />
-                    <div class="flex card-container overflow-hidden mt-4">
-                        <div class="flex-none align-items-left justify-content-left mr-3">
-                            <Skeleton class="shadow-2" shape="circle" style="margin-top:0.5rem; margin-left:0.5rem; margin-bottom:0.5rem" size="8rem" />
-                        </div>
-                        <div class="flex-grow-1 align-items-left justify-content-left">
-                            <Skeleton width="10rem" height="1.5rem" class="mb-3"></Skeleton>
-                            <Skeleton width="12rem" height="1.5rem" class="mb-3"></Skeleton>
-                            <Skeleton width="14rem" height="1.5rem" class="mb-3"></Skeleton>
-                        </div>
-                    </div>
-                    <Skeleton v-if="true" height="3rem" style="margin-top:0.5rem; border-radius: 1rem"></Skeleton>
-                </div>
                 <Divider />
                 <!--Temporizador-->
                 <div class="field col-12 mb-0">
@@ -49,7 +35,7 @@
                     <h3 class="mb-0">
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         Turno de {{ this.rivalProfile.name }}
-                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                     <h4 class="mt-1">
                         <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
@@ -60,7 +46,7 @@
                     <h3>
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.rivalProfile.name }} 
-                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>   
                 <!--Si yo soy rojo y es mi turno-->
@@ -68,7 +54,7 @@
                     <h3>
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.rivalProfile.name }} 
-                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>
                 <!--Si yo soy negro y no es mi turno-->
@@ -76,7 +62,7 @@
                     <h3 class="mb-0">
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         Turno de {{ this.rivalProfile.name }}
-                        <img class="flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                     <h4 class="mt-1">
                         <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
@@ -114,7 +100,7 @@
                     <h3>
                         <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.myPerfil.name }}
-                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>         
                 <!--Si yo soy negro y es mi turno-->
@@ -122,7 +108,7 @@
                     <h3>
                         <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         Turno de {{ this.myPerfil.name }}
-                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>
                 <!--Si yo soy rojo y es mi turno-->
@@ -130,7 +116,7 @@
                     <h3>
                         <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         Turno de {{ this.myPerfil.name }}
-                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>
                 <!--Si yo soy negro y no es mi turno-->
@@ -138,7 +124,7 @@
                     <h3>
                         <img id=myProfliePic :src="myProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.myPerfil.name }}
-                        <img class="flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="shadow-2 flag h-auto mr-1" :class="[myPerfil.country.flag]" src="images/flags/flag_placeholder.png">
                     </h3>
                 </div>
             </div>            
