@@ -50,7 +50,7 @@
             </Column>
             <Column header="Continuar">
                 <template #body>
-                    <Button class="p-button-raised" style="border-radius: 1rem" label="Continuar"></Button>
+                    <Button class="p-button-raised" v-on:click="loadGame(135)" style="border-radius: 1rem" label="Continuar"></Button>
                 </template>
             </Column>
         </DataTable>    
@@ -106,6 +106,21 @@ export default {
         },
         otherProfile(id){
             this.$router.push({name: 'otherProfile', params: { id: id}});
+        },
+        loadGame(id){
+            this.$accounts.loadGame(id).then(response =>{
+                let color = null;
+                console.log(response.game[1])
+                localStorage.setItem("movs", response.game[4])
+                if(response.game[1] == localStorage.getItem("id")){ // Jugaba como rojo
+                    color = "rojo"
+                    this.$router.push(`/game/${response.game[2]}/${response.game[0]}/${color}`)
+                } else {
+                    color = "negro"
+                    this.$router.push(`/game/${response.game[1]}/${response.game[0]}/${color}`)
+                }
+                
+            })
         }
     }
 }

@@ -2,7 +2,7 @@
 	<loader v-if="this.loading"/>
 	<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 	<searchFriends @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
-	<searchTable :show="this.showResults" :searchedItem="this.searchFriendField"/>
+	<searchTable v-if="showResults!=false" :show="this.showResults" :searchedItem="this.searchFriendField"/>
 	<!--<div class="animate-down" :class="{'push-down': this.showResults }">-->
 	<friendReq />
 	<myFriends />

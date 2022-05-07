@@ -208,8 +208,43 @@ class AccountService {
      deleteAccount(){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
         return http
-            .get('/do-deleteAccount/', headers)
+            .get('/do-deleteAccount/' ,headers)
             .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    // SEARCH USER
+    //------------------------------------------------------------------------------------------------------------------
+     /*
+     * BUSCAR USUARIO
+     */
+     searchUser(nickname){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        console.log(nickname)
+        return http
+            .post('/do_getSearchUsers/',{'nickname': String(nickname)} ,headers)
+            .then(response => {
+                console.log("LLEGAN LOS AMIGOS: ", response.data)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    // LOAD GAME
+    //------------------------------------------------------------------------------------------------------------------
+     /*
+     * CARGAR PARTIDA
+     */
+     loadGame(id){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        return http
+            .post('/do-loadGame/',{'id': id} ,headers)
+            .then(response => {
+                console.log(response.data)
                 return response.data;
             }, () => {
                 return false;

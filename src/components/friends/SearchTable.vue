@@ -84,16 +84,16 @@ export default {
 	created() {
         
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-
         //Que el back nos devuelva solo de los que no somos amigos
-        this.notFriendOf= [
-                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
-                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010'},
-                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
-        ];
+        this.notFriendOf= [];
 	},
     mounted() {
         this.loading = false;
+        this.$accounts.searchUser(this.searchedItem).then(response =>{
+            for(let i = 0; i < response.length; i++){
+                this.notFriendOf.push({id: response[i][1], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
+            }  
+        })
     },
 	methods: {
         formatDate(value) {
