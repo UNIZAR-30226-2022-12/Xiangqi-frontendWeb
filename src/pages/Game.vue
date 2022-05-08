@@ -306,6 +306,14 @@ export default  {
             this.reyNegro.fil = 9
             this.reyNegro.col = 4
         }
+        let movs = localStorage.getItem("movs")
+        console.log(movs)
+        if (movs != null){
+            console.log(movs)
+            //localStorage.removeItem("movs")
+            // CAMBIAR EL TABLERO
+            this.loadBoard(movs)
+        }
         this.idOp = this.$route.params.idOponent
         this.$accounts.getProfile(this.idOp).then(response => {
             this.loading = false;
@@ -397,6 +405,58 @@ export default  {
             var audio = new Audio('sounds/capture.wav');
             audio.loop = false;
             audio.play();
+        },
+
+        loadBoard(movs){
+            console.log("Se han hecho: ", movs.length/4)
+            let mov = 0;
+            let filini;
+            let colini;
+            let fil;
+            let col;
+            for(let i = 0; i < movs.length/4 - 1; i++){
+                if(this.playerColor == "rojo"){
+                    filini = movs[(mov*4)];
+                    colini = movs[(mov*4) + 1]
+                    fil = movs[(mov*4) + 2]
+                    col = movs[(mov*4) + 3]
+                } else {
+                    filini = 9 - movs[(mov*4)];
+                    colini = 8- movs[(mov*4) + 1]
+                    fil = 9 - movs[(mov*4) + 2]
+                    col = 8 - movs[(mov*4) + 3]
+                }
+                
+                console.log("Movimiento: ", filini, colini, fil, col)
+                this.movePiece(filini, colini, fil, col)
+                mov++;
+            }
+            if(this.playerColor == "rojo"){
+                filini = movs[(mov*4)];
+                colini = movs[(mov*4) + 1]
+                fil = movs[(mov*4) + 2]
+                col = movs[(mov*4) + 3]
+            } else {
+                filini = 9 - movs[(mov*4)];
+                colini = 8- movs[(mov*4) + 1]
+                fil = 9 - movs[(mov*4) + 2]
+                col = 8 - movs[(mov*4) + 3]
+            }
+            console.log("Movimiento Final: ", filini, colini, fil, col)
+            this.selectedPiece.fil = filini
+            this.selectedPiece.col = colini
+            this.selectedPiece.selected = true
+            this.tablero.filas[fil][col].esPista = true
+            this.moveSelectedPiece( fil,  col, this.tablero.filas[fil][col], false)
+            this.selectedPiece.selected = false
+        },
+
+        movePiece(filini, colini, indexFil, indexCol){
+            this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[filini][colini].pieza
+            this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[filini][colini].color
+            this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[filini][colini].esPista
+            this.tablero.filas[filini][colini].pieza = null
+            this.turno++
         },
 
         /*
