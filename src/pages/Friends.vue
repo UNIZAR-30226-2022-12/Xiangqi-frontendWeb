@@ -1,7 +1,7 @@
 <template>
 	<loader v-if="this.loading"/>
 	<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
-	<searchFriends @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
+	<searchFriends :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 	<searchTable :show="this.showResults" :searchedItem="this.searchFriendField"/>
 	<!--<div class="animate-down" :class="{'push-down': this.showResults }">-->
 	<friendReq />
@@ -22,6 +22,7 @@ export default {
 			showResults: false,
 			loading: false,
 			searchFriendField: '',
+
 		}
 	},
 	components: {
@@ -41,6 +42,11 @@ export default {
         },
 		getSearchFriendField(results) {
 			this.searchFriendField = results;
+		},
+		clearFriendsPressed(){
+			console.log('clearResults');
+			this.showResults = false;
+			this.searchFriendField = '';
 		}
 	}
 }

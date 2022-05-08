@@ -8,6 +8,7 @@
                 <InputText placeholder="Nombre de usuario" class="h-3rem pl-4" style=" border-style: none; border-top-left-radius: 1rem; border-bottom-left-radius: 1rem; border-top-right-radius: 0; border-bottom-right-radius: 0; box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);" v-model="searchFriendField"/>
                 <!--On click enviar evento-->
                 <Button v-on:click="search()" :disabled="this.searchFriendField == null" class="p-button-raised font-semibold w-4rem text-left h-3rem" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 1rem; border-bottom-right-radius: 1rem" icon="pi pi-search" iconPos="left" />
+                <Button v-if="this.showResults && this.show" v-on:click="clear()" class="p-button-raised font-semibold w-4rem text-left h-3rem" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 1rem; border-bottom-right-radius: 1rem" icon="pi pi-times" iconPos="left" />
             </section>
         </div>
         <div class="col-12 md:col-6 overflow-hidden" style="border-top-right-radius: 1rem !important; border-bottom-right-radius: 1rem !important;">
@@ -19,7 +20,13 @@
 <script>
 export default {
     //Eventos que enviamos a Friends
-    emits: ['search-friends-pressed', 'search-friend-field'],
+    emits: ['clear-friends-pressed', 'search-friends-pressed', 'search-friend-field'],
+    props: {
+        show: {
+            type: Boolean,
+            required: true
+        },
+    },
     data() {
         return {
             searchFriendField: null,
@@ -38,9 +45,12 @@ export default {
         //Metodo on click que envia las variables de los eventos
         search() {
             this.$emit('search-friend-field', this.searchFriendField);
-            this.searchFriendField = null;
+            //this.searchFriendField = null;
             this.showResults = true;
             this.$emit('search-friends-pressed', this.showResults);
+        },
+        clear() {
+            this.$emit('clear-friends-pressed');
         }
     }
 }
