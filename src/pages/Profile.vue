@@ -35,6 +35,7 @@ export default {
 			this.loading = false;
 			this.perfil = response.perfil;
 			this.games = response.partidas;
+			console.log(this.games);
 			this.stats = response.estadisticas;
 
 			if (this.perfil.hasImage) {

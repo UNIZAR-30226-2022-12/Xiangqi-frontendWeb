@@ -46,7 +46,7 @@ export default {
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
 				for(let i = 0; i < response.length; i++){
-					this.notFriendOf.push({id: response[i][1], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
+					this.notFriendOf.push({id: response[i][0], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
 				}
 				this.loadingSearch = false;
 			});

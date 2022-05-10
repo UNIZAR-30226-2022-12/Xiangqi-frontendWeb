@@ -41,7 +41,7 @@ const routes = [
     },
     {
         path: '/otherProfile/:id',
-        name: 'Perfil de otro usuario',
+        name: 'OtherProfile',
         component: OtherProfile,
     },
     {

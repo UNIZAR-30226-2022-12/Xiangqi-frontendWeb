@@ -90,25 +90,16 @@ export default {
 	created() {  
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 	},
-    mounted() {
-    },
     watch: {
         "loading": function(val, oldVal) {
             console.log("new: %s, old: %s", val, oldVal);
         }
-    },
-	methods: {
-        formatDate(value) {
-            return value.toLocaleDateString('en-US', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-            });
+    },   
+    methods: {
+        otherProfile(id){
+            this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
-        formatCurrency(value) {
-            return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
-        },
-	}        
+    }  
 }
 </script>
 

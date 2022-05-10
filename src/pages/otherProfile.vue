@@ -1,7 +1,7 @@
 <template>
 	<loader v-if="this.loading"/>
-	<otherData v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="false"/>
-	<otherStatics v-if="stats!=null" :perfil="perfil" :myProfile="false" :games="stats"/>
+	<otherData v-if="perfil != null" :perfil="perfil" :profileImage="profileImage" :myProfile="false"/>
+	<otherStatics v-if="stats != null" :perfil="perfil" :myProfile="false" :games="stats"/>
 </template>
 
 <script>
@@ -27,7 +27,6 @@ export default {
 		otherStatics,
 	},
 	created() {
-		document.title = 'Perfil de ' + this.perfil.nickname;
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
         this.$accounts.getProfile(this.$route.params.id).then(response => {
@@ -37,7 +36,7 @@ export default {
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto
 				console.log("tiene foto");
-				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+				this.$accounts.getProfileImage(this.$route.params.id).then(data => {
 					this.profileImage = data;
 				});
 			} else {
