@@ -216,24 +216,6 @@ class AccountService {
             });
     }
 
-    // SEARCH USER
-    //------------------------------------------------------------------------------------------------------------------
-     /*
-     * BUSCAR USUARIO
-     */
-     searchUser(nickname){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
-        console.log(nickname)
-        return http
-            .post('/do_getSearchUsers/',{'nickname': String(nickname)} ,headers)
-            .then(response => {
-                console.log("LLEGAN LOS AMIGOS: ", response.data)
-                return response.data;
-            }, () => {
-                return false;
-            });
-    }
-
     // LOAD GAME
     //------------------------------------------------------------------------------------------------------------------
      /*

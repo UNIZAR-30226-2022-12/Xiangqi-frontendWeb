@@ -18,10 +18,10 @@
                         </div>
                     </template>
                     <template #empty>
-                        No se han encontrado solicitudes de amistad
+                        No se han encontrado usuarios por {{searchedItem}}
                     </template>
                     <template #loading>
-                        Cargando solicitudes. Por favor, espere.
+                        Cargando usuarios. Por favor, espere.
                     </template>
                     <Column field="nickname" header="Nombre de usuario" sortable style="min-width: 14rem">
                         <template #body="{data}">
@@ -68,32 +68,34 @@ export default {
         searchedItem: {
             type: String,
             required: true
+        },
+        notFriendOf: {
+            type: Array,
+            required: true
+        },
+        loading: {
+            type: Boolean,
+            required: true
         }
     },
 	data() {
 		return {
-			notFriendOf: null,
-            loading: true,
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
-            selectedRival: null
+            selectedRival: null,
 		}
 	},
-	created() {
-        
+	created() {  
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-        //Que el back nos devuelva solo de los que no somos amigos
-        this.notFriendOf= [];
 	},
     mounted() {
-        this.loading = false;
-        this.$accounts.searchUser(this.searchedItem).then(response =>{
-            for(let i = 0; i < response.length; i++){
-                this.notFriendOf.push({id: response[i][1], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
-            }  
-        })
+    },
+    watch: {
+        "loading": function(val, oldVal) {
+            console.log("new: %s, old: %s", val, oldVal);
+        }
     },
 	methods: {
         formatDate(value) {
