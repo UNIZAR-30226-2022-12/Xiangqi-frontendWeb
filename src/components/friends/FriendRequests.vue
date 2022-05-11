@@ -2,13 +2,13 @@
     <h2>Solicitudes de amistad</h2>
 	<div class="surface-section section p-6">
         <DataTable :value="friendRequests" :paginator="true" :rows="10"
-        :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+        :rowHover="true" v-model:selection="selectedUser" v-model:filters="filters" filterDisplay="menu" :loading="loading"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
         currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
         :globalFilterFields="['nickname']" responsiveLayout="scroll">
             <template #header>
                 <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 class="m-0">Solicitudes</h5>
+                    <h5 class="m-0"> Solicitudes </h5>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search" />
                         <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
@@ -57,27 +57,31 @@
 
 <script>
 
-import {FilterMatchMode,FilterOperator} from 'primevue/api';
+import {FilterMatchMode, FilterOperator} from 'primevue/api';
 
 export default {
-	inject: ['$accounts'],
+	inject: ['$accounts'],    
+    props: {
+        friendRequests: {
+            type: Object,
+            required: true
+        },
+        loading: {
+            type: Boolean,
+            required: true
+        }
+    },
 	data() {
 		return {
-			friendRequests: null,
-            loading: true,
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
-            selectedRival: null
+            selectedUser: null
 		}
 	},
 	created() {
-        
-		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-
-		//this.customerService = new CustomerService();
-        this.friendRequests= [
+        /*this.friendRequests= [
                 {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
@@ -91,11 +95,8 @@ export default {
 				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-        ];
+        ];*/
 	},
-    mounted() {
-        this.loading = false;
-    },
 	methods: {
         formatDate(value) {
             return value.toLocaleDateString('en-US', {

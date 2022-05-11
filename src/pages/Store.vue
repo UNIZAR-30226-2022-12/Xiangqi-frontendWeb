@@ -10,10 +10,10 @@ import boardsSection from '../components/store/StoreSection.vue';
 import piecesSection from '../components/store/StoreSection.vue';
 
 export default {
-	inject: ['$accounts'],
+	inject: ['$accounts', '$store'],
 	data() {
 		return {
-			loading: false,
+			loading: true,
 			boardsName: 'tableros',
 			setsBoards: [
                 {id: '1', name: 'Madera teka', desc: "Tablero con un dragón grabado", category: "Tablero de madera",price: '11', purchased: true},
@@ -42,8 +42,20 @@ export default {
 		piecesSection,
 	},
 	created() {
-		//this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-		this.$loggedStatus.logged = true;
+		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+		
+		//CUANDO ESTE EL BACK HECHO:
+		//CAMBIAR ESTO
+		this.loading = false;
+
+		//POR ESTO
+		/*
+		this.$store.getStoreItems().then(response => {
+			this.loading = false;
+			this.setsBoards = response.setsBoards;
+			this.setsPieces = response.setsPieces;
+		});
+		*/
 	}
 }
 </script>

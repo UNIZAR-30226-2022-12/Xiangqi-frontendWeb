@@ -19,7 +19,6 @@ export default {
                         {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
                         {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
                         {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
-                        {label: 'Mis tableros', icon: 'pi pi-fw pi-table', to: '/MyBoards'},
                     ]
                 },
             ]

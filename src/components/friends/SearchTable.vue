@@ -4,7 +4,7 @@
             <h2 class="mt-4">Usuarios encontrados por {{searchedItem}}</h2>
             <div class="surface-section section p-6">
                 <DataTable :value="notFriendOf" :paginator="true" :rows="10"
-                :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
+                :rowHover="true" v-model:selection="selectedUser" v-model:filters="filters" filterDisplay="menu" :loading="loading"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
                 currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
                 :globalFilterFields="['nickname']" responsiveLayout="scroll">
@@ -84,17 +84,9 @@ export default {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
-            selectedRival: null,
+            selectedUser: null,
 		}
 	},
-	created() {  
-		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-	},
-    watch: {
-        "loading": function(val, oldVal) {
-            console.log("new: %s, old: %s", val, oldVal);
-        }
-    },   
     methods: {
         otherProfile(id){
             this.$router.push({name: 'OtherProfile', params: { id: id}});

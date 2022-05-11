@@ -2,7 +2,7 @@
     <h2>Mis amigos</h2>
     <div class="surface-section section p-6">
         <div class="card">
-            <Carousel :value="friends" :numVisible="5" :numScroll="5" :responsiveOptions="responsiveOptions">
+            <Carousel v-if="this.friends.len > 0" :value="friends" :numVisible="5" :numScroll="5" :responsiveOptions="responsiveOptions">
                 <template #item="slotProps">
                     <div class="product-item">
                         <div class="product-item-content text-center">
@@ -22,6 +22,9 @@
                     </div>
                 </template>
             </Carousel>
+            <div v-else>
+                No se han encontrado amigos
+            </div>
         </div>
     </div>
 </template>
@@ -30,9 +33,14 @@
 
 export default {
 	inject: ['$accounts'],
+    props: {
+        friends: {
+            type: Object,
+            required: true
+        }
+    },
 	data() {
-		return {
-			friends: null,			
+		return {			
             responsiveOptions: [
 				{
 					breakpoint: '1024px',
@@ -53,9 +61,7 @@ export default {
 		}
 	},
 	created() {
-        
-		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-
+        /*
         this.friends= [
                 {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain'},
                 {id: '1', nickname: 'John', name:"John Doe", flag: 'flag-fr', country: 'France'},
@@ -70,7 +76,7 @@ export default {
 				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-        ];
+        ];*/
 	},      
 }
 </script>

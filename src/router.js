@@ -9,7 +9,6 @@ import Friends from './pages/Friends.vue';
 import Ranking from './pages/Ranking.vue';
 import Store from './pages/Store.vue';
 import Historial from './pages/Historial.vue';
-import MyBoards from './pages/MyBoards.vue';
 import NotFound from './pages/NotFound.vue';
 import RecPwd from './pages/RecPwd.vue';
 
@@ -63,11 +62,6 @@ const routes = [
         path: '/historial',
         name: 'Historial',
         component: Historial,
-    },
-    {
-        path: '/myBoards',
-        name: 'Mis tableros',
-        component: MyBoards,
     },
     {
         path: '/recPwd',

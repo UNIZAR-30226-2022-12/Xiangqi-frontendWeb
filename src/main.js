@@ -116,6 +116,7 @@ library.add(faUserGroup);
 //Importar el account service
 import accounts from '@/service/AccountService';
 import friends from '@/service/FriendsService';
+import store from '@/service/StoreService';
 import game from '@/service/GameService';
 
 router.beforeEach(function(to, from, next) {
@@ -128,6 +129,7 @@ const app = createApp(AppWrapper);
 //Servicio para login y para crear cuentas
 app.provide('$accounts', accounts);
 app.provide('$friends', friends);
+app.provide('$store', store);
 app.provide('$game', game);
 
 //Cambiar tema por defecto aquí y en index.html

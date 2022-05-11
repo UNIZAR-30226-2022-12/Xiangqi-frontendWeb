@@ -1,11 +1,12 @@
 <template>
 	<loader v-if="this.loading"/>
-	<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
-	<searchFriends :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
-	<searchTable :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
-	<!--<div class="animate-down" :class="{'push-down': this.showResults }">-->
-	<friendReq />
-	<myFriends />
+	<div v-else>
+		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
+		<searchFriends :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
+		<searchTable :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
+		<friendReq :friendRequests="this.friendRequests" />
+		<myFriends :loading="this.loadingRequests" :friends="this.friends"/>
+	</div>
 </template>
 
 <script>
@@ -24,6 +25,9 @@ export default {
 			searchFriendField: '',
 			notFriendOf: [],
 			loadingSearch: true,
+			friendRequests: [],
+			loadingRequests: true,
+			friends: [],
 		}
 	},
 	components: {
@@ -35,6 +39,23 @@ export default {
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+
+		//CUANDO ESTE EL BACK HECHO:
+		//CAMBIAR ESTO
+		this.loading = false;
+
+		//POR ESTO
+		/*
+		this.$friends.getFriendRequests().then(response => {
+			this.friendRequests = response.friendRequests;
+			this.loadingRequests = false;
+		});
+
+		this.$friends.getFriends().then(response => {
+			this.friends = response.friends;
+			this.loading = false;
+		});
+		*/
 	},
 	methods: {
 		//Metodos que recogen los eventos definidos en searchFriends
@@ -50,30 +71,15 @@ export default {
 				}
 				this.loadingSearch = false;
 			});
-			
-			//Pasarle el rsultado  al componente searchTable
         },
 		getSearchFriendField(results) {
 			this.searchFriendField = results;
 		},
 		clearFriendsPressed(){
-			console.log('clearResults');
 			this.showResults = false;
 			this.searchFriendField = '';
 		}
 	}
 }
 </script>
-
-<style>
-/*
-.push-down {
-	transform: translateY(1rem);
-}
-
-.animate-down {
-	transition: transform 1000ms ease-in-out;
-}
-*/
-</style>
 
