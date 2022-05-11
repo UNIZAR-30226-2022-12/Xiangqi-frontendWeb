@@ -1,16 +1,25 @@
 <template>
+	<h2> Tienda </h2>
 	<loader v-if="this.loading"/>
-	<boardsSection :name="boardsName" :set="setsBoards"/>
-	<piecesSection :name="piecesName" :set="setsPieces"/>
+	<div v-else>
+		<boardsSection :loading="this.loading" :name="boardsName" :set="setsBoards"/>
+		<piecesSection :loading="this.loading" :name="piecesName" :set="setsPieces"/>
+	</div>
 </template>
 
 <script>
+
 import loader from '../components/Loader.vue';
 import boardsSection from '../components/store/StoreSection.vue';
 import piecesSection from '../components/store/StoreSection.vue';
 
 export default {
 	inject: ['$accounts', '$store'],
+	components: {
+		boardsSection,
+		piecesSection,
+		loader
+	},
 	data() {
 		return {
 			loading: true,
@@ -31,15 +40,14 @@ export default {
             ],
 			piecesName: 'piezas',
 			setsPieces: [
-                {id: '1', name: 'Iconos símbolo', desc: "Iconos con símbolos dibujados", category: "Piezas con iconos", price: '10', purchased: true},
-                {id: '2', name: 'Iconos en Chino', desc: "Iconos tradicionales en Chino", category: "Piezas en Chino", price: '10', purchased: false},
+                {id: '1', name: 'Default symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '10', purchased: true},
+                {id: '2', name: 'Default Chino', desc: "Iconos tradicionales en Chino", category: "Chino", price: '10', purchased: true},
+				{id: '3', name: 'Dark symbols', desc: "Iconos con símbolos oscuros", category: "Iconos", price: '30', purchased: false},
+				{id: '4', name: 'Dark Chino', desc: "Iconos en Chino oscuros", category: "Chino", price: '30', purchased: false},
+				{id: '5', name: 'Light symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '20', purchased: false},
+				{id: '6', name: 'Light Chino', desc: "Iconos en Chino claros", category: "Chino", price: '20', purchased: false},
             ],
 		}
-	},
-	components: {
-		loader,
-		boardsSection,
-		piecesSection,
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
@@ -51,9 +59,9 @@ export default {
 		//POR ESTO
 		/*
 		this.$store.getStoreItems().then(response => {
-			this.loading = false;
 			this.setsBoards = response.setsBoards;
 			this.setsPieces = response.setsPieces;
+			this.loading = false;
 		});
 		*/
 	}

@@ -1,15 +1,17 @@
 <template>
+	<h2> Amigos </h2>
 	<loader v-if="this.loading"/>
 	<div v-else>
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 		<searchFriends :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 		<searchTable :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
-		<friendReq :friendRequests="this.friendRequests" />
-		<myFriends :loading="this.loadingRequests" :friends="this.friends"/>
+		<friendReq :loading="this.loadingRequests" :friendRequests="this.friendRequests" />
+		<myFriends :loading="this.loadingFriends" :friends="this.friends"/>
 	</div>
 </template>
 
 <script>
+
 import loader from '../components/Loader.vue';
 import searchFriends from '../components/friends/SearchFriends.vue';
 import searchTable from '../components/friends/SearchTable.vue';
@@ -18,24 +20,25 @@ import myFriends from '../components/friends/MyFriends.vue';
 
 export default {
 	inject: ['$accounts', '$friends'],
-	data() {
-		return {
-			showResults: false,
-			loading: false,
-			searchFriendField: '',
-			notFriendOf: [],
-			loadingSearch: true,
-			friendRequests: [],
-			loadingRequests: true,
-			friends: [],
-		}
-	},
 	components: {
 		loader,
 		searchFriends,
 		searchTable,
 		friendReq,
 		myFriends,
+	},
+	data() {
+		return {
+			showResults: false,
+			loading: true,
+			searchFriendField: '',
+			notFriendOf: [],
+			loadingSearch: true,
+			friendRequests: [],
+			loadingRequests: true,
+			friends: [],
+			loadingFriends: true,
+		}
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
@@ -53,7 +56,7 @@ export default {
 
 		this.$friends.getFriends().then(response => {
 			this.friends = response.friends;
-			this.loading = false;
+			this.loadingFriends = false;
 		});
 		*/
 	},

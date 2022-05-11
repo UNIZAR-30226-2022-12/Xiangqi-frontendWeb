@@ -1,5 +1,4 @@
 <template>
-    <h2>Buscar usuarios</h2>
     <div class="grid grid-nogutter surface-section section">
         <div class="col-12 md:col-7 pl-5 text-center md:text-left flex align-items-center">
             <section class="p-4">
@@ -16,7 +15,7 @@
             </section>
         </div>
         <div class="col-12 md:col-5 overflow-hidden image-border">
-            <img src="../../assets/images/1.png" alt="Xiangqi" class="md:ml-auto block md:h-full poligon-clip altura-img">
+            <img src="images/pictures/4.jpg" alt="Xiangqi" class="md:ml-auto block md:h-full poligon-clip altura-img">
         </div>
     </div>
 </template>

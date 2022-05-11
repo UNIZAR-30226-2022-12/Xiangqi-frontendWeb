@@ -1,7 +1,8 @@
 <template>
-	<h2> Sets de {{ name }} </h2>
-    <div class="surface-section section p-6">
-        <DataView :value="set" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
+    <div class="surface-section section p-6 mb-6">
+        <h2> Sets de {{ name }} </h2>
+        <loader v-if="this.loading"/>   
+        <DataView v-else :value="set" :layout="layout" :paginator="true" :rows="6" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
             <template #header>
                 <div class="grid grid-nogutter">
                     <div class="col-6" style="text-align: left">
@@ -68,9 +69,13 @@
 </template>
 
 <script>
+import loader from '../LoaderSmall.vue';
 
 export default {
 	inject: ['$accounts'],
+    components: {
+		loader,
+    },
     props: {
         set: {
             type: Object,
@@ -78,6 +83,10 @@ export default {
         },
         name: {
             type: String,
+            required: true
+        },
+        loading: {
+            type: Boolean,
             required: true
         },
     },

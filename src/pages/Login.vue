@@ -12,7 +12,7 @@
                 </section>
             </div>
             <div class="col-12 md:col-6 overflow-hidden">
-                <img src="../assets/images/1.png" alt="Xiangqi" class="md:ml-auto block md:h-full poligon-clip altura-img">
+                <img src="images/pictures/1.png" alt="Xiangqi" class="md:ml-auto block md:h-full poligon-clip altura-img">
             </div>
         </div>
 
@@ -158,7 +158,7 @@
             <!--MOBILE APP-->
             <div class="grid my-8 md:pt-5">
                 <div class="flex justify-content-center col-12 lg:col-6 bg-blue-100 p-0 flex-order-1 lg:flex-order-0" style="border-radius:8px;">
-                    <img src="../assets/images/2.png" class="w-4" alt="mockup mobile">
+                    <img src="images/pictures/2.png" class="w-4" alt="mockup mobile">
                 </div>
                 <div class="col-12 lg:col-6 my-auto flex flex-column lg:align-items-start align-items-center lg:pl-5">
                     <div class="flex align-items-center justify-content-center bg-blue-200" style="width:4.2rem; height:4.2rem; border-radius: 10px;">
@@ -182,7 +182,7 @@
                 </div>
 
                 <div class="flex justify-content-end flex-order-1 sm:flex-order-2 col-12 lg:col-6 bg-yellow-100 p-0" style="border-radius:8px;">
-                    <img src="../assets/images/3.png" class="w-11 pt-4" alt="mockup">
+                    <img src="images/pictures/3.png" class="w-11 pt-4" alt="mockup">
                 </div>
             </div>
         </div>

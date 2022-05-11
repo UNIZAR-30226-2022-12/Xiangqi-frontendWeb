@@ -9,7 +9,7 @@
 </div>
 </template>
 
-<style>
+<style scooped>
 /* Color del spinner */
 
 #spinnerContainer .p-progress-spinner-circle{

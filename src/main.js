@@ -117,6 +117,7 @@ library.add(faUserGroup);
 import accounts from '@/service/AccountService';
 import friends from '@/service/FriendsService';
 import store from '@/service/StoreService';
+import ranking from '@/service/RankingService';
 import game from '@/service/GameService';
 
 router.beforeEach(function(to, from, next) {
@@ -130,6 +131,7 @@ const app = createApp(AppWrapper);
 app.provide('$accounts', accounts);
 app.provide('$friends', friends);
 app.provide('$store', store);
+app.provide('$ranking', ranking);
 app.provide('$game', game);
 
 //Cambiar tema por defecto aquí y en index.html
