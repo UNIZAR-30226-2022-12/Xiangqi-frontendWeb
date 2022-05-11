@@ -1,11 +1,11 @@
 <template>
 	<h2> Sets de {{ name }} </h2>
     <div class="surface-section section p-6">
-        <DataView :value="set" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
+        <DataView :value="set" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
             <template #header>
                 <div class="grid grid-nogutter">
                     <div class="col-6" style="text-align: left">
-                        <Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Ordenar por precio" @change="onSortChange($event)"/>
+                        <Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Ordenar por..." @change="onSortChange($event)"/>
                     </div>
                     <div class="col-6" style="text-align: right">
                         <DataViewLayoutOptions v-model="layout" />
@@ -21,13 +21,15 @@
                         <div class="product-list-detail">
                             <div class="product-name">{{slotProps.data.name}}</div>
                             <div class="product-description">{{slotProps.data.desc}}</div>
-                            <!--<i class="pi pi-tag product-category-icon"></i><span class="product-category">{{slotProps.data.category}}</span>-->
+                            <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{slotProps.data.category}}</span>
                         </div>
                         <div class="h-2"></div>
                         <div class="product-list-action">
-                            <span class="product-price">{{slotProps.data.price}} ©</span>
+                            <span class="product-price">
+                                {{slotProps.data.price}} 
+                                <font-awesome-icon class="text-xl" icon="coins" />
+                            </span>
                             <Button icon="pi pi-shopping-cart" label="Comprar" :disabled="slotProps.data.purchased"></Button>
-                            <!--<span :class="'product-badge status-'+slotProps.data.inventoryStatus.toLowerCase()">{{slotProps.data.inventoryStatus}}</span>-->
                         </div>
                     </div>
                 </div>
@@ -37,22 +39,23 @@
                 <div class="col-12 md:col-4">
                     <div class="product-grid-item card">
                         <div class="product-grid-item-top">
-                            <!--<div>
+                            <div>
                                 <i class="pi pi-tag product-category-icon"></i>
                                 <span class="product-category">{{slotProps.data.category}}</span>
                             </div>
-                            <span :class="'product-badge status-'+slotProps.data.inventoryStatus.toLowerCase()">{{slotProps.data.inventoryStatus}}</span>-->
                         </div>
                         <div class="product-grid-item-content">
                             <img v-if="name == 'tableros'" class="store-item-grid" :src="'images/themes/boards/' + slotProps.data.id + '.jpg'" :alt="slotProps.data.name">
                             <img v-else class="store-item-grid-piece store-item-grid" :src="'images/themes/pieces/' + slotProps.data.id + '/canyonnegro.svg'">
                             <div class="product-name">{{slotProps.data.name}}</div>
                             <div class="product-description">{{slotProps.data.desc}}</div>
-                            <!--<Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false"></Rating>-->
                         </div>
                         <div class="h-2rem"></div>
                         <div class="product-grid-item-bottom">
-                            <span class="product-price">{{slotProps.data.price}} ©</span>
+                            <span class="product-price">
+                                {{slotProps.data.price}}
+                                <font-awesome-icon class="text-xl" icon="coins" />
+                            </span>
                             <Button icon="pi pi-shopping-cart" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
@@ -87,6 +90,9 @@ export default {
             sortOptions: [
                 {label: 'Precio de Mayor a Menor', value: '!price'},
                 {label: 'Precio de Menor a Mayor', value: 'price'},
+                {label: 'Comprados primero', value: '!purchased'},
+                {label: 'No comprados primero', value: 'purchased'},
+                {label: 'Por categoría', value: 'category'},
             ]
         }
     },
@@ -118,13 +124,30 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-.p-dataview{
-border-width: 1px !important;
-border-color: black !important;
-border-style: solid;
-border-radius: 1rem;
+<style>
+
+.p-dataview-header {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+    border-top-style: none !important;
 }
+
+.p-paginator-bottom {
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
+</style>
+
+<style lang="scss" scoped>
+
+.p-dataview {
+    border-width: 1px !important;
+    border-style: solid;
+    border-radius: 1rem;
+    border-bottom-style: none !important;
+}
+
 .store-item-list {
 	vertical-align: middle;
 	width: 5rem;
@@ -134,8 +157,8 @@ border-radius: 1rem;
 
 .store-item-grid {
 	vertical-align: middle;
-	width: 8rem;
-	height: 8rem;
+	width: 10rem;
+	height: 10rem;
 	border-radius: 10%;
 }
 
@@ -168,7 +191,7 @@ border-radius: 1rem;
 }
 
 .product-description {
-	margin: 0 0 0rem 0;
+	margin: 0 0 1rem 0;
 }
 
 .product-category-icon {
