@@ -83,8 +83,8 @@ export default {
     },
     created(){
         /*
-        *   LAST WEEK
-        */
+         *   LAST WEEK
+         */
         //Cargar los datos de la tabla
         console.log(this.games)
         this.lastWeek.datasets[0].data = this.games.diaJugadas

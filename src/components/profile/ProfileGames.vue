@@ -130,11 +130,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 .foto-perfil-table {
     display: block; 
-	vertical-align: middle;
+	/*vertical-align: middle;*/
 	width: 2rem;
 	height: 2rem;
 	border-radius: 50%;

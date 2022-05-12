@@ -10,8 +10,8 @@
 </template>
 
 <style scooped>
-/* Color del spinner */
 
+/* Color del spinner */
 #spinnerContainer .p-progress-spinner-circle{
 	-webkit-animation: p-progress-spinner-dash 1.5s ease-in-out infinite !important;
 	animation: p-progress-spinner-dash 1.5s ease-in-out infinite !important;

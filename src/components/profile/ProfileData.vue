@@ -2,9 +2,9 @@
 	<h2 v-if="myProfile">Mi perfil</h2>
 	<h2 v-else>Perfil de {{perfil.name}}</h2>
 	
-    <div class="surface-section section p-6 text-center"> <!--text-center px-2 py-4 md:px-3 lg:px-4-->
+    <div class="surface-section section p-6 text-center">
 		<div class="grid m-auto">
-			<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)"> <!--col-12 sm:col-12 md:col-12 lg:col-3 bg-blue-500  lg:max-w-max--><!-- m-2 px-5 py-3-->
+			<div class="col-fixed" style="margin-left: auto; margin-right:auto; width:calc(8rem + 20px)">
 				<img id=profliePic :src="profileImage" class="foto-perfil shadow-2 surface-50" style="" alt="foto de perfil">
 			</div>
 			<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
@@ -13,7 +13,6 @@
 				<img class="flag h-auto" :class="[perfil.country.flag]" src="images/flags/flag_placeholder.png">
 			</div>
 			<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
-				<!--<Button v-if="myProfile" class="p-button-raised" style="border-radius: 1rem" label="Editar perfil" icon="pi pi-user-edit" iconPos="left"></Button>-->
 				<profileEdit v-if="myProfile" :perfil="perfil"/>
 			</div>
 		</div>
@@ -28,8 +27,6 @@
 				</div>
 				<div class="col-12 md:col-6 lg:col-2 mb-4 text-center">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50 text-center" style="border-radius: 1rem">
-						<!--<i class="pi pi-money-bill text-4xl text-primary"></i>-->
-						<!--<font-awesome-icon class="text-4xl text-primary" icon="phone" />-->
 						<font-awesome-icon class="text-4xl text-primary" icon="coins" />
 					</span>
 					<div class="text-900 mb-3 font-medium text-center">Número de puntos</div>

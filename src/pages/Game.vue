@@ -8,7 +8,7 @@
                 <rivalInfo v-if="rivalProfile!=null" :isFriend="false" :perfil="rivalProfile" :profileImage="rivalProfileImage"/>
                 <Divider />
                 <!--Temporizador-->
-                <div class="field col-12 mb-0">
+                <div v-if="this.showTimer" class="field col-12 mb-0">
                     <h6>Temporizador:</h6>
                     <h2 class="mt-0 mb-0">{{this.timer}}</h2>
                 </div>
@@ -281,6 +281,7 @@ export default  {
             //BARRA LATERAL
             //------------------------------------------------------
             timer: '00:00:00',
+            showTimer: true,
 
             //Set de piezas seleccionado por defecto, lo ponemos en el themechanger
             selectedPiecesSet: null,
@@ -293,6 +294,7 @@ export default  {
     },
 	created() {
         this.idSala = this.$route.params.idSala;
+        //this.showTimer = this.$route.params.timer;
         this.myid = localStorage.getItem('id');
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");

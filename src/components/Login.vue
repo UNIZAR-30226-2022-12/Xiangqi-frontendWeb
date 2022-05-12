@@ -1,5 +1,4 @@
 <template>
-
   <!--ACCOUNT CREATED DIALOG-->
   <Dialog v-model:visible="dialog.accountCreated" :closable="false" class="dialog-account-created dialog-login resize-dialog" :draggable="false" :modal="true">
       <template #header :class="colorHeader">

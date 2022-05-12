@@ -98,14 +98,16 @@ export default {
 		*/
 	},
 	methods: {
-		//Metodos que recogen los eventos definidos en searchFriends
+		// Metodos que recogen los eventos definidos en searchFriends
 		searchFriendsPressed(results){
-			//Hacer peticion al back
+			// Hacer peticion al back
 			this.loadingSearch = true;
 			this.showResults = results;
 			console.log(this.searchFriendField);
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
+				// Cuando este el back bien hecho cambiar el for por
+				// this.notFriendOf = response.notFriendOf;
 				for(let i = 0; i < response.length; i++){
 					this.notFriendOf.push({id: response[i][0], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
 				}
