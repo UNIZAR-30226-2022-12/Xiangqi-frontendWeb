@@ -88,8 +88,8 @@ export default {
 	},
 
 	created() {
-		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-
+		//this.$loggedStatus.logged = this.$accounts.isAuthenticated();
+        this.$loggedStatus.logged = true;
 		// CUANDO ESTE EL BACK HECHO:
 		// CAMBIAR ESTO
 		// ---------------------------------------------------------------------

@@ -42,8 +42,12 @@ export default {
         return {
             //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
             setsPieces: [
-                {id:'1', name: 'Iconos occidentales'},
-                {id:'2', name: 'Iconos en Chino'},
+                {id: '1', name: 'Default symbols'},
+                {id: '2', name: 'Default Chino'},
+				{id: '3', name: 'Dark symbols'},
+				{id: '4', name: 'Dark Chino'},
+				{id: '5', name: 'Light symbols'},
+				{id: '6', name: 'Light Chino'},
             ],
 
             //Set de piezas seleccionado por defecto
@@ -54,18 +58,18 @@ export default {
 
             //Estos son los sets que tiene el usuario, habra que pedirlos al back
             setsBoards: [
-                {id: '1', name: 'Madera 1'},
-                {id: '2', name: 'Madera 2'},
-                {id: '3', name: 'Madera 3'},
-                {id: '4', name: 'Metal 1'},
-                {id: '5', name: 'Metal 2'},
-                {id: '6', name: 'Marmol 1'},
-                {id: '7', name: 'Marmol 2'},
-                {id: '8', name: 'Marmol 3'},
-                {id: '9', name: 'Marmol 4'},
-                {id: '10', name: 'Checker 1'},
-                {id: '11', name: 'Cemento 1'},
-                {id: '12', name: 'Cemento 2'},
+                {id: '1', name: 'Madera teka'},
+                {id: '2', name: 'Madera nogal'},
+                {id: '3', name: 'Madera roble'},
+                {id: '4', name: 'Metal óxido'},
+                {id: '5', name: 'Metal acero'},
+                {id: '6', name: 'Mármol gris'},
+                {id: '7', name: 'Mármol arena'},
+                {id: '8', name: 'Mármol onyx'},
+                {id: '9', name: 'Mármol hielo'},
+                {id: '10', name: 'Ajedrezado'},
+                {id: '11', name: 'Cemento gris'},
+                {id: '12', name: 'Hormigón'},
             ],
         }
     },

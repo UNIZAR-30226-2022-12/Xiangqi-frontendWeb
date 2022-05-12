@@ -1,6 +1,6 @@
 <template>
 	<div class="layout-menu-container">
-		<AppSubmenu :items="menu" class="layout-menu" :root="true" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
+		<AppSubmenu :items="menu" :notifications="notifications" class="layout-menu" :root="true" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
 	</div>
 </template>
 
@@ -10,18 +10,26 @@ import AppSubmenu from './AppSubmenu';
 export default {
 	data() {
 		return {
-		menu : [
-                {
-                    label: 'Menú',
-                    items: [
-                        {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
-                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends'},
-                        {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
-                        {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
-                        {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
-                    ]
-                },
-            ]
+
+            notifications: [
+                {type: 'friendRequest', nickname: 'juanksp'},
+                {type: 'friendRequest', nickname: 'alexzheng'},
+                {type: 'gameRequest', nickname: 'juanksp'},
+                {type: 'gameRequest', nickname: 'alexzheng'},
+            ],
+
+            menu: [
+                    {
+                        label: 'Menú',
+                        items: [
+                            {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
+                            {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends'},
+                            {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
+                            {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
+                            {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
+                        ]
+                    },
+                ]
 		}
 	},
     methods: {

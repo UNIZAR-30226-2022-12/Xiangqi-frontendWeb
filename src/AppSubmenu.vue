@@ -1,5 +1,9 @@
 <template>
 	<ul v-if="items">
+		<template v-if="this.notifications != null">
+			<h5 v-if="this.numFriendReq > 0"> {{ this.numFriendReq }} solicitudes de amistad </h5>
+			<h5 v-if="this.numGameReq > 0"> {{ this.numGameReq }} invitaciones a partidas </h5>
+		</template>
 		<template v-for="(item,i) of items">
 			<li v-if="visible(item) && !item.separator" :key="item.label || i" :class="[{'layout-menuitem-category': root, 'active-menuitem': activeIndex === i && !item.to && !item.disabled}]" role="none">
 				<template v-if="root">
@@ -39,10 +43,27 @@ export default {
 		root: {
 			type: Boolean,
 			default: false
+		},
+		notifications: {
+			type: Array,
+			required: false
+		}
+	},
+	mounted() {
+		if (this.notifications == null) return;
+		for (let i = 0; i < this.notifications.length; i++) {
+			if (this.notifications[i].type == 'friendRequest') {
+				this.numFriendReq++;
+			}
+			if (this.notifications[i].type == 'gameRequest') {
+				this.numGameReq++;
+			}
 		}
 	},
 	data() {
 		return {
+			numFriendReq: 0,
+			numGameReq: 0,
 			activeIndex : null
 		}
 	},
