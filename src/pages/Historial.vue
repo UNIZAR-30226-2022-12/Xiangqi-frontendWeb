@@ -1,7 +1,7 @@
 <template>
 	<h2> Historial </h2>
 	<loader v-if="this.loading"/>
-	<historial :playerHistory="playerHistory" v-else/>
+	<historial v-else :playerHistory="playerHistory"/>
 </template>
 
 <script>
@@ -23,33 +23,37 @@ export default {
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
-		//El atributo key es obligatorio para que funcione el componente
+		// CUANDO ESTE EL BACK HECHO:
+		// CAMBIAR ESTO
+		// ---------------------------------------------------------------------
+		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
+		// El atributo key es obligatorio para que funcione el componente
 		this.playerHistory = [
 			{key: "0", data: {date: "20/02/22", hour: "12:30"},
 				children: [
-					{key: "0", data: {id: 0, nickname: "pikanachi", piece:"caballo negro", origin: "[2-2]", destination: "[4-4]"}},
-					{key: "1", data: {id: 1, nickname: "juanksp", piece:"caballo rojo", origin: "[3-2]", destination: "[3-3]"}}
+					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"caballonegro", origin: "[12-12]", destination: "[14-14]"}},
+					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"canyonrojo", origin: "[3-2]", destination: "[3-3]"}},
+					{key: "3", data: {id: 2, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
 				]
 			},
 			{key: "1", data: {date: "22/02/22", hour: "11:23"},
 				children: [
-					{key: "0", data: {id: 0, nickname: "pikanachi", piece:"caballo negro", origin: "[2-2]", destination: "[4-4]"}},
-					{key: "1", data: {id: 1, nickname: "juanksp", piece:"caballo rojo", origin: "[3-2]", destination: "[3-3]"}}
+					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
+					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"soldadorojo", origin: "[3-2]", destination: "[3-3]"}}
 				]
 			},
 			{key: "2", data: {date: "22/02/22", hour: "11:23"},
 				children: [
-					{key: "0", data: {id: 0, nickname: "pikanachi", piece:"caballo negro", origin: "[2-2]", destination: "[4-4]"}},
-					{key: "1", data: {id: 1, nickname: "juanksp", piece:"caballo rojo", origin: "[3-2]", destination: "[3-3]"}}
+					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"caballonegro", origin: "[2-2]", destination: "[4-4]"}},
+					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"caballorojo", origin: "[3-2]", destination: "[3-3]"}}
 				]
 			},
 		];
 
-		//CUANDO ESTE EL BACK HECHO:
-		//CAMBIAR ESTO
 		this.loading = false;
 
-		//POR ESTO
+		// POR ESTO
+		// ---------------------------------------------------------------------
 		/*
 		this.$accounts.getHistorial().then(response => {
 			this.playerHistory = response.playerHistory;

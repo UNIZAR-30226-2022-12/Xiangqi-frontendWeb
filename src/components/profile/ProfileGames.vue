@@ -9,13 +9,18 @@
         :globalFilterFields="['nickname']" responsiveLayout="scroll">
             <template #header>
                 <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                    <h5 class="m-0">Partidas</h5>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search" />
-                        <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
-                    </span>
+                    <h5 class="md:m-0 text-center md:text-left"> Partidas </h5>
+                    <div class="flex flex-column flex-wrap card-container">
+                        <div class="flex align-items-center justify-content-center">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search" />
+                                <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </template>
+
             <template #empty>
                 No se han encontrado partidas
             </template>

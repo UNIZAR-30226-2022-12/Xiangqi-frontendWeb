@@ -1,15 +1,19 @@
 <template>
     <div class="surface-section section p-6 mb-6">
-        <h2> Sets de {{ name }} </h2>
+        
         <loader v-if="this.loading"/>   
         <DataView v-else :value="set" :layout="layout" :paginator="true" :rows="6" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
             <template #header>
-                <div class="grid grid-nogutter">
-                    <div class="col-6" style="text-align: left">
-                        <Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Ordenar por..." @change="onSortChange($event)"/>
-                    </div>
-                    <div class="col-6" style="text-align: right">
-                        <DataViewLayoutOptions v-model="layout" />
+                <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                    <h5 class="md:m-0 text-center md:text-left"> Sets de {{ name }} </h5>
+                    <div class="flex flex-wrap card-container">
+                        <div class="flex align-items-center justify-content-center mr-2">
+                            <Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Ordenar por..." @change="onSortChange($event)" style="border-radius: 1rem"/>
+                        </div>
+                        <div class="flex-grow-1 flex"></div>
+                        <div class="flex align-items-center justify-content-center mr-0">
+                            <DataViewLayoutOptions class="text-center" v-model="layout"/>
+                        </div>
                     </div>
                 </div>
             </template>

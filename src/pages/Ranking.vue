@@ -12,16 +12,21 @@
             :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
             currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
-            :globalFilterFields="['nickname']" responsiveLayout="scroll">
+            :globalFilterFields="['nickname']" responsiveLayout="scroll">                
                 <template #header>
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Ranking</h5>
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search" />
-                            <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Buscar por nickname" />
-                        </span>
+                        <h5 class="md:m-0 text-center md:text-left"> Ranking </h5>
+                        <div class="flex flex-column flex-wrap card-container">
+                            <div class="flex align-items-center justify-content-center">
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search" />
+                                    <InputText v-model="filters['global'].value" style="border-radius: 1rem" placeholder="Nombre de usuario" />
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </template>
+
                 <template #empty>
                     El ranking está vacío
                 </template>
@@ -85,19 +90,10 @@ export default {
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 
-		//CUANDO ESTE EL BACK HECHO:
-		//CAMBIAR ESTO
-		this.loading = false;
-
-		//POR ESTO
-        /*
-		this.$ranking.getRanking().then(response => {
-			this.ranking = response.ranking;
-            this.loading = false;
-		});
-        */
-
-        /*
+		// CUANDO ESTE EL BACK HECHO:
+		// CAMBIAR ESTO
+		// ---------------------------------------------------------------------
+		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
         this.ranking= [
                 {id:'1,', position: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
                 {id:'1,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
@@ -112,7 +108,18 @@ export default {
 				{id:'1,', position: '11', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
                 {id:'1,', position: '12', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
                 {id:'1,', position: '13', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-        ];*/
+        ];
+
+		this.loading = false;
+
+		//POR ESTO
+        // ---------------------------------------------------------------------
+        /*
+		this.$ranking.getRanking().then(response => {
+			this.ranking = response.ranking;
+            this.loading = false;
+		});
+        */
 	},
 	methods: {
         formatDate(value) {

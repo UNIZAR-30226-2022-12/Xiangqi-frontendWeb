@@ -177,10 +177,10 @@ class AccountService {
     }
     // MODIFICAR PERFIL DE USUARIO
     //------------------------------------------------------------------------------------------------------------------
-     /*
+    /*
      * Envia los datos a modificar del perfil al backend
      */
-     changeProfile(nickname, name, date, country, password, image){
+    changeProfile(nickname, name, date, country, password, image){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
         if(password.length == 0){
             return http
@@ -202,13 +202,13 @@ class AccountService {
     }
     // ELIMINAR PERFIL DE USUARIO
     //------------------------------------------------------------------------------------------------------------------
-     /*
+    /*
      * Elimina el perfil
      */
-     deleteAccount(){
+    deleteAccount(){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
         return http
-            .get('/do-deleteAccount/' ,headers)
+            .get('/do-deleteAccount/', headers)
             .then(response => {
                 return response.data;
             }, () => {
@@ -218,15 +218,36 @@ class AccountService {
 
     // LOAD GAME
     //------------------------------------------------------------------------------------------------------------------
-     /*
+    /*
      * CARGAR PARTIDA
      */
-     loadGame(id){
+    loadGame(id){
         const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+
+
+        // ----------------> en vd ya tienes el token y de ahi se puede sacar el id del usuario por lo q no hace ni falta el id
+
+
         return http
-            .post('/do-loadGame/',{'id': id} ,headers)
+            .post('/do-loadGame/', {'id': id}, headers)
             .then(response => {
                 console.log(response.data)
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    // HISTORIAL
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+     * Devuelve el historial de movimientos del usuario a partir del id en el token.
+     */
+    getHistorial(){
+        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        return http
+            .get('/do-getHistorial/', headers)
+            .then(response => {
                 return response.data;
             }, () => {
                 return false;
