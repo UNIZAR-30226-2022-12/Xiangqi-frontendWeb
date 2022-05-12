@@ -26,7 +26,7 @@
             <template #loading>
                 Cargando solicitudes. Por favor, espere.
             </template>
-            <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
+            <Column field="nickname" header="Nombre de usuario" sortable style="min-width: 14rem">
                 <template #body="{data}">
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
