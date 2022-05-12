@@ -1,4 +1,3 @@
-
 <template>
     <h2>Mis partidas</h2>
 	<div class="surface-section section p-6">
