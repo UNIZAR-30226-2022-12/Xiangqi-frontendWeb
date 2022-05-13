@@ -1,9 +1,30 @@
 <template>
 	<ul v-if="items">
+		<!--Notificaciones-->
 		<template v-if="this.notifications != null">
-			<h5 v-if="this.numFriendReq > 0"> {{ this.numFriendReq }} solicitudes de amistad </h5>
-			<h5 v-if="this.numGameReq > 0"> {{ this.numGameReq }} invitaciones a partidas </h5>
+			<li class="layout-menuitem-category">
+				<div class="layout-menuitem-root-text" aria-label="Notificaciones"> Notificaciones </div>
+			</li>
+			<div v-if="this.numFriendReq > 0" class="flex mb-3">
+				<div class="flex-initial flex align-items-center justify-content-center mr-2">
+					<Badge :value="this.numFriendReq"></Badge>
+				</div>
+				<div class="flex-initial flex align-items-center justify-content-center">
+					<!-- Se emite el evento al componente padre AppMenu.vue -->
+					<Button v-on:click="this.$emit('friends-notify-pressed')" label="Solicitudes de amistad" class="p-button-link p-1" />
+				</div>
+			</div>
+
+			<div v-if="this.numGameReq > 0" class="flex mb-3">
+				<div class="flex-initial flex align-items-center justify-content-center mr-2">
+					<Badge :value="this.numGameReq"></Badge>
+				</div>
+				<div class="flex-initial flex align-items-center justify-content-center">
+					<Button label="Invitaciones a partidas" class="p-button-link p-1" />
+				</div>
+			</div>
 		</template>
+
 		<template v-for="(item,i) of items">
 			<li v-if="visible(item) && !item.separator" :key="item.label || i" :class="[{'layout-menuitem-category': root, 'active-menuitem': activeIndex === i && !item.to && !item.disabled}]" role="none">
 				<template v-if="root">
@@ -37,6 +58,9 @@
 <script>
 import newGameButton from '/src/components/NewGame.vue';
 export default {
+	// Definicion del evento emitido al clicar
+	emits: ['friends-notify-pressed'],
+
 	name: 'appsubmenu',
 	props: {
 		items: Array,
@@ -49,7 +73,8 @@ export default {
 			required: false
 		}
 	},
-	mounted() {
+	created() {
+		// Calcular el número de notificacines de cada tipo que tenemos
 		if (this.notifications == null) return;
 		for (let i = 0; i < this.notifications.length; i++) {
 			if (this.notifications[i].type == 'friendRequest') {
@@ -99,3 +124,12 @@ export default {
 	},
 }
 </script>
+
+<style>
+
+.notification {
+	background-color: red;
+}
+
+</style>
+

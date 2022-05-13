@@ -1,12 +1,12 @@
 <template>
-	<h2> Amigos </h2>
+	<h2 v-if="this.$route.params.isNotification != 'notification'"> Amigos </h2>
 	<loader v-if="this.loading"/>
 	<div v-else>
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
-		<searchFriends :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
-		<searchTable :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
+		<searchFriends v-if="this.$route.params.isNotification != 'notification'" :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
+		<searchTable v-if="this.$route.params.isNotification != 'notification'" :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
 		<friendReq :loading="this.loadingRequests" :friendRequests="this.friendRequests" />
-		<myFriends :loading="this.loadingFriends" :friends="this.friends"/>
+		<myFriends v-if="this.$route.params.isNotification != 'notification'" :loading="this.loadingFriends" :friends="this.friends"/>
 	</div>
 </template>
 

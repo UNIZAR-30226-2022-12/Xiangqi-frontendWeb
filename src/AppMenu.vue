@@ -1,6 +1,6 @@
 <template>
 	<div class="layout-menu-container">
-		<AppSubmenu :items="menu" :notifications="notifications" class="layout-menu" :root="true" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
+		<AppSubmenu :items="menu" @friends-notify-pressed="clearFriendReq" :notifications="notifications" class="layout-menu" :root="true" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
 	</div>
 </template>
 
@@ -19,20 +19,33 @@ export default {
             ],
 
             menu: [
-                    {
-                        label: 'Menú',
-                        items: [
-                            {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
-                            {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends'},
-                            {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
-                            {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
-                            {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
-                        ]
-                    },
-                ]
+                {
+                    label: 'Menú',
+                    items: [
+                        {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
+                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends/noNotify'},
+                        {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
+                        {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
+                        {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
+                    ]
+                },
+            ]
 		}
 	},
     methods: {
+        clearFriendReq() {
+			//Ya hemos atendido la notificacion
+			//Decirle al back que las borre
+
+
+
+
+
+
+            // Ir a la pagina de amigos y que muestre solo las solicitudes
+			this.$router.push(`/Friends/notification`)
+		},
+        
         onMenuToggle(event) {
             this.$emit('menu-toggle', event);
         },

@@ -44,7 +44,7 @@ const routes = [
         component: OtherProfile,
     },
     {
-        path: '/friends',
+        path: '/friends/:isNotification',
         name: 'Amigos',
         component: Friends,
     },
