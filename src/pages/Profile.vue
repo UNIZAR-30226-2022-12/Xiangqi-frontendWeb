@@ -11,6 +11,7 @@ import myProfile from '../components/profile/ProfileData.vue';
 import myGames from '../components/profile/ProfileGames.vue';
 import myStatics from '../components/profile/ProfileStatics.vue';
 
+
 export default {
 	inject: ['$accounts'],
 	data() {
@@ -21,6 +22,7 @@ export default {
 			columns: null,
 			profileImage: '',
 			stats: null,
+			socket: null,
 		}
 	},
 	components: {

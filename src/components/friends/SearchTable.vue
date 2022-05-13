@@ -49,8 +49,8 @@
                     </Column>
                     <Column field="birthday" header="Cumpleaños" sortable></Column>
                     <Column header="Enviar solicitud">
-                        <template #body>
-                            <Button class="p-button-raised" style="border-radius: 1rem" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
+                        <template #body="{data}">
+                            <Button class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
                         </template>
                     </Column>
                 </DataTable>    
@@ -62,6 +62,7 @@
 <script>
 
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
+import io from "socket.io-client";
 
 export default {
 	inject: ['$accounts'],
@@ -90,12 +91,20 @@ export default {
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
             selectedUser: null,
+            socket: null,
 		}
 	},
     methods: {
         otherProfile(id){
             this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
+        sendFriendRequest(id){
+            console.log("Aaaaaaaaaaaaaaa")
+            if(this.socket == null){
+                this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+            }
+            this.socket.emit('sendFriendRequest',{'id': localStorage.getItem('id'), 'idFriend': id})
+        }
     }  
 }
 </script>

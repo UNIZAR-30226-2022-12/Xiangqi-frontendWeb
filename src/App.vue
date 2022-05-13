@@ -21,6 +21,7 @@
 import AppTopBar from './AppTopbar.vue';
 import AppMenu from './AppMenu.vue';
 import AppFooter from './AppFooter.vue';
+import io from "socket.io-client";
 
 
 export default {
@@ -31,6 +32,7 @@ export default {
             staticMenuInactive: false,
             overlayMenuActive: false,
             mobileMenuActive: false,
+            socket: null,
         }
     },
     watch: {
@@ -70,6 +72,15 @@ export default {
             }
 
             event.preventDefault();
+        },
+        mounted(){
+            window.addEventListener("beforeunload", ()=> {
+                if(this.socket == null){
+                    this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+                }
+                this.socket.emit('leave',{'id': localStorage.getItem('id')})
+            })
+            
         },
         onSidebarClick() {
             this.menuClick = true;
