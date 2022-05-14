@@ -1,11 +1,11 @@
 <template>
     <h2>Mis partidas</h2>
-	<div class="surface-section section p-6">
+	<div class="surface-section section md:p-6 lg:p-6 mobileBorder">
         <DataTable :value="games" :paginator="true" :rows="10"
         :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[10,25,50]"
         currentPageReportTemplate="Mostrando del {first} al {last} de {totalRecords} entradas"
-        :globalFilterFields="['nickname']" responsiveLayout="scroll">
+        :globalFilterFields="['nickname']" responsiveLayout="scroll" class="mobileFontSmall">
             <template #header>
                 <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                     <h5 class="md:m-0 text-center md:text-left"> Partidas </h5>
@@ -26,7 +26,7 @@
             <template #loading>
                 Cargando partidas. Por favor, espere.
             </template>
-            <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
+            <Column class="mobileFontSmall" field="nickname" header="Adversario" sortable>
                 <template #body="{data}">
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
@@ -38,10 +38,10 @@
                     </div>
                 </template>
             </Column>
-            <Column field="flag" header="País" sortable style="min-width: 14rem">
+            <Column field="flag" header="País" sortable>
                 <template #body="{data}">
-                    <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                    <span class="ml-2 image-text">{{data.country}}</span>
+                    <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                    <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                 </template>
             </Column>
             <Column field="startDate" header="Inicio de juego" sortable></Column>

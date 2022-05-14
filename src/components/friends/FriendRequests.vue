@@ -1,6 +1,6 @@
 <template>
     <h2>Solicitudes de amistad</h2>
-	<div class="surface-section section p-6">
+	<div class="surface-section section md:p-6 lg:p-6 mobileBorder">
         <DataTable :value="friendRequests" :paginator="true" :rows="10"
         :rowHover="true" v-model:selection="selectedUser" v-model:filters="filters" filterDisplay="menu" :loading="loading"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
@@ -42,7 +42,7 @@
             <Column field="flag" header="País" sortable style="min-width: 14rem">
                 <template #body="{data}">
                     <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                    <span class="ml-2 image-text">{{data.country}}</span>
+                    <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                 </template>
             </Column>
             <Column field="birthday" header="Cumpleaños" sortable></Column>

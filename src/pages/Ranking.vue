@@ -7,7 +7,7 @@
     <h2>Ranking de jugadores</h2>
     <loader v-if="this.loading"/>
 	<div v-else>
-        <div class="surface-section section p-6">
+        <div class="surface-section section md:p-6 lg:p-6 mobileBorder">
             <DataTable :value="ranking" :paginator="true" :rows="20"
             :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"
             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
@@ -38,7 +38,7 @@
                         # {{data.position}}
                     </template>
                 </Column>
-                <Column field="nickname" header="Adversario" sortable style="min-width: 14rem">
+                <Column field="nickname" header="Adversario" sortable>
                     <template #body="{data}">
                         <div class="card">
                             <div class="card-container blue-container overflow-hidden">
@@ -50,10 +50,10 @@
                         </div>
                     </template>
                 </Column>
-                <Column field="flag" header="País" sortable style="min-width: 14rem">
+                <Column field="flag" header="País" sortable>
                     <template #body="{data}">
                         <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                        <span class="ml-2 image-text">{{data.country}}</span>
+                        <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                     </template>
                 </Column>
                 <Column field="winnedGames" header="Partidas jugadas" sortable></Column>

@@ -1,21 +1,23 @@
 <template>
     <h2 v-if="myProfile"> Mis estadísticas</h2>
     <h2 v-else>Estadísticas de {{perfil.name}}</h2>
-	<div class="surface-section section p-6">
-        <h3>Resumen total</h3>
+	<div class="surface-section section mb-6 md:p-6 lg:p-6 mobileBorder mobileBackground">
+        <h4>Resumen total</h4>
         <div class="surface-section section mt-4 p-6">
             <div class="grid m-auto">
                 <div class="col-fixed pr-4" style="padding: 0">
-                    <h5>Partidas ganadas: {{wonGames}}</h5>
+                    <h5 class="mobileFont">Partidas ganadas: {{wonGames}}</h5>
                 </div>
                 <div class="col-fixed" style="padding-top:0; padding-bottom:0; padding-left: 0">
-                    <h5>Partidas jugadas: {{playedGames}}</h5>
+                    <h5 class="mobileFont">Partidas jugadas: {{playedGames}}</h5>
                 </div>
             </div>
             <ProgressBar :value="progressBar" :showValue="false"/>
         </div>
-        <h3>Resumen semanal</h3>
-        <div class="p-chart surface-section section mt-4 p-6 text-center">
+    </div>
+    <div class="surface-section section md:p-6 lg:p-6 mobileBorder mobileBackground">
+        <h4>Resumen semanal</h4>
+        <div class="p-chart surface-section section mt-4 md:p-6 lg:p-6 p-3 text-center">
             <Chart type="bar" :data="lastWeek" :options="basicOptions"/>
         </div>
     </div>   

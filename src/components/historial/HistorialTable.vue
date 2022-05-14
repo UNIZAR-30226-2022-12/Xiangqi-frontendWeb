@@ -1,6 +1,6 @@
 
 <template>
-    <div class="surface-section section p-6 mb-6">
+    <div class="surface-section section md:p-6 lg:p-6 mobileBorder">
         <h3 v-if="playerHistory.length == 0"> No se han encontrado partidas </h3>
         <TreeTable v-else :value="playerHistory" :paginator="true" :rows="10" sortMode="single">                      
             <template #header>

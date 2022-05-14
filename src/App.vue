@@ -143,4 +143,22 @@ export default {
     left: auto;
     top: 0;
 }
+
+@media screen and (max-width: 48em) {
+    .mobileBorder {
+        border-width: 0px;
+    }
+    .mobileBackground {
+        background-color: transparent;
+    }
+    .mobileFont {
+        font-size: 1.2em;
+    }
+    .mobileFontSmall {
+        font-size: 1em;
+    }
+    .mobileNoDisplay {
+        display: none;
+    }
+}
 </style>

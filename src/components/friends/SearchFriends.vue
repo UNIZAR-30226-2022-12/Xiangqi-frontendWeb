@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-nogutter surface-section section">
-        <div class="col-12 md:col-7 pl-5 text-center md:text-left flex align-items-center">
+        <div class="col-12 md:col-7 text-center md:text-left flex align-items-center">
             <section class="p-4">
                 <span class="block text-7xl font-bold mb-1">Buscar amigos</span>
                 <div class="text-4xl text-primary font-bold mb-3">Si conoces el nombre de usuario de alguien puedes buscarlo aquí y enviarle una solicitud</div>

@@ -2,7 +2,7 @@
     <Transition name="slide-fade">
         <div v-if="show">
             <h2 class="mt-4">Usuarios encontrados por {{searchedItem}}</h2>
-            <div class="surface-section section p-6">
+            <div class="surface-section section md:p-6 lg:p-6 mobileBorder">
                 <DataTable :value="notFriendOf" :paginator="true" :rows="10"
                 :rowHover="true" v-model:selection="selectedUser" v-model:filters="filters" filterDisplay="menu" :loading="loading"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[20,30,50]"
@@ -28,7 +28,7 @@
                     <template #loading>
                         Cargando usuarios. Por favor, espere.
                     </template>
-                    <Column field="nickname" header="Nombre de usuario" sortable style="min-width: 14rem">
+                    <Column field="nickname" header="Nombre de usuario" sortable>
                         <template #body="{data}">
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
@@ -44,7 +44,7 @@
                     <Column field="flag" header="País" sortable>
                         <template #body="{data}">
                             <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                            <span class="ml-2 image-text">{{data.country}}</span>
+                            <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                         </template>
                     </Column>
                     <Column field="birthday" header="Cumpleaños" sortable></Column>

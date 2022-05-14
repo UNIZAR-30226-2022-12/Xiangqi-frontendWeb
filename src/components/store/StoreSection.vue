@@ -1,5 +1,5 @@
 <template>
-    <div class="surface-section section p-6 mb-6">
+    <div class="surface-section section mb-6 md:p-6 lg:p-6 mobileBorder">
         
         <loader v-if="this.loading"/>   
         <DataView v-else :value="set" :layout="layout" :paginator="true" :rows="6" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
