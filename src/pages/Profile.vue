@@ -33,7 +33,7 @@ export default {
 	},
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-		this.$accounts.getProfile(localStorage.getItem('id')).then(response => {
+		this.$accounts.getProfile(sessionStorage.getItem('id')).then(response => {
 			this.loading = false;
 			this.perfil = response.perfil;
 			this.games = response.partidas;
@@ -42,7 +42,7 @@ export default {
 
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto
-				this.$accounts.getProfileImage(localStorage.getItem('id')).then(data => {
+				this.$accounts.getProfileImage(sessionStorage.getItem('id')).then(data => {
 					this.profileImage = data;
 				});
 			} else {

@@ -38,6 +38,7 @@
                     </div>
                 </template>
             </Column>
+            <Column field="name" header="Nombre" sortable></Column>
             <Column field="flag" header="País" sortable style="min-width: 14rem">
                 <template #body="{data}">
                     <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
@@ -45,7 +46,6 @@
                 </template>
             </Column>
             <Column field="birthday" header="Cumpleaños" sortable></Column>
-            <Column field="requestDate" header="Fecha de solicitud" sortable></Column>
             <Column header="Aceptar">
                 <template #body>
                     <Button icon="pi pi-check" class="p-button-rounded p-button-success p-button-outlined" />

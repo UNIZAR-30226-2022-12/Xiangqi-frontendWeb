@@ -52,7 +52,7 @@ export default {
     return {
       //CHAT
       //Mensajes del chat que pillaremos del back mine lo uso para ver si es mio o no (en vd tbn se podria usar el nickname == mi nickname)
-      //CAMBIAR A SI EL ID == AL DEL LOCALSTORAGE ES MIO
+      //CAMBIAR A SI EL ID == AL DEL sessionStorage ES MIO
       messages: [
       ],
       //Aqui es donde se pone el nuevo mensaje a enviar, habrá que appendearlo a la lista de mensajes para mostrarlo en el front tbn

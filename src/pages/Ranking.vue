@@ -116,7 +116,7 @@ export default {
         // ---------------------------------------------------------------------
         /*
 		this.$ranking.getRanking().then(response => {
-			this.ranking = response.ranking;
+			this.ranking = response;
             this.loading = false;
 		});
         */

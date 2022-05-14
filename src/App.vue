@@ -1,7 +1,7 @@
 <template>
 	<div :class="containerClass" @click="onWrapperClick">
         <AppTopBar @menu-toggle="onMenuToggle" @change-theme="changeTheme" />
-        <div class="layout-sidebar" @click="onSidebarClick">
+        <div v-if="this.$loggedStatus.logged" class="layout-sidebar" @click="onSidebarClick">
             <AppMenu @menuitem-click="onMenuItemClick" @menu-toggle="onMenuToggle"/>
         </div>
 
@@ -78,7 +78,7 @@ export default {
                 if(this.socket == null){
                     this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
                 }
-                this.socket.emit('leave',{'id': localStorage.getItem('id')})
+                this.socket.emit('leave',{'id': sessionStorage.getItem('id')})
             })
             
         },

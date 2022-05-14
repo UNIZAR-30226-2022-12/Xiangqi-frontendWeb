@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             display: true,
-            myid: localStorage.getItem('id')
+            myid: sessionStorage.getItem('id')
         }
     },
     methods: {

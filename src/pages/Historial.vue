@@ -56,7 +56,7 @@ export default {
 		// ---------------------------------------------------------------------
 		/*
 		this.$accounts.getHistorial().then(response => {
-			this.playerHistory = response.playerHistory;
+			this.playerHistory = response;
 			this.loading = false;
 		});
 		*/

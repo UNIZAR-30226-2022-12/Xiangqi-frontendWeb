@@ -15,7 +15,7 @@ class StoreService {
      * Obtiene la lista de tableros y de piezas que tiene la tienda
      */
      getStoreItems(){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
             .post('/do-getStoreItems/', headers)
             .then(response => {

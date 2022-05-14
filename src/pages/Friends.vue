@@ -47,22 +47,22 @@ export default {
 		// CAMBIAR ESTO
 		// ---------------------------------------------------------------------
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
-        this.friendRequests= [
-                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010', requestDate: '13/09/2010'},
-        ];
-
+        /*this.friendRequests= [
+                {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
+                {id: '1', nickname: 'John', name:"Nacho Ortega", flag: 'flag-fr', country: 'France', birthday:'13/09/2010'},
+                {id: '1', nickname: 'Juanksp', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+                {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China', birthday:'13/09/2010'},
+        ];*/
+		/*
         this.friends= [
                 {id: '1', nickname: 'Pikanachi', name:"Nacho Ortega", flag: 'flag-es', country: 'Spain'},
                 {id: '1', nickname: 'John', name:"John Doe", flag: 'flag-fr', country: 'France'},
@@ -77,7 +77,7 @@ export default {
 				{id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
-        ];
+        ];*/
 
 		this.loading = false;
 		this.loadingRequests = false;
@@ -85,17 +85,15 @@ export default {
 
 		// POR ESTO
 		// ---------------------------------------------------------------------
-		/*
 		this.$friends.getFriendRequests().then(response => {
-			this.friendRequests = response.friendRequests;
+			this.friendRequests = response;
 			this.loadingRequests = false;
 		});
 
 		this.$friends.getFriends().then(response => {
-			this.friends = response.friends;
+			this.friends = response;
 			this.loadingFriends = false;
 		});
-		*/
 	},
 	methods: {
 		// Metodos que recogen los eventos definidos en searchFriends
@@ -107,10 +105,10 @@ export default {
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
 				// Cuando este el back bien hecho cambiar el for por
-				// this.notFriendOf = response.notFriendOf;
-				for(let i = 0; i < response.length; i++){
+				this.notFriendOf = response;
+				/*for(let i = 0; i < response.length; i++){
 					this.notFriendOf.push({id: response[i][0], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
-				}
+				}*/
 				this.loadingSearch = false;
 			});
         },

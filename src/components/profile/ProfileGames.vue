@@ -115,8 +115,8 @@ export default {
             this.$accounts.loadGame(id).then(response =>{
                 let color = null;
                 console.log(response.game[1])
-                localStorage.setItem("movs", response.game[4])
-                if(response.game[1] == localStorage.getItem("id")){ // Jugaba como rojo
+                sessionStorage.setItem("movs", response.game[4])
+                if(response.game[1] == sessionStorage.getItem('id')){ // Jugaba como rojo
                     color = "rojo"
                     this.$router.push(`/game/${response.game[2]}/${response.game[0]}/${color}`)
                 } else {

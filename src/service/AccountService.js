@@ -42,8 +42,8 @@ class AccountService {
             .post('/do-login', {'email': email, 'pwd': password})
             .then(response => {
                 if (response.data.ok) {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('id', response.data.id);
+                    sessionStorage.setItem('token', response.data.token);
+                    sessionStorage.setItem('id', response.data.id);
                     this.authenticated = true;
                     return response.data;
                 }
@@ -54,11 +54,11 @@ class AccountService {
     }
 
     /*
-     * Si existe un token en el localStorage pone authenticated a true.
+     * Si existe un token en el sessionStorage pone authenticated a true.
      * Pone authenticated a false en caso contrario.
      */
     isAuthenticated(){
-        if(localStorage.getItem('token') != null){
+        if(sessionStorage.getItem('token') != null){
             this.authenticated = true;
         } else {
             this.authenticated = false;
@@ -72,8 +72,8 @@ class AccountService {
      */
     logout() {
         this.authenticated = false;
-        localStorage.removeItem('token');
-        localStorage.removeItem('id');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('id');
     }
 
     /*
@@ -137,7 +137,7 @@ class AccountService {
      * Obtiene el perfil del usuario (mail, nickname, name, birthday, country, range, points y registerDate) dado su id.
      */
     getProfile(id){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}};
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}};
         return http
             .get('/do-getProfile/' + id, headers)
             .then(response => {
@@ -151,7 +151,7 @@ class AccountService {
      * Obtiene la URL de la imagen del perfil del usuario dado su id.
      */
     getProfileImage(id) {
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}, 'responseType': 'blob'};
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}, 'responseType': 'blob'};
 
         return http
             .get('/do-getProfileImage/' + id, headers)
@@ -181,7 +181,7 @@ class AccountService {
      * Envia los datos a modificar del perfil al backend
      */
     changeProfile(nickname, name, date, country, password, image){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         if(password.length == 0){
             return http
             .post('/do-changeProfile/' + nickname + '/' + name + '/' + date + '/' + country + '/' + 'a', {'image': image}, headers)
@@ -206,7 +206,7 @@ class AccountService {
      * Elimina el perfil
      */
     deleteAccount(){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
             .get('/do-deleteAccount/', headers)
             .then(response => {
@@ -222,7 +222,7 @@ class AccountService {
      * CARGAR PARTIDA
      */
     loadGame(id){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
 
 
         // ----------------> en vd ya tienes el token y de ahi se puede sacar el id del usuario por lo q no hace ni falta el id
@@ -244,7 +244,7 @@ class AccountService {
      * Devuelve el historial de movimientos del usuario a partir del id en el token.
      */
     getHistorial(){
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
             .get('/do-getHistorial/', headers)
             .then(response => {

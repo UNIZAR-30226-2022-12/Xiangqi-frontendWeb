@@ -15,7 +15,7 @@ class FriendsService {
      * Obtiene la lista de usuarios a partir del nickname puesto en el campo de busqueda
      */
     searchUser(nickname) {
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
             .post('/do-searchUsers/', {'nickname': nickname}, headers)
             .then(response => {
@@ -31,9 +31,9 @@ class FriendsService {
      * Obtiene la lista de solicitudes de amistad
      */
     getFriendRequests() {
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
-            .post('/do-getFriendRequests/', headers)
+            .get('/do-getFriendRequests/', headers)
             .then(response => {
                 return response.data;
             }, () => {
@@ -47,9 +47,9 @@ class FriendsService {
      * Obtiene la lista de amigos
      */
     getFriends() {
-        const headers = {'headers': {'x-access-token': localStorage.getItem('token')}}
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
-            .post('/do-getFriends/', headers)
+            .get('/do-getFriends/', headers)
             .then(response => {
                 return response.data;
             }, () => {

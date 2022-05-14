@@ -255,7 +255,7 @@ axios.interceptors.response.use(function (response) {
     if (response.status === 401) {
         console.log('401');
         //let msg = response.body.returnMessage;
-        //localStorage.setItem('logoutReason', msg);
+        //sessionStorage.setItem('logoutReason', msg);
         accounts.logout();
         router.push('/');
     }
@@ -267,7 +267,7 @@ axios.interceptors.response.use(function (response) {
     if (response.status === 401) {
         console.log('401');
         //let msg = response.body.returnMessage;
-        //localStorage.setItem('logoutReason', msg);
+        //sessionStorage.setItem('logoutReason', msg);
         accounts.logout();
         router.push('/');
     }

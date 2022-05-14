@@ -295,11 +295,11 @@ export default  {
 	created() {
         this.idSala = this.$route.params.idSala;
         //this.showTimer = this.$route.params.timer;
-        this.myid = localStorage.getItem('id');
+        this.myid = sessionStorage.getItem('id');
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
-        //localStorage.removeItem("socket")
+        //sessionStorage.removeItem("socket")
         this.playerColor = this.$route.params.color
         if(this.playerColor == "negro"){
             this.tablero.filas = this.tablero.Negro
@@ -308,11 +308,11 @@ export default  {
             this.reyNegro.fil = 9
             this.reyNegro.col = 4
         }
-        let movs = localStorage.getItem("movs")
+        let movs = sessionStorage.getItem("movs")
         console.log(movs)
         if (movs != null){
             console.log(movs)
-            //localStorage.removeItem("movs")
+            //sessionStorage.removeItem("movs")
             // CAMBIAR EL TABLERO
             this.loadBoard(movs)
         }

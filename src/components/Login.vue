@@ -307,7 +307,6 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { email, required, minLength, maxLength, helpers } from "@vuelidate/validators";
-import io from "socket.io-client";
 //Debe contener al menos mayusculas, minusculas y numeros [0-9]{2} le fuerza a q sean 2 numeros
 const alpha = helpers.regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]+)$/);
 
@@ -402,13 +401,6 @@ export default {
               //name: 'profile',
               //params: { id: id, myProfile: true }
             //});
-            if(this.socket == null){
-              this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-            }
-            this.socket.emit('enter',{'id': localStorage.getItem('id')})
-            this.socket.on("friendRequest",(data)=>{
-                console.log("FriendRequest de", data)
-            })
             this.$loggedStatus.logged = true;
             this.$router.push('/profile');
           }

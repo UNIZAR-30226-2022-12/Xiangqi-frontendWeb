@@ -1,22 +1,19 @@
 <template>
 	<div class="layout-menu-container">
-		<AppSubmenu :items="menu" @friends-notify-pressed="clearFriendReq" :notifications="notifications" class="layout-menu" :root="true" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
+		<AppSubmenu :items="menu" @friends-notify-pressed="clearFriendReq" :root="true" :numFriendReq="this.numFriendReq" class="layout-menu" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
 	</div>
 </template>
 
 <script>
 import AppSubmenu from './AppSubmenu';
-
+import io from "socket.io-client";
 export default {
 	data() {
 		return {
 
-            notifications: [
-                {type: 'friendRequest', nickname: 'juanksp'},
-                {type: 'friendRequest', nickname: 'alexzheng'},
-                {type: 'gameRequest', nickname: 'juanksp'},
-                {type: 'gameRequest', nickname: 'alexzheng'},
-            ],
+            //notifications: [],
+            socket: null,
+            numFriendReq: 0,
 
             menu: [
                 {
@@ -32,6 +29,18 @@ export default {
             ]
 		}
 	},
+    created() {
+        if(this.socket == null){
+            this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+        }
+        this.socket.emit('enter',{'id': sessionStorage.getItem('id')})
+        this.socket.on("friendRequest",(data)=>{
+            console.log("FriendRequest de", data);
+            //this.notifications.push({type: 'friendRequest', id: data.id});
+            this.numFriendReq++;
+            console.log("numFriendReq", this.numFriendReq);
+        })
+    },
     methods: {
         clearFriendReq() {
 			//Ya hemos atendido la notificacion

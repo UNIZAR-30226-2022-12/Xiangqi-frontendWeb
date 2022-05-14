@@ -77,7 +77,7 @@ export default {
       if(this.socket == null) {
         this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
       }
-      this.socket.emit("searchRandomOpponent",{'id':localStorage.getItem("id")})
+      this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
       this.socket.on("startGame", (data)=>{
         console.log(data)
         this.display = false;
@@ -90,7 +90,6 @@ export default {
         }
 
         this.socket.off("startGame")
-        localStorage.setItem("socket", this.socket)
         this.socket.emit("leaveRoom", {'id': data.idSala})
         this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
       })

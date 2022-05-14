@@ -103,7 +103,7 @@ export default {
             if(this.socket == null){
                 this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             }
-            this.socket.emit('sendFriendRequest',{'id': localStorage.getItem('id'), 'idFriend': id})
+            this.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id})
         }
     }  
 }

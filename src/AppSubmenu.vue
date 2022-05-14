@@ -1,7 +1,7 @@
 <template>
 	<ul v-if="items">
 		<!--Notificaciones-->
-		<template v-if="this.notifications != null">
+		<!--<template v-if="this.notifications != null">-->
 			<li class="layout-menuitem-category">
 				<div class="layout-menuitem-root-text" aria-label="Notificaciones"> Notificaciones </div>
 			</li>
@@ -23,7 +23,7 @@
 					<Button label="Invitaciones a partidas" class="p-button-link p-1" />
 				</div>
 			</div>
-		</template>
+		<!--</template>-->
 
 		<template v-for="(item,i) of items">
 			<li v-if="visible(item) && !item.separator" :key="item.label || i" :class="[{'layout-menuitem-category': root, 'active-menuitem': activeIndex === i && !item.to && !item.disabled}]" role="none">
@@ -68,14 +68,14 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		notifications: {
-			type: Array,
+		numFriendReq: {
+			type: Number,
 			required: false
 		}
 	},
 	created() {
 		// Calcular el número de notificacines de cada tipo que tenemos
-		if (this.notifications == null) return;
+		/*if (this.notifications == null) return;
 		for (let i = 0; i < this.notifications.length; i++) {
 			if (this.notifications[i].type == 'friendRequest') {
 				this.numFriendReq++;
@@ -83,11 +83,10 @@ export default {
 			if (this.notifications[i].type == 'gameRequest') {
 				this.numGameReq++;
 			}
-		}
+		}*/
 	},
 	data() {
 		return {
-			numFriendReq: 0,
 			numGameReq: 0,
 			activeIndex : null
 		}
