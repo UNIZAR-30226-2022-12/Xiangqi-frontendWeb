@@ -2,7 +2,7 @@
     <div class="block-content">
         <div class="">
             <div class="surface-section px-4 py-6 md:px-6 lg:px-8 text-center">
-                <img :src="logo()" alt="Logo" height="50">
+                <img :src="logo()" class="shadow-4" alt="Xiangqi logo" style="border-radius:20px" height="80">
                 <div class="font-medium text-900 mt-4 mb-3">
                     © 2022 Xiangqi Online
                 </div>

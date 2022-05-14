@@ -342,6 +342,7 @@ export default  {
 				this.myProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
+
         //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
         this.$playing.game = true;

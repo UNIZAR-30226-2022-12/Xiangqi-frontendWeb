@@ -4,12 +4,12 @@
 			<i class="pi pi-bars"></i>
 		</button>
 		<router-link v-if="!$loggedStatus.logged && !$playing.game" to="/" class="layout-topbar-logo">
-			<img alt="Logo" :src="topbarImage()" />
+			<img alt="Logo" class="shadow-4" style="border-radius: 8.5px;" :src="topbarImage()" />
 			<span>Xiangqi online</span>
 		</router-link>
 
 		<router-link v-else to="/profile" class="layout-topbar-logo">
-			<img alt="Logo" :src="topbarImage()" />
+			<img alt="Logo" class="shadow-4" style="border-radius: 8.5px;" :src="topbarImage()" />
 			<span>Xiangqi online</span>
 		</router-link>
 		<button v-if="$loggedStatus.logged || $playing.game" class="p-link layout-topbar-menu-button layout-topbar-button"

@@ -89,25 +89,24 @@ export default {
 
 	created() {
 		//this.$loggedStatus.logged = this.$accounts.isAuthenticated();
-        this.$loggedStatus.logged = true;
 		// CUANDO ESTE EL BACK HECHO:
 		// CAMBIAR ESTO
 		// ---------------------------------------------------------------------
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
         this.ranking= [
                 {id:'1,', position: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '3', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '4', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '6', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '7', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '8', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '9', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '10', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-				{id:'1,', position: '11', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '12', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-                {id:'1,', position: '13', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'11,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
+                {id:'12,', position: '3', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
+                {id:'10,', position: '4', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'7,', position: '5', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'9,', position: '6', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'5,', position: '7', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'19,', position: '8', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'12,', position: '9', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'13,', position: '10', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+				{id:'0,', position: '11', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'17,', position: '12', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
+                {id:'18,', position: '13', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
         ];
 
 		this.loading = false;

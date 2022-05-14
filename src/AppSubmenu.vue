@@ -1,29 +1,21 @@
 <template>
 	<ul v-if="items">
 		<!--Notificaciones-->
-		<!--<template v-if="this.notifications != null">-->
+		<template v-if="this.numFriendReq > 0">
 			<li class="layout-menuitem-category">
 				<div class="layout-menuitem-root-text" aria-label="Notificaciones"> Notificaciones </div>
 			</li>
-			<div v-if="this.numFriendReq > 0" class="flex mb-3">
+			<div class="flex mb-3">
 				<div class="flex-initial flex align-items-center justify-content-center mr-2">
 					<Badge :value="this.numFriendReq"></Badge>
 				</div>
 				<div class="flex-initial flex align-items-center justify-content-center">
 					<!-- Se emite el evento al componente padre AppMenu.vue -->
-					<Button v-on:click="this.$emit('friends-notify-pressed')" label="Solicitudes de amistad" class="p-button-link p-1" />
+					<Button v-if="this.numFriendReq == 1" v-on:click="this.$emit('friends-notify-pressed')" label="Solicitud de amistad" class="p-button-link p-1" />
+					<Button v-else v-on:click="this.$emit('friends-notify-pressed')" label="Solicitudes de amistad" class="p-button-link p-1" />
 				</div>
 			</div>
-
-			<div v-if="this.numGameReq > 0" class="flex mb-3">
-				<div class="flex-initial flex align-items-center justify-content-center mr-2">
-					<Badge :value="this.numGameReq"></Badge>
-				</div>
-				<div class="flex-initial flex align-items-center justify-content-center">
-					<Button label="Invitaciones a partidas" class="p-button-link p-1" />
-				</div>
-			</div>
-		<!--</template>-->
+		</template>
 
 		<template v-for="(item,i) of items">
 			<li v-if="visible(item) && !item.separator" :key="item.label || i" :class="[{'layout-menuitem-category': root, 'active-menuitem': activeIndex === i && !item.to && !item.disabled}]" role="none">

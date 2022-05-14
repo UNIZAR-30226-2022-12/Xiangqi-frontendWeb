@@ -8,7 +8,7 @@
                     <div class="grid m-auto">
                         <h1 class="col justify-content-center text-center font-bold text-5xl text-pink-500 m-0">
                             <i class="pi pi-fw pi-exclamation-circle text-4xl text-pink-500"></i>
-                            Error 404: Not found
+                            Error: No estás logueado
                         </h1>
                     </div>
                     <span class="text-600">La página pedida no se encuentra disponible.</span>

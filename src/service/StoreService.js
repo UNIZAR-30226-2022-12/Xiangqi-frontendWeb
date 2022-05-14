@@ -17,7 +17,7 @@ class StoreService {
      getStoreItems(){
         const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
-            .post('/do-getStoreItems/', headers)
+            .get('/do-getStoreItems/', headers)
             .then(response => {
                 return response.data;
             }, () => {

@@ -29,20 +29,20 @@ export default {
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
 		// El atributo key es obligatorio para que funcione el componente
 		this.playerHistory = [
-			{key: "0", data: {date: "20/02/22", hour: "12:30"},
+			{key: 0, data: {date: "20/02/22", hour: "12:30"},
 				children: [
-					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"caballonegro", origin: "[12-12]", destination: "[14-14]"}},
-					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"canyonrojo", origin: "[3-2]", destination: "[3-3]"}},
-					{key: "3", data: {id: 2, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
+					{data: {id: 0, nickname: "pikanachi", flag: "flag-es", color: 'rojo', piece:"caballonegro", origin: "[12-12]", destination: "[14-14]"}},
+					{data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"canyonrojo", origin: "[3-2]", destination: "[3-3]"}},
+					{data: {id: 2, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
 				]
 			},
-			{key: "1", data: {date: "22/02/22", hour: "11:23"},
+			{key: 1, data: {date: "22/02/22", hour: "11:23"},
 				children: [
-					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
-					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"soldadorojo", origin: "[3-2]", destination: "[3-3]"}}
+					{data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"oficialnegro", origin: "[2-2]", destination: "[4-4]"}},
+					{data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"soldadorojo", origin: "[3-2]", destination: "[3-3]"}}
 				]
 			},
-			{key: "2", data: {date: "22/02/22", hour: "11:23"},
+			{key: 2, data: {date: "22/02/22", hour: "11:23"},
 				children: [
 					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", piece:"caballonegro", origin: "[2-2]", destination: "[4-4]"}},
 					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", piece:"caballorojo", origin: "[3-2]", destination: "[3-3]"}}

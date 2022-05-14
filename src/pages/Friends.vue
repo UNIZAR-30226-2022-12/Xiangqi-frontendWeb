@@ -1,12 +1,12 @@
 <template>
-	<h2 v-if="this.$route.params.isNotification != 'notification'"> Amigos </h2>
-	<loader v-if="this.loading"/>
+	<h2 v-if="$route.params.isNotification != 'notification'"> Amigos </h2>
+	<loader v-if="loading"/>
 	<div v-else>
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
-		<searchFriends v-if="this.$route.params.isNotification != 'notification'" :show="this.showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
-		<searchTable v-if="this.$route.params.isNotification != 'notification'" :notFriendOf="this.notFriendOf" :loading="this.loadingSearch" :show="this.showResults" :searchedItem="this.searchFriendField"/>
-		<friendReq :loading="this.loadingRequests" :friendRequests="this.friendRequests" />
-		<myFriends v-if="this.$route.params.isNotification != 'notification'" :loading="this.loadingFriends" :friends="this.friends"/>
+		<searchFriends v-if="$route.params.isNotification != 'notification'" :show="showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
+		<searchTable v-if="$route.params.isNotification != 'notification'" :notFriendOf="notFriendOf" :notFriendOfImages="notFriendOfImages" :loading="loadingSearch" :show="showResults" :searchedItem="searchFriendField"/>
+		<friendReq :loading="loadingRequests" :friendRequests="friendRequestsArray" />
+		<myFriends v-if="$route.params.isNotification != 'notification'" :friends="friendsArray" :loading="loadingFriends"/>
 	</div>
 </template>
 
@@ -33,10 +33,11 @@ export default {
 			loading: true,
 			searchFriendField: '',
 			notFriendOf: [],
+			notFriendOfImages: [],
 			loadingSearch: true,
-			friendRequests: [],
+			friendRequestsArray: [],
 			loadingRequests: true,
-			friends: [],
+			friendsArray: [],
 			loadingFriends: true,
 		}
 	},
@@ -78,10 +79,11 @@ export default {
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
                 {id: '1', nickname: 'AlexZheng', name:"Nacho Ortega", flag: 'flag-cn', country: 'China'},
         ];*/
-
+		/*
 		this.loading = false;
 		this.loadingRequests = false;
 		this.loadingFriends = false;
+		*/
 
 		// POR ESTO
 		// ---------------------------------------------------------------------
@@ -93,6 +95,7 @@ export default {
 		this.$friends.getFriends().then(response => {
 			this.friends = response;
 			this.loadingFriends = false;
+			this.loading = false;
 		});
 	},
 	methods: {
@@ -104,12 +107,23 @@ export default {
 			console.log(this.searchFriendField);
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
-				// Cuando este el back bien hecho cambiar el for por
 				this.notFriendOf = response;
-				/*for(let i = 0; i < response.length; i++){
-					this.notFriendOf.push({id: response[i][0], nickname: response[i][5], name:response[i][6], flag: 'flag-es', country: response[i][8], birthday:response[i][13]})
-				}*/
+
+				//Buscar la foto
+				//if (this.perfil.hasImage) {
+					// Pedir al back la foto
+					for (var i = 0; i < this.notFriendOf.length; i++) {
+						//llegan las fotos
+						let id = this.notFriendOf[i].id;
+						this.$accounts.getProfileImage(id).then(data => {
+							this.notFriendOfImages.push({id: id, image: data})
+						});
+					}
+				//} else {
+				//	this.profileImage = "images/profilePlaceholder.svg";
+				//}
 				this.loadingSearch = false;
+
 			});
         },
 		getSearchFriendField(results) {

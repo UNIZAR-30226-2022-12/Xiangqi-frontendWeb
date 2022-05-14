@@ -7,7 +7,7 @@
 
         <div class="layout-main-container" style="min-height: 100vh;">
             <div class="layout-main">
-                <router-view />
+                <router-view/>
             </div>
         </div>
         <transition name="layout-mask">
@@ -129,7 +129,7 @@ export default {
     components: {
         'AppTopBar': AppTopBar,
         'AppMenu': AppMenu,
-        'AppFooter': AppFooter,
+        'AppFooter': AppFooter
     }
 }
 </script>

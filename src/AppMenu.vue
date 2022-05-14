@@ -1,17 +1,28 @@
 <template>
 	<div class="layout-menu-container">
 		<AppSubmenu :items="menu" @friends-notify-pressed="clearFriendReq" :root="true" :numFriendReq="this.numFriendReq" class="layout-menu" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
-	</div>
+        <GameReq v-if="showInvitaion" :nickname="nickname" />
+        <RejectedInvitation v-if="showRejectedInvitation" :nickname="nickname" />
+    </div>
 </template>
 
 <script>
+import GameReq from './components/GameRequest.vue';
+import RejectedInvitation from './components/RejectedInvitation.vue';
 import AppSubmenu from './AppSubmenu';
 import io from "socket.io-client";
 export default {
+    emits: ['menu-toggle', 'menuitem-click'],
+    components: {
+		'AppSubmenu': AppSubmenu,
+        GameReq,
+        RejectedInvitation,
+	},
 	data() {
 		return {
-
-            //notifications: [],
+            showInvitaion: false,
+            nickname: '',
+            showRejectedInvitation: false,
             socket: null,
             numFriendReq: 0,
 
@@ -30,6 +41,9 @@ export default {
 		}
 	},
     created() {
+        //PONER BIEN EL NICK <--------------------------------------------------------------------------
+        this.nickname = 'juanksp';
+
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
@@ -44,17 +58,10 @@ export default {
     methods: {
         clearFriendReq() {
 			//Ya hemos atendido la notificacion
-			//Decirle al back que las borre
-
-
-
-
-
-
+            this.numFriendReq = 0;
             // Ir a la pagina de amigos y que muestre solo las solicitudes
 			this.$router.push(`/Friends/notification`)
 		},
-        
         onMenuToggle(event) {
             this.$emit('menu-toggle', event);
         },
@@ -67,15 +74,12 @@ export default {
 				nodeElement.click();
 				event.preventDefault();
 			}
-		},
+		}
     },
 	computed: {
 		darkTheme() {
 			return this.$appState.darkTheme;
 		}
-	},
-	components: {
-		'AppSubmenu': AppSubmenu
 	}
 }
 </script>

@@ -83,7 +83,7 @@
   <Dialog v-model:visible="dialog.display" :draggable="false" :modal="true" class="dialog-login" :class="{ 'altura': dialog.isActive, 'alturaMax': dialog.isActiveMax, 'alturaErr': login.failed }">
     <template #header :class="colorHeader">
       <div class="grid" style="margin-right: -28px;">
-        <img alt="Logo" class="m-auto logo-size mt-3 mb-1" :src="loginImage()" />
+        <img alt="Logo" style="border-radius: 24px;" class="m-auto logo-size mt-3 mb-1 shadow-4" :src="loginImage()" />
         <div class="col-12 m-auto mb-1">
           <h3 class="text-center"> Xiangqi Online </h3> 
         </div>

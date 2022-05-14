@@ -33,7 +33,7 @@
                             <div class="card">
                                 <div class="card-container blue-container overflow-hidden">
                                     <div class="flex">
-                                        <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
+                                        <img :src="getImage(data.id)" class="foto-perfil-table" style="vertical-align: middle">
                                         <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                                     </div>
                                 </div>
@@ -50,7 +50,8 @@
                     <Column field="birthday" header="Cumpleaños" sortable></Column>
                     <Column header="Enviar solicitud">
                         <template #body="{data}">
-                            <Button class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
+                            <Button v-if="data.sended" :disabled="sendClicked" class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
+                            <Button v-else disabled="true" class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Solicitud enviada"></Button>
                         </template>
                     </Column>
                 </DataTable>    
@@ -76,7 +77,11 @@ export default {
             required: true
         },
         notFriendOf: {
-            type: Array,
+            type: Object,
+            required: true
+        },
+        notFriendOfImages: {
+            type: Object,
             required: true
         },
         loading: {
@@ -86,6 +91,7 @@ export default {
     },
 	data() {
 		return {
+            sendClicked: false,
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
@@ -99,11 +105,19 @@ export default {
             this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
         sendFriendRequest(id){
+            this.sendClicked = true; 
             console.log("Aaaaaaaaaaaaaaa")
             if(this.socket == null){
                 this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             }
             this.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id})
+        },
+        getImage(id){
+            for (let i = 0; i < this.notFriendOfImages.length; i++) {
+                if(this.notFriendOfImages[i].id == id){
+                    return this.notFriendOfImages[i].image;
+                }
+            }
         }
     }  
 }

@@ -135,8 +135,8 @@ export default {
 .foto-perfil-table {
     display: block; 
 	/*vertical-align: middle;*/
-	width: 2rem;
-	height: 2rem;
+	width: 3rem;
+	height: 3rem;
 	border-radius: 50%;
 	border-style: solid;
 	border-width: 1.5px;

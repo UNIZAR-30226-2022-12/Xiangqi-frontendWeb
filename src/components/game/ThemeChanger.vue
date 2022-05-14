@@ -40,38 +40,47 @@ export default {
     emits: ['change-board', 'change-icons'],
     data() {
         return {
-            //Estos son los sets de piezas que tiene el usuario, habra que pedirlos al back, de momento solo hay 2
-            setsPieces: [
-                {id: '1', name: 'Default symbols'},
-                {id: '2', name: 'Default Chino'},
-				{id: '3', name: 'Dark symbols'},
-				{id: '4', name: 'Dark Chino'},
-				{id: '5', name: 'Light symbols'},
-				{id: '6', name: 'Light Chino'},
-            ],
-
             //Set de piezas seleccionado por defecto
-            selectedPiecesSet: {id: '1', name: 'Iconos occidentales'},
+            selectedPiecesSet: {id: '1', name: 'Default symbols'},
 
             //Tema por defecto del tablero
-            selectedBoard: {id: '1', name: 'Madera 1'},
-
-            //Estos son los sets que tiene el usuario, habra que pedirlos al back
-            setsBoards: [
-                {id: '1', name: 'Madera teka'},
-                {id: '2', name: 'Madera nogal'},
-                {id: '3', name: 'Madera roble'},
-                {id: '4', name: 'Metal óxido'},
-                {id: '5', name: 'Metal acero'},
-                {id: '6', name: 'Mármol gris'},
-                {id: '7', name: 'Mármol arena'},
-                {id: '8', name: 'Mármol onyx'},
-                {id: '9', name: 'Mármol hielo'},
-                {id: '10', name: 'Ajedrezado'},
-                {id: '11', name: 'Cemento gris'},
-                {id: '12', name: 'Hormigón'},
-            ],
+            selectedBoard: {id: '1', name: 'Madera teka'},
         }
+    },
+    created() {
+		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
+		this.setsBoards = [
+			{id: '1', name: 'Madera teka', desc: "Tablero con un dragón grabado", category: "Tablero de madera",price: '0', purchased: true},
+			{id: '2', name: 'Madera nogal', desc: "Tablero con dragones grabados", category: "Tablero de madera", price: '0', purchased: true},
+			{id: '3', name: 'Madera roble', desc: "Tablero con un grabado oriental", category: "Tablero de madera", price: '10', purchased: false},
+			{id: '4', name: 'Metal óxido', desc: "Tablero con dragones grabados", category: "Tablero de metal", price: '20', purchased: false},
+			{id: '5', name: 'Metal acero', desc: "Tablero con un dragón grabado", category: "Tablero de metal", price: '20', purchased: false},
+			{id: '6', name: 'Mármol gris', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '7', name: 'Mármol arena', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '8', name: 'Mármol onyx', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: true},
+			{id: '9', name: 'Mármol hielo', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '10', name: 'Ajedrezado', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '11', name: 'Cemento gris', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
+			{id: '12', name: 'Hormigón', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
+		];
+
+		this.setsPieces = [
+                {id: '1', name: 'Default symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '0', purchased: true},
+                {id: '2', name: 'Default Chino', desc: "Iconos tradicionales en Chino", category: "Chino", price: '0', purchased: true},
+				{id: '3', name: 'Dark symbols', desc: "Iconos con símbolos oscuros", category: "Iconos", price: '30', purchased: false},
+				{id: '4', name: 'Dark Chino', desc: "Iconos en Chino oscuros", category: "Chino", price: '30', purchased: false},
+				{id: '5', name: 'Light symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '60', purchased: false},
+				{id: '6', name: 'Light Chino', desc: "Iconos en Chino claros", category: "Chino", price: '60', purchased: false},
+        ];
+
+		//POR ESTO
+		// ---------------------------------------------------------------------
+		/*
+		this.$store.getStoreItems().then(response => {
+			this.setsBoards = response.setsBoards;
+			this.setsPieces = response.setsPieces;
+		});
+		*/
     },
     methods: {
         changeBoard() {

@@ -17,7 +17,7 @@ class RankingService {
      getRanking(){
         const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
-            .post('/do-getRanking/', headers)
+            .get('/do-getRanking/', headers)
             .then(response => {
                 return response.data;
             }, () => {
