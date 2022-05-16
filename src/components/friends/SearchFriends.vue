@@ -9,7 +9,7 @@
                         <InputText placeholder="Nombre de usuario" class="w-16rem h-3rem pl-4 pr-6" style="border-style: none; border-top-left-radius: 1rem; border-bottom-left-radius: 1rem; border-top-right-radius: 0; border-bottom-right-radius: 0; box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);" v-model="searchFriendField"/>
                         <!--On click enviar evento-->
                         <Button v-if="this.showResults && this.show" v-on:click="clear()" class="border-circle p-button surface-400 border-400 border-3 mr-2 z-5 absolute" style="right: 4.5rem; width: 1.4rem; height: 1.25rem; margin-top: 0.8rem" icon="pi pi-times" iconPos="left" />
-                        <Button v-on:click="search()" :disabled="this.searchFriendField == null" class="p-button-raised font-semibold w-4rem text-left h-3rem" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 1rem; border-bottom-right-radius: 1rem" icon="pi pi-search" iconPos="left" />
+                        <Button v-on:click="search()" :disabled="this.searchFriendField == null || this.searchFriendField == ''" class="p-button-raised font-semibold w-4rem text-left h-3rem" style="border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 1rem; border-bottom-right-radius: 1rem" icon="pi pi-search" iconPos="left" />
                     </div>
                 </div>
             </section>

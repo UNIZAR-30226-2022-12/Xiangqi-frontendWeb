@@ -37,7 +37,6 @@ export default {
 		this.$accounts.getProfile(sessionStorage.getItem('id')).then(response => {
 			this.perfil = response.perfil;
 			this.games = response.partidas;
-			console.log(this.games);
 			this.stats = response.estadisticas;
 
 			if (this.perfil.hasImage) {

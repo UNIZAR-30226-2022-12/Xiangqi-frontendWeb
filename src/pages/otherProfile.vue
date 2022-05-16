@@ -32,6 +32,7 @@ export default {
         this.$accounts.getProfile(this.$route.params.id).then(response => {
 			this.loading = false;
 			this.perfil = response.perfil;
+			this.stats = response.estadisticas;
 
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto

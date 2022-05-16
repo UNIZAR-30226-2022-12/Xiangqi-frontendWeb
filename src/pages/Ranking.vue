@@ -35,7 +35,7 @@
                 </template>
                 <Column field="position" header="Posicion" sortable>
                     <template #body="{data}">
-                        # {{data.position}}
+                        # {{data.position + 1}}
                     </template>
                 </Column>
                 <Column field="nickname" header="Adversario" sortable>
