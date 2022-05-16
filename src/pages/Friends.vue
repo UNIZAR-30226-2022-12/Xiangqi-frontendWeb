@@ -109,16 +109,16 @@ export default {
 		this.$friends.getFriends().then(response => {
 			this.friendsArray = response;
 			for (var i = 0; i < this.friendsArray.length; i++) {
-					//llegan las fotos
-					let id = this.friendsArray[i].id;
-					if (this.friendsArray[i].hasImage) {
-						this.$accounts.getProfileImage(id).then(data => {
-							this.friendsArrayImages.push({id: id, image: data})
-						});
-					} else {
-						this.friendsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
-					}
+				//llegan las fotos
+				let id = this.friendsArray[i].id;
+				if (this.friendsArray[i].hasImage) {
+					this.$accounts.getProfileImage(id).then(data => {
+						this.friendsArrayImages.push({id: id, image: data})
+					});
+				} else {
+					this.friendsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
 				}
+			}
 			this.loadingFriends = false;
 			this.loading = false;
 		});
