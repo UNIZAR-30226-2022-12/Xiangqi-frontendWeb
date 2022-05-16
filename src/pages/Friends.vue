@@ -1,7 +1,8 @@
 <template>
 	<h2 v-if="$route.params.isNotification != 'notification'"> Amigos </h2>
 	<loader v-if="loading"/>
-	<div v-else-if="notFriendOf != null && friendRequestsArray != null && friendsArray != null && !loading">
+	<!--<div v-else-if="notFriendOf != null && friendRequestsArray != null && friendsArray != null && !loading">-->
+	<div v-else>
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 		<searchFriends v-if="$route.params.isNotification != 'notification'" :show="showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 		<searchTable v-if="$route.params.isNotification != 'notification'" :notFriendOf="notFriendOf" :notFriendOfImages="notFriendOfImages" :loading="loadingSearch" :show="showResults" :searchedItem="searchFriendField"/>
@@ -32,12 +33,12 @@ export default {
 			showResults: false,
 			loading: true,
 			searchFriendField: '',
-			notFriendOf: null,
+			notFriendOf: [],
 			notFriendOfImages: [],
 			loadingSearch: true,
-			friendRequestsArray: null,
+			friendRequestsArray: [],
 			loadingRequests: true,
-			friendsArray: null,
+			friendsArray: [],
 			loadingFriends: true,
 		}
 	},
@@ -110,20 +111,19 @@ export default {
 				this.notFriendOf = response;
 
 				//Buscar la foto
-				//if (this.perfil.hasImage) {
-					// Pedir al back la foto
-					for (var i = 0; i < this.notFriendOf.length; i++) {
-						//llegan las fotos
-						let id = this.notFriendOf[i].id;
+				// Pedir al back la foto
+				for (var i = 0; i < this.notFriendOf.length; i++) {
+					//llegan las fotos
+					let id = this.notFriendOf[i].id;
+					if (this.notFriendOf[i].hasImage) {
 						this.$accounts.getProfileImage(id).then(data => {
 							this.notFriendOfImages.push({id: id, image: data})
 						});
+					} else {
+						this.notFriendOfImages.push({id: id, image: "images/profilePlaceholder.svg"})
 					}
-				//} else {
-				//	this.profileImage = "images/profilePlaceholder.svg";
-				//}
+				}
 				this.loadingSearch = false;
-
 			});
         },
 		getSearchFriendField(results) {
