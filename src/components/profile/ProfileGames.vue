@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
+                                <img :src="getImage(data.id)" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -72,6 +72,10 @@ export default {
             type: Object,
             required: true
         },
+        gameArrayImages: {
+            type: Object,
+            required: true
+        }
     },
     data() {
         return {
@@ -125,6 +129,13 @@ export default {
                 }
                 
             })
+        },
+        getImage(id){
+            for (let i = 0; i < this.gameArrayImages.length; i++) {
+                if(this.gameArrayImages[i].id == id){
+                    return this.gameArrayImages[i].image;
+                }
+            }
         }
     }
 }
@@ -135,11 +146,12 @@ export default {
 .foto-perfil-table {
     display: block; 
 	/*vertical-align: middle;*/
-	width: 3rem;
-	height: 3rem;
+	width: 2.5rem;
+	height: 2.5rem;
+    margin: 0.5rem;
+
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 3px rgba(0, 0, 0, 0.12) !important;
 	border-radius: 50%;
-	border-style: solid;
-	border-width: 1.5px;
 	border-color: var(--surface-400);
 	object-fit: cover;
 }

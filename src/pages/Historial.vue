@@ -28,7 +28,7 @@ export default {
 		// ---------------------------------------------------------------------
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
 		// El atributo key es obligatorio para que funcione el componente
-		this.playerHistory = [
+		/*this.playerHistory = [
 			{key: 0, data: {date: "20/02/22", hour: "12:30"},
 				children: [
 					{data: {id: 0, nickname: "pikanachi", flag: "flag-es", color: 'rojo', origin: "[12-12]", destination: "[14-14]"}},
@@ -42,24 +42,22 @@ export default {
 					{data: {id: 1, nickname: "juanksp", flag: "flag-jp", color: 'negro', origin: "[3-2]", destination: "[3-3]"}}
 				]
 			},
-			{key: 2, data: {date: "22/02/22", hour: "11:23"},
+			{key: 2, data: {date: "22/02/22", hour: "11:23", nickname: 'empate'},
 				children: [
 					{key: "0", data: {id: 0, nickname: "pikanachi", flag: "flag-es", color: 'rojo', origin: "[2-2]", destination: "[4-4]"}},
 					{key: "1", data: {id: 1, nickname: "juanksp", flag: "flag-jp", color: 'negro', origin: "[3-2]", destination: "[3-3]"}}
 				]
 			},
-		];
+		];*/
 
-		this.loading = false;
+		//this.loading = false;
 
 		// POR ESTO
 		// ---------------------------------------------------------------------
-		/*
 		this.$accounts.getHistorial().then(response => {
 			this.playerHistory = response;
 			this.loading = false;
 		});
-		*/
 	}
 }
 </script>

@@ -105,18 +105,11 @@ export default {
             this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
         sendFriendRequest(id){
-            this.sendClicked = true; 
-            console.log("Aaaaaaaaaaaaaaa")
-
             for (let i = 0; i < this.notFriendOf.length; i++) {
-                /*if(this.notFriendOf[i].id == id){
-                    this.sendede
-                    }).catch(error => {
-                        console.log(error);
-                    });
-                }*/
+                if(this.notFriendOf[i].id == id){
+                    this.sendClicked = true; 
+                }
             }
-
             if(this.socket == null){
                 this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             }

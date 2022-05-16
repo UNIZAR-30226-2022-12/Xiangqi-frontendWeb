@@ -43,7 +43,7 @@
                         <div class="card">
                             <div class="card-container blue-container overflow-hidden">
                                 <div class="flex">
-                                    <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
+                                    <img :src="getImage(data.id)" class="foto-perfil-table" style="vertical-align: middle">
                                     <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                                 </div>
                             </div>
@@ -52,12 +52,12 @@
                 </Column>
                 <Column field="flag" header="País" sortable>
                     <template #body="{data}">
-                        <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                        <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
                         <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                     </template>
                 </Column>
-                <Column field="winnedGames" header="Partidas jugadas" sortable></Column>
-                <Column field="playedGames" header="Partidas ganadas" sortable></Column>
+                <Column field="playedGames" header="Partidas jugadas" sortable></Column>
+                <Column field="winnedGames" header="Partidas ganadas" sortable></Column>
             </DataTable>    
         </div>
     </div>
@@ -76,6 +76,7 @@ export default {
 	data() {
 		return {
 			ranking: [],
+            rankingImages: [],
 			//show: true,
 			loading: true,
 
@@ -93,7 +94,7 @@ export default {
 		// CAMBIAR ESTO
 		// ---------------------------------------------------------------------
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
-        this.ranking= [
+        /*this.ranking= [
                 {id:'1,', position: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
                 {id:'11,', position: '2', nickname: 'John', flag: 'flag-fr', country: 'France', winnedGames:'40', playedGames:'60'},
                 {id:'12,', position: '3', nickname: 'Juanksp', flag: 'flag-es', country: 'Spain', winnedGames:'40', playedGames:'60'},
@@ -107,18 +108,29 @@ export default {
 				{id:'0,', position: '11', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
                 {id:'17,', position: '12', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
                 {id:'18,', position: '13', nickname: 'AlexZheng', flag: 'flag-cn', country: 'China', winnedGames:'40', playedGames:'60'},
-        ];
+        ];*/
 
-		this.loading = false;
+		//this.loading = false;
 
 		//POR ESTO
         // ---------------------------------------------------------------------
-        /*
 		this.$ranking.getRanking().then(response => {
 			this.ranking = response;
+
+			for (var i = 0; i < this.ranking.length; i++) {
+					//llegan las fotos
+					let id = this.ranking[i].id;
+					if (this.ranking[i].hasImage) {
+						this.$accounts.getProfileImage(id).then(data => {
+							this.rankingImages.push({id: id, image: data})
+						});
+					} else {
+						this.rankingImages.push({id: id, image: "images/profilePlaceholder.svg"})
+					}
+				}
+
             this.loading = false;
 		});
-        */
 	},
 	methods: {
         formatDate(value) {
@@ -130,6 +142,13 @@ export default {
         },
         formatCurrency(value) {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+        },
+        getImage(id) {
+            for (let i = 0; i < this.rankingImages.length; i++) {
+                if(this.rankingImages[i].id == id){
+                    return this.rankingImages[i].image;
+                }
+            }
         },
 	}        
 }

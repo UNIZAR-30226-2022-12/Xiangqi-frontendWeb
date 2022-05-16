@@ -9,10 +9,11 @@
                 </div>
             </template>
             <div v-if="playerHistory.length != 0">
-                <Column field="date" header="Fecha de partida" :expander="true" style="width:12rem" :sortable="true">
+                <Column field="date" header="Fecha de partida" :expander="true" style="width: 12rem" :sortable="true">
                     <template #body="slotProps">
                         {{slotProps.node.data.date}}
-                        <span class="md-visible sm-visible">{{slotProps.node.data.hour}}</span>
+                        <span class="ml-2 md-visible sm-visible">{{slotProps.node.data.hour}}</span>
+                        <span class="md-visible sm-visible">{{slotProps.node.data.winnerNickname}}</span>
                         <span class="md-visible sm-visible" style="margin-left: -55px; min-width: 20px;">{{slotProps.node.data.id}}</span>
                         <img v-if="slotProps.node.data.flag != null" :class="'md-visible shadow-2 flag ' + slotProps.node.data.flag" src="images/flags/flag_placeholder.png" />
                         <span class="md-visible sm-visible min-width-md min-width-sm"> {{slotProps.node.data.nickname}} </span>
@@ -22,6 +23,13 @@
                     </template>
                 </Column>
                 <Column field="hour" class="text-center" header="Hora" headerClass="sm-invisible" bodyClass="sm-invisible" style="width: 5rem"></Column>
+                <Column field="winnerNickname" class="text-center" header="Ganador" headerClass="sm-invisible" bodyClass="sm-invisible" style="width: 5rem">
+                    <template #body="slotProps">
+                        <span v-if="slotProps.node.data.winnerNickname != null">
+                            {{slotProps.node.data.winnerNickname}}
+                        </span>
+                    </template>
+                </Column>
                 <Column field="id" class="text-center" header="Nº" headerClass="sm-invisible" bodyClass="sm-invisible" style="width: 4rem"></Column>
                 <Column field="flag" class="text-center" header="País" headerClass="sm-invisible" bodyClass="sm-invisible" style="width: 5rem">
                     <template #body="slotProps">

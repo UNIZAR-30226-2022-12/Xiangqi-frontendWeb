@@ -6,8 +6,8 @@
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 		<searchFriends v-if="$route.params.isNotification != 'notification'" :show="showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 		<searchTable v-if="$route.params.isNotification != 'notification'" :notFriendOf="notFriendOf" :notFriendOfImages="notFriendOfImages" :loading="loadingSearch" :show="showResults" :searchedItem="searchFriendField"/>
-		<friendReq :loading="loadingRequests" :friendRequests="friendRequestsArray" />
-		<myFriends v-if="$route.params.isNotification != 'notification'" :friends="friendsArray" :loading="loadingFriends"/>
+		<friendReq :loading="loadingRequests" :friendRequests="friendRequestsArray" :friendRequestsArrayImages="friendRequestsArrayImages"/>
+		<myFriends v-if="$route.params.isNotification != 'notification'" :friends="friendsArray" :friendsArrayImages="friendsArrayImages" :loading="loadingFriends"/>
 	</div>
 </template>
 
@@ -37,8 +37,10 @@ export default {
 			notFriendOfImages: [],
 			loadingSearch: true,
 			friendRequestsArray: [],
+			friendRequestsArrayImages: [],
 			loadingRequests: true,
 			friendsArray: [],
+			friendsArrayImages: [],
 			loadingFriends: true,
 		}
 	},
@@ -89,12 +91,34 @@ export default {
 		// POR ESTO
 		// ---------------------------------------------------------------------
 		this.$friends.getFriendRequests().then(response => {
-			this.friendRequests = response;
+			this.friendRequestsArray = response;
+			for (var i = 0; i < this.friendRequestsArray.length; i++) {
+					//llegan las fotos
+					let id = this.friendRequestsArray[i].id;
+					if (this.friendRequestsArray[i].hasImage) {
+						this.$accounts.getProfileImage(id).then(data => {
+							this.friendRequestsArrayImages.push({id: id, image: data})
+						});
+					} else {
+						this.friendRequestsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
+					}
+				}
 			this.loadingRequests = false;
 		});
 
 		this.$friends.getFriends().then(response => {
-			this.friends = response;
+			this.friendsArray = response;
+			for (var i = 0; i < this.friendsArray.length; i++) {
+					//llegan las fotos
+					let id = this.friendsArray[i].id;
+					if (this.friendsArray[i].hasImage) {
+						this.$accounts.getProfileImage(id).then(data => {
+							this.friendsArrayImages.push({id: id, image: data})
+						});
+					} else {
+						this.friendsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
+					}
+				}
 			this.loadingFriends = false;
 			this.loading = false;
 		});
@@ -111,7 +135,6 @@ export default {
 				this.notFriendOf = response;
 
 				//Buscar la foto
-				// Pedir al back la foto
 				for (var i = 0; i < this.notFriendOf.length; i++) {
 					//llegan las fotos
 					let id = this.notFriendOf[i].id;

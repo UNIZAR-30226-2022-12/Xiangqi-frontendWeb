@@ -34,7 +34,7 @@
                                 {{slotProps.data.price}} 
                                 <font-awesome-icon class="text-xl" icon="coins" />
                             </span>
-                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.category)" label="Comprar" :disabled="slotProps.data.purchased"></Button>
+                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo)" label="Comprar" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                 {{slotProps.data.price}}
                                 <font-awesome-icon class="text-xl" icon="coins" />
                             </span>
-                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.category)" :disabled="slotProps.data.purchased"></Button>
+                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo)" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
                 </div>
@@ -140,10 +140,10 @@ export default {
                 this.sortKey = sortValue;
             }
         },
-        purchaseItem(price, id, category) {
+        purchaseItem(price, id, tipo) {
             if (this.points - price >= 0) {
                 // points suficientes
-                this.$emit('purchase-item-pressed', price, id, category);
+                this.$emit('purchase-item-pressed', price, id, tipo);
             } else {
                 console.log("points insuficientes");
                 this.display = true;

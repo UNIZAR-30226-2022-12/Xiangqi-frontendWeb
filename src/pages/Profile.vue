@@ -1,7 +1,7 @@
 <template>
 	<loader v-if="loading"/>
 	<myProfile v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
-	<myGames v-if="games!=null" :games="games"/>
+	<myGames v-if="games!=null" :games="games" :gameArrayImages="gameArrayImages"/>
 	<myStatics v-if="stats!=null" :perfil="perfil" :myProfile="true" :games="stats"/>
 </template>
 
@@ -19,6 +19,7 @@ export default {
 			loading: true,
 			perfil: null,
 			games: null,
+			gameArrayImages: [],
 			columns: null,
 			profileImage: '',
 			stats: null,
@@ -34,7 +35,6 @@ export default {
 	created() {
 		this.$loggedStatus.logged = this.$accounts.isAuthenticated();
 		this.$accounts.getProfile(sessionStorage.getItem('id')).then(response => {
-			this.loading = false;
 			this.perfil = response.perfil;
 			this.games = response.partidas;
 			console.log(this.games);
@@ -48,6 +48,19 @@ export default {
 			} else {
 				this.profileImage = "images/profilePlaceholder.svg";
 			}
+
+			for (var i = 0; i < this.games.length; i++) {
+				//llegan las fotos
+				let id = this.games[i].id;
+				if (this.games[i].hasImage) {
+					this.$accounts.getProfileImage(id).then(data => {
+						this.gameArrayImages.push({id: id, image: data})
+					});
+				} else {
+					this.gameArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
+				}
+			}
+			this.loading = false;
 		});
 	},
 }

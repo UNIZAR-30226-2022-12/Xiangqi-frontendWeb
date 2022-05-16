@@ -38,30 +38,12 @@ class StoreService {
     }
 
     /*
-     * Envia al back los puntos que ha de restar al usuario
+     * Envia al back el item que ha comprado el usuario para poner su campo 'purchased' a true y actualizar el saldo
      */
-    updatePoints(price) {
+    purchaseItem(id, tipo, price) {
         const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
-            .post('/do-updatePoints/', {'price': price}, headers);
-    }
-
-    /*
-     * Envia al back el tablero que ha comprado el usuario para poner su campo 'purchased' a true
-     */
-    purchaseBoard(boardId) {
-        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
-        return http
-            .post('/do-purchaseBoard/', {'id': boardId}, headers);
-    }
-
-    /*
-     * Envia al back el set de piezas que ha comprado el usuario para poner su campo 'purchased' a true
-     */
-    purchasePiece(pieceId) {
-        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
-        return http
-            .post('/do-purchasePiece/', {'id': pieceId}, headers);
+            .post('/do-purchaseItem/', {'id': id, 'tipo': tipo, 'price': price}, headers);
     }
 }
 

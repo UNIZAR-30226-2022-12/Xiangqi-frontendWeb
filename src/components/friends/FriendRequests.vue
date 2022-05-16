@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-container blue-container overflow-hidden">
                             <div class="flex">
-                                <img src="images/profilePlaceholder.svg" class="foto-perfil-table" style="vertical-align: middle">
+                                <img :src="getImage(data.id)" class="foto-perfil-table" style="vertical-align: middle">
                                 <Button v-on:click="otherProfile(data.id)" :label="data.nickname" class="text-left p-button-link" />
                             </div>
                         </div>
@@ -41,7 +41,7 @@
             <Column field="name" header="Nombre" sortable></Column>
             <Column field="flag" header="País" sortable style="min-width: 14rem">
                 <template #body="{data}">
-                    <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                    <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
                     <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
                 </template>
             </Column>
@@ -74,6 +74,10 @@ export default {
         loading: {
             type: Boolean,
             required: true
+        },
+        friendRequestsArrayImages: {
+            type: Object,
+            required: true
         }
     },
 	data() {
@@ -97,6 +101,13 @@ export default {
         formatCurrency(value) {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
         },
+        getImage(id){
+            for (let i = 0; i < this.friendRequestsArrayImages.length; i++) {
+                if(this.friendRequestsArrayImages[i].id == id){
+                    return this.friendRequestsArrayImages[i].image;
+                }
+            }
+        }
 	}        
 }
 </script>

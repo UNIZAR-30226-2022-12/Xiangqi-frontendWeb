@@ -9,15 +9,15 @@
                         <div class="product-item">
                             <div class="product-item-content text-center">
                                 <div class="mt-1 mb-3">
-                                    <img src="images/profilePlaceholder.svg" :alt="slotProps.data.name" class="shadow-2 foto-perfil" />
+                                    <img :src="getImage(slotProps.data.id)" :alt="slotProps.data.name" class="shadow-2 foto-perfil" />
                                 </div>
                                 <div>
                                     <h4 class="mb-2">{{slotProps.data.name}}</h4>
-                                    <img class="flag h-auto" :class="[slotProps.data.flag]" src="images/flags/flag_placeholder.png">
+                                    <img class="flag h-auto shadow-2" :class="[slotProps.data.flag]" src="images/flags/flag_placeholder.png">
                                     <span class="ml-2 image-text">{{slotProps.data.country}}</span>
                                     <h6 class="mt-2 mb-2">#{{slotProps.data.nickname}}</h6>
                                     <div class="car-buttons mt-3">
-                                        <Button icon="pi pi-search" class="p-button-raised mb-2" style="border-radius: 1rem" label="Ver perfil"/>
+                                        <Button v-on:click="otherProfile(slotProps.data.id);" icon="pi pi-search" class="p-button-raised mb-2" style="border-radius: 1rem" label="Ver perfil"/>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,11 @@ export default {
         loading: {
             type: Boolean,
             required: true
-        }
+        },
+        friendsArrayImages: {
+            type: Object,
+            required: true
+        },
     },
 	data() {
 		return {			
@@ -70,6 +74,18 @@ export default {
 				}
 			]
 		}
-	},     
+	},
+    methods: {
+        getImage(id) {
+            for (let i = 0; i < this.friendsArrayImages.length; i++) {
+                if(this.friendsArrayImages[i].id == id){
+                    return this.friendsArrayImages[i].image;
+                }
+            }
+        },
+        otherProfile(id){
+            this.$router.push({name: 'OtherProfile', params: { id: id}});
+        },
+    }   
 }
 </script>

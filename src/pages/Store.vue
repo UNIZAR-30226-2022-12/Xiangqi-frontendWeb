@@ -45,63 +45,57 @@ export default {
 		// CAMBIAR ESTO
 		// ---------------------------------------------------------------------
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
-		this.setsBoards = [
-			{id: '1', name: 'Madera teka', desc: "Tablero con un dragón grabado", category: "Tablero de madera",price: '0', purchased: true},
-			{id: '2', name: 'Madera nogal', desc: "Tablero con dragones grabados", category: "Tablero de madera", price: '0', purchased: true},
-			{id: '3', name: 'Madera roble', desc: "Tablero con un grabado oriental", category: "Tablero de madera", price: '10', purchased: false},
-			{id: '4', name: 'Metal óxido', desc: "Tablero con dragones grabados", category: "Tablero de metal", price: '20', purchased: false},
-			{id: '5', name: 'Metal acero', desc: "Tablero con un dragón grabado", category: "Tablero de metal", price: '20', purchased: false},
-			{id: '6', name: 'Mármol gris', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
-			{id: '7', name: 'Mármol arena', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
-			{id: '8', name: 'Mármol onyx', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: true},
-			{id: '9', name: 'Mármol hielo', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
-			{id: '10', name: 'Ajedrezado', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
-			{id: '11', name: 'Cemento gris', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
-			{id: '12', name: 'Hormigón', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
+		/*this.setsBoards = [
+			{id: '1', tipo:'1', name: 'Madera teka', desc: "Tablero con un dragón grabado", category: "Tablero de madera",price: '0', purchased: true},
+			{id: '2', tipo:'tablero', name: 'Madera nogal', desc: "Tablero con dragones grabados", category: "Tablero de madera", price: '0', purchased: true},
+			{id: '3', tipo:'tablero', name: 'Madera roble', desc: "Tablero con un grabado oriental", category: "Tablero de madera", price: '10', purchased: false},
+			{id: '4', tipo:'tablero', name: 'Metal óxido', desc: "Tablero con dragones grabados", category: "Tablero de metal", price: '20', purchased: false},
+			{id: '5', tipo:'tablero', name: 'Metal acero', desc: "Tablero con un dragón grabado", category: "Tablero de metal", price: '20', purchased: false},
+			{id: '6', tipo:'tablero', name: 'Mármol gris', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '7', tipo:'tablero', name: 'Mármol arena', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '8', tipo:'tablero', name: 'Mármol onyx', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: true},
+			{id: '9', tipo:'tablero', name: 'Mármol hielo', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '10', tipo:'tablero', name: 'Ajedrezado', desc: "Tablero motivo ajedrezado grabado", category: "Tablero de mármol", price: '30', purchased: false},
+			{id: '11', tipo:'tablero', name: 'Cemento gris', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
+			{id: '12', tipo:'tablero', name: 'Hormigón', desc: "Tablero con un dragón grabado", category: "Tablero de cemento", price: '40', purchased: false},
 		];
 
 		this.setsPieces = [
-                {id: '1', name: 'Default symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '0', purchased: true},
-                {id: '2', name: 'Default Chino', desc: "Iconos tradicionales en Chino", category: "Chino", price: '0', purchased: true},
-				{id: '3', name: 'Dark symbols', desc: "Iconos con símbolos oscuros", category: "Iconos", price: '30', purchased: false},
-				{id: '4', name: 'Dark Chino', desc: "Iconos en Chino oscuros", category: "Chino", price: '30', purchased: false},
-				{id: '5', name: 'Light symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '60', purchased: false},
-				{id: '6', name: 'Light Chino', desc: "Iconos en Chino claros", category: "Chino", price: '60', purchased: false},
+                {id: '1', tipo:'tablero', name: 'Default symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '0', purchased: true},
+                {id: '2', tipo:'tablero', name: 'Default Chino', desc: "Iconos tradicionales en Chino", category: "Chino", price: '0', purchased: true},
+				{id: '3', tipo:'tablero', name: 'Dark symbols', desc: "Iconos con símbolos oscuros", category: "Iconos", price: '30', purchased: false},
+				{id: '4', tipo:'tablero', name: 'Dark Chino', desc: "Iconos en Chino oscuros", category: "Chino", price: '30', purchased: false},
+				{id: '5', tipo:'tablero', name: 'Light symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '60', purchased: false},
+				{id: '6', tipo:'tablero', name: 'Light Chino', desc: "Iconos en Chino claros", category: "Chino", price: '60', purchased: false},
         ];
 
-		this.loading = false;
-		this.points = 60;
+		this.loading = false;*/
+		//this.points = 60;
 
 		//POR ESTO
 		// ---------------------------------------------------------------------
-		/*
 		this.$store.getStoreItems().then(response => {
 			this.setsBoards = response.setsBoards;
 			this.setsPieces = response.setsPieces;
 		});
 
-        /*
 		this.$store.getPoints().then(response => {
 			this.points = response;
 			this.loading = false;
 		});
-		*/
 	},
 	methods: {
-		purchaseItem(price, id, category) {
+		purchaseItem(price, id, tipo) {
 			if (this.points - price >= 0) {
 				this.points = this.points - price;
 				// Actualizar el points en el back
-				//this.$store.updatePoints(price);
-
-				if (category.startsWith('Tablero')) {
-					// Enviar al back post para que compre el tablero
-					//this.$store.purchaseBoard(id);
+				this.$store.purchaseItem(id, tipo, price);
+				console.log(id, tipo, price);
+				if (tipo == 1) {
+					console.log('purchased board');
 					this.setsBoards[id - 1].purchased = true;
-
 				} else {
-					// Enviar al back post para que compre la pieza
-					//this.$store.purchasePiece(id);
+					console.log('purchased piece');
 					this.setsPieces[id - 1].purchased = true;
 				}
 			}
