@@ -1,5 +1,5 @@
 <template>
-	<loader v-if="this.loading"/>
+	<loader v-if="loading"/>
 	<myProfile v-if="perfil!=null" :perfil="perfil" :profileImage="profileImage" :myProfile="true"/>
 	<myGames v-if="games!=null" :games="games"/>
 	<myStatics v-if="stats!=null" :perfil="perfil" :myProfile="true" :games="stats"/>

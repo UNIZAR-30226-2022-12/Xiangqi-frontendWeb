@@ -5,8 +5,8 @@
 	</Transition>-->
 
     <h2>Ranking de jugadores</h2>
-    <loader v-if="this.loading"/>
-	<div v-else>
+    <loader v-if="loading"/>
+	<div v-else-if="ranking != null && !loading">
         <div class="surface-section section md:p-6 lg:p-6 mobileBorder">
             <DataTable :value="ranking" :paginator="true" :rows="20"
             :rowHover="true" v-model:selection="selectedRival" v-model:filters="filters" filterDisplay="menu" :loading="loading"

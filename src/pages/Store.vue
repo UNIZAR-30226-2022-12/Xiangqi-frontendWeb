@@ -1,9 +1,17 @@
 <template>
 	<h2> Tienda </h2>
-	<loader v-if="this.loading"/>
-	<div v-else>
-		<boardsSection :loading="this.loading" :name="boardsName" :set="setsBoards"/>
-		<piecesSection :loading="this.loading" :name="piecesName" :set="setsPieces"/>
+	<loader v-if="loading"/>
+	<div v-else-if="!loading && setsBoards != null && setsPieces != null && points != null">
+		<div class="surface-section section mb-6">
+			<div class="col-12 mb-4 mt-4 text-center">
+				<span class="p-3 shadow-2 mb-3 inline-block surface-50 text-center" style="border-radius: 1rem">
+					<font-awesome-icon class="text-4xl text-primary" icon="coins" />
+				</span>
+				<div class="text-900 text-2xl font-medium">Número de puntos {{points}}</div>
+			</div>
+		</div>
+		<boardsSection :loading="loading" :name="boardsName" :set="setsBoards" @purchase-item-pressed="purchaseItem" :points="points"/>
+		<piecesSection :loading="loading" :name="piecesName" :set="setsPieces" @purchase-item-pressed="purchaseItem" :points="points"/>
 	</div>
 </template>
 
@@ -25,8 +33,9 @@ export default {
 			loading: true,
 			boardsName: 'tableros',
 			piecesName: 'piezas',
-			setsBoards: [],
-			setsPieces: [],
+			setsBoards: null,
+			setsPieces: null,
+			points: null,
 		}
 	},
 	created() {
@@ -61,6 +70,7 @@ export default {
         ];
 
 		this.loading = false;
+		this.points = 60;
 
 		//POR ESTO
 		// ---------------------------------------------------------------------
@@ -68,9 +78,34 @@ export default {
 		this.$store.getStoreItems().then(response => {
 			this.setsBoards = response.setsBoards;
 			this.setsPieces = response.setsPieces;
+		});
+
+        /*
+		this.$store.getPoints().then(response => {
+			this.points = response;
 			this.loading = false;
 		});
 		*/
+	},
+	methods: {
+		purchaseItem(price, id, category) {
+			if (this.points - price >= 0) {
+				this.points = this.points - price;
+				// Actualizar el points en el back
+				//this.$store.updatePoints(price);
+
+				if (category.startsWith('Tablero')) {
+					// Enviar al back post para que compre el tablero
+					//this.$store.purchaseBoard(id);
+					this.setsBoards[id - 1].purchased = true;
+
+				} else {
+					// Enviar al back post para que compre la pieza
+					//this.$store.purchasePiece(id);
+					this.setsPieces[id - 1].purchased = true;
+				}
+			}
+		}
 	}
 }
 </script>

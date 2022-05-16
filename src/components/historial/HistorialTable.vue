@@ -16,7 +16,7 @@
                         <span class="md-visible sm-visible" style="margin-left: -55px; min-width: 20px;">{{slotProps.node.data.id}}</span>
                         <img v-if="slotProps.node.data.flag != null" :class="'md-visible shadow-2 flag ' + slotProps.node.data.flag" src="images/flags/flag_placeholder.png" />
                         <span class="md-visible sm-visible min-width-md min-width-sm"> {{slotProps.node.data.nickname}} </span>
-                        <img v-if="slotProps.node.data.piece != null" class="md-visible sm-visible piece piece-sm" :src="'images/themes/pieces/1/' + slotProps.node.data.piece + '.svg'">
+                        <img v-if="slotProps.node.data.color != null" class="md-visible sm-visible piece piece-sm" :src="'images/themes/pieces/colors/' + slotProps.node.data.color + '.svg'">
                         <span class="md-visible sm-visible" style="min-width: 45px;">{{slotProps.node.data.origin}}</span>
                         <span class="md-visible sm-visible">{{slotProps.node.data.destination}}</span>
                     </template>
@@ -29,9 +29,9 @@
                     </template>
                 </Column>
                 <Column field="nickname" class="text-center" header="Jugador" headerClass="sm-invisible" bodyClass="sm-invisible"></Column>
-                <Column field="piece" class="text-center" header="Pieza" headerClass="sm-invisible" bodyClass="sm-invisible">
+                <Column field="color" class="text-center" header="Color" headerClass="sm-invisible" bodyClass="sm-invisible">
                     <template #body="slotProps">
-                            <img v-if="slotProps.node.data.piece != null" class="piece piece-lg" :src="'images/themes/pieces/1/' + slotProps.node.data.piece + '.svg'">
+                            <img v-if="slotProps.node.data.color != null" class="piece piece-lg" :src="'images/themes/pieces/colors/' + slotProps.node.data.color + '.svg'">
                     </template>
                 </Column>
                 <Column field="origin" class="text-center" header="Origen" headerClass="sm-invisible" bodyClass="sm-invisible"></Column>

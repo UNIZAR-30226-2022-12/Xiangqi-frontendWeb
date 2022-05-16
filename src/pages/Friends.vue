@@ -1,7 +1,7 @@
 <template>
 	<h2 v-if="$route.params.isNotification != 'notification'"> Amigos </h2>
 	<loader v-if="loading"/>
-	<div v-else>
+	<div v-else-if="notFriendOf != null && friendRequestsArray != null && friendsArray != null && !loading">
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 		<searchFriends v-if="$route.params.isNotification != 'notification'" :show="showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 		<searchTable v-if="$route.params.isNotification != 'notification'" :notFriendOf="notFriendOf" :notFriendOfImages="notFriendOfImages" :loading="loadingSearch" :show="showResults" :searchedItem="searchFriendField"/>
@@ -32,12 +32,12 @@ export default {
 			showResults: false,
 			loading: true,
 			searchFriendField: '',
-			notFriendOf: [],
+			notFriendOf: null,
 			notFriendOfImages: [],
 			loadingSearch: true,
-			friendRequestsArray: [],
+			friendRequestsArray: null,
 			loadingRequests: true,
-			friendsArray: [],
+			friendsArray: null,
 			loadingFriends: true,
 		}
 	},

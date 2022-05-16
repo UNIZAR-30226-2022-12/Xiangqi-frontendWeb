@@ -1,6 +1,6 @@
 <template>
     <div class="surface-section section mb-6 md:p-6 lg:p-6 mobileBorder">
-        
+        <pointsDialog :display="display" @ok-pressed="closeDialog"/>
         <loader v-if="this.loading"/>   
         <DataView v-else :value="set" :layout="layout" :paginator="true" :rows="6" :sortOrder="sortOrder" :sortField="sortField" style="border-color: var(--surface-border) !important">
             <template #header>
@@ -34,7 +34,7 @@
                                 {{slotProps.data.price}} 
                                 <font-awesome-icon class="text-xl" icon="coins" />
                             </span>
-                            <Button icon="pi pi-shopping-cart" label="Comprar" :disabled="slotProps.data.purchased"></Button>
+                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.category)" label="Comprar" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                 {{slotProps.data.price}}
                                 <font-awesome-icon class="text-xl" icon="coins" />
                             </span>
-                            <Button icon="pi pi-shopping-cart" :disabled="slotProps.data.purchased"></Button>
+                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.category)" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
                 </div>
@@ -74,11 +74,14 @@
 
 <script>
 import loader from '../LoaderSmall.vue';
+import pointsDialog from './StorePoints.vue';
 
 export default {
 	inject: ['$accounts'],
+    emits: ['purchase-item-pressed'],
     components: {
-		loader,
+        loader,
+		pointsDialog,
     },
     props: {
         set: {
@@ -91,6 +94,10 @@ export default {
         },
         loading: {
             type: Boolean,
+            required: true
+        },
+        points: {
+            type: Number,
             required: true
         },
     },
@@ -106,7 +113,8 @@ export default {
                 {label: 'Comprados primero', value: '!purchased'},
                 {label: 'No comprados primero', value: 'purchased'},
                 {label: 'Por categoría', value: 'category'},
-            ]
+            ],
+            display: false,
         }
     },
     methods: {
@@ -131,6 +139,18 @@ export default {
                 this.sortField = value;
                 this.sortKey = sortValue;
             }
+        },
+        purchaseItem(price, id, category) {
+            if (this.points - price >= 0) {
+                // points suficientes
+                this.$emit('purchase-item-pressed', price, id, category);
+            } else {
+                console.log("points insuficientes");
+                this.display = true;
+            }
+        },
+        closeDialog() {
+            this.display = false;
         }
     }
 }

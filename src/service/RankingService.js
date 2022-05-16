@@ -14,7 +14,7 @@ class RankingService {
     /*
      * Obtiene la lista de tableros y de piezas que tiene la tienda
      */
-     getRanking(){
+    getRanking(){
         const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
         return http
             .get('/do-getRanking/', headers)
