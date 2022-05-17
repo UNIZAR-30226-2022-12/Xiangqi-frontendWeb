@@ -11,7 +11,7 @@
     </div>
     <template #footer>
     <div class="grid">
-            <Button v-on:click="display = false" class="p-button-raised font-semibold h-3rem w-full" label="Aceptar" style="border-radius: 1rem"/>
+            <Button v-on:click="rejected()" class="p-button-raised font-semibold h-3rem w-full" label="Aceptar" style="border-radius: 1rem"/>
     </div>
     </template>
   </Dialog>
@@ -31,6 +31,12 @@ export default {
             display: true,
             }
     },
+    methods:{
+      rejected(){
+        this.display = false
+        this.$router.go()
+      }
+    }
 }
 
 </script>

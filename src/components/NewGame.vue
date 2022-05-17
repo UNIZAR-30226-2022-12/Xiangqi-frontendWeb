@@ -43,6 +43,19 @@
 import io from "socket.io-client"
 
 export default {
+  props: {
+		onlineFriends: {
+			type: Array,
+			required: false
+		},
+    cerrar: {
+			type: Boolean,
+			required: false
+		}
+	},
+  created(){
+    this.friends = this.onlineFriends;
+  },
   data() {
     return {
       display: false,
@@ -60,9 +73,11 @@ export default {
   },
   methods: {
     openDialog() {
+      console.log("AMIGOS: ", this.onlineFriends)
       this.display = true;
       //Juan aqui reseteo el socket así ok??
-      this.socket = null;
+      let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+      socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
       this.searchingOponent = false;
       this.friend = false;
       this.timer = false;
@@ -71,28 +86,53 @@ export default {
     },
     nuevaPartida() {
       //Ponemos el spinner
-      this.searchingOponent = true;
+      if(this.selectedFriend == null){
+        this.searchingOponent = true;
 
-      //Pasarle al back las opciones de la partida
-      if(this.socket == null) {
-        this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-      }
-      this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
-      this.socket.on("startGame", (data)=>{
-        console.log(data)
-        this.display = false;
-
-        var color;
-        if(data.rojo) {
-          color = "rojo"
-        } else {
-          color = "negro"
+        //Pasarle al back las opciones de la partida
+        if(this.socket == null) {
+          this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
+        this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
+        this.socket.on("startGame", (data)=>{
+          console.log(data)
+          this.display = false;
 
-        this.socket.off("startGame")
-        this.socket.emit("leaveRoom", {'id': data.idSala})
-        this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
-      })
+          var color;
+          if(data.rojo) {
+            color = "rojo"
+          } else {
+            color = "negro"
+          }
+
+          this.socket.off("startGame")
+          this.socket.emit("leaveRoom", {'id': data.idSala})
+          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
+        })
+      } else {
+        //Esperando supongo
+        this.searchingOponent = true;
+        console.log("ENVIO A AMIGo")
+        if(this.socket == null) {
+          this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+        }
+        this.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
+        this.socket.on("startGame", (data)=>{
+          console.log(data)
+          this.display = false;
+
+          var color;
+          if(data.rojo) {
+            color = "rojo"
+          } else {
+            color = "negro"
+          }
+
+          this.socket.off("startGame")
+          this.socket.emit("leaveRoom", {'id': data.idSala})
+          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
+        })
+      }
     }
   }
 }

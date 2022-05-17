@@ -146,6 +146,15 @@ class AccountService {
                 return false;
             });
     }
+    getNickname(id){
+        return http
+            .get('/do-getNickname/' + id)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 
     /*
      * Obtiene la URL de la imagen del perfil del usuario dado su id.

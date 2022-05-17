@@ -22,8 +22,8 @@
 				<template v-if="root">
 					<div class="layout-menuitem-root-text" :aria-label="item.label">{{item.label}}</div>
 					<!--NUEVA PARTIDA-->
-					<newGameButton />
-					<appsubmenu :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)"></appsubmenu>
+					<newGameButton :onlineFriends="onlineFriends" />
+					<appsubmenu :onlineFriends="onlineFriends" :primera="false" :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)"></appsubmenu>
 				</template>
 				<template v-else>
 					<router-link v-if="item.to" :to="item.to" :class="[item.class, 'p-ripple', {'p-disabled': item.disabled}]" :style="item.style" @click="onMenuItemClick($event,item,i)" :target="item.target" :aria-label="item.label" exact role="menuitem" v-ripple>
@@ -39,7 +39,7 @@
 						<Badge v-if="item.badge" :value="item.badge"></Badge>
 					</a>
 					<transition name="layout-submenu-wrapper">
-						<appsubmenu v-show="activeIndex === i" :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)"></appsubmenu>
+						<appsubmenu :primera="false" v-show="activeIndex === i" :items="visible(item) && item.items" @menuitem-click="$emit('menuitem-click', $event)"></appsubmenu>
 					</transition>
 				</template>
 			</li>
@@ -63,24 +63,21 @@ export default {
 		numFriendReq: {
 			type: Number,
 			required: false
+		},
+		onlineFriends: {
+			type: Array,
+			required: false
+		},
+		primera: {
+			type: Boolean,
+			required: true
 		}
-	},
-	created() {
-		// Calcular el número de notificacines de cada tipo que tenemos
-		/*if (this.notifications == null) return;
-		for (let i = 0; i < this.notifications.length; i++) {
-			if (this.notifications[i].type == 'friendRequest') {
-				this.numFriendReq++;
-			}
-			if (this.notifications[i].type == 'gameRequest') {
-				this.numGameReq++;
-			}
-		}*/
 	},
 	data() {
 		return {
 			numGameReq: 0,
-			activeIndex : null
+			activeIndex : null,
+			socket: null,
 		}
 	},
 	methods: {
