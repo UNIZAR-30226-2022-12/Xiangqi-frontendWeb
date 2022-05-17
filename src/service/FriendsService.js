@@ -56,6 +56,34 @@ class FriendsService {
                 return false;
             });
     }
+
+    /*
+     * Envia al al back que el usuario ha rechazado la solicitud de amistad
+     */
+    rejectRequest(id) {
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
+        return http
+            .post('/do-rejectRequest/', {'id': id}, headers)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
+    /*
+     * Envia al al back que el usuario ha aceptado la solicitud de amistad
+     */
+    acceptRequest(id) {
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}}
+        return http
+            .post('/do-acceptRequest/', {'id': id}, headers)
+            .then(response => {
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
 }
 
 export default new FriendsService({

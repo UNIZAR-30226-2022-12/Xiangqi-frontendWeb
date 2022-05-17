@@ -61,7 +61,7 @@
                                 {{slotProps.data.price}}
                                 <font-awesome-icon class="text-xl" icon="coins" />
                             </span>
-                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo)" :disabled="slotProps.data.purchased"></Button>
+                            <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo, slotProps.data.name)" :disabled="slotProps.data.purchased"></Button>
                         </div>
                     </div>
                 </div>
@@ -140,12 +140,13 @@ export default {
                 this.sortKey = sortValue;
             }
         },
-        purchaseItem(price, id, tipo) {
-            if (this.points - price >= 0) {
+        purchaseItem(price, id, tipo, name) {
+            var saldo = this.points - price;
+            if (saldo >= 0) {
                 // points suficientes
+                this.$toast.add({severity:'success', summary:'Skin comprada', detail:'Has comprado la skin' + name + '. Tu saldo ahora es de ' + saldo + ' puntos.', life: 5000});
                 this.$emit('purchase-item-pressed', price, id, tipo);
             } else {
-                console.log("points insuficientes");
                 this.display = true;
             }
         },

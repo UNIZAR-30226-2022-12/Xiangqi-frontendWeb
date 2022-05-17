@@ -47,13 +47,13 @@
             </Column>
             <Column field="birthday" header="Cumpleaños" sortable></Column>
             <Column header="Aceptar">
-                <template #body>
-                    <Button icon="pi pi-check" class="p-button-rounded p-button-success p-button-outlined" />
+                <template #body="{data}">
+                    <Button icon="pi pi-check" v-on:click="onConfirm(data.id, data.nickname)" class="p-button-rounded p-button-success p-button-outlined" />
                 </template>
             </Column>
 			<Column header="Rechazar">
-                <template #body>
-                    <Button icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" />
+                <template #body="{data}">
+                    <Button icon="pi pi-times" v-on:click="onReject(data.id, data.nickname)" class="p-button-rounded p-button-danger p-button-outlined" />
                 </template>
             </Column>
         </DataTable>    
@@ -65,7 +65,8 @@
 import {FilterMatchMode, FilterOperator} from 'primevue/api';
 
 export default {
-	inject: ['$accounts'],    
+	inject: ['$accounts'],  
+    emits: ['remove-invitation-pressed', 'add-invitation-pressed'],  
     props: {
         friendRequests: {
             type: Object,
@@ -86,28 +87,37 @@ export default {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
             },
-            selectedUser: null
+            selectedUser: null,
 		}
 	},
 
 	methods: {
-        formatDate(value) {
-            return value.toLocaleDateString('en-US', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-            });
-        },
-        formatCurrency(value) {
-            return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
-        },
         getImage(id){
             for (let i = 0; i < this.friendRequestsArrayImages.length; i++) {
                 if(this.friendRequestsArrayImages[i].id == id){
                     return this.friendRequestsArrayImages[i].image;
                 }
             }
-        }
-	}        
+        },
+        onConfirm(id, nickname) {
+            this.$emit('add-invitation-pressed', id);
+            this.$toast.add({severity:'success', summary:'Invitacion Aceptada', detail:'La solicitud de ' + nickname + ' ha sido aceptada.', life: 3000});
+        },
+        onReject(id, nickname) {
+            this.$confirm.require({
+                message: 'Si rechaza la solicitud esta se borrará.',
+                header: '¿Seguro que desea rechazar la invitación?',
+                icon: 'pi pi-exclamation-triangle',
+                rejectLabel: 'Rechazar',
+                acceptLabel: 'No rechazar',
+                accept: () => {
+                },
+                reject: () => {
+                    this.$emit('remove-invitation-pressed', id);
+                    this.$toast.add({severity:'error', summary:'Invitacion rechazara', detail:'La solicitud de ' + nickname + ' ha sido rechazada.', life: 3000});
+                }
+            });
+        },
+	}  
 }
 </script>

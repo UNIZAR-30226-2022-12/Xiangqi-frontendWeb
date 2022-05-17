@@ -6,7 +6,7 @@
 		<!--Para recoger el evento definido en searchFriends y el metodo al que invocan-->
 		<searchFriends v-if="$route.params.isNotification != 'notification'" :show="showResults" @clear-friends-pressed="clearFriendsPressed" @search-friends-pressed="searchFriendsPressed" @search-friend-field="getSearchFriendField"/>
 		<searchTable v-if="$route.params.isNotification != 'notification'" :notFriendOf="notFriendOf" :notFriendOfImages="notFriendOfImages" :loading="loadingSearch" :show="showResults" :searchedItem="searchFriendField"/>
-		<friendReq :loading="loadingRequests" :friendRequests="friendRequestsArray" :friendRequestsArrayImages="friendRequestsArrayImages"/>
+		<friendReq :loading="loadingRequests" :friendRequests="friendRequestsArray" :friendRequestsArrayImages="friendRequestsArrayImages" @remove-invitation-pressed="removeInvitationPressed" @add-invitation-pressed="addInvitationPressed"/>
 		<myFriends v-if="$route.params.isNotification != 'notification'" :friends="friendsArray" :friendsArrayImages="friendsArrayImages" :loading="loadingFriends"/>
 	</div>
 </template>
@@ -149,6 +149,26 @@ export default {
 				this.loadingSearch = false;
 			});
         },
+		//Rechazamos la peticion de amistad
+		removeInvitationPressed(id) {
+			for (var i = 0; i < this.friendRequestsArray.length; i++) {
+				if (this.friendRequestsArray[i].id == id) {
+					this.friendRequestsArray.splice(i, 1);
+					this.friendRequestsArrayImages.splice(i, 1);
+				}
+			}
+			this.$friends.rejectRequest(id);
+		},
+		//Aceptamos la peticion de amistad
+		addInvitationPressed(id) {
+			for (var i = 0; i < this.friendRequestsArray.length; i++) {
+				if (this.friendRequestsArray[i].id == id) {
+					this.friendRequestsArray.splice(i, 1);
+					this.friendRequestsArrayImages.splice(i, 1);
+				}
+			}
+			this.$friends.acceptRequest(id);
+		},
 		getSearchFriendField(results) {
 			this.searchFriendField = results;
 		},

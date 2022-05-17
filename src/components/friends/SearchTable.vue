@@ -50,8 +50,8 @@
                     <Column field="birthday" header="Cumpleaños" sortable></Column>
                     <Column header="Enviar solicitud">
                         <template #body="{data}">
-                            <Button v-if="data.sended" :disabled="sendClicked" class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Enviar solicitud"></Button>
-                            <Button v-else disabled="true" class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id)" icon="pi pi-user-plus" label="Solicitud enviada"></Button>
+                            <Button :disabled="data.sended || sendClicked[data.id]" class="p-button-raised" style="border-radius: 1rem" v-on:click="sendFriendRequest(data.id, data.nickname)" icon="pi pi-user-plus" :label="putLabel(data.id, data.sended)"></Button>
+                            <!--<Button v-else disabled="true" class="p-button-raised" style="border-radius: 1rem" icon="pi pi-user-plus" label="Solicitud enviada"></Button>-->
                         </template>
                     </Column>
                 </DataTable>    
@@ -91,7 +91,7 @@ export default {
     },
 	data() {
 		return {
-            sendClicked: false,
+            sendClicked: [],
 			filters: {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
                 'nickname': {operator: FilterOperator.AND, constraints: [{value: null, matchMode: FilterMatchMode.STARTS_WITH}]},
@@ -100,26 +100,39 @@ export default {
             socket: null,
 		}
 	},
+    created() {
+        for (let i = 0; i < this.notFriendOf.length; i++) {
+            this.sendClicked[i] = false;
+        } 
+    },
     methods: {
         otherProfile(id){
             this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
-        sendFriendRequest(id){
+        sendFriendRequest(id, nickname){
+            this.$toast.add({severity:'success', summary:'Solicitud enviada', detail:'Ha una solicitud de amistad ha sido enviada a ' + nickname, life: 5000});
             for (let i = 0; i < this.notFriendOf.length; i++) {
                 if(this.notFriendOf[i].id == id){
-                    this.sendClicked = true; 
+                    this.sendClicked[id] = true; 
                 }
             }
             if(this.socket == null){
                 this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             }
-            this.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id})
+            this.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id});
         },
         getImage(id){
             for (let i = 0; i < this.notFriendOfImages.length; i++) {
                 if(this.notFriendOfImages[i].id == id){
                     return this.notFriendOfImages[i].image;
                 }
+            }
+        },
+        putLabel(id, sended) {
+            if (sended || this.sendClicked[id]) {
+                return 'Solicitud enviada';
+            } else {
+                return 'Enviar solicitud';
             }
         }
     }  
