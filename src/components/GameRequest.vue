@@ -27,12 +27,20 @@
 </template>
 
 <script>
-//import io from "socket.io-client"
+import io from "socket.io-client"
 
 export default {
     props: {
         nickname: {
             type: String,
+            required: true
+        },
+        id: {
+            type: Number,
+            required: true
+        },
+        idSala: {
+            type: Number,
             required: true
         },
     },
@@ -47,7 +55,21 @@ export default {
             searchingOponent: false,
             }
     },
+    created(){
+        console.log("GAMEREQUEST")
+    },
+    unmounted(){
+        console.log("DESTRUCCION")
+        this.confirmDisabled = false
+        this.rejectDisabled = false
+        //socket: null
+        this.display = true
+        this.searchingOponent = false
+    },
     methods: {
+        delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        },
         onConfirm() {
             this.$confirm.require({
                 message: 'Si rechaza la invitación deberá esta se borrará.',
@@ -58,12 +80,35 @@ export default {
                 accept: () => {
                 },
                 reject: () => {
+                    let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+                    socket.emit("rejectReq", {"id":this.id})
                     this.display = false;
+                    
                     this.$toast.add({severity:'error', summary:'Invitacion rechazara', detail:'La invitación de ' + this.nickname + ' ha sido rechazada.', life: 3000});
+                    socket = null
+                    this.delay(1500).then(()=>{this.$router.go()})
                 }
             });
         },
         acceptInvitation() {
+            let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+            socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
+            socket.on("startGame", (data)=>{
+            console.log(data)
+            this.display = false;
+
+            var color;
+            if(data.rojo) {
+                color = "rojo"
+            } else {
+                color = "negro"
+            }
+
+            socket.off("startGame")
+            socket.emit("leaveRoom", {'id': data.idSala})
+            this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
+            })
+            console.log("ACEPTADO")
             /*
             //Ponemos el spinner
             this.searchingOponent = true;

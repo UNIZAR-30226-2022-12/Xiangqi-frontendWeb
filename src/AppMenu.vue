@@ -1,7 +1,7 @@
 <template>
 	<div class="layout-menu-container">
-		<AppSubmenu :items="menu" @friends-notify-pressed="clearFriendReq" :root="true" :numFriendReq="this.numFriendReq" class="layout-menu" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
-        <GameReq v-if="showInvitaion" :nickname="nickname" />
+		<AppSubmenu :onlineFriends="onlineFriends" :primera="true" :items="menu" @friends-notify-pressed="clearFriendReq" :root="true" :numFriendReq="this.numFriendReq" class="layout-menu" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
+        <GameReq v-if="showInvitaion" :nickname="nickname" :id="id" :idSala="idSala" />
         <RejectedInvitation v-if="showRejectedInvitation" :nickname="nickname" />
     </div>
 </template>
@@ -13,6 +13,7 @@ import AppSubmenu from './AppSubmenu';
 import io from "socket.io-client";
 export default {
     emits: ['menu-toggle', 'menuitem-click'],
+    inject: ['$accounts'],
     components: {
 		'AppSubmenu': AppSubmenu,
         GameReq,
@@ -25,6 +26,9 @@ export default {
             showRejectedInvitation: false,
             socket: null,
             numFriendReq: 0,
+            onlineFriends: [],
+            id: null,
+            idSala: 1,
 
             menu: [
                 {
@@ -54,6 +58,30 @@ export default {
             this.numFriendReq++;
             console.log("numFriendReq", this.numFriendReq);
         })
+        this.socket.on("onlineFriends",(data)=>{
+            console.log("Amigos conectados", data);
+            data.forEach(friend => {
+                this.onlineFriends.push({"id": friend['id'], "name": friend['nickname']});
+            });
+        })
+        this.socket.on("gameRequest",(data)=>{
+            console.log("GAMEREQ de", data);
+            this.id = data["id"]
+            this.idSala = data["idSala"]
+            this.$accounts.getNickname(data["id"]).then(data => { //this.createAc.image
+                console.log(data);
+                this.nickname = data;
+                this.showInvitaion = true;
+                console.log(this.showInvitaion, this.idSala)
+            });
+        })
+        this.socket.on("rejectReq",()=>{
+            console.log("Me la rechaza");
+            this.showRejectedInvitation = true;
+
+        })
+        console.log("aaaaaaaaaaaaaaaaaaaaa")
+		this.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
     },
     methods: {
         clearFriendReq() {
