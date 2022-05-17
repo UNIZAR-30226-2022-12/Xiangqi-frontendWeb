@@ -579,7 +579,7 @@ export default {
         submitDisabled: true,
       },
       Images: '',
-      countries: '',
+      countries: [],
     }
   },
   //vuelidate

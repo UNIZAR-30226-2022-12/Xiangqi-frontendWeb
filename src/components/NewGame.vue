@@ -8,10 +8,6 @@
     <div class="card p-2">
       <div class="flex align-items-center flex-wrap card-container">
           <div class="flex align-items-center justify-content-center mb-5">
-            <InputSwitch v-model="timer" id="timer"/>
-            <div class="ml-3">Partida con temporizador</div>
-          </div>
-          <div class="flex align-items-center justify-content-center mb-5">
             <InputSwitch v-model="friend" id="friend"/>
             <div class="ml-3">Partida contra un amigo conectado</div>
           </div>
@@ -23,15 +19,15 @@
       </div>
     </div>
     <template #footer>
-      <Button v-on:click="nuevaPartida()" :disabled="this.searchingOponent || (selectedFriend.name == null && friend)" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem">
+      <Button v-on:click="nuevaPartida()" :disabled="this.searchingOponent || (selectedFriend == null && friend)" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem">
         <div class="flex justify-content-center flex-wrap card-container w-full">
             <div id="spinner" class="flex align-items-center justify-content-center mr-2">
               <ProgressSpinner v-if="this.searchingOponent" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
             </div>                   
             <div v-if="!this.searchingOponent && !friend" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida aleatoria</div>
-            <div v-else-if="!this.searchingOponent && selectedFriend.name != null" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida contra {{selectedFriend.name}}</div>
-            <div v-else-if="selectedFriend.name == null && friend" class="flex align-items-center justify-content-center font-bold text-white">Por favor seleccione un amigo de su lista</div>
-            <div v-else-if="selectedFriend.name != null && friend" class="flex align-items-center justify-content-center font-bold text-white">Conectando con {{selectedFriend.name}}</div>
+            <div v-else-if="!this.searchingOponent && selectedFriend != null" class="flex align-items-center justify-content-center font-bold text-white">Nueva partida contra {{selectedFriend.name}}</div>
+            <div v-else-if="selectedFriend == null && friend" class="flex align-items-center justify-content-center font-bold text-white">Por favor seleccione un amigo de su lista</div>
+            <div v-else-if="selectedFriend != null && friend" class="flex align-items-center justify-content-center font-bold text-white">Conectando con {{selectedFriend.name}}</div>
             <div v-else class="flex align-items-center justify-content-center font-bold text-white">Buscando oponente...</div>
         </div>
       </Button> 
@@ -59,14 +55,9 @@ export default {
   data() {
     return {
       display: false,
-      timer: false,
       friend: false,
-      selectedFriend: {id: null, name: null},
-      friends: [
-        {id: 1, name: 'juanksp'},
-        {id: 2, name: 'pikanachi'},
-        {id: 3, name: 'alexzheng'},
-      ],
+      selectedFriend: null,
+      friends: [],
       socket: null,
       searchingOponent: false,
     }
@@ -75,14 +66,18 @@ export default {
     openDialog() {
       console.log("AMIGOS: ", this.onlineFriends)
       this.display = true;
-      //Juan aqui reseteo el socket así ok??
-      let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-      socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
+
+      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
+      this.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')});
+
+      // Si los vuelvo a poner a null peta muuy fuerte
+      this.selectedFriend = null;
+
+      this.friends = this.onlineFriends;
+
       this.searchingOponent = false;
       this.friend = false;
-      this.timer = false;
-      this.selectedFriend.id = null, 
-      this.selectedFriend.name = null
+
     },
     nuevaPartida() {
       //Ponemos el spinner
@@ -107,7 +102,7 @@ export default {
 
           this.socket.off("startGame")
           this.socket.emit("leaveRoom", {'id': data.idSala})
-          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
+          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       } else {
         //Esperando supongo
@@ -130,10 +125,16 @@ export default {
 
           this.socket.off("startGame")
           this.socket.emit("leaveRoom", {'id': data.idSala})
-          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
+          this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       }
     }
+  },
+  mounted() { 
+    // Recoge el evento que lanza al clicar en aceptar el rejectedInvitation
+    this.emitter.on("close-new-game", close => {
+      this.display = close;
+    });
   }
 }
 </script>

@@ -30,17 +30,18 @@
 import io from "socket.io-client"
 
 export default {
+    emits: ['close-game-request'],
     props: {
         nickname: {
             type: String,
             required: true
         },
         id: {
-            type: Number,
+            type: String,
             required: true
         },
         idSala: {
-            type: Number,
+            type: String,
             required: true
         },
     },
@@ -50,7 +51,6 @@ export default {
             reject: 'Rechazar',
             confirmDisabled: false,
             rejectDisabled: false,
-            //socket: null,
             display: true,
             searchingOponent: false,
             }
@@ -62,7 +62,6 @@ export default {
         console.log("DESTRUCCION")
         this.confirmDisabled = false
         this.rejectDisabled = false
-        //socket: null
         this.display = true
         this.searchingOponent = false
     },
@@ -82,11 +81,10 @@ export default {
                 reject: () => {
                     let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
                     socket.emit("rejectReq", {"id":this.id})
-                    this.display = false;
-                    
+                    this.$emit('close-game-request');
                     this.$toast.add({severity:'error', summary:'Invitacion rechazara', detail:'La invitación de ' + this.nickname + ' ha sido rechazada.', life: 3000});
                     socket = null
-                    this.delay(1500).then(()=>{this.$router.go()})
+                    //this.delay(1500).then(()=>{this.$router.go()})
                 }
             });
         },
@@ -95,7 +93,6 @@ export default {
             socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
             socket.on("startGame", (data)=>{
             console.log(data)
-            this.display = false;
 
             var color;
             if(data.rojo) {
@@ -103,36 +100,12 @@ export default {
             } else {
                 color = "negro"
             }
-
             socket.off("startGame")
             socket.emit("leaveRoom", {'id': data.idSala})
+            this.$emit('close-game-request');
             this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
             })
             console.log("ACEPTADO")
-            /*
-            //Ponemos el spinner
-            this.searchingOponent = true;
-
-            //Pasarle al back las opciones de la partida
-            if(this.socket == null) {
-            this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-            }
-            this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
-            this.socket.on("startGame", (data)=>{
-            console.log(data)
-            this.display = false;
-
-            var color;
-            if(data.rojo) {
-                color = "rojo"
-            } else {
-                color = "negro"
-            }
-
-            this.socket.off("startGame")
-            this.socket.emit("leaveRoom", {'id': data.idSala})
-            this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
-            })*/
         }
     }
 }

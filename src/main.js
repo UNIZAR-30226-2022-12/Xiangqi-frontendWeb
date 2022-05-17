@@ -106,6 +106,9 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { faArrowTrendUp } from "@fortawesome/free-solid-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
+//Mitt event handler
+import mitt from 'mitt';
+
 library.add(faPhone);
 library.add(faCakeCandles);
 library.add(faCoins);
@@ -125,7 +128,13 @@ router.beforeEach(function(to, from, next) {
     next();
 });
 
+//Emisor para el mitt
+const emitter = mitt();
+
 const app = createApp(AppWrapper);
+
+//Configurar emiter para mitt
+app.config.globalProperties.emitter = emitter;
 
 //Servicio para login y para crear cuentas
 app.provide('$accounts', accounts);
@@ -231,7 +240,9 @@ app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
-app.component("font-awesome-icon", FontAwesomeIcon)
+app.component("font-awesome-icon", FontAwesomeIcon);
+
+
 /*
 router.beforeEach(function (to, from, next) {
     var hasLogin = parseInt(process.env.VUE_APP_HAS_LOGIN);

@@ -31,3 +31,11 @@ vue --version
 ```
 npm update -g @vue/cli
 ```
+
+## Funcionamiento del event Bus
+
+### Handleador de eventos global no solo entre componente padre e hijo
+ 
+```
+https://stackoverflow.com/questions/63471824/vue-js-3-event-bus
+```

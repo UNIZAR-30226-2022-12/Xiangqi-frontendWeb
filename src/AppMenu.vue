@@ -1,8 +1,8 @@
 <template>
 	<div class="layout-menu-container">
 		<AppSubmenu :onlineFriends="onlineFriends" :primera="true" :items="menu" @friends-notify-pressed="clearFriendReq" :root="true" :numFriendReq="this.numFriendReq" class="layout-menu" @menuitem-click="onMenuItemClick" @keydown="onKeyDown" />
-        <GameReq v-if="showInvitaion" :nickname="nickname" :id="id" :idSala="idSala" />
-        <RejectedInvitation v-if="showRejectedInvitation" :nickname="nickname" />
+        <GameReq v-if="showInvitaion" :nickname="nickname" :id="id" :idSala="idSala" @close-game-request="closeGameRequest"/>
+        <RejectedInvitation/>
     </div>
 </template>
 
@@ -45,9 +45,6 @@ export default {
 		}
 	},
     created() {
-        //PONER BIEN EL NICK <--------------------------------------------------------------------------
-        this.nickname = 'juanksp';
-
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
@@ -77,7 +74,7 @@ export default {
         })
         this.socket.on("rejectReq",()=>{
             console.log("Me la rechaza");
-            this.showRejectedInvitation = true;
+            this.emitter.emit("open-rejected-invitation", true);
 
         })
         console.log("aaaaaaaaaaaaaaaaaaaaa")
@@ -102,7 +99,11 @@ export default {
 				nodeElement.click();
 				event.preventDefault();
 			}
-		}
+		},
+        closeGameRequest(){
+            console.log("CIERRO---------------");
+            this.showInvitaion = false;
+        },
     },
 	computed: {
 		darkTheme() {
