@@ -5,13 +5,8 @@
         <div class="centrar-mauto col-12 lg:col-4 align-items-center surface-section section p-6 text-left mb-4 lg:mb-0" style="max-width: 40rem"> 
             <div class="grid">
                 <!--rivalInfo-->
-                <rivalInfo v-if="rivalProfile!=null" :isFriend="false" :perfil="rivalProfile" :profileImage="rivalProfileImage"/>
+                <rivalInfo v-if="rivalProfile!=null" :perfil="rivalProfile" :profileImage="rivalProfileImage"/>
                 <Divider />
-                <!--Temporizador-->
-                <div v-if="this.showTimer" class="field col-12 mb-0">
-                    <h6>Temporizador:</h6>
-                    <h2 class="mt-0 mb-0">{{this.timer}}</h2>
-                </div>
                 <Button v-on:click="confirm()" class="col-12 mt-2 mb-2 w-full p-button-raised font-semibold h-3rem bg-pink-500 border-pink-500" style="border-radius: 1rem" icon="pi pi-save" label="Guardar y salir"/>
                 <Divider />
                 <!--Chat-->
@@ -278,11 +273,6 @@ export default  {
                 name: 'Nacho Ortega'
             },
 
-            //BARRA LATERAL
-            //------------------------------------------------------
-            timer: '00:00:00',
-            showTimer: true,
-
             //Set de piezas seleccionado por defecto, lo ponemos en el themechanger
             selectedPiecesSet: null,
 
@@ -294,7 +284,6 @@ export default  {
     },
 	created() {
         this.idSala = this.$route.params.idSala;
-        //this.showTimer = this.$route.params.timer;
         this.myid = sessionStorage.getItem('id');
         if(this.socket == null){
             this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");

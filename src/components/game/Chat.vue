@@ -81,6 +81,7 @@ export default {
       setTimeout(() => {
         chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
       }, 1);
+      this.$toast.add({severity:'info', summary: this.nicknameOp, detail:data, life: 5000});
       //Borrar el mensaje
       //this.message = null;
 

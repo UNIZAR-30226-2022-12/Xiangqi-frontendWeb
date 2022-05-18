@@ -14,17 +14,12 @@
                 <p>Cumpleaños: {{ rival.birthday }} </p>
             </div>
         </div>
-        <Button v-if="!isFriend" class="col-12 w-full mt-2 w-full p-button-raised font-semibold h-3rem  font-semibold" style="border-radius: 1rem" label="Añadir a mis amigos" icon="pi pi-user-plus"/>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        isFriend: {
-            type: Boolean,
-            required: true
-        },
         perfil: {
             type: Object,
             required: false
