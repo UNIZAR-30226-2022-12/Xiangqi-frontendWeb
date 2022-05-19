@@ -113,7 +113,7 @@ export default {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
         },
         otherProfile(id){
-            this.$router.push({name: 'otherProfile', params: { id: id}});
+            this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
         loadGame(id){
             this.$accounts.loadGame(id).then(response =>{

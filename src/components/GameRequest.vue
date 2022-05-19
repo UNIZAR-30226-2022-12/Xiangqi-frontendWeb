@@ -89,6 +89,7 @@ export default {
             });
         },
         acceptInvitation() {
+            this.confirmDisabled = true;
             let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
             socket.on("startGame", (data)=>{

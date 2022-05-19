@@ -38,6 +38,7 @@
 
 export default {
     emits: ['change-board', 'change-icons'],
+    inject: ['$store'],
     data() {
         return {
             //Set de piezas seleccionado por defecto
@@ -45,11 +46,14 @@ export default {
 
             //Tema por defecto del tablero
             selectedBoard: {id: '1', name: 'Madera teka'},
+
+            setsBoards: [],
+            setsPieces: []
         }
     },
     created() {
 		// EJEMPLO DE JSON DE RESPONSE (NO BORRAR)
-		this.setsBoards = [
+		/*this.setsBoards = [
 			{id: '1', name: 'Madera teka', desc: "Tablero con un dragón grabado", category: "Tablero de madera",price: '0', purchased: true},
 			{id: '2', name: 'Madera nogal', desc: "Tablero con dragones grabados", category: "Tablero de madera", price: '0', purchased: true},
 			{id: '3', name: 'Madera roble', desc: "Tablero con un grabado oriental", category: "Tablero de madera", price: '10', purchased: false},
@@ -71,16 +75,23 @@ export default {
 				{id: '4', name: 'Dark Chino', desc: "Iconos en Chino oscuros", category: "Chino", price: '30', purchased: false},
 				{id: '5', name: 'Light symbols', desc: "Iconos con símbolos claros", category: "Iconos", price: '60', purchased: false},
 				{id: '6', name: 'Light Chino', desc: "Iconos en Chino claros", category: "Chino", price: '60', purchased: false},
-        ];
+        ];*/
 
 		//POR ESTO
 		// ---------------------------------------------------------------------
-		/*
 		this.$store.getStoreItems().then(response => {
-			this.setsBoards = response.setsBoards;
-			this.setsPieces = response.setsPieces;
+			for (let i = 0; i < response.setsBoards.length; i++) {
+                if (response.setsBoards[i].purchased) {
+                    this.setsBoards.push(response.setsBoards[i]);
+                }
+            }
+            
+			for (let i = 0; i < response.setsPieces.length; i++) {
+                if (response.setsPieces[i].purchased) {
+                    this.setsPieces.push(response.setsPieces[i]);
+                }
+            }
 		});
-		*/
     },
     methods: {
         changeBoard() {

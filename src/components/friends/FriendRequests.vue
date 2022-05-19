@@ -118,6 +118,9 @@ export default {
                 }
             });
         },
+        otherProfile(id){
+            this.$router.push({name: 'OtherProfile', params: { id: id}});
+        },
 	}  
 }
 </script>
