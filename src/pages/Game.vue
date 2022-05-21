@@ -298,14 +298,6 @@ export default  {
             this.reyNegro.fil = 9
             this.reyNegro.col = 4
         }
-        let movs = sessionStorage.getItem("movs")
-        console.log(movs)
-        if (movs != null){
-            console.log(movs)
-            //sessionStorage.removeItem("movs")
-            // CAMBIAR EL TABLERO
-            this.loadBoard(movs)
-        }
         this.idOp = this.$route.params.idOponent
         this.$accounts.getProfile(this.idOp).then(response => {
             this.loading = false;
@@ -320,6 +312,15 @@ export default  {
 				this.rivalProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
+        let movs = sessionStorage.getItem("movs")
+        console.log(movs)
+        if (movs != null){
+            console.log(movs)
+            //sessionStorage.removeItem("movs")
+            // CAMBIAR EL TABLERO
+            this.loadBoard(movs)
+        }
+        
 
         this.$accounts.getProfile(this.myid).then(response => {
 			this.myPerfil = response.perfil;
