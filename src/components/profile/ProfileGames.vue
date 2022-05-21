@@ -54,7 +54,8 @@
             </Column>
             <Column header="Continuar">
                 <template #body="{data}">
-                    <Button class="p-button-raised" v-on:click="loadGame(data.idSala)" style="border-radius: 1rem" label="Continuar"></Button>
+                    <Button v-if="data.estado == 0" class="p-button-raised" v-on:click="loadGame(data.idSala)" style="border-radius: 1rem" label="Continuar"></Button>
+                    <Button v-else disabled="true" class="p-button-raised" style="border-radius: 1rem" label="Terminada"></Button>
                 </template>
             </Column>
         </DataTable>    
