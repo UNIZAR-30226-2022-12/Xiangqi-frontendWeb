@@ -300,6 +300,7 @@ export default  {
         }
         this.idOp = this.$route.params.idOponent
         this.$accounts.getProfile(this.idOp).then(response => {
+            console.log("perfil rival: ", response)
             this.loading = false;
 			this.rivalProfile = response.perfil;
 
@@ -313,6 +314,7 @@ export default  {
 			}
 		});
         this.$accounts.getProfile(this.myid).then(response => {
+            console.log("perfil mio: ", response)
 			this.myPerfil = response.perfil;
             if (this.myPerfil.hasImage) {
 				// Pedir al back la foto
@@ -322,22 +324,23 @@ export default  {
 			} else {
 				this.myProfileImage = "images/profilePlaceholder.svg";
 			}
-		});
-        let movs = sessionStorage.getItem("movs")
-        console.log(movs)
-        if (movs != null){
+            let movs = sessionStorage.getItem("movs")
             console.log(movs)
-            //sessionStorage.removeItem("movs")
-            // CAMBIAR EL TABLERO
-            this.loadBoard(movs)
-        }
+            if (movs != null){
+                console.log(movs)
+                //sessionStorage.removeItem("movs")
+                // CAMBIAR EL TABLERO
+                this.loadBoard(movs)
+            }
+            //para ocultar de manera guarra el menu
+            this.$loggedStatus.logged = false;
+            this.$playing.game = true;
+		});
         
 
         
 
-        //para ocultar de manera guarra el menu
-		this.$loggedStatus.logged = false;
-        this.$playing.game = true;
+        
 	},
     unmounted(){
         console.log("destroyed")
@@ -422,7 +425,15 @@ export default  {
                     fil = 9 - movs[(mov*4) + 2]
                     col = 8 - movs[(mov*4) + 3]
                 }
-                
+                if(this.tablero.filas[filini][colini].color == "rojo"){
+                    this.reyRojo.fil = fil
+                    this.reyRojo.col = col
+                    console.log("Muevo al rey rojo: ", this.reyRojo)
+                } else{
+                    this.reyNegro.fil = fil
+                    this.reyNegro.col = col
+                    console.log("Muevo al rey negro: ", this.reyNegro)
+                }
                 console.log("Movimiento: ", filini, colini, fil, col)
                 this.movePiece(filini, colini, fil, col)
                 mov++;
@@ -641,6 +652,7 @@ export default  {
         */
 
         moveSelectedPiece(indexFil, indexCol, itemFila, emit) {
+            console.log("POSICION DE LOS REYES.\nRey Rojo: ", this.reyRojo, "\nRey Negro: ", this.reyNegro)
             if(itemFila.esPista && this.selectedPiece.selected){
                 //Comprobar si es valido el movimiento
                 let aux = {pieza: this.tablero.filas[indexFil][indexCol].pieza, color: this.tablero.filas[indexFil][indexCol].color, esPista:this.tablero.filas[indexFil][indexCol].esPista}
