@@ -312,16 +312,6 @@ export default  {
 				this.rivalProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
-        let movs = sessionStorage.getItem("movs")
-        console.log(movs)
-        if (movs != null){
-            console.log(movs)
-            //sessionStorage.removeItem("movs")
-            // CAMBIAR EL TABLERO
-            this.loadBoard(movs)
-        }
-        
-
         this.$accounts.getProfile(this.myid).then(response => {
 			this.myPerfil = response.perfil;
             if (this.myPerfil.hasImage) {
@@ -333,6 +323,17 @@ export default  {
 				this.myProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
+        let movs = sessionStorage.getItem("movs")
+        console.log(movs)
+        if (movs != null){
+            console.log(movs)
+            //sessionStorage.removeItem("movs")
+            // CAMBIAR EL TABLERO
+            this.loadBoard(movs)
+        }
+        
+
+        
 
         //para ocultar de manera guarra el menu
 		this.$loggedStatus.logged = false;
