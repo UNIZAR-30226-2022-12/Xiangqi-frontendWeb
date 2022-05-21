@@ -449,16 +449,19 @@ export default  {
                 fil = 9 - movs[(mov*4) + 2]
                 col = 8 - movs[(mov*4) + 3]
             }
-            console.log("Movimiento Final: ", filini, colini, fil, col)
-            this.selectedPiece.fil = filini
-            this.selectedPiece.col = colini
-            this.selectedPiece.selected = true
-            this.tablero.filas[fil][col].esPista = true
-            this.moveSelectedPiece( fil,  col, this.tablero.filas[fil][col], false)
-            this.selectedPiece.selected = false
+            if (movs.length != 0){
+                console.log("Movimiento Final: ", filini, colini, fil, col)
+                this.selectedPiece.fil = filini
+                this.selectedPiece.col = colini
+                this.selectedPiece.selected = true
+                this.tablero.filas[fil][col].esPista = true
+                this.moveSelectedPiece( fil,  col, this.tablero.filas[fil][col], false)
+                this.selectedPiece.selected = false
+            }
         },
 
         movePiece(filini, colini, indexFil, indexCol){
+            console.log(this.tablero.filas[indexFil][indexCol].pieza, this.tablero.filas[filini][colini].pieza)
             this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[filini][colini].pieza
             this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[filini][colini].color
             this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[filini][colini].esPista
