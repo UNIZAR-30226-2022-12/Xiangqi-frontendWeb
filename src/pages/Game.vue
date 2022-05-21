@@ -126,7 +126,7 @@
         </div>
         <!--GameOver-->
         <gameover v-if="this.gameOverDispay" :ganador="ganador" />
-        <confetti v-if="this.gameOverDispay && this.myid == this.ganador.id" />
+        <confetti v-if="this.gameWinDisplay" />
     </div>
 </template>
 
@@ -265,12 +265,13 @@ export default  {
             },
 
             //Ha acabado la partida
+            gameWinDisplay: false,
             gameOverDispay: false,
 
             //Ganador de la partida
             ganador: {
-                id: '11', 
-                name: 'Nacho Ortega'
+                id: '', 
+                name: ''
             },
 
             //Set de piezas seleccionado por defecto, lo ponemos en el themechanger
@@ -369,6 +370,7 @@ export default  {
             this.ganador.id = this.myid
             this.ganador.name = this.myPerfil.name
             this.gameOverDispay = true;
+            this.gameWinDisplay = true;
         })
     },
     methods: {
@@ -1329,11 +1331,10 @@ export default  {
 
                 // emit le dire al back quien ha ganado
                 this.socket.emit("lose", {'idSala': this.idSala, 'idGanador': this.idOp, 'idPerdedor': this.myid})
-                /*ESTO LE SALE AL PERDEDOR
-                this.ganador.id = this.myid
-                this.ganador.name = this.perfil.name
+                //ESTO LE SALE AL PERDEDOR
+                this.ganador.id = this.idOp
+                this.ganador.name = this.rivalProfile.name
                 this.gameOverDispay = true;
-                */
            }
        },
 

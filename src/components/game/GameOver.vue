@@ -1,7 +1,7 @@
 <template>
     <Dialog v-model:visible="display" class="dialog-success-verified" :draggable="false" :modal="true" :closable="false">
         <template #header :class="colorHeader">
-        <h3 v-if="this.myid == this.ganador.id">Enhorabuena ¡Has ganado la partida!</h3>
+        <h3 v-if="this.myid == this.ganador.id">Enhorabuena ¡Has ganado la partida y 10 puntos!</h3>
         <h3 v-else>¡Has perdido!</h3>
         </template>
         <div class="text-center">
