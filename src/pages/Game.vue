@@ -1329,6 +1329,7 @@ export default  {
 
                 // emit le dire al back quien ha ganado
                 this.socket.emit("lose", {'idSala': this.idSala, 'idGanador': this.idOp, 'idPerdedor': this.myid})
+                
                 /*ESTO LE SALE AL PERDEDOR
                 this.ganador.id = this.myid
                 this.ganador.name = this.perfil.name

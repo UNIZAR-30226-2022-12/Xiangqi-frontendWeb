@@ -57,6 +57,7 @@ export default {
         })
         this.socket.on("onlineFriends",(data)=>{
             console.log("Amigos conectados", data);
+            this.onlineFriends = []
             data.forEach(friend => {
                 this.onlineFriends.push({"id": friend['id'], "name": friend['nickname']});
             });

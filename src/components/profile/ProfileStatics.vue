@@ -120,10 +120,8 @@ export default {
         /*
          *   TOTAL
          */
-        //this.wonGames = this.games.totalGanadas
-        //this.playedGames = this.games.totalJugadas
-        this.wonGames = 67
-        this.playedGames = 400
+        this.wonGames = this.games.totalGanadas
+        this.playedGames = this.games.totalJugadas
         this.progressBar = this.wonGames/this.playedGames * 100
     },
 }

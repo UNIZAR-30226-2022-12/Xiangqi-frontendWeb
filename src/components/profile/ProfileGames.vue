@@ -53,8 +53,8 @@
                 </template>
             </Column>
             <Column header="Continuar">
-                <template #body>
-                    <Button class="p-button-raised" v-on:click="loadGame(135)" style="border-radius: 1rem" label="Continuar"></Button>
+                <template #body="{data}">
+                    <Button class="p-button-raised" v-on:click="loadGame(data.idSala)" style="border-radius: 1rem" label="Continuar"></Button>
                 </template>
             </Column>
         </DataTable>    
