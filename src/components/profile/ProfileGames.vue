@@ -54,7 +54,7 @@
             </Column>
             <Column header="Continuar">
                 <template #body="{data}">
-                    <Button v-if="data.estado == 0" class="p-button-raised" v-on:click="loadGame(data.idSala)" style="border-radius: 1rem" label="Continuar"></Button>
+                    <Button v-if="data.estado == 0" :disabled="clicked" class="p-button-raised" v-on:click="loadGame(data.idSala)" style="border-radius: 1rem" label="Continuar"></Button>
                     <Button v-else disabled="true" class="p-button-raised" style="border-radius: 1rem" label="Terminada"></Button>
                 </template>
             </Column>
@@ -87,6 +87,7 @@ export default {
             },
             loading: true,
             selectedRival: null,
+            clicked: false,
             /*
             games: [
                 {id: '1', nickname: 'Pikanachi', flag: 'flag-es', country: 'Spain', startDate:'01/01/2020', lastMovDate:'01/01/2021', myTurn: false},
@@ -117,6 +118,7 @@ export default {
             this.$router.push({name: 'OtherProfile', params: { id: id}});
         },
         loadGame(id){
+            this.clicked = true;
             this.$accounts.loadGame(id).then(response =>{
                 let color = null;
                 console.log(response.game[1])
