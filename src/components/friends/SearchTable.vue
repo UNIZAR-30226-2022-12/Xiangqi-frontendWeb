@@ -10,7 +10,7 @@
                 :globalFilterFields="['nickname']" responsiveLayout="scroll">
                     <template #header>
                         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                            <h5 class="md:m-0 text-center md:text-left"> Solicitudes </h5>
+                            <h5 class="md:m-0 text-center md:text-left"> Usuarios encontrados </h5>
                             <div class="flex flex-column flex-wrap card-container">
                                 <div class="flex align-items-center justify-content-center">
                                     <span class="p-input-icon-left">
@@ -43,8 +43,8 @@
                     <Column field="name" header="Nombre" sortable></Column>
                     <Column field="flag" header="País" sortable>
                         <template #body="{data}">
-                            <img class="flag h-auto" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                            <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
+                            <img class="flag h-auto shadow-2 mr-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                            <span class="mobileNoDisplay image-text">{{data.country}}</span>
                         </template>
                     </Column>
                     <Column field="birthday" header="Cumpleaños" sortable></Column>
@@ -119,11 +119,7 @@ export default {
             this.$game.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id});
         },
         getImage(id){
-            for (let i = 0; i < this.notFriendOfImages.length; i++) {
-                if(this.notFriendOfImages[i].id == id){
-                    return this.notFriendOfImages[i].image;
-                }
-            }
+            return this.notFriendOfImages[id];
         },
         putLabel(id, sended) {
             if (sended || this.sendClicked[id]) {

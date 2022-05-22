@@ -36,7 +36,6 @@ export default {
 
 			if (this.perfil.hasImage) {
 				// Pedir al back la foto
-				console.log("tiene foto");
 				this.$accounts.getProfileImage(this.$route.params.id).then(data => {
 					this.profileImage = data;
 				});

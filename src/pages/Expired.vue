@@ -6,12 +6,12 @@
                     <img :src="logo()" class="shadow-4" alt="Xiangqi logo" style="border-radius:33px; width:10rem;">
                     <h1>Xiangqi Online</h1>
                     <div class="grid m-auto">
-                        <h1 class="col justify-content-center text-center font-bold text-5xl text-pink-500 m-0">
-                            <i class="pi pi-fw pi-exclamation-circle text-4xl text-pink-500"></i>
-                            Error: No estás logueado
+                        <h1 class="col justify-content-center text-center font-bold text-5xl text-blue-500 m-0">
+                            <i class="pi pi-fw pi-exclamation-circle text-4xl text-blue-500"></i>
+                            Error 401: Sesión caducada
                         </h1>
                     </div>
-                    <span class="text-600">La página pedida no se encuentra disponible.</span>
+                    <span class="text-600">Su sesión ha caducado. Por favor, vuelva a loguearse.</span>
                     <div class="col-12 mt-5 text-center" v-if="this.$loggedStatus.logged">
                         <i class="pi pi-fw pi-arrow-left text-blue-500 mr-2" style="vertical-align:center;"></i>
                         <router-link to="/profile" class="text-blue-500">Ir a mi perfil</router-link>

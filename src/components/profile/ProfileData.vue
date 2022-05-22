@@ -10,7 +10,7 @@
 			<div class="col-12 sm:col-12 md:col-12 lg:col-6 align-self-start lg:text-left profile-name" style="min-height: 3.5rem">
 				<h2 class="mb-1">{{perfil.name}}</h2>
 				<p class="mb-1">#{{perfil.nickname}}</p>
-				<img class="flag h-auto" :class="[perfil.country.flag]" src="images/flags/flag_placeholder.png">
+				<img class="flag h-auto shadow-2" :class="[perfil.country.flag]" src="images/flags/flag_placeholder.png">
 			</div>
 			<div class="col align-self-start lg:text-right" style="padding-right: 0; padding-left: 0; min-height: 3.5rem">
 				<profileEdit v-if="myProfile" :perfil="perfil"/>

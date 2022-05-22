@@ -34,7 +34,7 @@ export default {
                     label: 'Menú',
                     items: [
                         {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
-                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends/noNotify'},
+                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends'},
                         {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
                         {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
                         {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
@@ -47,34 +47,30 @@ export default {
         this.$game.socket.emit('enter',{'id': sessionStorage.getItem('id')})
         this.$game.socket.on("friendRequest",(data)=>{
             console.log("FriendRequest de", data);
-            //this.notifications.push({type: 'friendRequest', id: data.id});
+            this.$toast.add({severity:'info', summary:'Solicitud de amistad', detail:'Has recibido una solicituh de amistad.', life: 5000});
             this.numFriendReq++;
-            console.log("numFriendReq", this.numFriendReq);
+            //console.log("numFriendReq", this.numFriendReq);
         })
         this.$game.socket.on("onlineFriends",(data)=>{
-            console.log("Amigos conectados", data);
             this.onlineFriends = []
             data.forEach(friend => {
                 this.onlineFriends.push({"id": friend['id'], "name": friend['nickname']});
             });
         })
         this.$game.socket.on("gameRequest",(data)=>{
-            console.log("GAMEREQ de", data);
             this.id = data["id"]
             this.idSala = data["idSala"]
             this.$accounts.getNickname(data["id"]).then(data => { //this.createAc.image
-                console.log(data);
+                //console.log(data);
                 this.nickname = data;
                 this.showInvitaion = true;
-                console.log(this.showInvitaion, this.idSala)
+                //console.log(this.showInvitaion, this.idSala)
             });
         })
         this.$game.socket.on("rejectReq",()=>{
-            console.log("Me la rechaza");
             this.emitter.emit("open-rejected-invitation", true);
 
         })
-        console.log("aaaaaaaaaaaaaaaaaaaaa")
 		this.$game.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
     },
     methods: {
@@ -82,7 +78,7 @@ export default {
 			//Ya hemos atendido la notificacion
             this.numFriendReq = 0;
             // Ir a la pagina de amigos y que muestre solo las solicitudes
-			this.$router.push(`/Friends/notification`)
+			this.$router.push('/FriendRequest');
 		},
         onMenuToggle(event) {
             this.$emit('menu-toggle', event);
@@ -98,7 +94,6 @@ export default {
 			}
 		},
         closeGameRequest(){
-            console.log("CIERRO---------------");
             this.showInvitaion = false;
         },
     },

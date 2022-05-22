@@ -92,12 +92,8 @@ export default {
 	},
 
 	methods: {
-        getImage(id){
-            for (let i = 0; i < this.friendRequestsArrayImages.length; i++) {
-                if(this.friendRequestsArrayImages[i].id == id){
-                    return this.friendRequestsArrayImages[i].image;
-                }
-            }
+        getImage(id) {
+            return this.friendRequestsArrayImages[id];
         },
         onConfirm(id, nickname) {
             this.$emit('add-invitation-pressed', id);

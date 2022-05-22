@@ -40,8 +40,8 @@
             </Column>
             <Column field="flag" header="País" sortable>
                 <template #body="{data}">
-                    <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                    <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
+                    <img class="flag h-auto shadow-2 mr-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                    <span class="mobileNoDisplay image-text">{{data.country}}</span>
                 </template>
             </Column>
             <Column field="startDate" header="Inicio de juego" sortable></Column>
@@ -121,7 +121,7 @@ export default {
             this.clicked = true;
             this.$accounts.loadGame(id).then(response =>{
                 let color = null;
-                console.log(response.game[1])
+                //console.log(response.game[1])
                 sessionStorage.setItem("movs", response.game[4])
                 if(response.game[1] == sessionStorage.getItem('id')){ // Jugaba como rojo
                     color = "rojo"
@@ -134,11 +134,7 @@ export default {
             })
         },
         getImage(id){
-            for (let i = 0; i < this.gameArrayImages.length; i++) {
-                if(this.gameArrayImages[i].id == id){
-                    return this.gameArrayImages[i].image;
-                }
-            }
+            return this.gameArrayImages[id]
         }
     }
 }

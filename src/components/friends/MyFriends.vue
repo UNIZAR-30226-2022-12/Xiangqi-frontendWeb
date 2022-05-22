@@ -77,11 +77,7 @@ export default {
 	},
     methods: {
         getImage(id) {
-            for (let i = 0; i < this.friendsArrayImages.length; i++) {
-                if(this.friendsArrayImages[i].id == id){
-                    return this.friendsArrayImages[i].image;
-                }
-            }
+            return this.friendsArrayImages[id];
         },
         otherProfile(id){
             this.$router.push({name: 'OtherProfile', params: { id: id}});

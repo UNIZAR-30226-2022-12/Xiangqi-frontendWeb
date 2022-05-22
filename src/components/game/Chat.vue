@@ -63,15 +63,14 @@ export default {
   },
   mounted(){
     this.$accounts.getProfile(this.idOp).then(response => {
-      console.log(response.perfil)
+      //console.log(response.perfil)
       this.nicknameOp = response.perfil.nickname
 		});
     this.$accounts.getProfile(this.myId).then(response => {
-      console.log(response.perfil)
+      //console.log(response.perfil)
       this.myNickname = response.perfil.nickname
 		});
     this.$game.socket.on("my msg", (data)=>{
-      console.log(data)
       this.messages.push({nickname: this.nicknameOp, message: data, mine: false});
       const chat = document.getElementById('chat');
       setTimeout(() => {
@@ -87,7 +86,6 @@ export default {
       audio.play();
     })
     this.$game.socket.emit("enterRoom", {'id': this.idSala})
-    console.log("idsala", this.idSala)
   },
   unmounted(){
     this.$game.socket.off("my msg")

@@ -1,5 +1,5 @@
 <template>
-	<h2 v-if="$route.params.isNotification != 'notification'"> Amigos </h2>
+	<h2> Amigos </h2>
 	<loader v-if="loading"/>
 	<!--<div v-else-if="notFriendOf != null && friendRequestsArray != null && friendsArray != null && !loading">-->
 	<div v-else>
@@ -93,16 +93,17 @@ export default {
 		this.$friends.getFriendRequests().then(response => {
 			this.friendRequestsArray = response;
 			for (var i = 0; i < this.friendRequestsArray.length; i++) {
-					//llegan las fotos
-					let id = this.friendRequestsArray[i].id;
-					if (this.friendRequestsArray[i].hasImage) {
-						this.$accounts.getProfileImage(id).then(data => {
-							this.friendRequestsArrayImages.push({id: id, image: data})
-						});
-					} else {
-						this.friendRequestsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
-					}
+				//llegan las fotos
+				let id = this.friendRequestsArray[i].id;
+				if (this.friendRequestsArray[i].hasImage && this.friendRequestsArrayImages[id] == null) {
+					this.friendRequestsArrayImages[id] = '';
+					this.$accounts.getProfileImage(id).then(data => {
+						this.friendRequestsArrayImages[id] = data;
+					});
+				} else if (!this.friendRequestsArray[i].hasImage && this.friendRequestsArrayImages[id] == null) {
+					this.friendRequestsArrayImages[id] = "images/profilePlaceholder.svg";
 				}
+			}
 			this.loadingRequests = false;
 		});
 
@@ -111,12 +112,13 @@ export default {
 			for (var i = 0; i < this.friendsArray.length; i++) {
 				//llegan las fotos
 				let id = this.friendsArray[i].id;
-				if (this.friendsArray[i].hasImage) {
+				if (this.friendsArray[i].hasImage && this.friendsArrayImages[id] == null) {
+					this.friendsArrayImages[id] = '';
 					this.$accounts.getProfileImage(id).then(data => {
-						this.friendsArrayImages.push({id: id, image: data})
+						this.friendsArrayImages[id] = data;
 					});
-				} else {
-					this.friendsArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
+				} else if (!this.friendsArray[i].hasImage && this.friendsArrayImages[id] == null) {
+					this.friendsArrayImages[id] = "images/profilePlaceholder.svg";
 				}
 			}
 			this.loadingFriends = false;
@@ -129,7 +131,7 @@ export default {
 			// Hacer peticion al back
 			this.loadingSearch = true;
 			this.showResults = results;
-			console.log(this.searchFriendField);
+			//console.log(this.searchFriendField);
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
 				this.notFriendOf = response;
@@ -138,12 +140,13 @@ export default {
 				for (var i = 0; i < this.notFriendOf.length; i++) {
 					//llegan las fotos
 					let id = this.notFriendOf[i].id;
-					if (this.notFriendOf[i].hasImage) {
+					if (this.notFriendOf[i].hasImage && this.notFriendOfImages[id] == null) {
+						this.notFriendOfImages[id] = '';
 						this.$accounts.getProfileImage(id).then(data => {
-							this.notFriendOfImages.push({id: id, image: data})
+							this.notFriendOfImages[id] = data;
 						});
-					} else {
-						this.notFriendOfImages.push({id: id, image: "images/profilePlaceholder.svg"})
+					} else if (!this.notFriendOf[i].hasImage && this.notFriendOfImages[id] == null) {
+						this.notFriendOfImages[id] = "images/profilePlaceholder.svg";
 					}
 				}
 				this.loadingSearch = false;

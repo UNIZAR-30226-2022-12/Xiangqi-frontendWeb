@@ -393,7 +393,7 @@ export default {
       this.$accounts.login(this.vLogin$.login.email.$model, this.vLogin$.login.password.$model).then(success => {
         if (success.ok) {
           if (success.validacion){ // Correo verificado, y ok, entramos
-          console.log("entramos")
+            //console.log("entramos")
             this.dialog.display = false;
             this.login.loging = false;
             

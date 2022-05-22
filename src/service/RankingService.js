@@ -1,13 +1,8 @@
-import axios from 'axios';
-
-var http = null;
+import http from './http';
 
 class RankingService {
 
-    constructor ({url}) {
-        console.log(url);
-        http = axios.create({baseURL: url});
-    }
+    constructor () {}
 
     // SEARCH USER
     //------------------------------------------------------------------------------------------------------------------
@@ -26,6 +21,4 @@ class RankingService {
     }
 }
 
-export default new RankingService({
-    url: "http://ec2-3-82-235-243.compute-1.amazonaws.com:3000"
-});
+export default new RankingService();

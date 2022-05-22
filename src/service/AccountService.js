@@ -1,15 +1,10 @@
-import axios from 'axios';
-
-var http = null;
+import http from './http';
 
 class AccountService {
 
     authenticated = false;
 
-    constructor ({url}) {
-        console.log(url);
-        http = axios.create({baseURL: url});
-    }
+    constructor () {}
 
     // CREAR UNA CUENTA
     //------------------------------------------------------------------------------------------------------------------
@@ -240,7 +235,7 @@ class AccountService {
         return http
             .post('/do-loadGame/', {'id': id}, headers)
             .then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 return response.data;
             }, () => {
                 return false;
@@ -264,7 +259,4 @@ class AccountService {
     }
 }
 
-export default new AccountService({
-    //url: "http://" + window.location.hostname + ":8000"
-    url: "http://ec2-3-82-235-243.compute-1.amazonaws.com:3000"
-});
+export default new AccountService();

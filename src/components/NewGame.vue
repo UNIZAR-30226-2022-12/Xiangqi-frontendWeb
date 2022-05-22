@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     openDialog() {
-      console.log("AMIGOS: ", this.onlineFriends)
+      //console.log("AMIGOS: ", this.onlineFriends)
       this.display = true;
 
       this.$game.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')});
@@ -86,7 +86,6 @@ export default {
         //Pasarle al back las opciones de la partida
         this.$game.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
         this.$game.socket.on("startGame", (data)=>{
-          console.log(data)
           this.display = false;
 
           var color;
@@ -106,7 +105,6 @@ export default {
         console.log("ENVIO A AMIGo")
         this.$game.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
         this.$game.socket.on("startGame", (data)=>{
-          console.log(data)
           this.display = false;
 
           var color;

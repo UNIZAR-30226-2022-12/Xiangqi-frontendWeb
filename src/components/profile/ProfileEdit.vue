@@ -193,19 +193,19 @@ export default {
 
             //No hemos cambiado el password passwordDisable = true
             if (this.edit.passwordDisable) {
-                console.log('NO ME CAMBIAS EL PASS');
+                //console.log('NO ME CAMBIAS EL PASS');
                 if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid ) {
-                    console.log('NO VALE Y NO ME CAMBIAS EL PASS');
+                    //console.log('NO VALE Y NO ME CAMBIAS EL PASS');
                     this.edit.editing = false;
                     return;
                 }
             } else if (this.vEdit$.edit.nickname.$invalid || this.vEdit$.edit.name.$invalid || this.vEdit$.edit.date.$invalid || this.vEdit$.edit.country.$invalid  || this.vEdit$.edit.password.$invalid || this.vEdit$.edit.confPassword.$invalid) {
-                console.log('NO VALE Y ME CAMBIAS EL PASS');
+                //console.log('NO VALE Y ME CAMBIAS EL PASS');
                 this.edit.editing = false;
                 return;
             }
             // La form ha sido validada correctamente en front
-            console.log('Formulario validado correctamente');
+            //console.log('Formulario validado correctamente');
 
             //Sumarle 1 a la fecha xD
             this.edit.date.setDate(this.edit.date.getDate() + 1);
@@ -243,7 +243,7 @@ export default {
         uploadFile() {
             this.Images = ''
             let file = this.$refs.file.files[0];
-            console.log(file)
+            //console.log(file)
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {

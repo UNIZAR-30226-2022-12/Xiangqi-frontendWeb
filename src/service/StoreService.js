@@ -1,13 +1,8 @@
-import axios from 'axios';
-
-var http = null;
+import http from './http';
 
 class StoreService {
 
-    constructor ({url}) {
-        console.log(url);
-        http = axios.create({baseURL: url});
-    }
+    constructor () {}
 
     /*
      * Obtiene la lista de tableros y de piezas que tiene la tienda
@@ -47,6 +42,4 @@ class StoreService {
     }
 }
 
-export default new StoreService({
-    url: "http://ec2-3-82-235-243.compute-1.amazonaws.com:3000"
-});
+export default new StoreService();
