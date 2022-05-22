@@ -148,6 +148,7 @@ app.config.globalProperties.$appState = reactive({ theme: 'saga-blue', darkTheme
 
 // Variable global que guarda si estamos logueados o no
 app.config.globalProperties.$loggedStatus = reactive({logged: false});
+app.config.globalProperties.$showExpired = reactive({expired: false});
 app.config.globalProperties.$playing = reactive({game: false});
 
 app.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });

@@ -12,6 +12,7 @@ import Historial from './pages/Historial.vue';
 import NotFound from './pages/NotFound.vue';
 import RecPwd from './pages/RecPwd.vue';
 import FriendRequest from './pages/FriendRequest.vue';
+import Expired from './pages/Expired.vue';
 
 const routes = [
     {
@@ -73,6 +74,11 @@ const routes = [
         path: '/recPwd',
         name: 'Recuperar contraseña',
         component: RecPwd,
+    },
+    {
+        path: '/expired',
+        name: 'Sesion caducada',
+        component: Expired,
     },
     {
         path: '/:pathMatch(.*)*',

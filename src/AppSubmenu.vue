@@ -51,7 +51,7 @@
 import newGameButton from '/src/components/NewGame.vue';
 export default {
 	// Definicion del evento emitido al clicar
-	emits: ['friends-notify-pressed'],
+	emits: ['friends-notify-pressed', 'menuitem-click'],
 
 	name: 'appsubmenu',
 	props: {
