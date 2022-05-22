@@ -63,10 +63,10 @@
 <script>
 
 import {FilterMatchMode,FilterOperator} from 'primevue/api';
-import io from "socket.io-client";
+
 
 export default {
-	inject: ['$accounts'],
+	inject: ['$accounts', '$game'],
     props: {
         show: {
             type: Boolean,
@@ -116,10 +116,7 @@ export default {
                     this.sendClicked[id] = true; 
                 }
             }
-            if(this.socket == null){
-                this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-            }
-            this.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id});
+            this.$game.socket.emit('sendFriendRequest',{'id': sessionStorage.getItem('id'), 'idFriend': id});
         },
         getImage(id){
             for (let i = 0; i < this.notFriendOfImages.length; i++) {

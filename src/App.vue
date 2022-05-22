@@ -21,10 +21,10 @@
 import AppTopBar from './AppTopbar.vue';
 import AppMenu from './AppMenu.vue';
 import AppFooter from './AppFooter.vue';
-import io from "socket.io-client";
 
 
 export default {
+    inject: ['$game'],
     emits: ['change-theme'],
     data() {
         return {
@@ -75,10 +75,7 @@ export default {
         },
         mounted(){
             window.addEventListener("beforeunload", ()=> {
-                if(this.socket == null){
-                    this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-                }
-                this.socket.emit('leave',{'id': sessionStorage.getItem('id')})
+                this.$game.socket.emit('leave',{'id': sessionStorage.getItem('id')})
             })
             
         },

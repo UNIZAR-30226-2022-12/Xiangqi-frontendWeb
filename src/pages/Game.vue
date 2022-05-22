@@ -137,12 +137,11 @@ import chat from '../components/game/Chat.vue';
 import themeChanger from '../components/game/ThemeChanger.vue';
 import gameRules from '../components/game/GameRules.vue';
 import gameover from '../components/game/GameOver.vue';
-import io from "socket.io-client";
 import confetti from '../components/game/Confetti.vue';
 import loader from '../components/Loader.vue';
 
 export default  {
-	inject: ['$accounts'],
+	inject: ['$accounts', '$game'],
     components: {
         rivalInfo,
         chat,
@@ -286,9 +285,6 @@ export default  {
 	created() {
         this.idSala = this.$route.params.idSala;
         this.myid = sessionStorage.getItem('id');
-        if(this.socket == null){
-            this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-        }
         //sessionStorage.removeItem("socket")
         this.playerColor = this.$route.params.color
         if(this.playerColor == "negro"){
@@ -344,14 +340,15 @@ export default  {
 	},
     unmounted(){
         console.log("destroyed")
-        this.socket.emit("leaveRoom", {'id': this.idSala})
-        this.socket.off("opMov")
-        this.socket.off("win")
+        this.$game.socket.emit("leaveRoom", {'id': this.idSala})
+        this.$game.socket.off("opMov")
+        this.$game.socket.off("win")
     },
     mounted(){
         this.loadThemeChanger();
-        this.socket.emit("enterRoom", {'id': this.idSala})
-        this.socket.on("opMov", (data)=>{
+        this.$game.socket.emit("enterRoom", {'id': this.idSala})
+        console.log("enterromm")
+        this.$game.socket.on("opMov", (data)=>{
             //console.log(data)
             //console.log("Movimiento del rival", data.mov[0])
             if(this.selectedPiece.fil != null){
@@ -369,7 +366,7 @@ export default  {
             audio.loop = false;
             audio.play();
         })
-        this.socket.on("win", ()=>{
+        this.$game.socket.on("win", ()=>{
             console.log("win")
             //AQUI ES DONDE HE GANADO
             this.ganador.id = this.myid
@@ -713,7 +710,7 @@ export default  {
                 } else {
                     //ENVIAR MOVIMIENTO
                     if(emit){
-                        this.socket.emit("doMov", {'id': this.idSala, 'mov': [this.selectedPiece.fil,this.selectedPiece.col,indexFil,indexCol], 'color': this.playerColor})
+                        this.$game.socket.emit("doMov", {'id': this.idSala, 'mov': [this.selectedPiece.fil,this.selectedPiece.col,indexFil,indexCol], 'color': this.playerColor})
                     }
                     this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
                         this.tablero.filas[move.f][move.c].esPista = false;
@@ -1347,7 +1344,7 @@ export default  {
                 console.log("Jaque mate")
 
                 // emit le dire al back quien ha ganado
-                this.socket.emit("lose", {'idSala': this.idSala, 'idGanador': this.idOp, 'idPerdedor': this.myid})
+                this.$game.socket.emit("lose", {'idSala': this.idSala, 'idGanador': this.idOp, 'idPerdedor': this.myid})
                 //ESTO LE SALE AL PERDEDOR
                 this.ganador.id = this.idOp
                 this.ganador.name = this.rivalProfile.name

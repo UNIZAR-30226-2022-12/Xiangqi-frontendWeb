@@ -10,10 +10,9 @@
 import GameReq from './components/GameRequest.vue';
 import RejectedInvitation from './components/RejectedInvitation.vue';
 import AppSubmenu from './AppSubmenu';
-import io from "socket.io-client";
 export default {
     emits: ['menu-toggle', 'menuitem-click'],
-    inject: ['$accounts'],
+    inject: ['$accounts', '$game'],
     components: {
 		'AppSubmenu': AppSubmenu,
         GameReq,
@@ -45,24 +44,21 @@ export default {
 		}
 	},
     created() {
-        if(this.socket == null){
-            this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-        }
-        this.socket.emit('enter',{'id': sessionStorage.getItem('id')})
-        this.socket.on("friendRequest",(data)=>{
+        this.$game.socket.emit('enter',{'id': sessionStorage.getItem('id')})
+        this.$game.socket.on("friendRequest",(data)=>{
             console.log("FriendRequest de", data);
             //this.notifications.push({type: 'friendRequest', id: data.id});
             this.numFriendReq++;
             console.log("numFriendReq", this.numFriendReq);
         })
-        this.socket.on("onlineFriends",(data)=>{
+        this.$game.socket.on("onlineFriends",(data)=>{
             console.log("Amigos conectados", data);
             this.onlineFriends = []
             data.forEach(friend => {
                 this.onlineFriends.push({"id": friend['id'], "name": friend['nickname']});
             });
         })
-        this.socket.on("gameRequest",(data)=>{
+        this.$game.socket.on("gameRequest",(data)=>{
             console.log("GAMEREQ de", data);
             this.id = data["id"]
             this.idSala = data["idSala"]
@@ -73,13 +69,13 @@ export default {
                 console.log(this.showInvitaion, this.idSala)
             });
         })
-        this.socket.on("rejectReq",()=>{
+        this.$game.socket.on("rejectReq",()=>{
             console.log("Me la rechaza");
             this.emitter.emit("open-rejected-invitation", true);
 
         })
         console.log("aaaaaaaaaaaaaaaaaaaaa")
-		this.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
+		this.$game.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
     },
     methods: {
         clearFriendReq() {

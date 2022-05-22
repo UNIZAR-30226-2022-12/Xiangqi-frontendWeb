@@ -29,10 +29,9 @@
 
 <script>
 
-import io from "socket.io-client";
 
 export default {
-  inject: ['$accounts'],
+  inject: ['$accounts', '$game'],
   name: 'app',
   props: {
       idSala: {
@@ -71,10 +70,7 @@ export default {
       console.log(response.perfil)
       this.myNickname = response.perfil.nickname
 		});
-    if(this.socket == null){
-        this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-    }
-    this.socket.on("my msg", (data)=>{
+    this.$game.socket.on("my msg", (data)=>{
       console.log(data)
       this.messages.push({nickname: this.nicknameOp, message: data, mine: false});
       const chat = document.getElementById('chat');
@@ -90,12 +86,12 @@ export default {
       audio.loop = false;
       audio.play();
     })
-    this.socket.emit("enterRoom", {'id': this.idSala})
+    this.$game.socket.emit("enterRoom", {'id': this.idSala})
     console.log("idsala", this.idSala)
   },
   unmounted(){
-    this.socket.off("my msg")
-    this.socket.emit("leaveRoom", {'id': this.idSala})
+    this.$game.socket.off("my msg")
+    this.$game.socket.emit("leaveRoom", {'id': this.idSala})
   },
   methods: {
     sendMessage() {
@@ -105,7 +101,7 @@ export default {
       setTimeout(() => {
         chat.scroll({ top: chat.scrollHeight, behavior: 'smooth' });
       }, 1);
-      this.socket.emit("sendMsg", {'id': this.idSala, 'msg': this.message})
+      this.$game.socket.emit("sendMsg", {'id': this.idSala, 'msg': this.message})
       //Borrar el mensaje
       this.message = null;
 

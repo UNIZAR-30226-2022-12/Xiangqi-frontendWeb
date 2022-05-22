@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import io from "socket.io-client"
 
 export default {
+  inject: ['$game'],
   props: {
 		onlineFriends: {
 			type: Array,
@@ -67,8 +67,7 @@ export default {
       console.log("AMIGOS: ", this.onlineFriends)
       this.display = true;
 
-      this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-      this.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')});
+      this.$game.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')});
 
       // Si los vuelvo a poner a null peta muuy fuerte
       this.selectedFriend = null;
@@ -85,11 +84,8 @@ export default {
         this.searchingOponent = true;
 
         //Pasarle al back las opciones de la partida
-        if(this.socket == null) {
-          this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-        }
-        this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
-        this.socket.on("startGame", (data)=>{
+        this.$game.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
+        this.$game.socket.on("startGame", (data)=>{
           console.log(data)
           this.display = false;
 
@@ -100,19 +96,16 @@ export default {
             color = "negro"
           }
 
-          this.socket.off("startGame")
-          this.socket.emit("leaveRoom", {'id': data.idSala})
+          this.$game.socket.off("startGame")
+          this.$game.socket.emit("leaveRoom", {'id': data.idSala})
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       } else {
         //Esperando supongo
         this.searchingOponent = true;
         console.log("ENVIO A AMIGo")
-        if(this.socket == null) {
-          this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-        }
-        this.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
-        this.socket.on("startGame", (data)=>{
+        this.$game.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
+        this.$game.socket.on("startGame", (data)=>{
           console.log(data)
           this.display = false;
 
@@ -123,8 +116,8 @@ export default {
             color = "negro"
           }
 
-          this.socket.off("startGame")
-          this.socket.emit("leaveRoom", {'id': data.idSala})
+          this.$game.socket.off("startGame")
+          this.$game.socket.emit("leaveRoom", {'id': data.idSala})
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       }
