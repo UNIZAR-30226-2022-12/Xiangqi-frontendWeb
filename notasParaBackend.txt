@@ -1,2 +1,0 @@
-Para el perfil necesitamos el numero de amigos
-si se envia una contra vacia no se cambia

@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     openDialog() {
-      console.log("AMIGOS: ", this.onlineFriends)
+      //console.log("AMIGOS: ", this.onlineFriends)
       this.display = true;
 
       this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
@@ -90,7 +90,7 @@ export default {
         }
         this.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
         this.socket.on("startGame", (data)=>{
-          console.log(data)
+          //console.log(data)
           this.display = false;
 
           var color;
@@ -107,13 +107,13 @@ export default {
       } else {
         //Esperando supongo
         this.searchingOponent = true;
-        console.log("ENVIO A AMIGo")
+        //console.log("ENVIO A AMIGo")
         if(this.socket == null) {
           this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
         }
         this.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
         this.socket.on("startGame", (data)=>{
-          console.log(data)
+          //console.log(data)
           this.display = false;
 
           var color;

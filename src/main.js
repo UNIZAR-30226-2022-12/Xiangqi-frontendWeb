@@ -4,8 +4,6 @@ import 'primeicons/primeicons.css';
 import './assets/styles/layout.scss';
 import './assets/demo/flags/flags.css';
 
-import axios from 'axios';
-
 import { createApp, reactive } from 'vue';
 import router from './router';
 import AppWrapper from './AppWrapper.vue';
@@ -242,63 +240,5 @@ app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
-
-
-/*
-router.beforeEach(function (to, from, next) {
-    var hasLogin = parseInt(process.env.VUE_APP_HAS_LOGIN);
-    console.log(hasLogin);
-    if (hasLogin != 0){
-        console.log('beforeEach', to.path + ' - Auth: ' + accounts.isAuthenticated());
-        if ((to.path !== '/login' && to.path !== 'login') && !accounts.isAuthenticated()) {
-            next({ path: '/login' });
-        }/* else if ((to.path === '/login' || to.path === 'login') && accounts.isAuthenticated()) {
-            next({ path: '/' });
-        } else {
-            next();
-        }
-    } else
-        console.log('else');
-        next();
-});*/
-/*
-axios.interceptors.response.use(function (response) {
-    console.log('INTERCEPTOR!!!!!!!!!!!!!!!!!!!!!');
-    if (response.status === 401) {
-        console.log('401');
-        //let msg = response.body.returnMessage;
-        //sessionStorage.setItem('logoutReason', msg);
-        accounts.logout();
-        router.push('/');
-    }
-});*/
-
-/*
-axios.interceptors.response.use(function (response) {
-    console.log('INTERCEPTOR!!!!!!!!!!!!!!!!!!!!!');
-    if (response.status === 401) {
-        console.log('401');
-        //let msg = response.body.returnMessage;
-        //sessionStorage.setItem('logoutReason', msg);
-        accounts.logout();
-        router.push('/');
-    }
-});*/
-
-export function jwtInterceptor() {
-    axios.interceptors.request.use(request => {
-        // add auth header with jwt if account is logged in and request is to the api url
-        console.log(request, 'INTERCEPTOR!!!!!!!!!!!!!!!!!!!!!');
-        /*const account = accountService.accountValue;
-        const isLoggedIn = account?.token;
-        const isApiUrl = request.url.startsWith(process.env.VUE_APP_API_URL);
-
-        if (isLoggedIn && isApiUrl) {
-            request.headers.common.Authorization = `Bearer ${account.token}`;
-        }
-
-        return request;*/
-    });
-}
 
 app.mount('#app');

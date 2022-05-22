@@ -64,18 +64,18 @@ export default {
   },
   mounted(){
     this.$accounts.getProfile(this.idOp).then(response => {
-      console.log(response.perfil)
+      //console.log(response.perfil)
       this.nicknameOp = response.perfil.nickname
 		});
     this.$accounts.getProfile(this.myId).then(response => {
-      console.log(response.perfil)
+      //console.log(response.perfil)
       this.myNickname = response.perfil.nickname
 		});
     if(this.socket == null){
         this.socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
     }
     this.socket.on("my msg", (data)=>{
-      console.log(data)
+      //console.log(data)
       this.messages.push({nickname: this.nicknameOp, message: data, mine: false});
       const chat = document.getElementById('chat');
       setTimeout(() => {
@@ -91,7 +91,7 @@ export default {
       audio.play();
     })
     this.socket.emit("enterRoom", {'id': this.idSala})
-    console.log("idsala", this.idSala)
+    //console.log("idsala", this.idSala)
   },
   unmounted(){
     this.socket.off("my msg")

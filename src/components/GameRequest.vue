@@ -55,11 +55,8 @@ export default {
             searchingOponent: false,
             }
     },
-    created(){
-        console.log("GAMEREQUEST")
-    },
     unmounted(){
-        console.log("DESTRUCCION")
+        //console.log("DESTRUCCION")
         this.confirmDisabled = false
         this.rejectDisabled = false
         this.display = true
@@ -93,7 +90,7 @@ export default {
             let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
             socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
             socket.on("startGame", (data)=>{
-            console.log(data)
+            //console.log(data)
 
             var color;
             if(data.rojo) {
@@ -106,7 +103,7 @@ export default {
             this.$emit('close-game-request');
             this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
             })
-            console.log("ACEPTADO")
+            //console.log("ACEPTADO")
         }
     }
 }

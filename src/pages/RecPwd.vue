@@ -128,7 +128,7 @@ export default {
 
             //this.$accountscount(this.vRecPwd$.nickname.$model, this.vRecPwd$.name.$model, this.vRecPwd$.email.$model, this.vRecPwd$.date.$model, this.vRecPwd$.country.$model, this.vRecPwd$.password.$model,this.Images).then(success => { //this.image
             const email = window.location.href.split('?')[1].split('=')[1]
-            console.log(email);
+            //console.log(email);
             this.$accounts.changePwd(email, this.vRecPwd$.confPassword.$model).then(success => { 
                 if (success) {
                     this.dialog.display = false;
@@ -136,10 +136,6 @@ export default {
                     this.$router.push('/');
                 }
             });
-            //if (success) {
-                //Ocultar el dialogo de crear reestablecer y mostar el de contraseña reestablecida
-                
-            //});
         },
     },
     validations() {

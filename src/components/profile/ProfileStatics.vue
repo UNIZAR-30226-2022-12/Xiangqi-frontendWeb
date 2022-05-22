@@ -88,7 +88,7 @@ export default {
          *   LAST WEEK
          */
         //Cargar los datos de la tabla
-        console.log(this.games)
+        //console.log(this.games)
         this.lastWeek.datasets[0].data = this.games.diaJugadas
         this.lastWeek.datasets[1].data = this.games.diaGanadas
         //Ponerle las labels a la tabla horizontal
@@ -99,9 +99,9 @@ export default {
             let mes = today.getMonth();
             let anyo = today.getFullYear();
             if(dia == 1){
-                console.log("MES ANTERIOR")
+                //console.log("MES ANTERIOR")
                 if(mes == 0){
-                    console.log("AÑO ANATERIOR")
+                    //console.log("AÑO ANATERIOR")
                     mes = 12;
                     anyo = anyo - 1;
                 } else{

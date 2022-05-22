@@ -284,6 +284,10 @@ export default  {
         }
     },
 	created() {
+        //para ocultar de manera guarra el menu
+        this.$loggedStatus.logged = false;
+        this.$playing.game = true;
+        
         this.idSala = this.$route.params.idSala;
         this.myid = sessionStorage.getItem('id');
         if(this.socket == null){
@@ -332,9 +336,6 @@ export default  {
                 // CAMBIAR EL TABLERO
                 this.loadBoard(movs)
             }
-            //para ocultar de manera guarra el menu
-            this.$loggedStatus.logged = false;
-            this.$playing.game = true;
 		});
         
 
@@ -479,6 +480,7 @@ export default  {
         *---------------------------------------------------------------------------------------------------------------
         */
         checkCheck(reyCheck, amenaza){
+            this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
             //console.log("Posicion del rey: ", reyCheck.fil, reyCheck.col )
             reyCheck.fil = parseInt(reyCheck.fil)
             reyCheck.col = parseInt(reyCheck.col)
@@ -548,8 +550,7 @@ export default  {
                 if(this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza != null){ // Encontramos fihca
                     if(this.tablero.filas[reyCheck.fil][reyCheck.col + it].color == amenaza){//Ficha 
                         if(amenzas.includes(this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza)){
-                            this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
-                                //console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza, amenaza)
+                            //console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col + it].pieza, amenaza)
                             return false //Hay jaque
                         }
                     }
@@ -577,7 +578,7 @@ export default  {
                 if(this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza != null){ // Encontramos fihca
                     if(this.tablero.filas[reyCheck.fil][reyCheck.col - it].color == amenaza){//Ficha 
                         if(amenzas.includes(this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza)){
-                                //console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza, amenaza)
+                            //console.log("jaque", this.tablero.filas[reyCheck.fil][reyCheck.col - it].pieza, amenaza)
                             return false //Hay jaque
                         }
                     }
@@ -623,7 +624,6 @@ export default  {
                 if(pos.f >= 0 && pos.f <= 9 ){
                     if(this.tablero.filas[pos.f][pos.c].pieza == "caballo" && this.tablero.filas[pos.f][pos.c].color == amenaza){
                         //console.log("Jaque caballo", amenaza)
-                        this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque del caballo", life: 5000});
                         return false
                     }
                 }

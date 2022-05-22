@@ -43,8 +43,8 @@
                     <Column field="name" header="Nombre" sortable></Column>
                     <Column field="flag" header="País" sortable>
                         <template #body="{data}">
-                            <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                            <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
+                            <img class="flag h-auto shadow-2 mr-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                            <span class="mobileNoDisplay image-text">{{data.country}}</span>
                         </template>
                     </Column>
                     <Column field="birthday" header="Cumpleaños" sortable></Column>

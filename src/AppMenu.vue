@@ -51,35 +51,33 @@ export default {
         this.socket.emit('enter',{'id': sessionStorage.getItem('id')})
         this.socket.on("friendRequest",(data)=>{
             console.log("FriendRequest de", data);
-            //this.notifications.push({type: 'friendRequest', id: data.id});
             this.$toast.add({severity:'info', summary:'Solicitud de amistad', detail:'Has recibido una solicituh de amistad.', life: 5000});
             this.numFriendReq++;
-            console.log("numFriendReq", this.numFriendReq);
+            //console.log("numFriendReq", this.numFriendReq);
         })
         this.socket.on("onlineFriends",(data)=>{
-            console.log("Amigos conectados", data);
+            //console.log("Amigos conectados", data);
             this.onlineFriends = []
             data.forEach(friend => {
                 this.onlineFriends.push({"id": friend['id'], "name": friend['nickname']});
             });
         })
         this.socket.on("gameRequest",(data)=>{
-            console.log("GAMEREQ de", data);
+            //console.log("GAMEREQ de", data);
             this.id = data["id"]
             this.idSala = data["idSala"]
             this.$accounts.getNickname(data["id"]).then(data => { //this.createAc.image
-                console.log(data);
+                //console.log(data);
                 this.nickname = data;
                 this.showInvitaion = true;
-                console.log(this.showInvitaion, this.idSala)
+                //console.log(this.showInvitaion, this.idSala)
             });
         })
         this.socket.on("rejectReq",()=>{
-            console.log("Me la rechaza");
+            //console.log("Me la rechaza");
             this.emitter.emit("open-rejected-invitation", true);
 
         })
-        console.log("aaaaaaaaaaaaaaaaaaaaa")
 		this.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
     },
     methods: {
@@ -103,7 +101,6 @@ export default {
 			}
 		},
         closeGameRequest(){
-            console.log("CIERRO---------------");
             this.showInvitaion = false;
         },
     },

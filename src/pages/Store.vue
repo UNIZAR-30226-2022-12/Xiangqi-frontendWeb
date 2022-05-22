@@ -90,12 +90,12 @@ export default {
 				this.points = this.points - price;
 				// Actualizar el points en el back
 				this.$store.purchaseItem(id, tipo, price);
-				console.log(id, tipo, price);
+				//console.log(id, tipo, price);
 				if (tipo == 1) {
-					console.log('purchased board');
+					//console.log('purchased board');
 					this.setsBoards[id - 1].purchased = true;
 				} else {
-					console.log('purchased piece');
+					//console.log('purchased piece');
 					this.setsPieces[id - 1].purchased = true;
 				}
 			}

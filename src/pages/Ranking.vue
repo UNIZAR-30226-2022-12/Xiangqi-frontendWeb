@@ -52,8 +52,8 @@
                 </Column>
                 <Column field="flag" header="País" sortable>
                     <template #body="{data}">
-                        <img class="flag h-auto shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
-                        <span class="ml-2 mobileNoDisplay image-text">{{data.country}}</span>
+                        <img class="flag h-auto mr-2 shadow-2" :class="[data.flag]" src="images/flags/flag_placeholder.png">
+                        <span class="mobileNoDisplay image-text">{{data.country}}</span>
                     </template>
                 </Column>
                 <Column field="playedGames" header="Partidas jugadas" sortable></Column>

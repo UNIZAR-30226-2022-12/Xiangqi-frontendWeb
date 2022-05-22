@@ -131,7 +131,7 @@ export default {
 			// Hacer peticion al back
 			this.loadingSearch = true;
 			this.showResults = results;
-			console.log(this.searchFriendField);
+			//console.log(this.searchFriendField);
 			this.notFriendOf = [];
 			this.$friends.searchUser(this.searchFriendField).then(response =>{
 				this.notFriendOf = response;

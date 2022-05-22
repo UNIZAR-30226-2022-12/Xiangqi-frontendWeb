@@ -235,7 +235,7 @@ class AccountService {
         return http
             .post('/do-loadGame/', {'id': id}, headers)
             .then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 return response.data;
             }, () => {
                 return false;
