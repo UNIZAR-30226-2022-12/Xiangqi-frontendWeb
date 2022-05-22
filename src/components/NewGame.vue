@@ -31,6 +31,7 @@
             <div v-else class="flex align-items-center justify-content-center font-bold text-white">Buscando oponente...</div>
         </div>
       </Button> 
+       <Button v-on:click="cancelar()" :disabled="this.searchingOponent == false" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem"/>
     </template>
   </Dialog>
 </template>
@@ -119,7 +120,12 @@ export default {
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       }
-    }
+    },
+    cancelar(){
+      console.log("cancelar")
+      this.$game.socket.off("startGame")
+      this.display = false;
+    },
   },
   mounted() { 
     // Recoge el evento que lanza al clicar en aceptar el rejectedInvitation
