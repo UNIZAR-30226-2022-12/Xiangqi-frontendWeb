@@ -44,7 +44,8 @@
 						<font-awesome-icon class="text-4xl text-primary" icon="arrow-trend-up" />
 					</span>
 					<div class="text-900 mb-3 font-medium text-center">Puesto en ranking</div>
-					<span class="text-700 text-sm line-height-3">puesto {{perfil.range}}</span>
+					<span v-if="stats.totalGanadas > 0" class="text-700 text-sm line-height-3">puesto {{perfil.range + 1}}</span>
+					<span v-else class="text-700 text-sm line-height-3">¡Gana partidas!</span>
 				</div>
 				<div class="col-12 md:col-6 lg:col-3 mb-4 text-center">
 					<span class="p-3 shadow-2 mb-3 inline-block surface-50 text-center" style="border-radius: 1rem">
@@ -75,6 +76,10 @@ export default {
 		myProfile: {
 			type: Boolean,
 			required: true
+		},
+		stats: {
+			type: Object,
+            required: true
 		}
     },
 	components: {

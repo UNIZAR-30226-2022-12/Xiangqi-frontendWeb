@@ -30,8 +30,8 @@
             <div v-else-if="selectedFriend != null && friend" class="flex align-items-center justify-content-center font-bold text-white">Conectando con {{selectedFriend.name}}</div>
             <div v-else class="flex align-items-center justify-content-center font-bold text-white">Buscando oponente...</div>
         </div>
-      </Button> 
-       <Button v-on:click="cancelar()" :disabled="this.searchingOponent == false" class="p-button-raised font-semibold h-3rem w-full" style="border-radius: 1rem"/>
+      </Button>
+      <Button v-if="searchingOponent && selectedFriend != null" v-on:click="cancelar(selectedFriend.name)" :disabled="!searchingOponent" label="Cancelar Invitación" icon="pi pi-times" class="p-button-raised p-button-danger font-semibold mt-3 h-3rem w-full" style="border-radius: 1rem"/>
     </template>
   </Dialog>
 </template>
@@ -121,10 +121,23 @@ export default {
         })
       }
     },
-    cancelar(){
-      console.log("cancelar")
-      this.$game.socket.off("startGame")
-      this.display = false;
+    cancelar(name){
+            this.$confirm.require({
+                message: 'Si rechaza la invitación esta se borrará.',
+                header: '¿Seguro que deseas cancelar la invitación?',
+                icon: 'pi pi-exclamation-triangle',
+                rejectLabel: 'Cancelar invitación',
+                acceptLabel: 'No cancelar invitación',
+                accept: () => {
+                },
+                reject: () => {
+                    this.display = false;
+                    console.log("cancelar")
+                    this.$game.socket.off("startGame")
+                    this.$toast.add({severity:'info', summary:'Invitacion cancelada', detail:'La invitación a ' + name + ' ha sido cancelada.', life: 3000});
+                }
+            });
+
     },
   },
   mounted() { 

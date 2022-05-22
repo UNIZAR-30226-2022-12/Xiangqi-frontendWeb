@@ -68,7 +68,7 @@ export default {
         },
         onConfirm() {
             this.$confirm.require({
-                message: 'Si rechaza la invitación deberá esta se borrará.',
+                message: 'Si rechaza la invitación esta se borrará.',
                 header: '¿Seguro que desea rechazar la invitación?',
                 icon: 'pi pi-exclamation-triangle',
                 rejectLabel: 'Rechazar',

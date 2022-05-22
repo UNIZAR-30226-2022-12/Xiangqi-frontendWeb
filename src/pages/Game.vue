@@ -42,6 +42,10 @@
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.rivalProfile.name }} 
                         <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <h4 class="mt-1">
+                            <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                            Esperando turno
+                        </h4>
                     </h3>
                 </div>   
                 <!--Si yo soy rojo y es mi turno-->
@@ -50,6 +54,10 @@
                         <img id=profliePic :src="rivalProfileImage" class="foto-perfil-sm shadow-2 surface-50 mt-1 mb-2 mr-2" alt="foto de perfil">
                         {{ this.rivalProfile.name }} 
                         <img class="shadow-2 flag h-auto mr-1" :class="[rivalProfile.country.flag]" src="images/flags/flag_placeholder.png">
+                        <h4 class="mt-1">
+                            <ProgressSpinner class="mt-2" style="width:20px; height:20px" strokeWidth="8" fill="transparent" animationDuration="2s"/>
+                            Esperando turno
+                        </h4>
                     </h3>
                 </div>
                 <!--Si yo soy negro y no es mi turno-->
@@ -299,10 +307,9 @@ export default  {
             this.reyNegro.col = 4
         }
         this.idOp = this.$route.params.idOponent
-        this.$accounts.getProfile(this.idOp).then(response => {
-            console.log("perfil rival: ", response)
+        this.$accounts.getProfileInfo(this.idOp).then(response => {
             this.loading = false;
-			this.rivalProfile = response.perfil;
+			this.rivalProfile = response;
 
 			if (this.rivalProfile.hasImage) {
 				// Pedir al back la foto
@@ -313,9 +320,8 @@ export default  {
 				this.rivalProfileImage = "images/profilePlaceholder.svg";
 			}
 		});
-        this.$accounts.getProfile(this.myid).then(response => {
-            console.log("perfil mio: ", response)
-			this.myPerfil = response.perfil;
+        this.$accounts.getProfileInfo(this.myid).then(response => {
+			this.myPerfil = response;
             if (this.myPerfil.hasImage) {
 				// Pedir al back la foto
 				this.$accounts.getProfileImage(this.myid).then(data => {
@@ -729,6 +735,7 @@ export default  {
                         if(this.checkCheck(reyCheck, amenaza) == false){
                             console.log("JMe hace jaque el negro")
                             this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
+                            this.repJaque();
                             this.calcMovesJaque("rojo","negro", reyCheck)
                         } 
                         console.log("Mueve Rojo")
@@ -738,6 +745,7 @@ export default  {
                         if(this.checkCheck(reyCheck, amenaza) == false){
                             console.log("JMe hace jaque el rojo")
                             this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
+                            this.repJaque();
                             this.calcMovesJaque("negro","rojo", reyCheck)
                         } 
                         console.log("Mueve Negro")
@@ -1930,6 +1938,11 @@ export default  {
                     this.tablero.filas[indexFil][indexCol].color = this.playerColor
                 }
            }
+        },
+        repJaque() {
+            var audio = new Audio('sounds/jaque.wav');
+            audio.loop = false;
+            audio.play();
         },
         confirm() {
             this.$confirm.require({

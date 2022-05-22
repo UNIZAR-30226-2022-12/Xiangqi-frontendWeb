@@ -141,6 +141,22 @@ class AccountService {
                 return false;
             });
     }
+
+    /*
+     * Obtiene el perfil del usuario sin los games ni las statics.
+     */
+    getProfileInfo(id){
+        const headers = {'headers': {'x-access-token': sessionStorage.getItem('token')}};
+        return http
+            .get('/do-getProfileInfo/' + id, headers)
+            .then(response => {
+                console.log("la data", response.data);
+                return response.data;
+            }, () => {
+                return false;
+            });
+    }
+
     getNickname(id){
         return http
             .get('/do-getNickname/' + id)
