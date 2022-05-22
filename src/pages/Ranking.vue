@@ -118,17 +118,17 @@ export default {
 			this.ranking = response;
 
 			for (var i = 0; i < this.ranking.length; i++) {
-					//llegan las fotos
-					let id = this.ranking[i].id;
-					if (this.ranking[i].hasImage) {
-						this.$accounts.getProfileImage(id).then(data => {
-							this.rankingImages.push({id: id, image: data})
-						});
-					} else {
-						this.rankingImages.push({id: id, image: "images/profilePlaceholder.svg"})
-					}
+				//llegan las fotos
+                let id = this.ranking[i].id;
+                if (this.ranking[i].hasImage && this.rankingImages[id] == null) {
+					this.rankingImages[id] = '';
+					this.$accounts.getProfileImage(id).then(data => {
+						this.rankingImages[id] = data;
+					});
+				} else if (!this.ranking[i].hasImage && this.rankingImages[id] == null) {
+					this.rankingImages[id] = "images/profilePlaceholder.svg";
 				}
-
+			}
             this.loading = false;
 		});
 	},
@@ -144,11 +144,7 @@ export default {
             return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
         },
         getImage(id) {
-            for (let i = 0; i < this.rankingImages.length; i++) {
-                if(this.rankingImages[i].id == id){
-                    return this.rankingImages[i].image;
-                }
-            }
+            return this.rankingImages[id];
         },
         otherProfile(id){
             this.$router.push({name: 'OtherProfile', params: {id: id}});

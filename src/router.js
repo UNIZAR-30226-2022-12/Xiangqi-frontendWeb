@@ -11,6 +11,7 @@ import Store from './pages/Store.vue';
 import Historial from './pages/Historial.vue';
 import NotFound from './pages/NotFound.vue';
 import RecPwd from './pages/RecPwd.vue';
+import FriendRequest from './pages/FriendRequest.vue';
 
 const routes = [
     {
@@ -44,7 +45,12 @@ const routes = [
         component: OtherProfile,
     },
     {
-        path: '/friends/:isNotification',
+        path: '/friendRequest',
+        name: 'Solicitudes',
+        component: FriendRequest,
+    },
+    {
+        path: '/friends',
         name: 'Amigos',
         component: Friends,
     },

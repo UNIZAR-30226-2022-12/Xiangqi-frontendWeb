@@ -51,12 +51,13 @@ export default {
 			for (var i = 0; i < this.games.length; i++) {
 				//llegan las fotos
 				let id = this.games[i].id;
-				if (this.games[i].hasImage) {
+				if (this.games[i].hasImage && this.gameArrayImages[id] == null) {
+					this.gameArrayImages[id] = '';
 					this.$accounts.getProfileImage(id).then(data => {
-						this.gameArrayImages.push({id: id, image: data})
+						this.gameArrayImages[id] = data;
 					});
-				} else {
-					this.gameArrayImages.push({id: id, image: "images/profilePlaceholder.svg"})
+				} else if (!this.games[i].hasImage && this.gameArrayImages[id] == null) {
+					this.gameArrayImages[id] = "images/profilePlaceholder.svg";
 				}
 			}
 			this.loading = false;

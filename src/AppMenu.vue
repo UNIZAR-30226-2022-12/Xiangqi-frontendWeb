@@ -35,7 +35,7 @@ export default {
                     label: 'Menú',
                     items: [
                         {label: 'Perfil', icon: 'pi pi-fw pi-home', to: '/Profile'},
-                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends/noNotify'},
+                        {label: 'Amigos', icon: 'pi pi-fw pi-users', to: '/Friends'},
                         {label: 'Ranking', icon: 'pi pi-fw pi-list', to: '/Ranking'},
                         {label: 'Tienda', icon: 'pi pi-fw pi-shopping-cart', to: '/Store'},
                         {label: 'Historial', icon: 'pi pi-fw pi-history', to: '/Historial'},
@@ -52,6 +52,7 @@ export default {
         this.socket.on("friendRequest",(data)=>{
             console.log("FriendRequest de", data);
             //this.notifications.push({type: 'friendRequest', id: data.id});
+            this.$toast.add({severity:'info', summary:'Solicitud de amistad', detail:'Has recibido una solicituh de amistad.', life: 5000});
             this.numFriendReq++;
             console.log("numFriendReq", this.numFriendReq);
         })
@@ -86,7 +87,7 @@ export default {
 			//Ya hemos atendido la notificacion
             this.numFriendReq = 0;
             // Ir a la pagina de amigos y que muestre solo las solicitudes
-			this.$router.push(`/Friends/notification`)
+			this.$router.push('/FriendRequest');
 		},
         onMenuToggle(event) {
             this.$emit('menu-toggle', event);

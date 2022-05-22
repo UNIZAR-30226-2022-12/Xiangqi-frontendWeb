@@ -134,11 +134,7 @@ export default {
             })
         },
         getImage(id){
-            for (let i = 0; i < this.gameArrayImages.length; i++) {
-                if(this.gameArrayImages[i].id == id){
-                    return this.gameArrayImages[i].image;
-                }
-            }
+            return this.gameArrayImages[id]
         }
     }
 }
