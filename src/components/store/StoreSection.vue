@@ -30,9 +30,12 @@
                         </div>
                         <div class="h-2"></div>
                         <div class="product-list-action">
-                            <span class="product-price">
-                                {{slotProps.data.price}} 
+                            <span v-if="slotProps.data.price > 0" class="product-price">
+                                {{slotProps.data.price}}
                                 <font-awesome-icon class="text-xl" icon="coins" />
+                            </span>
+                            <span v-else class="product-price">
+                                ¡Gratis!
                             </span>
                             <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo)" label="Comprar" :disabled="slotProps.data.purchased"></Button>
                         </div>
@@ -57,9 +60,12 @@
                         </div>
                         <div class="h-2rem"></div>
                         <div class="product-grid-item-bottom">
-                            <span class="product-price">
+                            <span v-if="slotProps.data.price > 0" class="product-price">
                                 {{slotProps.data.price}}
                                 <font-awesome-icon class="text-xl" icon="coins" />
+                            </span>
+                            <span v-else class="product-price">
+                                ¡Gratis!
                             </span>
                             <Button icon="pi pi-shopping-cart" v-on:click="purchaseItem(slotProps.data.price, slotProps.data.id, slotProps.data.tipo, slotProps.data.name)" :disabled="slotProps.data.purchased"></Button>
                         </div>

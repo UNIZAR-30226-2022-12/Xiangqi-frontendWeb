@@ -331,22 +331,17 @@ export default  {
 				this.myProfileImage = "images/profilePlaceholder.svg";
 			}
             let movs = sessionStorage.getItem("movs")
-            console.log(movs)
+            //console.log(movs)
             if (movs != null){
-                console.log(movs)
+                //console.log(movs)
                 //sessionStorage.removeItem("movs")
                 // CAMBIAR EL TABLERO
                 this.loadBoard(movs)
             }
-		});
-        
-
-        
-
-        
+		});  
 	},
     unmounted(){
-        console.log("destroyed")
+        //console.log("destroyed")
         this.$game.socket.emit("leaveRoom", {'id': this.idSala})
         this.$game.socket.off("opMov")
         this.$game.socket.off("win")
@@ -354,7 +349,7 @@ export default  {
     mounted(){
         this.loadThemeChanger();
         this.$game.socket.emit("enterRoom", {'id': this.idSala})
-        console.log("enterromm")
+        //console.log("enterromm")
         this.$game.socket.on("opMov", (data)=>{
             //console.log(data)
             //console.log("Movimiento del rival", data.mov[0])
@@ -374,7 +369,7 @@ export default  {
             audio.play();
         })
         this.$game.socket.on("win", ()=>{
-            console.log("win")
+            //console.log("win")
             //AQUI ES DONDE HE GANADO
             this.ganador.id = this.myid
             this.ganador.name = this.myPerfil.name
@@ -411,7 +406,7 @@ export default  {
         },
 
         loadBoard(movs){
-            console.log("Se han hecho: ", movs.length/4)
+            //console.log("Se han hecho: ", movs.length/4)
             let mov = 0;
             let filini;
             let colini;
@@ -433,14 +428,14 @@ export default  {
                     if(this.tablero.filas[filini][colini].color == "rojo"){
                         this.reyRojo.fil = fil
                         this.reyRojo.col = col
-                        console.log("Muevo al rey rojo: ", this.reyRojo)
+                        //console.log("Muevo al rey rojo: ", this.reyRojo)
                     } else{
                         this.reyNegro.fil = fil
                         this.reyNegro.col = col
-                        console.log("Muevo al rey negro: ", this.reyNegro)
+                        //console.log("Muevo al rey negro: ", this.reyNegro)
                     }
                 }
-                console.log("Movimiento: ", filini, colini, fil, col)
+                //console.log("Movimiento: ", filini, colini, fil, col)
                 this.movePiece(filini, colini, fil, col)
                 mov++;
             }
@@ -456,7 +451,7 @@ export default  {
                 col = 8 - movs[(mov*4) + 3]
             }
             if (movs.length != 0){
-                console.log("Movimiento Final: ", filini, colini, fil, col)
+                //console.log("Movimiento Final: ", filini, colini, fil, col)
                 this.selectedPiece.fil = filini
                 this.selectedPiece.col = colini
                 this.selectedPiece.selected = true
@@ -467,7 +462,7 @@ export default  {
         },
 
         movePiece(filini, colini, indexFil, indexCol){
-            console.log(this.tablero.filas[indexFil][indexCol].pieza, this.tablero.filas[filini][colini].pieza)
+            //console.log(this.tablero.filas[indexFil][indexCol].pieza, this.tablero.filas[filini][colini].pieza)
             this.tablero.filas[indexFil][indexCol].pieza = this.tablero.filas[filini][colini].pieza
             this.tablero.filas[indexFil][indexCol].color = this.tablero.filas[filini][colini].color
             this.tablero.filas[indexFil][indexCol].esPista = this.tablero.filas[filini][colini].esPista
@@ -659,7 +654,7 @@ export default  {
         */
 
         moveSelectedPiece(indexFil, indexCol, itemFila, emit) {
-            console.log("POSICION DE LOS REYES.\nRey Rojo: ", this.reyRojo, "\nRey Negro: ", this.reyNegro)
+            //console.log("POSICION DE LOS REYES.\nRey Rojo: ", this.reyRojo, "\nRey Negro: ", this.reyNegro)
             if(itemFila.esPista && this.selectedPiece.selected){
                 //Comprobar si es valido el movimiento
                 let aux = {pieza: this.tablero.filas[indexFil][indexCol].pieza, color: this.tablero.filas[indexFil][indexCol].color, esPista:this.tablero.filas[indexFil][indexCol].esPista}
@@ -673,12 +668,12 @@ export default  {
                         auxRey = {fil:this.reyRojo.fil, col: this.reyRojo.col}
                         this.reyRojo.fil = indexFil
                         this.reyRojo.col = indexCol
-                        console.log("Muevo al rey rojo: ", this.reyRojo, auxRey)
+                        //console.log("Muevo al rey rojo: ", this.reyRojo, auxRey)
                     } else{
                         auxRey = {fil:this.reyNegro.fil, col: this.reyNegro.col}
                         this.reyNegro.fil = indexFil
                         this.reyNegro.col = indexCol
-                        console.log("Muevo al rey negro: ", this.reyNegro, auxRey)
+                        //console.log("Muevo al rey negro: ", this.reyNegro, auxRey)
                     }
                 }
                 var reyCheck
@@ -691,18 +686,18 @@ export default  {
                     amenaza = "rojo"
                 }
                 if(this.checkCheck(reyCheck, amenaza) == false && emit != false){
-                    console.log("Movimiento no valido")
+                    //console.log("Movimiento no valido")
                     this.$toast.add({severity:'info', summary: "Movimiento no valido", detail:"Ese movimiento te deja en jaque o dejas enfrentados los generales", life: 5000});
                     if(auxRey != null){
                         //console.log(this.tablero.filas[indexFil][indexCol])
                         if(this.tablero.filas[indexFil][indexCol].color == "rojo"){
                             this.reyRojo.fil = auxRey.fil
                             this.reyRojo.col = auxRey.col
-                            console.log("El rey vuelve a: ", this.reyRojo)
+                            //console.log("El rey vuelve a: ", this.reyRojo)
                         } else{
                             this.reyNegro.fil = auxRey.fil
                             this.reyNegro.col = auxRey.col
-                            console.log("El rey vuelve a: ", this.reyNegro)
+                            //console.log("El rey vuelve a: ", this.reyNegro)
                         }
                     }
                     this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].pieza = this.tablero.filas[indexFil][indexCol].pieza
@@ -733,26 +728,26 @@ export default  {
                         let reyCheck = {fil: this.reyRojo.fil, col: this.reyRojo.col}
                         let amenaza = "negro"
                         if(this.checkCheck(reyCheck, amenaza) == false){
-                            console.log("JMe hace jaque el negro")
+                            //console.log("JMe hace jaque el negro")
                             this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
                             this.repJaque();
                             this.calcMovesJaque("rojo","negro", reyCheck)
                         } 
-                        console.log("Mueve Rojo")
+                        //console.log("Mueve Rojo")
                     } else if(this.turno%2 == 0 && this.playerColor == "negro"){ //Comprobar el negro
                         let reyCheck = {fil: this.reyNegro.fil, col: this.reyNegro.col}
                         let amenaza = "rojo"
                         if(this.checkCheck(reyCheck, amenaza) == false){
-                            console.log("JMe hace jaque el rojo")
+                            //console.log("JMe hace jaque el rojo")
                             this.$toast.add({severity:'info', summary: "Jaque", detail:"Has recibido un jaque", life: 5000});
                             this.repJaque();
                             this.calcMovesJaque("negro","rojo", reyCheck)
                         } 
-                        console.log("Mueve Negro")
+                        //console.log("Mueve Negro")
                     }
                     this.turno += 1
-                    console.log("movido, Truno actual: ", this.turno)
-                    console.log("POSICION DE LOS REYES.\nRey Rojo: ", this.reyRojo, "\nRey Negro: ", this.reyNegro)
+                    //console.log("movido, Truno actual: ", this.turno)
+                    //console.log("POSICION DE LOS REYES.\nRey Rojo: ", this.reyRojo, "\nRey Negro: ", this.reyNegro)
                 }
             } else {
                 this.selectedPiece.selected = false;
@@ -813,7 +808,7 @@ export default  {
             })
             this.tablero.filas[filaMov][columnaMov].esPista = false
             if(valido == true){
-                console.log("Movimiento valido")
+                //console.log("Movimiento valido")
                 returnValue = 1
                 this.tablero.filas[filaActual][columnaActual].moves.push({f: filaMov, c: columnaMov})
                 this.tablero.filas[filaActual][columnaActual].turno = this.turno + 1
@@ -1186,42 +1181,42 @@ export default  {
                             // -------------------------------------------------------------------------------------------------
                             //MOVIMIENTOS POSIBLES DE LA CANYON
                             else if(this.tablero.filas[j][i].pieza == "canyon"){
-                                console.log(i,j, this.tablero.filas[j][i])
+                                //console.log(i,j, this.tablero.filas[j][i])
                                 //Iterar al norte
                                 let it = 1
                                 let saltar = false
-                                console.log("norte")
+                                //console.log("norte")
                                 for(let k = j; k > 0; k --){
-                                    console.log(j-it, i, this.tablero.filas[j - it][i].pieza)
+                                    //console.log(j-it, i, this.tablero.filas[j - it][i].pieza)
                                     if(this.tablero.filas[j - it][i].pieza == null){
                                         if(!saltar){
-                                            console.log("MOVEMOS")
+                                            //console.log("MOVEMOS")
                                             totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
-                                        } else{
-                                            console.log("VOLAMOS")
-                                        }
+                                        } //else {
+                                            //console.log("VOLAMOS")
+                                        //}
                                         
                                     } else{ // Encontramos una pieza
                                         if(this.tablero.filas[j - it][i].color != this.tablero.filas[j][i].color){
                                             if(saltar){
-                                                console.log("COMEMOS")
+                                                //console.log("COMEMOS")
                                                 totalMoves += this.moveJaque(j, i, j - it, i,pMover ,false, reyCheck, amenaza)
                                                 break
                                             } else{
                                                 if(saltar){
-                                                    console.log("NOS CAEMOS")
+                                                    //console.log("NOS CAEMOS")
                                                     break
                                                 } else{
-                                                    console.log("SALTAMOS")
+                                                    //console.log("SALTAMOS")
                                                     saltar = true
                                                 }
                                             }
                                         } else {// SALTAR
                                             if(saltar){
-                                                console.log("NOS CAEMOS")
+                                                //console.log("NOS CAEMOS")
                                                 break
                                             } else{
-                                                console.log("SALTAMOS")
+                                                //console.log("SALTAMOS")
                                                 saltar = true
                                             }
                                         }
@@ -1229,40 +1224,40 @@ export default  {
                                     it += 1
                                 }
                                 //Iterar al sur
-                                console.log("sur")
+                                //console.log("sur")
                                 it = 1
                                 saltar = false
                                 for(let k = j; k < 9; k ++){
-                                    console.log(j+it, i, this.tablero.filas[j + it][i].pieza)
+                                    //console.log(j+it, i, this.tablero.filas[j + it][i].pieza)
                                     if(this.tablero.filas[j + it][i].pieza == null){
                                         if(!saltar){
-                                            console.log("MOVEMOS")
+                                            //console.log("MOVEMOS")
                                             totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
-                                        } else{
-                                            console.log("VOLAMOS")
-                                        }
+                                        } //else{
+                                            //console.log("VOLAMOS")
+                                        //}
                                         
                                     } else{ // Encontramos una pieza
                                         if(this.tablero.filas[j + it][i].color != this.tablero.filas[j][i].color){
                                             if(saltar){
-                                                console.log("COMEMOS")
+                                                //console.log("COMEMOS")
                                                 totalMoves += this.moveJaque(j, i, j + it, i,pMover ,false, reyCheck, amenaza)
                                                 break
                                             } else{
                                                 if(saltar){
-                                                    console.log("NOS CAEMOS")
+                                                    //console.log("NOS CAEMOS")
                                                     break
                                                 } else{
-                                                    console.log("SALTAMOS")
+                                                    //console.log("SALTAMOS")
                                                     saltar = true
                                                 }
                                             }
                                         } else {// SALTAR
                                             if(saltar){
-                                                console.log("NOS CAEMOS")
+                                                //console.log("NOS CAEMOS")
                                                 break
                                             } else{
-                                                console.log("SALTAMOS")
+                                                //console.log("SALTAMOS")
                                                 saltar = true
                                             }
                                         }
@@ -1272,39 +1267,39 @@ export default  {
                                 //Iterar al este
                                 it = 1
                                 saltar = false
-                                console.log("este")
+                                //console.log("este")
                                 for(let k = i; k < 8; k ++){
-                                    console.log(j, i + it)
-                                    console.log(j, i + it, this.tablero.filas[j][i + it].pieza )
+                                    //console.log(j, i + it)
+                                    //console.log(j, i + it, this.tablero.filas[j][i + it].pieza )
                                     if(this.tablero.filas[j][i + it].pieza == null){
                                         if(!saltar){
-                                            console.log("MOVEMOS")
+                                            //console.log("MOVEMOS")
                                             totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
-                                        } else{
-                                            console.log("VOLAMOS")
-                                        }
+                                        } //else{
+                                            //console.log("VOLAMOS")
+                                        //}
                                         
                                     } else{ // Encontramos una pieza
                                         if(this.tablero.filas[j][i + it].color != this.tablero.filas[j][i].color){
                                             if(saltar){
-                                                console.log("COMEMOS")
+                                                //console.log("COMEMOS")
                                                 totalMoves += this.moveJaque(j, i, j, i + it,pMover ,false, reyCheck, amenaza)
                                                 break
                                             } else{
                                                 if(saltar){
-                                                    console.log("NOS CAEMOS")
+                                                    //console.log("NOS CAEMOS")
                                                     break
                                                 } else{
-                                                    console.log("SALTAMOS")
+                                                    //console.log("SALTAMOS")
                                                     saltar = true
                                                 }
                                             }
                                         } else {// SALTAR
                                             if(saltar){
-                                                console.log("NOS CAEMOS")
+                                                //console.log("NOS CAEMOS")
                                                 break
                                             } else{
-                                                console.log("SALTAMOS")
+                                                //console.log("SALTAMOS")
                                                 saltar = true
                                             }
                                         }
@@ -1312,40 +1307,40 @@ export default  {
                                     it += 1
                                 }
                                 //Iterar al oeste
-                                console.log("oeste")
+                                //console.log("oeste")
                                 it = 1
                                 saltar = false
                                 for(let k = i; k > 0; k --){
-                                    console.log(j, i - it, this.tablero.filas[j][i - it].pieza)
+                                    //console.log(j, i - it, this.tablero.filas[j][i - it].pieza)
                                     if(this.tablero.filas[j][i - it].pieza == null){
                                         if(!saltar){
-                                            console.log("MOVEMOS")
+                                            //console.log("MOVEMOS")
                                             totalMoves += this.moveJaque(j, i, j, i - it,pMover ,false, reyCheck, amenaza)
-                                        } else{
-                                            console.log("VOLAMOS")
-                                        }
+                                        } //else{
+                                            //console.log("VOLAMOS")
+                                        //}
                                         
                                     } else{ // Encontramos una pieza
                                         if(this.tablero.filas[j][i - it].color != this.tablero.filas[j][i].color){
                                             if(saltar){
-                                                console.log("COMEMOS")
+                                                //console.log("COMEMOS")
                                                 totalMoves += this.moveJaque(j, i, j, i - it,pMover ,false, reyCheck, amenaza)
                                                 break
                                             } else{
                                                 if(saltar){
-                                                    console.log("NOS CAEMOS")
+                                                    //console.log("NOS CAEMOS")
                                                     break
                                                 } else{
-                                                    console.log("SALTAMOS")
+                                                    //console.log("SALTAMOS")
                                                     saltar = true
                                                 }
                                             }
                                         } else {// SALTAR
                                             if(saltar){
-                                                console.log("NOS CAEMOS")
+                                                //console.log("NOS CAEMOS")
                                                 break
                                             } else{
-                                                console.log("SALTAMOS")
+                                                //console.log("SALTAMOS")
                                                 saltar = true
                                             }
                                         }
@@ -1360,9 +1355,9 @@ export default  {
                     }
                 }
            }
-           console.log("Tiene ", totalMoves, "Movimientos posibles")
+           //console.log("Tiene ", totalMoves, "Movimientos posibles")
            if(totalMoves == 0){
-                console.log("Jaque mate")
+                //console.log("Jaque mate")
 
                 // emit le dire al back quien ha ganado
                 this.$game.socket.emit("lose", {'idSala': this.idSala, 'idGanador': this.idOp, 'idPerdedor': this.myid})
@@ -1391,7 +1386,7 @@ export default  {
                         this.selectedPiece.fil = indexFil;
                         this.selectedPiece.col = indexCol;
                         this.selectedPiece.selected = true;
-                        console.log("TURNOS: ",item.turno,this.turno )
+                        //console.log("TURNOS: ",item.turno,this.turno )
                         if(item.turno == this.turno){
                                 item.moves.forEach(move => {
                                 //console.log("EN ITEM TURNO WAT", move)
@@ -1893,9 +1888,9 @@ export default  {
                                             if(!saltar){
                                                 //console.log("MOVEMOS")
                                                 item.moves.push({f: indexFil, c: indexCol - it})
-                                            } else{
-                                                ////console.log("VOLAMOS")
-                                            }
+                                            } //else{
+                                                //console.log("VOLAMOS")
+                                            //}
                                             
                                         } else{ // Encontramos una pieza
                                             if(this.tablero.filas[indexFil][indexCol - it].color != this.playerColor){

@@ -88,8 +88,6 @@ export default {
         //Pasarle al back las opciones de la partida
         this.$game.socket.emit("searchRandomOpponent",{'id':sessionStorage.getItem('id')})
         this.$game.socket.on("startGame", (data)=>{
-          this.display = false;
-
           var color;
           if(data.rojo) {
             color = "rojo"
@@ -99,12 +97,13 @@ export default {
 
           this.$game.socket.off("startGame")
           this.$game.socket.emit("leaveRoom", {'id': data.idSala})
+          this.display = false;
           this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`)
         })
       } else {
         //Esperando supongo
         this.searchingOponent = true;
-        console.log("ENVIO A AMIGo")
+        //console.log("ENVIO A AMIGo")
         this.$game.socket.emit("sendGameRequest",{'id':sessionStorage.getItem('id'), 'idFriend': this.selectedFriend.id})
         this.$game.socket.on("startGame", (data)=>{
           this.display = false;
@@ -123,27 +122,24 @@ export default {
       }
     },
     cancelar(name){
-            this.$confirm.require({
-                message: 'Si rechaza la invitación esta se borrará.',
-                header: '¿Seguro que deseas cancelar la invitación?',
-                icon: 'pi pi-exclamation-triangle',
-                rejectLabel: 'Cancelar invitación',
-                acceptLabel: 'No cancelar invitación',
-                accept: () => {
-                },
-                reject: () => {
-                    this.display = false;
-                    console.log("cancelar")
-                    this.$game.socket.off("startGame")
-                    this.$game.socket.emit("cancelGameRequest",{"id":sessionStorage.getItem("id")})
-                    this.$toast.add({severity:'info', summary:'Invitacion cancelada', detail:'La invitación a ' + name + ' ha sido cancelada.', life: 3000});
-                }
-            });
-
+      this.$confirm.require({
+          message: 'Si rechaza la invitación esta se borrará.',
+          header: '¿Seguro que deseas cancelar la invitación?',
+          icon: 'pi pi-exclamation-triangle',
+          rejectLabel: 'Cancelar invitación',
+          acceptLabel: 'No cancelar invitación',
+          accept: () => {
+          },
+          reject: () => {
+              this.display = false;
+              this.$game.socket.off("startGame")
+              this.$game.socket.emit("cancelGameRequest",{"id":sessionStorage.getItem("id")})
+              this.$toast.add({severity:'info', summary:'Invitacion cancelada', detail:'La invitación a ' + name + ' ha sido cancelada.', life: 3000});
+          }
+      });
     },
     cancelarRandom(){
       this.display = false;
-      console.log("cancelar")
       this.$game.socket.off("startGame")
       this.$game.socket.emit("cancelGameRandom",{"id":sessionStorage.getItem("id")})
       this.$toast.add({severity:'info', summary:'Busqueda cancelada', detail:'Busqueda de oponente cancelada', life: 3000});

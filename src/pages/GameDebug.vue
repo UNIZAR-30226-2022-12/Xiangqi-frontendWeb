@@ -368,26 +368,26 @@ export default  {
                     
                 } else{
                     if(this.turno%2 != 0){//Comprobar el rojo
-                        console.log("Comprobar el rojo")
+                        //console.log("Comprobar el rojo")
                         reyCheck = this.reyRojo
                         amenaza = "negro"
                         if(this.checkCheck(reyCheck, amenaza) == false){
-                            console.log("JMe hace jaque el negro")
+                            //console.log("JMe hace jaque el negro")
                             this.calcMovesJaque("rojo","negro", reyCheck)
                         } 
-                        console.log("Mueve Rojo")
+                        //console.log("Mueve Rojo")
                     } else{ //Comprobar el negro
-                        console.log("Comprobar el negro")
+                        //console.log("Comprobar el negro")
                         reyCheck = this.reyNegro
                         amenaza = "rojo"
                         if(this.checkCheck(reyCheck, amenaza) == false){
-                            console.log("JMe hace jaque el rojo")
+                            //console.log("JMe hace jaque el rojo")
                             this.calcMovesJaque("negro","rojo", reyCheck)
                         } 
-                        console.log("Mueve Negro")
+                        //console.log("Mueve Negro")
                     }
                                         this.turno += 1
-                    console.log("movido, Truno actual: ", this.turno)
+                    //console.log("movido, Truno actual: ", this.turno)
                 }    
             }
             
@@ -963,7 +963,7 @@ export default  {
                                     it += 1
                                 }
                             }
-                            console.log(totalMoves)
+                            //console.log(totalMoves)
                         }
                         //console.log(this.tablero.filas[j][i])
                         this.tablero.filas[j][i].turno = this.turno
@@ -2038,9 +2038,9 @@ export default  {
                                 if(!saltar){
                                     //console.log("MOVEMOS")
                                     item.moves.push({f: indexFil, c: indexCol - it})
-                                } else{
-                                    ////console.log("VOLAMOS")
-                                }
+                                } //else{
+                                    //console.log("VOLAMOS")
+                                //}
                                 
                             } else{ // Encontramos una pieza
                                 if(this.tablero.filas[indexFil][indexCol - it].color != item.color){

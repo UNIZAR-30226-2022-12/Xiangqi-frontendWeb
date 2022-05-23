@@ -150,7 +150,7 @@ class AccountService {
         return http
             .get('/do-getProfileInfo/' + id, headers)
             .then(response => {
-                console.log("la data", response.data);
+                //console.log("la data", response.data);
                 return response.data;
             }, () => {
                 return false;
