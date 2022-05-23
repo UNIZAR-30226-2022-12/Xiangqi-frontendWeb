@@ -15,10 +15,10 @@
                 <div class="flex-initial flex align-items-center justify-content-center text-2xl mb-3"> {{ item.dispName }}</div>
             </div>
             <div class="flex mb-3">
-                <img :src="'images/themes/pieces/1/' + item.name + 'Negro.svg'" alt="soldado" class="w-4rem mr-3">
-                <img :src="'images/themes/pieces/1/' + item.name + 'Rojo.svg'" alt="soldado" class="w-4rem mr-3">
-                <img :src="'images/themes/pieces/2/' + item.name + 'Negro.svg'" alt="soldado" class="w-4rem mr-3">
-                <img :src="'images/themes/pieces/2/' + item.name + 'Rojo.svg'" alt="soldado" class="w-4rem mr-3">
+                <img :src="'images/themes/pieces/1/' + item.name + 'negro.svg'" alt="soldado" class="w-4rem mr-3">
+                <img :src="'images/themes/pieces/1/' + item.name + 'rojo.svg'" alt="soldado" class="w-4rem mr-3">
+                <img :src="'images/themes/pieces/2/' + item.name + 'negro.svg'" alt="soldado" class="w-4rem mr-3">
+                <img :src="'images/themes/pieces/2/' + item.name + 'rojo.svg'" alt="soldado" class="w-4rem mr-3">
             </div>
             <p class="mb-5">{{ item.desc }}</p>
         </div>
