@@ -308,7 +308,6 @@ export default  {
         }
         this.idOp = this.$route.params.idOponent
         this.$accounts.getProfileInfo(this.idOp).then(response => {
-            this.loading = false;
 			this.rivalProfile = response;
 
 			if (this.rivalProfile.hasImage) {
@@ -332,12 +331,23 @@ export default  {
 			}
             let movs = sessionStorage.getItem("movs")
             //console.log(movs)
-            if (movs != null){
+            if (movs == null){
                 //console.log(movs)
                 //sessionStorage.removeItem("movs")
                 // CAMBIAR EL TABLERO
+                this.$accounts.loadGame(this.idSala).then(response =>{
+                    //console.log(response.game[1])
+                    movs = response.game[4]
+                    this.loadBoard(movs)
+                    this.loading = false;
+                })
+                
+            } else {
+                sessionStorage.removeItem("movs")
                 this.loadBoard(movs)
+                this.loading = false;
             }
+            
 		});  
 	},
     unmounted(){
@@ -364,9 +374,6 @@ export default  {
             this.tablero.filas[data.mov[2]][data.mov[3]].esPista = true
             this.moveSelectedPiece( data.mov[2],  data.mov[3], this.tablero.filas[data.mov[2]][data.mov[3]], false)
             this.selectedPiece.selected = false
-            var audio = new Audio('sounds/move.wav');
-            audio.loop = false;
-            audio.play();
         })
         this.$game.socket.on("win", ()=>{
             //console.log("win")
@@ -714,6 +721,16 @@ export default  {
                     if(emit){
                         this.$game.socket.emit("doMov", {'id': this.idSala, 'mov': [this.selectedPiece.fil,this.selectedPiece.col,indexFil,indexCol], 'color': this.playerColor})
                     }
+                    console.log("aux:" , aux)
+                    if(aux['pieza'] != null){
+                        var audio = new Audio('sounds/capture.wav');
+                        audio.loop = false;
+                        audio.play();
+                    } else {
+                        audio = new Audio('sounds/move.wav');
+                        audio.loop = false;
+                        audio.play();
+                    }
                     this.tablero.filas[this.selectedPiece.fil][this.selectedPiece.col].moves.forEach(move => {
                         this.tablero.filas[move.f][move.c].esPista = false;
                     });
@@ -723,7 +740,7 @@ export default  {
                     this.movedPiece.filini = this.selectedPiece.fil
                     this.movedPiece.colini = this.selectedPiece.col
 
-                    this.playSound(itemFila)
+                    
                     if(this.turno%2 != 0 && this.playerColor == "rojo"){//Comprobar el rojo
                         let reyCheck = {fil: this.reyRojo.fil, col: this.reyRojo.col}
                         let amenaza = "negro"
