@@ -26,6 +26,11 @@ export default {
 			socket: null,
 		}
 	},
+	methods:{
+		equals(value){ 
+			return value.id != 14; 
+		}, 
+	},
 	components: {
 		loader,
 		myProfile,
@@ -47,7 +52,7 @@ export default {
 			} else {
 				this.profileImage = "images/profilePlaceholder.svg";
 			}
-
+			this.games = this.games.filter(this.equals)
 			for (var i = 0; i < this.games.length; i++) {
 				//llegan las fotos
 				let id = this.games[i].id;

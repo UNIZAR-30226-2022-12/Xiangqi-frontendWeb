@@ -32,6 +32,7 @@
         </div>
       </Button>
       <Button v-if="searchingOponent && selectedFriend != null" v-on:click="cancelar(selectedFriend.name)" :disabled="!searchingOponent" label="Cancelar Invitación" icon="pi pi-times" class="p-button-raised p-button-danger font-semibold mt-3 h-3rem w-full" style="border-radius: 1rem"/>
+      <Button v-if="searchingOponent && selectedFriend == null" v-on:click="cancelarRandom()" :disabled="!searchingOponent" label="Cancelar" icon="pi pi-times" class="p-button-raised p-button-danger font-semibold mt-3 h-3rem w-full" style="border-radius: 1rem"/>
     </template>
   </Dialog>
 </template>
@@ -134,9 +135,18 @@ export default {
                     this.display = false;
                     console.log("cancelar")
                     this.$game.socket.off("startGame")
+                    this.$game.socket.emit("cancelGameRequest",{"id":sessionStorage.getItem("id")})
                     this.$toast.add({severity:'info', summary:'Invitacion cancelada', detail:'La invitación a ' + name + ' ha sido cancelada.', life: 3000});
                 }
             });
+
+    },
+    cancelarRandom(){
+      this.display = false;
+      console.log("cancelar")
+      this.$game.socket.off("startGame")
+      this.$game.socket.emit("cancelGameRandom",{"id":sessionStorage.getItem("id")})
+      this.$toast.add({severity:'info', summary:'Busqueda cancelada', detail:'Busqueda de oponente cancelada', life: 3000});
 
     },
   },

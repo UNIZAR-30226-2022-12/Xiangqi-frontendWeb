@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import io from "socket.io-client"
 
 export default {
     emits: ['close-game-request'],
+    inject: ['$game'],
     props: {
         nickname: {
             type: String,
@@ -76,20 +76,18 @@ export default {
                 accept: () => {
                 },
                 reject: () => {
-                    let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-                    socket.emit("rejectReq", {"id":this.id})
+                    this.$game.socket.emit("rejectReq", {"id":this.id})
                     this.$emit('close-game-request');
                     this.$toast.add({severity:'error', summary:'Invitacion rechazara', detail:'La invitación de ' + this.nickname + ' ha sido rechazada.', life: 3000});
-                    socket = null
                     //this.delay(1500).then(()=>{this.$router.go()})
                 }
             });
         },
         acceptInvitation() {
             this.confirmDisabled = true;
-            let socket = io("http://ec2-3-82-235-243.compute-1.amazonaws.com:3005");
-            socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
-            socket.on("startGame", (data)=>{
+            this.$emit('close-game-request');
+            this.$game.socket.emit("acceptReq", {"id": sessionStorage.getItem("id"),"idFriend":this.id, "idSala": this.idSala})
+            this.$game.socket.on("startGame", (data)=>{
             //console.log(data)
 
             var color;
@@ -98,8 +96,8 @@ export default {
             } else {
                 color = "negro"
             }
-            socket.off("startGame")
-            socket.emit("leaveRoom", {'id': data.idSala})
+            this.$game.socket.off("startGame")
+            this.$game.socket.emit("leaveRoom", {'id': data.idSala})
             this.$emit('close-game-request');
             this.$router.push(`/game/${data.idOponent}/${data.idSala}/${color}`) //${this.timer}
             })

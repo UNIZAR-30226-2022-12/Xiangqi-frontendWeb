@@ -71,6 +71,11 @@ export default {
             this.emitter.emit("open-rejected-invitation", true);
 
         })
+        this.$game.socket.on("noGame",()=>{
+            console.log("noGame")
+            this.emitter.emit("open-rejected-invitation", true);
+
+        })
 		this.$game.socket.emit('getOnlineFriends',{'id': sessionStorage.getItem('id')})
     },
     methods: {
