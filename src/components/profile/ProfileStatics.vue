@@ -91,9 +91,10 @@ export default {
         //console.log(this.games)
         this.lastWeek.datasets[0].data = this.games.diaJugadas
         this.lastWeek.datasets[1].data = this.games.diaGanadas
+        console.log("last:", this.lastWeek.datasets)
         //Ponerle las labels a la tabla horizontal
         let today = new Date()
-        this.lastWeek.labels[6] = 'Hoy'
+        this.lastWeek.labels[0] = 'Hoy'
         for(let i = 5; i >= 0;i--){
             let dia = today.getDate();
             let mes = today.getMonth();
@@ -114,7 +115,7 @@ export default {
             let dd = String(dia);
             let mm = String(mes + 1); //empieza en 0
             let yyyy = String(anyo);
-            this.lastWeek.labels[i] = dd + '/' + mm + '/' + yyyy
+            this.lastWeek.labels[5 - i + 1] = dd + '/' + mm + '/' + yyyy
             today = new Date(mm + '/' + dd + '/' + yyyy);
         }
         /*
